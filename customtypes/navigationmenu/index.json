@@ -1,0 +1,36 @@
+{
+  "format": "custom",
+  "id": "navigationmenu",
+  "label": "NavigationMenu",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "navigationlink": {
+        "type": "Group",
+        "config": {
+          "label": "navigationLink",
+          "repeat": true,
+          "fields": {
+            "linkitem": {
+              "type": "Link",
+              "config": {
+                "label": "linkItem",
+                "placeholder": "",
+                "allowTargetBlank": true,
+                "select": null
+              }
+            },
+            "linklabel": {
+              "type": "Text",
+              "config": {
+                "label": "linkLabel",
+                "placeholder": ""
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

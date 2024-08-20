@@ -1,0 +1,189 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"heroimage": {
+				"origin": {
+					"id": "main",
+					"url": "https://images.unsplash.com/photo-1471897488648-5eae4ac6686b",
+					"width": 3560,
+					"height": 5340
+				},
+				"url": "https://images.unsplash.com/photo-1471897488648-5eae4ac6686b",
+				"width": 3560,
+				"height": 5340,
+				"edit": {
+					"zoom": 1,
+					"crop": {
+						"x": 0,
+						"y": 0
+					},
+					"background": "transparent"
+				},
+				"credits": null,
+				"alt": null,
+				"__TYPE__": "ImageContent",
+				"thumbnails": {}
+			},
+			"heroimageposition": {
+				"__TYPE__": "FieldContent",
+				"value": "left",
+				"type": "Select"
+			},
+			"headingtext": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Dolore adipisicing culpa voluptate sint aliqua cillum aute quis."
+						}
+					}
+				]
+			},
+			"subtext": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Eiusmod aliquip nisi veniam enim ea magna mollit ex nulla do est nulla quis sunt. Cupidatat sunt ut reprehenderit in magna in adipisicing."
+						}
+					}
+				]
+			},
+			"descriptionparagraph": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Elit elit laborum minim eiusmod. Cupidatat tempor sunt consequat laboris magna deserunt nostrud consequat excepteur cupidatat irure. Nulla velit incididunt duis."
+						}
+					}
+				]
+			},
+			"variant": {
+				"__TYPE__": "FieldContent",
+				"value": "dark",
+				"type": "Select"
+			},
+			"heroimageradius": {
+				"__TYPE__": "BooleanContent",
+				"value": true
+			}
+		},
+		"items": []
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "heroBannerWithTextButtons",
+		"primary": {
+			"heroimage": {
+				"origin": {
+					"id": "main",
+					"url": "https://images.unsplash.com/photo-1544731612-de7f96afe55f",
+					"width": 6000,
+					"height": 4000
+				},
+				"url": "https://images.unsplash.com/photo-1544731612-de7f96afe55f",
+				"width": 6000,
+				"height": 4000,
+				"edit": {
+					"zoom": 1,
+					"crop": {
+						"x": 0,
+						"y": 0
+					},
+					"background": "transparent"
+				},
+				"credits": null,
+				"alt": null,
+				"__TYPE__": "ImageContent",
+				"thumbnails": {}
+			},
+			"heroimageposition": {
+				"__TYPE__": "FieldContent",
+				"value": "right",
+				"type": "Select"
+			},
+			"heroimageradius": {
+				"__TYPE__": "BooleanContent",
+				"value": true
+			},
+			"subtext": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Dolore laboris aute sit reprehenderit ex esse cillum pariatur eiusmod aliqua est occaecat elit tempor commodo. Esse cupidatat id laboris deserunt nisi labore ullamco laborum cillum. Consequat consequat occaecat officia ullamco duis ad exercitation incididunt Lorem."
+						}
+					}
+				]
+			},
+			"headingtext": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Adipisicing mollit nisi eu laboris. Elit proident adipisicing culpa mollit."
+						}
+					}
+				]
+			},
+			"descriptionparagraph": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Anim mollit ea sunt Lorem minim aute deserunt sit dolor ipsum voluptate excepteur consectetur magna et. Laborum id labore elit adipisicing. Ipsum aliqua duis deserunt est commodo est duis ea pariatur ea sunt adipisicing adipisicing."
+						}
+					}
+				]
+			},
+			"variant": {
+				"__TYPE__": "FieldContent",
+				"value": "dark",
+				"type": "Select"
+			},
+			"buttonsgroups": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"buttonitem",
+								{
+									"__TYPE__": "LinkContent",
+									"value": {
+										"__TYPE__": "ExternalLink",
+										"url": "http://twitter.com"
+									}
+								}
+							],
+							[
+								"buttonlabel",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "kind",
+									"type": "Text"
+								}
+							]
+						]
+					}
+				]
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	}
+]

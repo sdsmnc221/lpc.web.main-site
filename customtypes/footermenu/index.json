@@ -1,0 +1,76 @@
+{
+  "format": "custom",
+  "id": "footermenu",
+  "label": "FooterMenu",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "linksgroup": {
+        "type": "Group",
+        "config": {
+          "label": "linksGroup",
+          "repeat": true,
+          "fields": {
+            "linkitem": {
+              "type": "Link",
+              "config": {
+                "label": "linkstem",
+                "placeholder": "",
+                "allowTargetBlank": true,
+                "select": null
+              }
+            },
+            "linklabel": {
+              "type": "Text",
+              "config": {
+                "label": "linkLabel",
+                "placeholder": ""
+              }
+            }
+          }
+        }
+      },
+      "copyright": {
+        "type": "Text",
+        "config": {
+          "label": "copyright",
+          "placeholder": ""
+        }
+      },
+      "socialmedias": {
+        "type": "Group",
+        "config": {
+          "label": "socialMediaGroup",
+          "repeat": true,
+          "fields": {
+            "socialmedialabel": {
+              "type": "Text",
+              "config": {
+                "label": "socialMediaLabel",
+                "placeholder": ""
+              }
+            },
+            "socialmediaLink": {
+              "type": "Link",
+              "config": {
+                "label": "socialMediaLink",
+                "placeholder": "",
+                "allowTargetBlank": true,
+                "select": null
+              }
+            },
+            "socialmediaicon": {
+              "type": "Image",
+              "config": {
+                "label": "socialMediaIcon",
+                "constraint": {},
+                "thumbnails": []
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

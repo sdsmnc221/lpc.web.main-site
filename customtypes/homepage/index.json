@@ -1,0 +1,76 @@
+{
+  "format": "page",
+  "id": "homepage",
+  "label": "HomePage",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "navigationmenu": {
+        "type": "Link",
+        "config": {
+          "label": "navigationMenu",
+          "select": "document",
+          "customtypes": ["navigationmenu"]
+        }
+      },
+      "headlineblocks": {
+        "type": "Link",
+        "config": {
+          "label": "headlineBlocks",
+          "select": "document",
+          "customtypes": ["multiphotosblock"]
+        }
+      },
+      "footermenu": {
+        "type": "Link",
+        "config": {
+          "label": "footerMenu",
+          "select": "document",
+          "customtypes": ["footermenu"]
+        }
+      },
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {
+            "pop_out_text": {
+              "type": "SharedSlice"
+            },
+            "hero_banner_with_text": {
+              "type": "SharedSlice"
+            }
+          }
+        }
+      }
+    },
+    "SEO & Metadata": {
+      "meta_title": {
+        "config": {
+          "label": "Meta Title",
+          "placeholder": "A title of the page used for social media and search engines"
+        },
+        "type": "Text"
+      },
+      "meta_description": {
+        "config": {
+          "label": "Meta Description",
+          "placeholder": "A brief summary of the page"
+        },
+        "type": "Text"
+      },
+      "meta_image": {
+        "config": {
+          "constraint": {
+            "height": 1260,
+            "width": 2400
+          },
+          "label": "Meta Image",
+          "thumbnails": []
+        },
+        "type": "Image"
+      }
+    }
+  }
+}

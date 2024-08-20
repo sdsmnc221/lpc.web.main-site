@@ -1,0 +1,28 @@
+{
+  "id": "pop_out_text",
+  "type": "SharedSlice",
+  "name": "PopOutText",
+  "description": "PopOutText",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "text": {
+          "type": "StructuredText",
+          "config": {
+            "label": "text",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,strong,em,hyperlink,rtl,heading4,heading5,heading6"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

@@ -7,10 +7,16 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "slicemachine": "start-slicemachine"
   },
   "dependencies": {
     "nuxt": "^3.12.4",
     "vue": "latest"
+  },
+  "devDependencies": {
+    "@nuxtjs/prismic": "^3.3.2",
+    "@slicemachine/adapter-nuxt": "^0.3.46",
+    "slice-machine-ui": "^2.5.0"
   }
 }
