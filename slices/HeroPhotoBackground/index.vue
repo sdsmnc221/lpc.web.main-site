@@ -31,7 +31,6 @@ const textContent = computed(() => primary.value?.text);
 const backgroundImage = computed(() => primary.value?.backgroundimage?.url);
 </script>
 
-<
 <style lang="scss">
 @import "@/styles/imports";
 
