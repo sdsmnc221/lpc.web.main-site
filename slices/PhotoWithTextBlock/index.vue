@@ -49,7 +49,10 @@ const description = computed(() => primary.value?.description);
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   gap: var(--spacing-s);
+
+  margin: 0 auto;
   text-align: left;
 
   &__photo {

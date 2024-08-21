@@ -7,6 +7,6 @@ export default defineNuxtConfig({
 
   prismic: {
     endpoint: apiEndpoint || repositoryName,
-    linkResolver: "./prismic/linkResolver",
+    linkResolver: "@/prismic/linkResolver",
   },
 });
