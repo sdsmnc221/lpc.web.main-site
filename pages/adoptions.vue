@@ -5,12 +5,14 @@
     :slice="hero"
   ></hero-banner-with-text>
 
+  <hero-photo-background :slice="adoptionsHeadline"></hero-photo-background>
+
   <pop-out-text :slice="popOutText"></pop-out-text>
 </template>
 
 <script setup lang="ts">
 import HeroBannerWithText from "@/slices/HeroBannerWithText/index.vue";
-
+import HeroPhotoBackground from "@/slices/HeroPhotoBackground/index.vue";
 import PopOutText from "@/slices/PopOutText/index.vue";
 
 const { client } = usePrismic();
@@ -24,6 +26,12 @@ const heroBanners = computed(
     adoptions.value?.data?.slices.filter(
       (s) => s?.slice_type == "hero_banner_with_text"
     ) ?? []
+);
+
+const adoptionsHeadline = computed(() =>
+  adoptions.value?.data?.slices.find(
+    (s) => s?.slice_type === "hero_photo_background"
+  )
 );
 
 const popOutText = computed(() =>
