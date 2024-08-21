@@ -3,14 +3,16 @@ import { type Content } from "@prismicio/client";
 
 // The array passed to `getSliceComponentProps` is purely optional.
 // Consider it as a visual hint for you when templating your slice.
-defineProps(
+const props = defineProps(
   getSliceComponentProps<Content.HeroBannerWithTextSlice>([
     "slice",
     "index",
     "slices",
     "context",
-  ]),
+  ])
 );
+
+console.log(props.slice);
 </script>
 
 <template>
@@ -19,6 +21,6 @@ defineProps(
     :data-slice-variation="slice.variation"
   >
     Placeholder component for hero_banner_with_text (variation:
-    {{ slice.variation }}) Slices
+    {{ slice.variation }}) Slices toto
   </section>
 </template>
