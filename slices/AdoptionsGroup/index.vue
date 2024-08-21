@@ -63,6 +63,7 @@ const { data: itemsData } = await useAsyncData(props.slice.id, async () => {
   }
 
   &__items {
+    margin-top: var(--spacing-l);
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;

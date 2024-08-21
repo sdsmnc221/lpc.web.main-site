@@ -99,4 +99,19 @@ const props = defineProps<CatInfo>();
     }
   }
 }
+
+@container app (min-width: 768px) {
+  .cat-item {
+    width: 32%;
+    &__name {
+      min-width: 32%;
+    }
+  }
+}
+
+@container app (min-width: 1200px) {
+  .cat-item {
+    width: 25%;
+  }
+}
 </style>
