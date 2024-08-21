@@ -32,15 +32,6 @@
             "default_value": "right"
           }
         },
-        "heroimageradius": {
-          "type": "Boolean",
-          "config": {
-            "label": "heroImageRadius",
-            "default_value": false,
-            "placeholder_true": "true",
-            "placeholder_false": "false"
-          }
-        },
         "subtext": {
           "type": "StructuredText",
           "config": {
@@ -109,15 +100,6 @@
               "left"
             ],
             "default_value": "right"
-          }
-        },
-        "heroimageradius": {
-          "type": "Boolean",
-          "config": {
-            "label": "heroImageRadius",
-            "default_value": false,
-            "placeholder_true": "true",
-            "placeholder_false": "false"
           }
         },
         "subtext": {

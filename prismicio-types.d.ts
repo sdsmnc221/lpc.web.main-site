@@ -372,17 +372,6 @@ export interface HeroBannerWithTextSliceDefaultPrimary {
   heroimageposition: prismic.SelectField<"right" | "left", "filled">;
 
   /**
-   * heroImageRadius field in *HeroBannerWithText → Default → Primary*
-   *
-   * - **Field Type**: Boolean
-   * - **Placeholder**: *None*
-   * - **Default Value**: false
-   * - **API ID Path**: hero_banner_with_text.default.primary.heroimageradius
-   * - **Documentation**: https://prismic.io/docs/field#boolean
-   */
-  heroimageradius: prismic.BooleanField;
-
-  /**
    * subText field in *HeroBannerWithText → Default → Primary*
    *
    * - **Field Type**: Rich Text
@@ -461,17 +450,6 @@ export interface HeroBannerWithTextSliceHeroBannerWithTextButtonsPrimary {
    * - **Documentation**: https://prismic.io/docs/field#select
    */
   heroimageposition: prismic.SelectField<"right" | "left", "filled">;
-
-  /**
-   * heroImageRadius field in *HeroBannerWithText →  HeroBannerWithText-Buttons → Primary*
-   *
-   * - **Field Type**: Boolean
-   * - **Placeholder**: *None*
-   * - **Default Value**: false
-   * - **API ID Path**: hero_banner_with_text.heroBannerWithTextButtons.primary.heroimageradius
-   * - **Documentation**: https://prismic.io/docs/field#boolean
-   */
-  heroimageradius: prismic.BooleanField;
 
   /**
    * subText field in *HeroBannerWithText →  HeroBannerWithText-Buttons → Primary*

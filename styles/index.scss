@@ -25,12 +25,27 @@ body {
     container-type: inline-size;
   }
 
-  h1 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     line-height: 1.1em;
+  }
+
+  h1 {
+    @extend .size-large;
+  }
+
+  h2,
+  h3 {
+    @extend .size-medium;
   }
 
   img {
     display: inline-block;
+    border-radius: 32px;
     filter: grayscale(1);
     transition: filter var(--base-transition-duration) ease-in-out;
 

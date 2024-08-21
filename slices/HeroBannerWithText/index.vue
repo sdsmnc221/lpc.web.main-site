@@ -2,13 +2,22 @@
   <section
     :data-slice-type="slice.slice_type"
     :data-slice-variation="slice.variation"
-    class="hero-banner-with-text bg-black"
+    class="hero-banner-with-text"
+    :class="`--${variant} ${descriptionParagraph.length > 0 ? '--with-description' : ''} --image-${heroImagePosition} }`"
   >
     <div class="hero-banner-with-text__text-content">
       <prismic-rich-text class="cl-gray size-medium" :field="subText" />
+
       <prismic-rich-text
-        class="hero-banner-with-text__heading cl-white gloock-regular"
+        class="hero-banner-with-text__heading gloock-regular"
+        :class="{ '--text-centered': descriptionParagraph.length === 0 }"
         :field="headingText"
+      />
+
+      <prismic-rich-text
+        v-if="descriptionParagraph.length > 0"
+        class="hero-banner-with-text__description albert-sans-regular"
+        :field="descriptionParagraph"
       />
 
       <div
@@ -26,6 +35,7 @@
     <div class="hero-banner-with-text__image-content">
       <prismic-image
         class="hero-banner-with-text__hero-image"
+        :class="{ '--square': descriptionParagraph.length > 0 }"
         :field="heroImage"
       />
     </div>
@@ -53,10 +63,18 @@ const withButton = computed(() =>
 );
 
 const primary = computed(() => props.slice.primary);
+
+const variant = computed(() => primary.value.variant);
+const heroImagePosition = computed(() => primary.value?.heroimageposition);
+
 const heroImage = computed(() => primary.value?.heroimage);
 const subText = computed(() => primary.value?.subtext);
 const headingText = computed(() => primary.value?.headingtext);
+const descriptionParagraph = computed(
+  () => primary.value?.descriptionparagraph
+);
 const buttons = computed(() => primary.value?.buttonsgroups);
+
 console.log(props.slice);
 </script>
 
@@ -68,23 +86,64 @@ console.log(props.slice);
   padding: var(--spacing-m);
   gap: var(--spacing-l);
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
-  min-height: 100vh;
+
+  &.--light {
+    @extend .bg-white;
+
+    .hero-banner-with-text__heading *,
+    .hero-banner-with-text__description * {
+      @extend .cl-black;
+    }
+  }
+
+  &.--dark {
+    @extend .bg-black;
+
+    .hero-banner-with-text__heading *,
+    .hero-banner-with-text__description * {
+      @extend .cl-white;
+    }
+  }
 
   &__text-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: var(--spacing-l);
-    text-align: center;
+    gap: var(--spacing-m);
+    text-align: left;
+
+    * {
+      text-align: left;
+    }
   }
 
   &__heading {
     * {
-      @extend .size-medium;
+      line-height: 1.2em;
     }
+
+    h1 {
+      @extend .size-xlarge;
+    }
+
+    h2,
+    h3 {
+      @extend .size-large;
+    }
+
+    &.--text-centered {
+      * {
+        text-align: center;
+      }
+    }
+  }
+
+  &__description * {
+    line-height: 1.5em;
+    @extend .size-16;
   }
 
   &__buttons-group {
@@ -102,16 +161,52 @@ console.log(props.slice);
     width: var(--w);
     height: var(--h);
     object-fit: cover;
+
+    &.--square {
+      --w: 360px !important;
+      --h: 360px !important;
+    }
   }
 }
 
 @container app (min-width: 768px) {
-  /* Change the flex direction of the .child element. */
   .hero-banner-with-text {
     align-items: flex-start;
     justify-content: flex-start;
     gap: var(--spacing-m);
+    padding: var(--spacing-l);
     min-height: 0;
+
+    &.--with-description {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      &.--image-left {
+        flex-direction: row-reverse;
+
+        & > * {
+          justify-content: flex-start;
+        }
+      }
+
+      & > * {
+        width: calc(100vw / 2 - var(--spacing-m) * 3);
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .hero-banner-with-text__hero-image {
+        width: var(--w);
+        height: var(--h);
+        object-fit: cover;
+
+        &.--square {
+          --w: 360px !important;
+          --h: 360px !important;
+        }
+      }
+    }
 
     * {
       text-align: left;
@@ -119,6 +214,14 @@ console.log(props.slice);
 
     &__text-content {
       gap: var(--spacing-m);
+    }
+
+    &__heading {
+      &.--text-centered {
+        * {
+          text-align: left;
+        }
+      }
     }
 
     &__buttons-group {
@@ -148,14 +251,39 @@ console.log(props.slice);
       text-align: left;
     }
 
+    &.--with-description {
+      min-height: 0;
+
+      .hero-banner-with-text__hero-image {
+        width: var(--w);
+        height: var(--h);
+        object-fit: cover;
+
+        &.--square {
+          --w: 520px !important;
+          --h: 520px !important;
+        }
+      }
+    }
+
     &__text-content {
       gap: var(--spacing-l);
     }
 
     &__heading {
-      * {
+      text-align: center;
+      h1 {
         @extend .size-xlarge;
       }
+
+      h2,
+      h3 {
+        @extend .size-large;
+      }
+    }
+
+    &__description * {
+      @extend .size-20;
     }
 
     &__hero-image {

@@ -68,10 +68,6 @@
 				"__TYPE__": "FieldContent",
 				"value": "dark",
 				"type": "Select"
-			},
-			"heroimageradius": {
-				"__TYPE__": "BooleanContent",
-				"value": true
 			}
 		},
 		"items": []
@@ -107,10 +103,6 @@
 				"__TYPE__": "FieldContent",
 				"value": "right",
 				"type": "Select"
-			},
-			"heroimageradius": {
-				"__TYPE__": "BooleanContent",
-				"value": true
 			},
 			"subtext": {
 				"__TYPE__": "StructuredTextContent",
