@@ -1,0 +1,186 @@
+:root {
+  --base-transition-duration: 0.72s;
+}
+
+@mixin newTransition(
+  $transitionName,
+  $opacityDurationEnter: 0.64s,
+  $opacityDurationLeave: 0.16s,
+  $transformDurationEnter: 0.96s,
+  $transformDurationLeave: 0.32s,
+  $transformEnter: "",
+  $transformLeave: ""
+) {
+  .#{$transitionName}-enter-active {
+    transition:
+      opacity $opacityDurationEnter,
+      transform $transformDurationEnter;
+  }
+
+  .#{$transitionName}-leave-active {
+    transition:
+      opacity $opacityDurationLeave,
+      transform $transformDurationLeave;
+  }
+  .#{$transitionName}-enter {
+    opacity: 0;
+    transform: #{$transformEnter};
+  }
+  .#{$transitionName}-leave-to {
+    opacity: 0;
+    transform: #{$transformLeave};
+  }
+}
+
+// Implementation of Transitions
+
+// .home-layout {
+//     @include fade(0.64s, 0.16s, 0.96s, 0.32s);
+// }
+
+// .custom-selector {
+//     @include fade($transformEnter: 'translateX(-50%) translateY(20%)', $transformLeave: 'translateX(-50%) translateY(-20%)');
+// }
+
+// Custom Transitions
+@include newTransition(
+  "previousStep",
+  0.64s,
+  0.16s,
+  0.96s,
+  0.32s,
+  "translateX(-8%)",
+  "translateX(8%)"
+);
+
+@include newTransition(
+  "nextStep",
+  0.64s,
+  0.16s,
+  0.96s,
+  0.32s,
+  "translateX(8%)",
+  "translateX(-8%)"
+);
+
+@include newTransition("opacity", 0.64s, 0.16s, 0.96s, 0.32s);
+
+// TODO: Replace with mixin to create transition
+// FadeX Transition
+.fadeX-enter-active {
+  transition:
+    opacity 0.48s,
+    transform 0.24s;
+}
+
+.fadeX-leave-active {
+  transition:
+    opacity 0.48s,
+    transform 0.24s;
+}
+.fadeX-enter {
+  opacity: 0;
+  transform: translateX(20%);
+}
+.fadeX-leave-to {
+  opacity: 0;
+  transform: translateX(-20%);
+}
+
+// FadeY Transition
+.fadeY-enter-active {
+  transition:
+    opacity 0.48s,
+    transform 0.24s;
+}
+
+.fadeY-leave-active {
+  transition:
+    opacity 0.48s,
+    transform 0.24s;
+}
+.fadeY-enter-from {
+  opacity: 0;
+  transform: translateY(20%);
+}
+.fadeY-leave-to {
+  opacity: 0;
+  transform: translateY(20%);
+}
+
+// List Transition
+/* 1. declare transition */
+.list-move,
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+}
+
+/* 2. declare enter from and leave to state */
+.fade-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: scaleY(0.01) translate(30px, 0);
+}
+
+/* 3. ensure leaving items are taken out of layout flow so that moving
+      animations can be calculated correctly. */
+.list-leave-active {
+  position: absolute;
+}
+
+.fadeView-enter-active,
+.fadeView-leave-active {
+  transition:
+    opacity 0.32s ease-in-out,
+    transform 0.96s ease-in-out;
+}
+.fadeView-enter-from {
+  opacity: 0;
+  transform: translateY(16%);
+}
+.fadeView-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+}
+.fadeView-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+.fadeView-leave-to {
+  opacity: 0;
+  transform: translateY(-16%);
+}
+
+// transition for datepicker
+.fadeCalendar-enter-active {
+  transition:
+    opacity 0.48s,
+    transform 0.96s !important;
+}
+
+.fadeCalendar-leave-active {
+  transition:
+    opacity 0.48s,
+    transform 0.96s !important;
+}
+.fadeCalendar-enter-from {
+  opacity: 0;
+  transform: translateY(20%) translateX(-50%) !important;
+}
+.fadeCalendar-leave-to {
+  opacity: 0;
+  transform: translateY(-20%) translateX(-50%) !important;
+}
+
+@keyframes fadeThenReappear {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

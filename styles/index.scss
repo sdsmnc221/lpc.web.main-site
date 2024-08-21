@@ -1,0 +1,45 @@
+@import "libs";
+@import "minireset";
+@import "transitions";
+@import "colors";
+@import "typography";
+@import "scrollbar";
+@import "spacings";
+
+* {
+  @include baseTypography();
+  //   margin: 0;
+  //   padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  .app {
+    width: 100vw;
+    overflow-x: hidden;
+    min-height: 100vh;
+
+    color: var(--black);
+  }
+
+  h1 {
+    line-height: 1.1em;
+  }
+
+  img {
+    filter: grayscale(1);
+    transition: filter var(--base-transition-duration) ease-in-out;
+
+    &:hover {
+      filter: grayscale(0);
+    }
+  }
+}
+
+.fake-hidden {
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+  height: 0;
+  margin: 0;
+}

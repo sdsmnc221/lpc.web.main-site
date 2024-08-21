@@ -14,6 +14,8 @@ const { client } = usePrismic();
 const { data: home } = await useAsyncData("home", () =>
   client.getSingle("homepage")
 );
-
-console.log(home.value);
 </script>
+
+<style lang="scss">
+@import "../styles/index";
+</style>

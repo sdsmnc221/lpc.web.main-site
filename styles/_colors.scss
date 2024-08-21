@@ -1,0 +1,25 @@
+:root {
+  --black: #333333;
+  --white: #f0f2f5;
+
+  --gray: #8b949e;
+}
+
+// CLASSE FOR BACKGROUND COLOR
+.bg-black {
+  background-color: var(--black) !important;
+}
+.bg-white {
+  background-color: var(--white) !important;
+}
+
+// CLASSE FOR TEXT COLOR
+.cl-black {
+  color: var(--black) !important;
+}
+.cl-white {
+  color: var(--white) !important;
+}
+.cl-gray {
+  color: var(--gray) !important;
+}

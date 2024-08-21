@@ -1,0 +1,106 @@
+@import "./colors";
+
+@import url("https://fonts.googleapis.com/css2?family=Gloock&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&family=Gloock&display=swap");
+
+@mixin baseTypography() {
+  @extend .albert-sans-regular;
+
+  line-height: 14px;
+  letter-spacing: -0.4px;
+}
+
+@mixin typography(
+  $class-name,
+  $font-family: "",
+  $font-size: "",
+  $font-weight: "",
+  $line-height: "",
+  $letter-spacing: -0.4px,
+  $color: "",
+  $text-decoration: "",
+  $tag: "*"
+) {
+  .typo-#{$class-name},
+  #{$tag}.typo-#{$class-name} {
+    font-size: $font-size;
+    font-weight: $font-weight;
+    font-style: normal;
+    line-height: $line-height;
+    letter-spacing: $letter-spacing;
+
+    @if $font-family != "" {
+      font-family: $font-family;
+    } @else {
+      font-family: "Inter", sans-serif;
+    }
+
+    @if $color != "" {
+      color: $color;
+    } @else {
+      color: var(--grayscale-black);
+    }
+
+    @if $text-decoration != "" {
+      text-decoration: $text-decoration !important;
+    } @else {
+      text-decoration: none !important;
+    }
+  }
+}
+
+// Typographies
+// @include typography($class-name: 'heading-1', $font-size: 24px, $font-weight: 700, $line-height: 26px);
+
+.gloock-regular {
+  font-family: "Gloock", serif;
+  font-weight: 400;
+  font-style: normal;
+
+  & > * {
+    font-family: "Gloock", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+}
+
+// <uniquifier>: Use a unique and descriptive class name
+// <weight>: Use a value from 100 to 900
+
+// .albert-sans-<uniquifier> {
+//     font-family: "Albert Sans", sans-serif;
+//     font-optical-sizing: auto;
+//     font-weight: <weight>;
+//     font-style: normal;
+//   }
+
+.albert-sans-regular {
+  font-family: "Albert Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+:root {
+  --base-ft-size: 0.8rem;
+}
+
+.size-regular {
+  font-size: var(--base-ft-size);
+}
+
+.size-16 {
+  font-size: 1rem;
+}
+
+.size-medium {
+  font-size: calc((var(--base-ft-size) * 2));
+}
+
+.size-large {
+  font-size: calc((var(--base-ft-size) * 3));
+}
+
+.size-xlarge {
+  font-size: calc((var(--base-ft-size) * 4));
+}
