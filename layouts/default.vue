@@ -1,7 +1,11 @@
 <template>
   <div>
     <navigation-menu :links="links"></navigation-menu>
-    <slot />
+
+    <main class="app">
+      <slot />
+    </main>
+
     <footer-menu
       v-if="footer && footer.data"
       v-bind="footer.data"
@@ -25,6 +29,4 @@ const links = computed(() => navigation.value?.data.navigationlink);
 const { data: footer } = await useAsyncData("footer", () =>
   client.getSingle("footermenu")
 );
-
-onMounted(() => console.log(footer.value));
 </script>

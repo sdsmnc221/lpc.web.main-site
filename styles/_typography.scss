@@ -129,3 +129,19 @@
 .size-xxlarge {
   font-size: calc((var(--base-ft-size) * 5));
 }
+
+.size-fullW {
+  /** 
+  x = 100vw - 2 * 48px 
+  r = 224px/24px = 9.333... = 28 / 3
+
+  y = x / r
+    = (100vw - 6em) / (28 / 3)
+    = (100vw - 6em) * 3 / 28
+    = (300vw - 18em) / 28
+    = (75vw - 4.5rem) / 7
+
+    https://stackoverflow.com/a/39269074/24528175
+  */
+  font-size: calc((100vw - 2 * 48px) / 7);
+}

@@ -1,21 +1,19 @@
 <template>
-  <main class="app">
-    <hero-banner-with-text
-      v-for="(hero, index) in heroBanners"
-      :key="`hero-banner-with-text-homepage-${index}`"
-      :slice="hero"
-    ></hero-banner-with-text>
+  <hero-banner-with-text
+    v-for="(hero, index) in heroBanners"
+    :key="`hero-banner-with-text-homepage-${index}`"
+    :slice="hero"
+  ></hero-banner-with-text>
 
-    <section class="home-headlines">
-      <photo-with-text-block
-        v-for="(block, index) in homeHeadlines"
-        :key="`home-headline-homepage-${index}`"
-        :slice="block"
-      ></photo-with-text-block>
-    </section>
+  <section class="home-headlines">
+    <photo-with-text-block
+      v-for="(block, index) in homeHeadlines"
+      :key="`home-headline-homepage-${index}`"
+      :slice="block"
+    ></photo-with-text-block>
+  </section>
 
-    <pop-out-text :slice="popOutText"></pop-out-text>
-  </main>
+  <pop-out-text :slice="popOutText"></pop-out-text>
 </template>
 
 <script setup lang="ts">

@@ -3,7 +3,7 @@
     :data-slice-type="slice.slice_type"
     :data-slice-variation="slice.variation"
     class="hero-banner-with-text"
-    :class="`--${variant} ${descriptionParagraph.length > 0 ? '--with-description' : ''} --image-${heroImagePosition} }`"
+    :class="`--${variant} ${descriptionParagraph.length > 0 ? '--with-description' : ''} --image-${heroImagePosition} ${withEmphasis ? '--emphasis' : ''} }`"
   >
     <div class="hero-banner-with-text__text-content">
       <prismic-rich-text
@@ -13,7 +13,9 @@
 
       <prismic-rich-text
         class="hero-banner-with-text__heading gloock-regular"
-        :class="{ '--text-centered': descriptionParagraph.length === 0 }"
+        :class="{
+          '--text-centered': descriptionParagraph.length === 0,
+        }"
         :field="headingText"
       />
 
@@ -25,7 +27,7 @@
 
       <div
         class="hero-banner-with-text__buttons-group"
-        v-if="withButton && buttons.length"
+        v-if="buttons && buttons.length"
       >
         <ui-button
           v-for="(btn, index) in buttons"
@@ -63,6 +65,9 @@ const props = defineProps(
 const variation = computed(() => props.slice.variation);
 const withButton = computed(() =>
   variation.value.toLowerCase().includes("buttons")
+);
+const withEmphasis = computed(() =>
+  variation.value.toLowerCase().includes("emphasis")
 );
 
 const primary = computed(() => props.slice.primary);
@@ -109,6 +114,31 @@ const buttons = computed(() => primary.value?.buttonsgroups);
     }
   }
 
+  &.--emphasis {
+    .hero-banner-with-text {
+      &__heading {
+        * {
+          text-transform: uppercase;
+          width: 100%;
+          text-align: center;
+          @extend .size-xxlarge;
+        }
+      }
+
+      &__description {
+        * {
+          text-align: center;
+        }
+      }
+
+      &__buttons-group {
+        * {
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+
   &__text-content {
     display: flex;
     flex-direction: column;
@@ -146,9 +176,11 @@ const buttons = computed(() => primary.value?.buttonsgroups);
     }
   }
 
-  &__description * {
-    line-height: 1.5em;
-    @extend .size-16;
+  &__description {
+    * {
+      line-height: 1.5em;
+      @extend .size-16;
+    }
   }
 
   &__buttons-group {
@@ -213,6 +245,38 @@ const buttons = computed(() => primary.value?.buttonsgroups);
       }
     }
 
+    &.--emphasis {
+      flex-direction: column;
+
+      & > * {
+        width: 100%;
+      }
+
+      .hero-banner-with-text {
+        &__heading {
+          * {
+            @extend .size-fullW;
+          }
+        }
+
+        &__description {
+          margin: var(--spacing-m) 0;
+        }
+
+        &__buttons-group {
+          margin: var(--spacing-m) 0;
+          * {
+            margin: 0 auto;
+          }
+        }
+
+        &__hero-image.--square {
+          --w: 710px !important;
+          --h: 600px !important;
+        }
+      }
+    }
+
     * {
       text-align: left;
     }
@@ -266,6 +330,27 @@ const buttons = computed(() => primary.value?.buttonsgroups);
         &.--square {
           --w: 520px !important;
           --h: 520px !important;
+        }
+      }
+    }
+
+    &.--emphasis {
+      flex-direction: column;
+
+      & > * {
+        width: 100%;
+      }
+
+      .hero-banner-with-text {
+        &__description {
+          padding: 0 12vw;
+        }
+
+        &__hero-image.--square {
+          --w: 1000px !important;
+          --h: 600px !important;
+          aspect-ratio: var(--w) / var(--h);
+          margin: 0 auto;
         }
       }
     }

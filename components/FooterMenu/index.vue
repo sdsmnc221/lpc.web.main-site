@@ -30,8 +30,6 @@ type Props = {
 };
 
 const props = defineProps<Props>();
-
-onMounted(() => console.log(props));
 </script>
 
 <style lang="scss">
