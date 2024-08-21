@@ -1,0 +1,65 @@
+{
+  "id": "adoptions_group",
+  "type": "SharedSlice",
+  "name": "AdoptionsGroup",
+  "description": "AdoptionsGroup",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "title",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,heading1,heading2,heading3,heading4,heading5,heading6,strong,em"
+          }
+        },
+        "catsgroup": {
+          "type": "Group",
+          "config": {
+            "label": "catsGroup",
+            "repeat": true,
+            "fields": {
+              "catitem": {
+                "type": "Link",
+                "config": {
+                  "label": "catItem",
+                  "select": "document",
+                  "customtypes": [
+                    "catfiche"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "contactinfo": {
+          "type": "StructuredText",
+          "config": {
+            "label": "ContactInfo",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,strong,em,hyperlink,list-item,o-list-item,rtl"
+          }
+        },
+        "adoptionrequirements": {
+          "type": "StructuredText",
+          "config": {
+            "label": "AdoptionRequirements",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,strong,em,hyperlink,list-item,o-list-item,rtl,image"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

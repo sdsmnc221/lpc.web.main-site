@@ -5,6 +5,172 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 /**
+ * Content for CatFiche documents
+ */
+interface CatficheDocumentData {
+  /**
+   * publicationDate field in *CatFiche*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: *None*
+   * - **API ID Path**: catfiche.createddate
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#date
+   */
+  createddate: prismic.DateField;
+
+  /**
+   * catPhoto field in *CatFiche*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: catfiche.catphoto
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  catphoto: prismic.ImageField<never>;
+
+  /**
+   * catName field in *CatFiche*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: catfiche.catname
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  catname: prismic.KeyTextField;
+
+  /**
+   * catAge field in *CatFiche*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: catfiche.catage
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#number
+   */
+  catage: prismic.NumberField;
+
+  /**
+   * catBirth field in *CatFiche*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: *None*
+   * - **API ID Path**: catfiche.catbirth
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#date
+   */
+  catbirth: prismic.DateField;
+
+  /**
+   * catDescription field in *CatFiche*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: catfiche.catdescription
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  catdescription: prismic.RichTextField;
+
+  /**
+   * catIdentification field in *CatFiche*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: Identifié.e par tatouage
+   * - **API ID Path**: catfiche.catidentification
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  catidentification: prismic.SelectField<
+    "Identifié.e par tatouage" | "Identifié. par puce" | "Non identifiée.",
+    "filled"
+  >;
+
+  /**
+   * catVaccination field in *CatFiche*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: catfiche.catvaccination
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  catvaccination: prismic.BooleanField;
+
+  /**
+   * catSterilization field in *CatFiche*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: catfiche.catsterilization
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  catsterilization: prismic.BooleanField;
+
+  /**
+   * zipCode field in *CatFiche*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: 91210
+   * - **API ID Path**: catfiche.zipcode
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#number
+   */
+  zipcode: prismic.NumberField;
+
+  /**
+   * relatedCat field in *CatFiche*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: catfiche.relatedcat
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  relatedcat: prismic.ContentRelationshipField<"catfiche">;
+
+  /**
+   * adoptionStatus field in *CatFiche*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: Adoptable - Chat adulte
+   * - **API ID Path**: catfiche.adoptionstatus
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  adoptionstatus: prismic.SelectField<
+    | "Adoptable - Chat adulte"
+    | "Adoptable - Chat craintif"
+    | "Adoptable - Chaton"
+    | "Adopté.e",
+    "filled"
+  >;
+}
+
+/**
+ * CatFiche document from Prismic
+ *
+ * - **API ID**: `catfiche`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type CatficheDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<CatficheDocumentData>,
+    "catfiche",
+    Lang
+  >;
+
+/**
  * Item in *FooterMenu → linksGroup*
  */
 export interface FootermenuDocumentDataLinksgroupItem {
@@ -306,6 +472,9 @@ export type NavigationmenuDocument<Lang extends string = string> =
   >;
 
 type NavigationpageDocumentDataSlicesSlice =
+  | MultiTextBlockSlice
+  | AdoptionsGroupSlice
+  | HeroPhotoBackgroundSlice
   | HeroBannerWithTextSlice
   | PhotoWithTextBlockSlice
   | PopOutTextSlice;
@@ -396,11 +565,104 @@ export type NavigationpageDocument<Lang extends string = string> =
   >;
 
 export type AllDocumentTypes =
+  | CatficheDocument
   | FootermenuDocument
   | HomepageDocument
   | MultiphotosblockDocument
   | NavigationmenuDocument
   | NavigationpageDocument;
+
+/**
+ * Item in *AdoptionsGroup → Default → Primary → catsGroup*
+ */
+export interface AdoptionsGroupSliceDefaultPrimaryCatsgroupItem {
+  /**
+   * catItem field in *AdoptionsGroup → Default → Primary → catsGroup*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: adoptions_group.default.primary.catsgroup[].catitem
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  catitem: prismic.ContentRelationshipField<"catfiche">;
+}
+
+/**
+ * Primary content in *AdoptionsGroup → Default → Primary*
+ */
+export interface AdoptionsGroupSliceDefaultPrimary {
+  /**
+   * title field in *AdoptionsGroup → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: adoptions_group.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * catsGroup field in *AdoptionsGroup → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: adoptions_group.default.primary.catsgroup[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  catsgroup: prismic.GroupField<
+    Simplify<AdoptionsGroupSliceDefaultPrimaryCatsgroupItem>
+  >;
+
+  /**
+   * ContactInfo field in *AdoptionsGroup → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: adoptions_group.default.primary.contactinfo
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  contactinfo: prismic.RichTextField;
+
+  /**
+   * AdoptionRequirements field in *AdoptionsGroup → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: adoptions_group.default.primary.adoptionrequirements
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  adoptionrequirements: prismic.RichTextField;
+}
+
+/**
+ * Default variation for AdoptionsGroup Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type AdoptionsGroupSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<AdoptionsGroupSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *AdoptionsGroup*
+ */
+type AdoptionsGroupSliceVariation = AdoptionsGroupSliceDefault;
+
+/**
+ * AdoptionsGroup Shared Slice
+ *
+ * - **API ID**: `adoptions_group`
+ * - **Description**: AdoptionsGroup
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type AdoptionsGroupSlice = prismic.SharedSlice<
+  "adoptions_group",
+  AdoptionsGroupSliceVariation
+>;
 
 /**
  * Item in *HeroBannerWithText →  HeroBannerWithText-Buttons → Primary → buttonsGroups*
@@ -422,6 +684,31 @@ export interface HeroBannerWithTextSliceHeroBannerWithTextButtonsPrimaryButtonsg
    * - **Field Type**: Text
    * - **Placeholder**: *None*
    * - **API ID Path**: hero_banner_with_text.heroBannerWithTextButtons.primary.buttonsgroups[].buttonlabel
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  buttonlabel: prismic.KeyTextField;
+}
+
+/**
+ * Item in *HeroBannerWithText → HeroBannerWithText-Emphasis → Primary → buttonsGroups*
+ */
+export interface HeroBannerWithTextSliceHeroBannerWithTextEmphasisPrimaryButtonsgroupsItem {
+  /**
+   * buttonLink field in *HeroBannerWithText → HeroBannerWithText-Emphasis → Primary → buttonsGroups*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero_banner_with_text.heroBannerWithTextEmphasis.primary.buttonsgroups[].buttonitem
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  buttonitem: prismic.LinkField;
+
+  /**
+   * buttonLabel field in *HeroBannerWithText → HeroBannerWithText-Emphasis → Primary → buttonsGroups*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero_banner_with_text.heroBannerWithTextEmphasis.primary.buttonsgroups[].buttonlabel
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   buttonlabel: prismic.KeyTextField;
@@ -601,11 +888,94 @@ export type HeroBannerWithTextSliceHeroBannerWithTextButtons =
   >;
 
 /**
+ * Primary content in *HeroBannerWithText → HeroBannerWithText-Emphasis → Primary*
+ */
+export interface HeroBannerWithTextSliceHeroBannerWithTextEmphasisPrimary {
+  /**
+   * heroImage field in *HeroBannerWithText → HeroBannerWithText-Emphasis → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero_banner_with_text.heroBannerWithTextEmphasis.primary.heroimage
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  heroimage: prismic.ImageField<never>;
+
+  /**
+   * subText field in *HeroBannerWithText → HeroBannerWithText-Emphasis → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero_banner_with_text.heroBannerWithTextEmphasis.primary.subtext
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  subtext: prismic.RichTextField;
+
+  /**
+   * headingText field in *HeroBannerWithText → HeroBannerWithText-Emphasis → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero_banner_with_text.heroBannerWithTextEmphasis.primary.headingtext
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  headingtext: prismic.RichTextField;
+
+  /**
+   * descriptionParagraph field in *HeroBannerWithText → HeroBannerWithText-Emphasis → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero_banner_with_text.heroBannerWithTextEmphasis.primary.descriptionparagraph
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  descriptionparagraph: prismic.RichTextField;
+
+  /**
+   * variant field in *HeroBannerWithText → HeroBannerWithText-Emphasis → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: dark
+   * - **API ID Path**: hero_banner_with_text.heroBannerWithTextEmphasis.primary.variant
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  variant: prismic.SelectField<"dark" | "light", "filled">;
+
+  /**
+   * buttonsGroups field in *HeroBannerWithText → HeroBannerWithText-Emphasis → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero_banner_with_text.heroBannerWithTextEmphasis.primary.buttonsgroups[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  buttonsgroups: prismic.GroupField<
+    Simplify<HeroBannerWithTextSliceHeroBannerWithTextEmphasisPrimaryButtonsgroupsItem>
+  >;
+}
+
+/**
+ * HeroBannerWithText-Emphasis variation for HeroBannerWithText Slice
+ *
+ * - **API ID**: `heroBannerWithTextEmphasis`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type HeroBannerWithTextSliceHeroBannerWithTextEmphasis =
+  prismic.SharedSliceVariation<
+    "heroBannerWithTextEmphasis",
+    Simplify<HeroBannerWithTextSliceHeroBannerWithTextEmphasisPrimary>,
+    never
+  >;
+
+/**
  * Slice variation for *HeroBannerWithText*
  */
 type HeroBannerWithTextSliceVariation =
   | HeroBannerWithTextSliceDefault
-  | HeroBannerWithTextSliceHeroBannerWithTextButtons;
+  | HeroBannerWithTextSliceHeroBannerWithTextButtons
+  | HeroBannerWithTextSliceHeroBannerWithTextEmphasis;
 
 /**
  * HeroBannerWithText Shared Slice
@@ -617,6 +987,143 @@ type HeroBannerWithTextSliceVariation =
 export type HeroBannerWithTextSlice = prismic.SharedSlice<
   "hero_banner_with_text",
   HeroBannerWithTextSliceVariation
+>;
+
+/**
+ * Primary content in *HeroPhotoBackground → Default → Primary*
+ */
+export interface HeroPhotoBackgroundSliceDefaultPrimary {
+  /**
+   * backgroundImage field in *HeroPhotoBackground → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero_photo_background.default.primary.backgroundimage
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  backgroundimage: prismic.ImageField<never>;
+
+  /**
+   * text field in *HeroPhotoBackground → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero_photo_background.default.primary.text
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  text: prismic.RichTextField;
+}
+
+/**
+ * Default variation for HeroPhotoBackground Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type HeroPhotoBackgroundSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<HeroPhotoBackgroundSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *HeroPhotoBackground*
+ */
+type HeroPhotoBackgroundSliceVariation = HeroPhotoBackgroundSliceDefault;
+
+/**
+ * HeroPhotoBackground Shared Slice
+ *
+ * - **API ID**: `hero_photo_background`
+ * - **Description**: HeroPhotoBackground
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type HeroPhotoBackgroundSlice = prismic.SharedSlice<
+  "hero_photo_background",
+  HeroPhotoBackgroundSliceVariation
+>;
+
+/**
+ * Item in *MultiTextBlock → Default → Primary → textBlocksGroup*
+ */
+export interface MultiTextBlockSliceDefaultPrimaryTextblocksgroupItem {
+  /**
+   * textBlockTitle field in *MultiTextBlock → Default → Primary → textBlocksGroup*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: multi_text_block.default.primary.textblocksgroup[].textblocktitle
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  textblocktitle: prismic.KeyTextField;
+
+  /**
+   * textBlockContent field in *MultiTextBlock → Default → Primary → textBlocksGroup*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: multi_text_block.default.primary.textblocksgroup[].textblockcontent
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  textblockcontent: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *MultiTextBlock → Default → Primary*
+ */
+export interface MultiTextBlockSliceDefaultPrimary {
+  /**
+   * title field in *MultiTextBlock → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: multi_text_block.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * textBlocksGroup field in *MultiTextBlock → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: multi_text_block.default.primary.textblocksgroup[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  textblocksgroup: prismic.GroupField<
+    Simplify<MultiTextBlockSliceDefaultPrimaryTextblocksgroupItem>
+  >;
+}
+
+/**
+ * Default variation for MultiTextBlock Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type MultiTextBlockSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<MultiTextBlockSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *MultiTextBlock*
+ */
+type MultiTextBlockSliceVariation = MultiTextBlockSliceDefault;
+
+/**
+ * MultiTextBlock Shared Slice
+ *
+ * - **API ID**: `multi_text_block`
+ * - **Description**: MultiTextBlock
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type MultiTextBlockSlice = prismic.SharedSlice<
+  "multi_text_block",
+  MultiTextBlockSliceVariation
 >;
 
 /**
@@ -739,6 +1246,8 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
+      CatficheDocument,
+      CatficheDocumentData,
       FootermenuDocument,
       FootermenuDocumentData,
       FootermenuDocumentDataLinksgroupItem,
@@ -756,13 +1265,30 @@ declare module "@prismicio/client" {
       NavigationpageDocumentData,
       NavigationpageDocumentDataSlicesSlice,
       AllDocumentTypes,
+      AdoptionsGroupSlice,
+      AdoptionsGroupSliceDefaultPrimaryCatsgroupItem,
+      AdoptionsGroupSliceDefaultPrimary,
+      AdoptionsGroupSliceVariation,
+      AdoptionsGroupSliceDefault,
       HeroBannerWithTextSlice,
       HeroBannerWithTextSliceDefaultPrimary,
       HeroBannerWithTextSliceHeroBannerWithTextButtonsPrimaryButtonsgroupsItem,
       HeroBannerWithTextSliceHeroBannerWithTextButtonsPrimary,
+      HeroBannerWithTextSliceHeroBannerWithTextEmphasisPrimaryButtonsgroupsItem,
+      HeroBannerWithTextSliceHeroBannerWithTextEmphasisPrimary,
       HeroBannerWithTextSliceVariation,
       HeroBannerWithTextSliceDefault,
       HeroBannerWithTextSliceHeroBannerWithTextButtons,
+      HeroBannerWithTextSliceHeroBannerWithTextEmphasis,
+      HeroPhotoBackgroundSlice,
+      HeroPhotoBackgroundSliceDefaultPrimary,
+      HeroPhotoBackgroundSliceVariation,
+      HeroPhotoBackgroundSliceDefault,
+      MultiTextBlockSlice,
+      MultiTextBlockSliceDefaultPrimaryTextblocksgroupItem,
+      MultiTextBlockSliceDefaultPrimary,
+      MultiTextBlockSliceVariation,
+      MultiTextBlockSliceDefault,
       PhotoWithTextBlockSlice,
       PhotoWithTextBlockSliceDefaultPrimary,
       PhotoWithTextBlockSliceVariation,

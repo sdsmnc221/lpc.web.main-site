@@ -33,6 +33,15 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "multi_text_block": {
+              "type": "SharedSlice"
+            },
+            "adoptions_group": {
+              "type": "SharedSlice"
+            },
+            "hero_photo_background": {
+              "type": "SharedSlice"
+            },
             "hero_banner_with_text": {
               "type": "SharedSlice"
             },

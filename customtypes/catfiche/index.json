@@ -1,0 +1,122 @@
+{
+  "format": "custom",
+  "id": "catfiche",
+  "label": "CatFiche",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "type": "UID",
+        "config": {
+          "label": "UID"
+        }
+      },
+      "createddate": {
+        "type": "Date",
+        "config": {
+          "label": "publicationDate",
+          "placeholder": ""
+        }
+      },
+      "catphoto": {
+        "type": "Image",
+        "config": {
+          "label": "catPhoto",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "catname": {
+        "type": "Text",
+        "config": {
+          "label": "catName",
+          "placeholder": ""
+        }
+      },
+      "catage": {
+        "type": "Number",
+        "config": {
+          "label": "catAge",
+          "placeholder": ""
+        }
+      },
+      "catbirth": {
+        "type": "Date",
+        "config": {
+          "label": "catBirth",
+          "placeholder": ""
+        }
+      },
+      "catdescription": {
+        "type": "StructuredText",
+        "config": {
+          "label": "catDescription",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,preformatted,strong,em,hyperlink,list-item,o-list-item,rtl"
+        }
+      },
+      "catidentification": {
+        "type": "Select",
+        "config": {
+          "label": "catIdentification",
+          "placeholder": "",
+          "options": [
+            "Identifié.e par tatouage",
+            "Identifié. par puce",
+            "Non identifiée."
+          ],
+          "default_value": "Identifié.e par tatouage"
+        }
+      },
+      "catvaccination": {
+        "type": "Boolean",
+        "config": {
+          "label": "catVaccination",
+          "placeholder_false": "false",
+          "placeholder_true": "true",
+          "default_value": true
+        }
+      },
+      "catsterilization": {
+        "type": "Boolean",
+        "config": {
+          "label": "catSterilization",
+          "placeholder_false": "false",
+          "placeholder_true": "true",
+          "default_value": false
+        }
+      },
+      "zipcode": {
+        "type": "Number",
+        "config": {
+          "label": "zipCode",
+          "placeholder": "91210"
+        }
+      },
+      "relatedcat": {
+        "type": "Link",
+        "config": {
+          "label": "relatedCat",
+          "select": "document",
+          "customtypes": ["catfiche"]
+        }
+      },
+      "adoptionstatus": {
+        "type": "Select",
+        "config": {
+          "label": "adoptionStatus",
+          "placeholder": "",
+          "options": [
+            "Adoptable - Chat adulte",
+            "Adoptable - Chat craintif",
+            "Adoptable - Chaton",
+            "Adopté.e"
+          ],
+          "default_value": "Adoptable - Chat adulte"
+        }
+      }
+    }
+  }
+}

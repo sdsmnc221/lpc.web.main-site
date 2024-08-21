@@ -1,0 +1,62 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"title": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Qui quis excepteur voluptate nisi. Exercitation commodo fugiat minim mollit aliquip. Ipsum dolor magna fugiat tempor labore veniam et ipsum laboris minim laboris proident duis commodo adipisicing."
+						}
+					}
+				]
+			},
+			"catsgroup": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"catitem",
+								{
+									"__TYPE__": "LinkContent",
+									"value": {
+										"__TYPE__": "DocumentLink",
+										"id": "mock_document_id"
+									}
+								}
+							]
+						]
+					}
+				]
+			},
+			"contactinfo": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Aute sunt minim ad pariatur do anim laborum qui eu sit laborum elit fugiat minim. Qui id veniam enim ullamco eu pariatur eiusmod ex culpa amet officia labore adipisicing exercitation sunt."
+						}
+					}
+				]
+			},
+			"adoptionrequirements": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Consequat minim et adipisicing veniam esse. Cillum aliqua enim dolore non nulla consequat ex labore."
+						}
+					}
+				]
+			}
+		},
+		"items": []
+	}
+]

@@ -1,0 +1,53 @@
+{
+  "id": "multi_text_block",
+  "type": "SharedSlice",
+  "name": "MultiTextBlock",
+  "description": "MultiTextBlock",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "title",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "heading1,heading2,heading3,heading4,heading5,heading6,rtl,strong,em"
+          }
+        },
+        "textblocksgroup": {
+          "type": "Group",
+          "config": {
+            "label": "textBlocksGroup",
+            "repeat": true,
+            "fields": {
+              "textblocktitle": {
+                "type": "Text",
+                "config": {
+                  "label": "textBlockTitle",
+                  "placeholder": ""
+                }
+              },
+              "textblockcontent": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "textBlockContent",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,preformatted,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

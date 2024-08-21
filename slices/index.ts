@@ -4,8 +4,17 @@ import { defineAsyncComponent } from "vue";
 import { defineSliceZoneComponents } from "@prismicio/vue";
 
 export const components = defineSliceZoneComponents({
+  adoptions_group: defineAsyncComponent(
+    () => import("./AdoptionsGroup/index.vue"),
+  ),
   hero_banner_with_text: defineAsyncComponent(
     () => import("./HeroBannerWithText/index.vue"),
+  ),
+  hero_photo_background: defineAsyncComponent(
+    () => import("./HeroPhotoBackground/index.vue"),
+  ),
+  multi_text_block: defineAsyncComponent(
+    () => import("./MultiTextBlock/index.vue"),
   ),
   photo_with_text_block: defineAsyncComponent(
     () => import("./PhotoWithTextBlock/index.vue"),

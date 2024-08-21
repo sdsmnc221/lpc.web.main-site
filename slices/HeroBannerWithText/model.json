@@ -168,6 +168,89 @@
         }
       },
       "items": {}
+    },
+    {
+      "id": "heroBannerWithTextEmphasis",
+      "name": "HeroBannerWithText-Emphasis",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "heroimage": {
+          "type": "Image",
+          "config": {
+            "label": "heroImage",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "subtext": {
+          "type": "StructuredText",
+          "config": {
+            "label": "subText",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em,hyperlink,rtl"
+          }
+        },
+        "headingtext": {
+          "type": "StructuredText",
+          "config": {
+            "label": "headingText",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,rtl"
+          }
+        },
+        "descriptionparagraph": {
+          "type": "StructuredText",
+          "config": {
+            "label": "descriptionParagraph",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,rtl,o-list-item"
+          }
+        },
+        "variant": {
+          "type": "Select",
+          "config": {
+            "label": "variant",
+            "placeholder": "",
+            "options": [
+              "dark",
+              "light"
+            ],
+            "default_value": "dark"
+          }
+        },
+        "buttonsgroups": {
+          "type": "Group",
+          "config": {
+            "label": "buttonsGroups",
+            "repeat": true,
+            "fields": {
+              "buttonitem": {
+                "type": "Link",
+                "config": {
+                  "label": "buttonLink",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "select": null
+                }
+              },
+              "buttonlabel": {
+                "type": "Text",
+                "config": {
+                  "label": "buttonLabel",
+                  "placeholder": ""
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
     }
   ]
 }
