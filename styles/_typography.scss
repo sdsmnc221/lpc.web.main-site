@@ -7,7 +7,7 @@
   @extend .albert-sans-regular;
 
   line-height: 14px;
-  letter-spacing: -0.4px;
+  letter-spacing: 0.12px;
 }
 
 @mixin typography(
@@ -91,6 +91,10 @@
 
 .size-16 {
   font-size: 1rem;
+}
+
+.size-24 {
+  font-size: 24px;
 }
 
 .size-medium {

@@ -7,7 +7,7 @@
     <div class="hero-banner-with-text__text-content">
       <prismic-rich-text class="cl-gray size-medium" :field="subText" />
       <prismic-rich-text
-        class="cl-white size-large gloock-regular"
+        class="hero-banner-with-text__heading cl-white gloock-regular"
         :field="headingText"
       />
 
@@ -61,6 +61,8 @@ console.log(props.slice);
 </script>
 
 <style lang="scss">
+@import "@/styles/imports";
+
 .hero-banner-with-text {
   display: flex;
   padding: var(--spacing-m);
@@ -79,6 +81,12 @@ console.log(props.slice);
     text-align: center;
   }
 
+  &__heading {
+    * {
+      @extend .size-medium;
+    }
+  }
+
   &__buttons-group {
     display: flex;
     flex-direction: column;
@@ -94,6 +102,66 @@ console.log(props.slice);
     width: var(--w);
     height: var(--h);
     object-fit: cover;
+  }
+}
+
+@container app (min-width: 768px) {
+  /* Change the flex direction of the .child element. */
+  .hero-banner-with-text {
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--spacing-m);
+    min-height: 0;
+
+    * {
+      text-align: left;
+    }
+
+    &__text-content {
+      gap: var(--spacing-m);
+    }
+
+    &__buttons-group {
+      flex-direction: row;
+      justify-content: flex-start;
+    }
+
+    &__hero-image {
+      width: 100%;
+      height: var(--h);
+      object-fit: cover;
+    }
+  }
+}
+
+@container app (min-width: 1200px) {
+  /* Change the flex direction of the .child element. */
+  .hero-banner-with-text {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-l);
+    min-height: 100vh;
+    padding: 12vh 12vw;
+
+    * {
+      text-align: left;
+    }
+
+    &__text-content {
+      gap: var(--spacing-l);
+    }
+
+    &__heading {
+      * {
+        @extend .size-xlarge;
+      }
+    }
+
+    &__hero-image {
+      width: auto;
+      min-width: var(--w);
+    }
   }
 }
 </style>

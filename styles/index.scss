@@ -20,6 +20,9 @@ body {
     min-height: 100vh;
 
     color: var(--black);
+
+    container-name: app;
+    container-type: inline-size;
   }
 
   h1 {
@@ -27,6 +30,7 @@ body {
   }
 
   img {
+    display: inline-block;
     filter: grayscale(1);
     transition: filter var(--base-transition-duration) ease-in-out;
 
