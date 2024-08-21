@@ -14,6 +14,11 @@
 }
 
 body {
+  #__nuxt {
+    container-name: nuxt;
+    container-type: inline-size;
+  }
+
   .app {
     width: 100vw;
     overflow-x: hidden;

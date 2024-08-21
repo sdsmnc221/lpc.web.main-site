@@ -60,4 +60,23 @@ const props = defineProps<Props>();
     }
   }
 }
+
+@container nuxt (min-width: 768px) {
+  .navigation-menu {
+    flex-wrap: nowrap;
+
+    a {
+      width: 25%;
+      text-align: center !important;
+
+      &:first-child {
+        text-align: left !important;
+      }
+
+      &:last-child {
+        text-align: right !important;
+      }
+    }
+  }
+}
 </style>
