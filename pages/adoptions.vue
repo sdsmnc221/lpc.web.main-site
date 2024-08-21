@@ -9,7 +9,7 @@
 
   <adoptions-group
     v-for="(group, index) in adoptionsGroup"
-    :key="`adoptions-grou[-${index}`"
+    :key="`${group.id}-${index}`"
     :slice="group"
   ></adoptions-group>
 
@@ -41,11 +41,10 @@ const adoptionsHeadline = computed(() =>
   )
 );
 
-const adoptionsGroup = computed(
-  () =>
-    adoptions.value?.data?.slices.filter(
-      (s) => s?.slice_type == "adoptions_group"
-    ) ?? []
+const adoptionsGroup = computed(() =>
+  adoptions.value?.data?.slices.filter(
+    (s) => s?.slice_type == "adoptions_group"
+  )
 );
 
 const popOutText = computed(() =>

@@ -8,11 +8,23 @@
       class="adoptions-group__title cl-black gloock-regular"
       :field="title"
     />
+
+    <div class="adoptions-group__items" v-if="itemsData?.length">
+      <cat-item
+        v-for="(cat, index) in itemsData"
+        :key="`adoptions-group-cat-${cat.id}`"
+        v-bind="cat.data"
+      ></cat-item>
+    </div>
   </section>
 </template>
 
 <script setup lang="ts">
 import { type Content } from "@prismicio/client";
+
+import CatItem from "@/components/CatItem/index.vue";
+
+const { client } = usePrismic();
 
 // The array passed to `getSliceComponentProps` is purely optional.
 // Consider it as a visual hint for you when templating your slice.
@@ -27,6 +39,14 @@ const props = defineProps(
 
 const primary = computed(() => props.slice.primary);
 const title = computed(() => primary.value?.title);
+
+const { data: itemsData } = await useAsyncData(props.slice.id, async () => {
+  const itemsId = primary.value?.catsgroup?.map((item) => item.catitem.id);
+
+  const items = await client.getAllByIDs(itemsId);
+
+  return items;
+});
 </script>
 
 <style lang="scss">
@@ -36,9 +56,18 @@ const title = computed(() => primary.value?.title);
   padding: var(--spacing-m);
 
   &__title {
+    margin-bottom: var(--spacing-m);
     * {
       @extend .size-medium;
     }
+  }
+
+  &__items {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
   }
 }
 </style>
