@@ -35,6 +35,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "photo_with_text_block": {
+              "type": "SharedSlice"
+            },
             "pop_out_text": {
               "type": "SharedSlice"
             },

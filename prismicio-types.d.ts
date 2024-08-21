@@ -123,6 +123,7 @@ export type FootermenuDocument<Lang extends string = string> =
   >;
 
 type HomepageDocumentDataSlicesSlice =
+  | PhotoWithTextBlockSlice
   | PopOutTextSlice
   | HeroBannerWithTextSlice;
 

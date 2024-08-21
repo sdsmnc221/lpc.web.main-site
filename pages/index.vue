@@ -6,12 +6,21 @@
       :slice="hero"
     ></hero-banner-with-text>
 
+    <section class="home-headlines">
+      <photo-with-text-block
+        v-for="(block, index) in homeHeadlines"
+        :key="`home-headline-homepage-${index}`"
+        :slice="block"
+      ></photo-with-text-block>
+    </section>
+
     <pop-out-text :slice="popOutText"></pop-out-text>
   </main>
 </template>
 
 <script setup lang="ts">
 import HeroBannerWithText from "@/slices/HeroBannerWithText/index.vue";
+import PhotoWithTextBlock from "@/slices/PhotoWithTextBlock/index.vue";
 import PopOutText from "@/slices/PopOutText/index.vue";
 
 const { client } = usePrismic();
@@ -27,6 +36,13 @@ const heroBanners = computed(
     ) ?? []
 );
 
+const homeHeadlines = computed(
+  () =>
+    home.value?.data?.slices.filter(
+      (s) => s.slice_type === "photo_with_text_block"
+    ) ?? []
+);
+
 const popOutText = computed(() =>
   home.value?.data?.slices.find((s) => s.slice_type === "pop_out_text")
 );
@@ -38,4 +54,37 @@ onMounted(() => {
 
 <style lang="scss">
 @import "../styles/index.scss";
+
+.app {
+  .home-headlines {
+    display: flex;
+    padding: var(--spacing-m);
+    gap: var(--spacing-l);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    margin-top: var(--spacing-l);
+  }
+}
+
+@container app (min-width: 768px) {
+  .app {
+    .home-headlines {
+      flex-direction: row;
+      margin-top: var(--spacing-m);
+      padding: var(--spacing-l);
+    }
+  }
+}
+
+@container app (min-width: 1200px) {
+  .app {
+    .home-headlines {
+      flex-direction: row;
+      margin-top: var(--spacing-m);
+      padding: 10vh 12vw;
+    }
+  }
+}
 </style>
