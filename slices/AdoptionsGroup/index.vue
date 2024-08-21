@@ -58,7 +58,7 @@ const { data: itemsData } = await useAsyncData(props.slice.id, async () => {
   &__title {
     margin-bottom: var(--spacing-m);
     * {
-      @extend .size-medium;
+      font-size: calc((var(--base-ft-size) * 3));
     }
   }
 
@@ -69,6 +69,12 @@ const { data: itemsData } = await useAsyncData(props.slice.id, async () => {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+  }
+}
+
+@container app (min-width: 768px) {
+  .adoptions-group {
+    padding: var(--spacing-l);
   }
 }
 </style>
