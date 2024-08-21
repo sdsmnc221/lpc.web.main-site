@@ -6,7 +6,10 @@
     :class="`--${variant} ${descriptionParagraph.length > 0 ? '--with-description' : ''} --image-${heroImagePosition} }`"
   >
     <div class="hero-banner-with-text__text-content">
-      <prismic-rich-text class="cl-gray size-medium" :field="subText" />
+      <prismic-rich-text
+        class="hero-banner-with-text__sub-text cl-gray size-medium"
+        :field="subText"
+      />
 
       <prismic-rich-text
         class="hero-banner-with-text__heading gloock-regular"
@@ -116,6 +119,10 @@ const buttons = computed(() => primary.value?.buttonsgroups);
     * {
       text-align: left;
     }
+  }
+
+  &__sub-text * {
+    text-align: center;
   }
 
   &__heading {

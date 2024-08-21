@@ -1,11 +1,17 @@
 {
   "format": "page",
-  "id": "homepage",
-  "label": "HomePage",
-  "repeatable": false,
+  "id": "navigationpage",
+  "label": "NavigationPage",
+  "repeatable": true,
   "status": true,
   "json": {
     "Main": {
+      "uid": {
+        "type": "UID",
+        "config": {
+          "label": "UID"
+        }
+      },
       "navigationmenu": {
         "type": "Link",
         "config": {
@@ -27,13 +33,13 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "hero_banner_with_text": {
+              "type": "SharedSlice"
+            },
             "photo_with_text_block": {
               "type": "SharedSlice"
             },
             "pop_out_text": {
-              "type": "SharedSlice"
-            },
-            "hero_banner_with_text": {
               "type": "SharedSlice"
             }
           }

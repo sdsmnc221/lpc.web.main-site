@@ -143,17 +143,6 @@ interface HomepageDocumentData {
   navigationmenu: prismic.ContentRelationshipField<"navigationmenu">;
 
   /**
-   * headlineBlocks field in *HomePage*
-   *
-   * - **Field Type**: Content Relationship
-   * - **Placeholder**: *None*
-   * - **API ID Path**: homepage.headlineblocks
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  headlineblocks: prismic.ContentRelationshipField<"multiphotosblock">;
-
-  /**
    * footerMenu field in *HomePage*
    *
    * - **Field Type**: Content Relationship
@@ -316,11 +305,102 @@ export type NavigationmenuDocument<Lang extends string = string> =
     Lang
   >;
 
+type NavigationpageDocumentDataSlicesSlice =
+  | HeroBannerWithTextSlice
+  | PhotoWithTextBlockSlice
+  | PopOutTextSlice;
+
+/**
+ * Content for NavigationPage documents
+ */
+interface NavigationpageDocumentData {
+  /**
+   * navigationMenu field in *NavigationPage*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigationpage.navigationmenu
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  navigationmenu: prismic.ContentRelationshipField<"navigationmenu">;
+
+  /**
+   * footerMenu field in *NavigationPage*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigationpage.footermenu
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  footermenu: prismic.ContentRelationshipField<"footermenu">;
+
+  /**
+   * Slice Zone field in *NavigationPage*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigationpage.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<NavigationpageDocumentDataSlicesSlice> /**
+   * Meta Title field in *NavigationPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: navigationpage.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *NavigationPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: navigationpage.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *NavigationPage*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigationpage.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * NavigationPage document from Prismic
+ *
+ * - **API ID**: `navigationpage`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type NavigationpageDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<NavigationpageDocumentData>,
+    "navigationpage",
+    Lang
+  >;
+
 export type AllDocumentTypes =
   | FootermenuDocument
   | HomepageDocument
   | MultiphotosblockDocument
-  | NavigationmenuDocument;
+  | NavigationmenuDocument
+  | NavigationpageDocument;
 
 /**
  * Item in *HeroBannerWithText →  HeroBannerWithText-Buttons → Primary → buttonsGroups*
@@ -672,6 +752,9 @@ declare module "@prismicio/client" {
       NavigationmenuDocument,
       NavigationmenuDocumentData,
       NavigationmenuDocumentDataNavigationlinkItem,
+      NavigationpageDocument,
+      NavigationpageDocumentData,
+      NavigationpageDocumentDataSlicesSlice,
       AllDocumentTypes,
       HeroBannerWithTextSlice,
       HeroBannerWithTextSliceDefaultPrimary,

@@ -46,10 +46,6 @@ const homeHeadlines = computed(
 const popOutText = computed(() =>
   home.value?.data?.slices.find((s) => s.slice_type === "pop_out_text")
 );
-
-onMounted(() => {
-  console.log(home);
-});
 </script>
 
 <style lang="scss">
