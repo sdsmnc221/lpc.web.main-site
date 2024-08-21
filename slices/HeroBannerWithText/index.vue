@@ -74,8 +74,6 @@ const descriptionParagraph = computed(
   () => primary.value?.descriptionparagraph
 );
 const buttons = computed(() => primary.value?.buttonsgroups);
-
-console.log(props.slice);
 </script>
 
 <style lang="scss">
@@ -238,7 +236,6 @@ console.log(props.slice);
 }
 
 @container app (min-width: 1200px) {
-  /* Change the flex direction of the .child element. */
   .hero-banner-with-text {
     flex-direction: row;
     align-items: center;
