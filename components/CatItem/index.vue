@@ -29,7 +29,9 @@
                 <span class="albert-sans-bold size-large">{{ catname }}</span>
               </h4>
 
-              <p class="albert-sans-regular size-medium">
+              <p
+                class="cat-item__fiche__status albert-sans-regular size-medium"
+              >
                 {{ adoptionstatus }}
               </p>
 
@@ -202,7 +204,8 @@ onMounted(() => console.log(props));
       gap: var(--spacing-s);
     }
 
-    &__title {
+    &__title,
+    &__status {
       text-align: center;
     }
 
@@ -260,6 +263,74 @@ onMounted(() => console.log(props));
 @container app (min-width: 1200px) {
   .cat-item {
     width: 25%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .cat-item {
+    &__fiche {
+      height: 64vh;
+
+      &__avatar {
+        top: -32%;
+        width: 320px;
+        z-index: 10;
+      }
+
+      &__content {
+        gap: var(--spacing-m);
+      }
+
+      &__row {
+        padding: 0 24vw;
+        margin-top: var(--spacing-l);
+      }
+
+      &__info {
+        width: 36%;
+        gap: var(--spacing-m);
+      }
+
+      &__badges {
+        gap: var(--spacing-m);
+      }
+
+      &__footnote {
+        text-align: center;
+        width: 100%;
+
+        margin-top: var(--spacing-l);
+
+        & > *:last-child {
+          margin-top: var(--spacing-m);
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) and (orientation: landscape) {
+  .cat-item {
+    &__fiche {
+      padding-left: 10vw;
+      &__avatar {
+        top: 50%;
+        left: 10%;
+        transform: translate(0, -50%);
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .cat-item {
+    &__fiche {
+      &__avatar {
+        top: 50%;
+        left: 10%;
+        transform: translate(-10%, -50%);
+      }
+    }
   }
 }
 </style>
