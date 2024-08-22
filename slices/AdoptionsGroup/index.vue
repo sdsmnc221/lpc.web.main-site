@@ -14,6 +14,8 @@
         v-for="(cat, index) in itemsData"
         :key="`adoptions-group-cat-${cat.id}`"
         v-bind="cat.data"
+        :contact-info="contactInfo"
+        :adoption-requirements="adoptionRequirements"
       ></cat-item>
     </div>
   </section>
@@ -39,6 +41,10 @@ const props = defineProps(
 
 const primary = computed(() => props.slice.primary);
 const title = computed(() => primary.value?.title);
+const contactInfo = computed(() => primary.value?.contactinfo);
+const adoptionRequirements = computed(
+  () => primary.value?.adoptionrequirements
+);
 
 const { data: itemsData } = await useAsyncData(props.slice.id, async () => {
   const itemsId = primary.value?.catsgroup?.map((item) => item.catitem.id);
