@@ -1,21 +1,52 @@
 <template>
   <div class="cat-item">
-    <prismic-image class="cat-item__photo" :field="catphoto" />
+    <Drawer>
+      <DrawerTrigger>
+        <prismic-image class="cat-item__photo" :field="catphoto" />
 
-    <h4 class="cat-item__name">
-      <span class="albert-sans-bold">{{ catname }}</span>
-    </h4>
+        <h4 class="cat-item__name">
+          <span class="albert-sans-bold">{{ catname }}</span>
+        </h4>
 
-    <div class="cat-item__info albert-sans-light size-regular">
-      <p>{{ catage }} an(s)</p>
-      <p>
-        {{ adoptionstatus.replace("Adoptable -", "").replace("Adopté - ", "") }}
-      </p>
-    </div>
+        <div class="cat-item__info albert-sans-light size-regular">
+          <p>{{ catage }} an(s)</p>
+          <p>
+            {{
+              adoptionstatus.replace("Adoptable -", "").replace("Adopté - ", "")
+            }}
+          </p>
+        </div>
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+          <DrawerDescription>This action cannot be undone.</DrawerDescription>
+        </DrawerHeader>
+        <DrawerFooter>
+          <Button>Submit</Button>
+          <DrawerClose>
+            <Button variant="outline"> Cancel </Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
   </div>
 </template>
 
 <script setup lang="ts">
+// import ItemDrawer from "@/components/ItemDrawer/index.vue";
+
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+
 type CatInfo = {
   createddate: string;
   catphoto: {
@@ -49,12 +80,15 @@ const props = defineProps<CatInfo>();
 
 .cat-item {
   width: 50%;
-  display: flex;
-  gap: var(--spacing-s);
   margin-bottom: var(--spacing-m);
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+
+  button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-s);
+  }
 
   &__photo {
     display: block;

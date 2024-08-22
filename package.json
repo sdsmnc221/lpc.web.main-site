@@ -12,13 +12,23 @@
   },
   "dependencies": {
     "@prismicio/vue": "^4.2.2",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "lucide-vue-next": "^0.429.0",
     "nuxt": "^3.12.4",
+    "radix-vue": "^1.9.4",
+    "shadcn-nuxt": "^0.10.4",
+    "tailwind-merge": "^2.5.2",
+    "tailwindcss-animate": "^1.0.7",
+    "vaul-vue": "^0.2.0",
     "vue": "latest"
   },
   "devDependencies": {
     "@nuxtjs/prismic": "^3.3.2",
+    "@nuxtjs/tailwindcss": "^6.12.1",
     "@slicemachine/adapter-nuxt": "^0.3.46",
     "sass-embedded": "^1.77.8",
-    "slice-machine-ui": "^2.5.0"
+    "slice-machine-ui": "^2.5.0",
+    "typescript": "^5.5.4"
   }
 }
