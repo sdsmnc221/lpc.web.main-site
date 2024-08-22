@@ -106,7 +106,7 @@ console.log("textBlocks", textBlocks.value);
   }
 }
 
-@container app (min-width: 768px) {
+@container app (min-width: 1200px) {
   .multi-text-block {
     padding: var(--spacing-l);
 

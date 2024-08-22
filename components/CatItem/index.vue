@@ -182,7 +182,7 @@ onMounted(() => console.log(props));
   }
 
   &__fiche {
-    height: 48vh;
+    height: 52vh;
     position: relative;
 
     &__avatar {
