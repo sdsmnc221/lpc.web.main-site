@@ -11,7 +11,7 @@
 
     <div class="adoptions-group__items" v-if="itemsData?.length">
       <cat-item
-        v-for="(cat, index) in itemsData"
+        v-for="cat in itemsData"
         :key="`adoptions-group-cat-${cat.id}`"
         v-bind="cat.data"
         :contact-info="contactInfo"

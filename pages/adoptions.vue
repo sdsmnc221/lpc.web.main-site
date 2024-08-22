@@ -13,6 +13,8 @@
     :slice="group"
   ></adoptions-group>
 
+  <multi-text-block :slice="faq"></multi-text-block>
+
   <pop-out-text :slice="popOutText"></pop-out-text>
 </template>
 
@@ -20,6 +22,7 @@
 import HeroBannerWithText from "@/slices/HeroBannerWithText/index.vue";
 import HeroPhotoBackground from "@/slices/HeroPhotoBackground/index.vue";
 import AdoptionsGroup from "@/slices/AdoptionsGroup/index.vue";
+import MultiTextBlock from "@/slices/MultiTextBlock/index.vue";
 import PopOutText from "@/slices/PopOutText/index.vue";
 
 const { client } = usePrismic();
@@ -38,6 +41,12 @@ const heroBanners = computed(
 const adoptionsHeadline = computed(() =>
   adoptions.value?.data?.slices.find(
     (s) => s?.slice_type === "hero_photo_background"
+  )
+);
+
+const faq = computed(() =>
+  adoptions.value?.data?.slices.find(
+    (s) => s?.slice_type === "multi_text_block"
   )
 );
 
