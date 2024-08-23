@@ -42,15 +42,26 @@ interface CatficheDocumentData {
   catname: prismic.KeyTextField;
 
   /**
+   * catSexe field in *CatFiche*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: catfiche.catsexe
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  catsexe: prismic.SelectField<"♂️" | "♀️">;
+
+  /**
    * catAge field in *CatFiche*
    *
-   * - **Field Type**: Number
+   * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
    * - **API ID Path**: catfiche.catage
    * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#number
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  catage: prismic.NumberField;
+  catage: prismic.RichTextField;
 
   /**
    * catBirth field in *CatFiche*
@@ -378,6 +389,24 @@ export type HomepageDocument<Lang extends string = string> =
     Lang
   >;
 
+interface ImageplaceholderDocumentData {}
+
+/**
+ * ImagePlaceholder document from Prismic
+ *
+ * - **API ID**: `imageplaceholder`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type ImageplaceholderDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<ImageplaceholderDocumentData>,
+    "imageplaceholder",
+    Lang
+  >;
+
 type MultiphotosblockDocumentDataSlicesSlice = PhotoWithTextBlockSlice;
 
 /**
@@ -568,6 +597,7 @@ export type AllDocumentTypes =
   | CatficheDocument
   | FootermenuDocument
   | HomepageDocument
+  | ImageplaceholderDocument
   | MultiphotosblockDocument
   | NavigationmenuDocument
   | NavigationpageDocument;
@@ -600,6 +630,16 @@ export interface AdoptionsGroupSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   title: prismic.RichTextField;
+
+  /**
+   * CatAvatarPlaceholder field in *AdoptionsGroup → Default → Primary*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: adoptions_group.default.primary.catavatarplaceholder
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  catavatarplaceholder: prismic.ContentRelationshipField<"imageplaceholder">;
 
   /**
    * catsGroup field in *AdoptionsGroup → Default → Primary*
@@ -1255,6 +1295,8 @@ declare module "@prismicio/client" {
       HomepageDocument,
       HomepageDocumentData,
       HomepageDocumentDataSlicesSlice,
+      ImageplaceholderDocument,
+      ImageplaceholderDocumentData,
       MultiphotosblockDocument,
       MultiphotosblockDocumentData,
       MultiphotosblockDocumentDataSlicesSlice,

@@ -21,6 +21,16 @@
             "multi": "paragraph,heading1,heading2,heading3,heading4,heading5,heading6,strong,em"
           }
         },
+        "catavatarplaceholder": {
+          "type": "Link",
+          "config": {
+            "label": "CatAvatarPlaceholder",
+            "select": "document",
+            "customtypes": [
+              "imageplaceholder"
+            ]
+          }
+        },
         "catsgroup": {
           "type": "Group",
           "config": {
