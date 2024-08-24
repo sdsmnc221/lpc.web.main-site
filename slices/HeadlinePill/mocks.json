@@ -1,0 +1,24 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"icon": {
+				"__TYPE__": "FieldContent",
+				"value": "calm",
+				"type": "Text"
+			},
+			"text": {
+				"__TYPE__": "FieldContent",
+				"value": "snow",
+				"type": "Text"
+			},
+			"variant": {
+				"__TYPE__": "FieldContent",
+				"value": "light",
+				"type": "Select"
+			}
+		},
+		"items": []
+	}
+]

@@ -16,5 +16,39 @@
 			}
 		},
 		"items": []
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "popOutTextWithHeading",
+		"primary": {
+			"text": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Veniam ex ex quis."
+						}
+					}
+				]
+			},
+			"headingtext": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Eu culpa sunt adipisicing eiusmod sint in. Dolore dolore occaecat reprehenderit ad eiusmod adipisicing veniam duis. Veniam ut tempor deserunt officia."
+						}
+					}
+				]
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
 	}
 ]

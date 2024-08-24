@@ -23,6 +23,35 @@
         }
       },
       "items": {}
+    },
+    {
+      "id": "popOutTextWithHeading",
+      "name": "PopOutText-WithHeading",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "headingtext": {
+          "type": "StructuredText",
+          "config": {
+            "label": "headingText",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink"
+          }
+        },
+        "text": {
+          "type": "StructuredText",
+          "config": {
+            "label": "text",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,strong,em,hyperlink,rtl,heading4,heading5,heading6"
+          }
+        }
+      },
+      "items": {}
     }
   ]
 }

@@ -7,11 +7,15 @@ export const components = defineSliceZoneComponents({
   adoptions_group: defineAsyncComponent(
     () => import("./AdoptionsGroup/index.vue"),
   ),
+  headline_pill: defineAsyncComponent(() => import("./HeadlinePill/index.vue")),
   hero_banner_with_text: defineAsyncComponent(
     () => import("./HeroBannerWithText/index.vue"),
   ),
   hero_photo_background: defineAsyncComponent(
     () => import("./HeroPhotoBackground/index.vue"),
+  ),
+  indicator_with_text: defineAsyncComponent(
+    () => import("./IndicatorWithText/index.vue"),
   ),
   map_with_text_block: defineAsyncComponent(
     () => import("./MapWithTextBlock/index.vue"),

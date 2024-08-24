@@ -1,0 +1,45 @@
+{
+  "id": "headline_pill",
+  "type": "SharedSlice",
+  "name": "HeadlinePill",
+  "description": "HeadlinePill",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "icon": {
+          "type": "Text",
+          "config": {
+            "label": "icon",
+            "placeholder": ""
+          }
+        },
+        "text": {
+          "type": "Text",
+          "config": {
+            "label": "text",
+            "placeholder": ""
+          }
+        },
+        "variant": {
+          "type": "Select",
+          "config": {
+            "label": "variant",
+            "placeholder": "",
+            "options": [
+              "dark",
+              "light"
+            ],
+            "default_value": "dark"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

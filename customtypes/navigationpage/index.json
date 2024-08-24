@@ -33,6 +33,12 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "headline_pill": {
+              "type": "SharedSlice"
+            },
+            "indicator_with_text": {
+              "type": "SharedSlice"
+            },
             "map_with_text_block": {
               "type": "SharedSlice"
             },

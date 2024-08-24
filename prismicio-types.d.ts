@@ -515,6 +515,8 @@ export type NavigationmenuDocument<Lang extends string = string> =
   >;
 
 type NavigationpageDocumentDataSlicesSlice =
+  | HeadlinePillSlice
+  | IndicatorWithTextSlice
   | MapWithTextBlockSlice
   | MultiTextBlockSlice
   | AdoptionsGroupSlice
@@ -717,6 +719,72 @@ type AdoptionsGroupSliceVariation = AdoptionsGroupSliceDefault;
 export type AdoptionsGroupSlice = prismic.SharedSlice<
   "adoptions_group",
   AdoptionsGroupSliceVariation
+>;
+
+/**
+ * Primary content in *HeadlinePill → Default → Primary*
+ */
+export interface HeadlinePillSliceDefaultPrimary {
+  /**
+   * icon field in *HeadlinePill → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: headline_pill.default.primary.icon
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  icon: prismic.KeyTextField;
+
+  /**
+   * text field in *HeadlinePill → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: headline_pill.default.primary.text
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  text: prismic.KeyTextField;
+
+  /**
+   * variant field in *HeadlinePill → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: dark
+   * - **API ID Path**: headline_pill.default.primary.variant
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  variant: prismic.SelectField<"dark" | "light", "filled">;
+}
+
+/**
+ * Default variation for HeadlinePill Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type HeadlinePillSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<HeadlinePillSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *HeadlinePill*
+ */
+type HeadlinePillSliceVariation = HeadlinePillSliceDefault;
+
+/**
+ * HeadlinePill Shared Slice
+ *
+ * - **API ID**: `headline_pill`
+ * - **Description**: HeadlinePill
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type HeadlinePillSlice = prismic.SharedSlice<
+  "headline_pill",
+  HeadlinePillSliceVariation
 >;
 
 /**
@@ -1100,6 +1168,61 @@ export type HeroPhotoBackgroundSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *IndicatorWithText → Default → Primary*
+ */
+export interface IndicatorWithTextSliceDefaultPrimary {
+  /**
+   * indicator field in *IndicatorWithText → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: indicator_with_text.default.primary.indicator
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  indicator: prismic.RichTextField;
+
+  /**
+   * description field in *IndicatorWithText → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: indicator_with_text.default.primary.description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+}
+
+/**
+ * Default variation for IndicatorWithText Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type IndicatorWithTextSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<IndicatorWithTextSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *IndicatorWithText*
+ */
+type IndicatorWithTextSliceVariation = IndicatorWithTextSliceDefault;
+
+/**
+ * IndicatorWithText Shared Slice
+ *
+ * - **API ID**: `indicator_with_text`
+ * - **Description**: IndicatorWithText
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type IndicatorWithTextSlice = prismic.SharedSlice<
+  "indicator_with_text",
+  IndicatorWithTextSliceVariation
+>;
+
+/**
  * Primary content in *MapWithTextBlock → Default → Primary*
  */
 export interface MapWithTextBlockSliceDefaultPrimary {
@@ -1340,9 +1463,49 @@ export type PopOutTextSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *PopOutText → PopOutText-WithHeading → Primary*
+ */
+export interface PopOutTextSlicePopOutTextWithHeadingPrimary {
+  /**
+   * headingText field in *PopOutText → PopOutText-WithHeading → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: pop_out_text.popOutTextWithHeading.primary.headingtext
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  headingtext: prismic.RichTextField;
+
+  /**
+   * text field in *PopOutText → PopOutText-WithHeading → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: pop_out_text.popOutTextWithHeading.primary.text
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  text: prismic.RichTextField;
+}
+
+/**
+ * PopOutText-WithHeading variation for PopOutText Slice
+ *
+ * - **API ID**: `popOutTextWithHeading`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type PopOutTextSlicePopOutTextWithHeading = prismic.SharedSliceVariation<
+  "popOutTextWithHeading",
+  Simplify<PopOutTextSlicePopOutTextWithHeadingPrimary>,
+  never
+>;
+
+/**
  * Slice variation for *PopOutText*
  */
-type PopOutTextSliceVariation = PopOutTextSliceDefault;
+type PopOutTextSliceVariation =
+  | PopOutTextSliceDefault
+  | PopOutTextSlicePopOutTextWithHeading;
 
 /**
  * PopOutText Shared Slice
@@ -1392,6 +1555,10 @@ declare module "@prismicio/client" {
       AdoptionsGroupSliceDefaultPrimary,
       AdoptionsGroupSliceVariation,
       AdoptionsGroupSliceDefault,
+      HeadlinePillSlice,
+      HeadlinePillSliceDefaultPrimary,
+      HeadlinePillSliceVariation,
+      HeadlinePillSliceDefault,
       HeroBannerWithTextSlice,
       HeroBannerWithTextSliceDefaultPrimary,
       HeroBannerWithTextSliceHeroBannerWithTextButtonsPrimaryButtonsgroupsItem,
@@ -1406,6 +1573,10 @@ declare module "@prismicio/client" {
       HeroPhotoBackgroundSliceDefaultPrimary,
       HeroPhotoBackgroundSliceVariation,
       HeroPhotoBackgroundSliceDefault,
+      IndicatorWithTextSlice,
+      IndicatorWithTextSliceDefaultPrimary,
+      IndicatorWithTextSliceVariation,
+      IndicatorWithTextSliceDefault,
       MapWithTextBlockSlice,
       MapWithTextBlockSliceDefaultPrimary,
       MapWithTextBlockSliceVariation,
@@ -1421,8 +1592,10 @@ declare module "@prismicio/client" {
       PhotoWithTextBlockSliceDefault,
       PopOutTextSlice,
       PopOutTextSliceDefaultPrimary,
+      PopOutTextSlicePopOutTextWithHeadingPrimary,
       PopOutTextSliceVariation,
       PopOutTextSliceDefault,
+      PopOutTextSlicePopOutTextWithHeading,
     };
   }
 }
