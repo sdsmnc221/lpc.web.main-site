@@ -44,6 +44,8 @@ const textContent = computed(() => primary.value?.text);
 
 @container app (min-width: 768px) {
   .pop-out-text {
+    margin: var(--spacing-l) 12vw;
+
     * {
       // @extend .size-large;
       font-size: calc((var(--base-ft-size) * 4));
