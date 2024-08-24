@@ -5,14 +5,6 @@
     :slice="hero"
   ></hero-banner-with-text>
 
-  <hero-photo-background :slice="adoptionsHeadline"></hero-photo-background>
-
-  <adoptions-group
-    v-for="(group, index) in adoptionsGroup"
-    :key="`${group.id}-${index}`"
-    :slice="group"
-  ></adoptions-group>
-
   <multi-text-block :slice="faq"></multi-text-block>
 
   <pop-out-text :slice="popOutText"></pop-out-text>
@@ -20,15 +12,14 @@
 
 <script setup lang="ts">
 import HeroBannerWithText from "@/slices/HeroBannerWithText/index.vue";
-import HeroPhotoBackground from "@/slices/HeroPhotoBackground/index.vue";
-import AdoptionsGroup from "@/slices/AdoptionsGroup/index.vue";
+
 import MultiTextBlock from "@/slices/MultiTextBlock/index.vue";
 import PopOutText from "@/slices/PopOutText/index.vue";
 
 const { client } = usePrismic();
 
 const { data: adoptions } = await useAsyncData("adoptions", () =>
-  client.getByUID("navigationpage", "adoptions")
+  client.getByUID("navigationpage", "contact")
 );
 
 const heroBanners = computed(
@@ -38,27 +29,17 @@ const heroBanners = computed(
     ) ?? []
 );
 
-const adoptionsHeadline = computed(() =>
-  adoptions.value?.data?.slices.find(
-    (s) => s?.slice_type === "hero_photo_background"
-  )
-);
-
 const faq = computed(() =>
   adoptions.value?.data?.slices.find(
     (s) => s?.slice_type === "multi_text_block"
   )
 );
 
-const adoptionsGroup = computed(() =>
-  adoptions.value?.data?.slices.filter(
-    (s) => s?.slice_type == "adoptions_group"
-  )
-);
-
 const popOutText = computed(() =>
   adoptions.value?.data?.slices.find((s) => s?.slice_type === "pop_out_text")
 );
+
+onMounted(() => console.log("contact", adoptions.value));
 </script>
 
 <style lang="scss">
@@ -74,6 +55,13 @@ const popOutText = computed(() =>
 
 @container app (min-width: 1200px) {
   .app {
+    .hero-banner-with-text {
+      &.--emphasis {
+        .hero-banner-with-text__heading * {
+          font-size: calc((var(--base-ft-size) * 8)) !important;
+        }
+      }
+    }
   }
 }
 </style>

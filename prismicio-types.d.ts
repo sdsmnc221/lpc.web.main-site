@@ -389,7 +389,21 @@ export type HomepageDocument<Lang extends string = string> =
     Lang
   >;
 
-interface ImageplaceholderDocumentData {}
+/**
+ * Content for ImagePlaceholder documents
+ */
+interface ImageplaceholderDocumentData {
+  /**
+   * image field in *ImagePlaceholder*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: imageplaceholder.image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+}
 
 /**
  * ImagePlaceholder document from Prismic

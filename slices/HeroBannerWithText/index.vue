@@ -204,6 +204,11 @@ const buttons = computed(() => primary.value?.buttonsgroups);
       --h: 360px !important;
     }
   }
+
+  &__image-content {
+    display: flex;
+    justify-content: center;
+  }
 }
 
 @container app (min-width: 768px) {

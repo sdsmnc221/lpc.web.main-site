@@ -1,6 +1,9 @@
 {
   "format": "custom",
   "id": "imageplaceholder",
+  "label": "ImagePlaceholder",
+  "repeatable": true,
+  "status": true,
   "json": {
     "Main": {
       "uid": {
@@ -8,10 +11,15 @@
         "config": {
           "label": "UID"
         }
+      },
+      "image": {
+        "type": "Image",
+        "config": {
+          "label": "image",
+          "constraint": {},
+          "thumbnails": []
+        }
       }
     }
-  },
-  "label": "ImagePlaceholder",
-  "repeatable": true,
-  "status": true
+  }
 }
