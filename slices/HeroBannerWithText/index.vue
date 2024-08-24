@@ -364,6 +364,12 @@ const buttons = computed(() => primary.value?.buttonsgroups);
       gap: var(--spacing-l);
     }
 
+    &:not(.--emphasis):not(:has(.hero-banner-with-text__buttons-group)) {
+      .hero-banner-with-text__text-content {
+        align-self: flex-start;
+      }
+    }
+
     &__heading {
       text-align: center;
       h1 {

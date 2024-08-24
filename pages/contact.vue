@@ -52,6 +52,11 @@ onMounted(() => console.log("contact", contact.value));
 @import "../styles/index.scss";
 
 .app {
+  .multi-text-block {
+    & > div:not(:first-of-type) {
+      margin-top: var(--spacing-m);
+    }
+  }
 }
 
 @container app (min-width: 768px) {
@@ -66,6 +71,15 @@ onMounted(() => console.log("contact", contact.value));
         .hero-banner-with-text__heading * {
           font-size: calc((var(--base-ft-size) * 8)) !important;
         }
+      }
+    }
+
+    .multi-text-block {
+      padding: var(--spacing-l) 12vw;
+
+      &__block {
+        padding-left: 0;
+        padding-right: 0;
       }
     }
   }

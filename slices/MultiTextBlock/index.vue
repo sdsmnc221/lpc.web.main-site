@@ -63,7 +63,7 @@ console.log("textBlocks", textBlocks.value);
     }
   }
 
-  & > div {
+  & > div:not(:first-child) {
     margin-top: var(--spacing-l);
   }
 

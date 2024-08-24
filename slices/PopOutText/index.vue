@@ -32,7 +32,7 @@ const textContent = computed(() => primary.value?.text);
 @import "@/styles/imports";
 
 .pop-out-text {
-  margin: var(--spacing-l) var(--spacing-s);
+  margin: var(--spacing-l) var(--spacing-m);
 
   * {
     line-height: 1.2em;

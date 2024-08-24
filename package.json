@@ -11,6 +11,7 @@
     "slicemachine": "start-slicemachine"
   },
   "dependencies": {
+    "@nuxtjs/leaflet": "^1.2.2",
     "@prismicio/vue": "^4.2.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
