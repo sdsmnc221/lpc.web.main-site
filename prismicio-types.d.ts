@@ -728,12 +728,12 @@ export interface HeadlinePillSliceDefaultPrimary {
   /**
    * icon field in *HeadlinePill → Default → Primary*
    *
-   * - **Field Type**: Text
+   * - **Field Type**: Image
    * - **Placeholder**: *None*
    * - **API ID Path**: headline_pill.default.primary.icon
-   * - **Documentation**: https://prismic.io/docs/field#key-text
+   * - **Documentation**: https://prismic.io/docs/field#image
    */
-  icon: prismic.KeyTextField;
+  icon: prismic.ImageField<never>;
 
   /**
    * text field in *HeadlinePill → Default → Primary*

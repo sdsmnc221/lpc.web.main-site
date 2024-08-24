@@ -13,10 +13,11 @@
       "imageUrl": "",
       "primary": {
         "icon": {
-          "type": "Text",
+          "type": "Image",
           "config": {
             "label": "icon",
-            "placeholder": ""
+            "constraint": {},
+            "thumbnails": []
           }
         },
         "text": {
