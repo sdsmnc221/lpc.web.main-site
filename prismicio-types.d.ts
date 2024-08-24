@@ -515,6 +515,7 @@ export type NavigationmenuDocument<Lang extends string = string> =
   >;
 
 type NavigationpageDocumentDataSlicesSlice =
+  | MapWithTextBlockSlice
   | MultiTextBlockSlice
   | AdoptionsGroupSlice
   | HeroPhotoBackgroundSlice
@@ -1099,6 +1100,71 @@ export type HeroPhotoBackgroundSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *MapWithTextBlock → Default → Primary*
+ */
+export interface MapWithTextBlockSliceDefaultPrimary {
+  /**
+   * title field in *MapWithTextBlock → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: map_with_text_block.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * description field in *MapWithTextBlock → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: map_with_text_block.default.primary.description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * geoPoint field in *MapWithTextBlock → Default → Primary*
+   *
+   * - **Field Type**: GeoPoint
+   * - **Placeholder**: *None*
+   * - **API ID Path**: map_with_text_block.default.primary.geopoint
+   * - **Documentation**: https://prismic.io/docs/field#geopoint
+   */
+  geopoint: prismic.GeoPointField;
+}
+
+/**
+ * Default variation for MapWithTextBlock Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type MapWithTextBlockSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<MapWithTextBlockSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *MapWithTextBlock*
+ */
+type MapWithTextBlockSliceVariation = MapWithTextBlockSliceDefault;
+
+/**
+ * MapWithTextBlock Shared Slice
+ *
+ * - **API ID**: `map_with_text_block`
+ * - **Description**: MapWithTextBlock
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type MapWithTextBlockSlice = prismic.SharedSlice<
+  "map_with_text_block",
+  MapWithTextBlockSliceVariation
+>;
+
+/**
  * Item in *MultiTextBlock → Default → Primary → textBlocksGroup*
  */
 export interface MultiTextBlockSliceDefaultPrimaryTextblocksgroupItem {
@@ -1340,6 +1406,10 @@ declare module "@prismicio/client" {
       HeroPhotoBackgroundSliceDefaultPrimary,
       HeroPhotoBackgroundSliceVariation,
       HeroPhotoBackgroundSliceDefault,
+      MapWithTextBlockSlice,
+      MapWithTextBlockSliceDefaultPrimary,
+      MapWithTextBlockSliceVariation,
+      MapWithTextBlockSliceDefault,
       MultiTextBlockSlice,
       MultiTextBlockSliceDefaultPrimaryTextblocksgroupItem,
       MultiTextBlockSliceDefaultPrimary,

@@ -33,6 +33,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "map_with_text_block": {
+              "type": "SharedSlice"
+            },
             "multi_text_block": {
               "type": "SharedSlice"
             },

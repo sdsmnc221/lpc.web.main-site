@@ -1,0 +1,43 @@
+{
+  "id": "map_with_text_block",
+  "type": "SharedSlice",
+  "name": "MapWithTextBlock",
+  "description": "MapWithTextBlock",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "title",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,rtl,hyperlink"
+          }
+        },
+        "description": {
+          "type": "StructuredText",
+          "config": {
+            "label": "description",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl,heading4,heading5,heading6"
+          }
+        },
+        "geopoint": {
+          "type": "GeoPoint",
+          "config": {
+            "label": "geoPoint"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

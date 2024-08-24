@@ -1,0 +1,38 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"title": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Dolor minim aute reprehenderit excepteur esse voluptate ex pariatur reprehenderit voluptate Lorem. Proident sint dolore est amet pariatur nostrud ea dolore Lorem nisi adipisicing et."
+						}
+					}
+				]
+			},
+			"description": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Veniam ipsum magna enim deserunt sint enim."
+						}
+					}
+				]
+			},
+			"geopoint": {
+				"__TYPE__": "GeoPointContent",
+				"position": {
+					"lat": 48.8841267,
+					"lng": 2.3300579
+				}
+			}
+		},
+		"items": []
+	}
+]

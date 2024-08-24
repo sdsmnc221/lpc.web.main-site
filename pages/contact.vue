@@ -5,6 +5,8 @@
     :slice="hero"
   ></hero-banner-with-text>
 
+  <map-with-text-block :slice="mapHeadquarter"></map-with-text-block>
+
   <multi-text-block :slice="faq"></multi-text-block>
 
   <pop-out-text :slice="popOutText"></pop-out-text>
@@ -12,34 +14,38 @@
 
 <script setup lang="ts">
 import HeroBannerWithText from "@/slices/HeroBannerWithText/index.vue";
-
+import MapWithTextBlock from "@/slices/MapWithTextBlock/index.vue";
 import MultiTextBlock from "@/slices/MultiTextBlock/index.vue";
 import PopOutText from "@/slices/PopOutText/index.vue";
 
 const { client } = usePrismic();
 
-const { data: adoptions } = await useAsyncData("adoptions", () =>
+const { data: contact } = await useAsyncData("contact", () =>
   client.getByUID("navigationpage", "contact")
 );
 
 const heroBanners = computed(
   () =>
-    adoptions.value?.data?.slices.filter(
+    contact.value?.data?.slices.filter(
       (s) => s?.slice_type == "hero_banner_with_text"
     ) ?? []
 );
 
-const faq = computed(() =>
-  adoptions.value?.data?.slices.find(
-    (s) => s?.slice_type === "multi_text_block"
+const mapHeadquarter = computed(() =>
+  contact.value?.data?.slices.find(
+    (s) => s?.slice_type === "map_with_text_block"
   )
 );
 
-const popOutText = computed(() =>
-  adoptions.value?.data?.slices.find((s) => s?.slice_type === "pop_out_text")
+const faq = computed(() =>
+  contact.value?.data?.slices.find((s) => s?.slice_type === "multi_text_block")
 );
 
-onMounted(() => console.log("contact", adoptions.value));
+const popOutText = computed(() =>
+  contact.value?.data?.slices.find((s) => s?.slice_type === "pop_out_text")
+);
+
+onMounted(() => console.log("contact", contact.value));
 </script>
 
 <style lang="scss">

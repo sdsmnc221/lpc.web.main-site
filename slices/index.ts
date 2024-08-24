@@ -13,6 +13,9 @@ export const components = defineSliceZoneComponents({
   hero_photo_background: defineAsyncComponent(
     () => import("./HeroPhotoBackground/index.vue"),
   ),
+  map_with_text_block: defineAsyncComponent(
+    () => import("./MapWithTextBlock/index.vue"),
+  ),
   multi_text_block: defineAsyncComponent(
     () => import("./MultiTextBlock/index.vue"),
   ),
