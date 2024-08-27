@@ -62,7 +62,7 @@ const textBlocks = computed(() => primary.value?.textblocksgroup);
   }
 
   & > div:not(:first-child) {
-    margin-top: var(--spacing-l);
+    margin-top: var(--spacing-l) !important;
   }
 
   &__block {
