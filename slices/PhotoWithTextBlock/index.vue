@@ -78,6 +78,7 @@ const description = computed(() => primary.value?.description);
 
 @container app (min-width: 768px) {
   .photo-with-text-block {
+    align-items: flex-start;
     flex: 1;
 
     &__photo {

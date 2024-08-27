@@ -72,6 +72,7 @@ const popOutText = computed(() =>
   .app.--index {
     .home-headlines {
       flex-direction: row;
+      align-items: flex-start;
       margin-top: var(--spacing-m);
       padding: var(--spacing-l);
     }
