@@ -51,7 +51,7 @@ onMounted(() => console.log("contact", contact.value));
 <style lang="scss">
 @import "../styles/index.scss";
 
-.app {
+.app.--contact {
   .multi-text-block {
     & > div:not(:first-of-type) {
       margin-top: var(--spacing-m);
@@ -65,7 +65,7 @@ onMounted(() => console.log("contact", contact.value));
 }
 
 @container app (min-width: 1200px) {
-  .app {
+  .app.--contact {
     .hero-banner-with-text {
       &.--emphasis {
         .hero-banner-with-text__heading * {

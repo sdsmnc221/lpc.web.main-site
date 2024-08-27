@@ -2,7 +2,7 @@
   <div>
     <navigation-menu :links="links"></navigation-menu>
 
-    <main class="app">
+    <main class="app" :class="`--${route.name as string}`">
       <slot />
     </main>
 
@@ -18,6 +18,8 @@ import { computed } from "vue";
 
 import NavigationMenu from "@/components/NavigationMenu/index.vue";
 import FooterMenu from "@/components/FooterMenu/index.vue";
+
+const route = useRoute();
 
 const { client } = usePrismic();
 

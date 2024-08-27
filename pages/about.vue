@@ -87,7 +87,7 @@ const popOutText = computed(() =>
 <style lang="scss">
 @import "../styles/index.scss";
 
-.app {
+.app.--about {
   .indicators-group,
   .photos-group,
   .pills-group {
@@ -119,7 +119,7 @@ const popOutText = computed(() =>
 }
 
 @container app (min-width: 768px) {
-  .app {
+  .app.--about {
     .indicators-group,
     .photos-group,
     .pills-group {
@@ -148,7 +148,7 @@ const popOutText = computed(() =>
 }
 
 @container app (min-width: 1200px) {
-  .app {
+  .app.--about {
     .indicators-group,
     .photos-group,
     .pills-group {

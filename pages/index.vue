@@ -49,7 +49,13 @@ const popOutText = computed(() =>
 <style lang="scss">
 @import "../styles/index.scss";
 
-.app {
+.app.--index {
+  .multi-text-block {
+    & > div:not(:first-of-type) {
+      margin-top: var(--spacing-m);
+    }
+  }
+
   .home-headlines {
     display: flex;
     padding: var(--spacing-m);
@@ -63,7 +69,7 @@ const popOutText = computed(() =>
 }
 
 @container app (min-width: 768px) {
-  .app {
+  .app.--index {
     .home-headlines {
       flex-direction: row;
       margin-top: var(--spacing-m);
@@ -73,11 +79,20 @@ const popOutText = computed(() =>
 }
 
 @container app (min-width: 1200px) {
-  .app {
+  .app.--index {
     .home-headlines {
       flex-direction: row;
       margin-top: var(--spacing-m);
       padding: 10vh 12vw;
+    }
+
+    .multi-text-block {
+      padding: var(--spacing-l) 12vw;
+
+      &__block {
+        padding-left: 0;
+        padding-right: 0;
+      }
     }
   }
 }

@@ -64,7 +64,12 @@ const popOutText = computed(() =>
 <style lang="scss">
 @import "../styles/index.scss";
 
-.app {
+.app.--adoptions {
+  .multi-text-block {
+    & > div:not(:first-of-type) {
+      margin-top: var(--spacing-m);
+    }
+  }
 }
 
 @container app (min-width: 768px) {
@@ -73,7 +78,15 @@ const popOutText = computed(() =>
 }
 
 @container app (min-width: 1200px) {
-  .app {
+  .app.--adoptions {
+    .multi-text-block {
+      padding: var(--spacing-l) 12vw;
+
+      &__block {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
   }
 }
 </style>

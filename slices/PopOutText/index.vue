@@ -176,7 +176,7 @@ onMounted(() => {
   .pop-out-text {
     margin: var(--spacing-l) 16vw;
 
-    * {
+    *:not(text) {
       // @extend .size-xxlarge;
       font-size: calc((var(--base-ft-size) * 5));
     }
