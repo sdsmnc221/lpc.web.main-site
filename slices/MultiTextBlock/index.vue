@@ -46,8 +46,6 @@ const id = computed(() => props.slice.id);
 const primary = computed(() => props.slice.primary);
 const title = computed(() => primary.value?.title);
 const textBlocks = computed(() => primary.value?.textblocksgroup);
-
-console.log("textBlocks", textBlocks.value);
 </script>
 
 <style lang="scss">

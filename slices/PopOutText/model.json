@@ -20,6 +20,15 @@
             "allowTargetBlank": true,
             "multi": "paragraph,preformatted,strong,em,hyperlink,rtl,heading4,heading5,heading6"
           }
+        },
+        "fittext": {
+          "type": "Boolean",
+          "config": {
+            "label": "fitText",
+            "default_value": false,
+            "placeholder_true": "true",
+            "placeholder_false": "false"
+          }
         }
       },
       "items": {}
@@ -48,6 +57,15 @@
             "placeholder": "",
             "allowTargetBlank": true,
             "multi": "paragraph,preformatted,strong,em,hyperlink,rtl,heading4,heading5,heading6"
+          }
+        },
+        "fittext": {
+          "type": "Boolean",
+          "config": {
+            "label": "fitText",
+            "default_value": false,
+            "placeholder_true": "true",
+            "placeholder_false": "false"
           }
         }
       },

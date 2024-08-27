@@ -13,6 +13,10 @@
 						}
 					}
 				]
+			},
+			"fittext": {
+				"__TYPE__": "BooleanContent",
+				"value": false
 			}
 		},
 		"items": []
@@ -42,6 +46,10 @@
 						}
 					}
 				]
+			},
+			"fittext": {
+				"__TYPE__": "BooleanContent",
+				"value": false
 			}
 		},
 		"items": [
