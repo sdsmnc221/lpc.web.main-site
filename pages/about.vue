@@ -120,14 +120,56 @@ const popOutText = computed(() =>
 
 @container app (min-width: 768px) {
   .app {
+    .indicators-group,
+    .photos-group,
+    .pills-group {
+      gap: var(--spacing-s);
+      padding: var(--spacing-m) var(--spacing-l);
+      margin-bottom: var(--spacing-s);
+    }
+
+    .photos-group {
+      flex-wrap: wrap;
+      flex-direction: row;
+
+      & > * {
+        flex: auto;
+        width: calc((100% - var(--spacing-s) * 2) / 2);
+        gap: 0;
+
+        img {
+          width: 100%;
+          height: 100%;
+          aspect-ratio: 1/1;
+        }
+      }
+    }
   }
 }
 
 @container app (min-width: 1200px) {
   .app {
+    .indicators-group,
+    .photos-group,
+    .pills-group {
+      gap: var(--spacing-s);
+      padding: var(--spacing-m) 12vw;
+      margin-bottom: var(--spacing-s);
+    }
+
+    .indicators-group {
+      flex-direction: row;
+      flex-wrap: wrap;
+
+      & > * {
+        width: 48%;
+      }
+    }
+
     .hero-banner-with-text {
       &.--emphasis {
         .hero-banner-with-text__heading * {
+          text-align: center;
           font-size: calc((var(--base-ft-size) * 8)) !important;
         }
       }

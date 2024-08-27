@@ -6,7 +6,7 @@
   >
     <prismic-image class="headline-pill__icon" :field="icon" />
 
-    <p class="albert-sans-regular size-20">{{ text }}</p>
+    <p class="albert-sans-regular">{{ text }}</p>
   </aside>
 </template>
 
@@ -30,6 +30,8 @@ const text = computed(() => primary.value?.text);
 </script>
 
 <style lang="scss">
+@import "@/styles/imports";
+
 .headline-pill {
   display: flex;
   justify-content: flex-start;
@@ -44,6 +46,38 @@ const text = computed(() => primary.value?.text);
     display: block;
     width: 24px;
     height: 24px;
+  }
+
+  p {
+    font-size: 20px;
+  }
+}
+
+@container app (min-width: 768px) {
+  .headline-pill {
+    padding: 50px;
+
+    &__icon {
+      width: 48px;
+      height: 48px;
+    }
+
+    p {
+      font-size: calc((var(--base-ft-size) * 3));
+    }
+  }
+}
+
+@container app (min-width: 1200px) {
+  .headline-pill {
+    &__icon {
+      width: 64px;
+      height: 64px;
+    }
+
+    p {
+      font-size: calc((var(--base-ft-size) * 3.6));
+    }
   }
 }
 </style>

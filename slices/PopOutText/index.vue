@@ -91,8 +91,13 @@ const headingText = computed(
 onMounted(() => {
   console.log(props.slice, primary.value);
 
-  computedViewBoxHeading.value = `0 0 ${window.innerWidth / 2} ${16 * 4}`;
-  computedViewBoxParagraph.value = `0 0 ${window.innerWidth / 2} ${16 * textContent.value.length}`;
+  computedViewBoxHeading.value = `0 0 ${window.innerWidth / 2} ${16 * (window.innerWidth < 768 ? 4 : 8)}`;
+  computedViewBoxParagraph.value = `0 0 ${window.innerWidth / 2} ${(window.innerWidth < 768 ? 16 : 16 * 3) * textContent.value.length}`;
+
+  window.addEventListener("resize", () => {
+    computedViewBoxHeading.value = `0 0 ${window.innerWidth / 2} ${16 * (window.innerWidth < 768 ? 4 : 8)}`;
+    computedViewBoxParagraph.value = `0 0 ${window.innerWidth / 2} ${(window.innerWidth < 768 ? 16 : 16 * 3) * textContent.value.length}`;
+  });
 });
 </script>
 
@@ -132,7 +137,7 @@ onMounted(() => {
         @extend .gloock-regular;
 
         &.heading-text-svg {
-          @extend .size-xlarge;
+          @extend .size-large;
         }
         &.content-text-svg {
           @extend .size-16;
@@ -149,6 +154,20 @@ onMounted(() => {
     * {
       // @extend .size-large;
       font-size: calc((var(--base-ft-size) * 4));
+    }
+
+    &:has(svg) {
+      svg {
+        text {
+          &.heading-text-svg {
+            font-size: calc((var(--base-ft-size) * 8));
+          }
+
+          &.content-text-svg {
+            font-size: calc((var(--base-ft-size) * 3));
+          }
+        }
+      }
     }
   }
 }
