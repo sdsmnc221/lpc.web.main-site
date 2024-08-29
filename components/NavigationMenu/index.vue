@@ -56,7 +56,7 @@ onMounted(() => {
 
   position: sticky;
   top: 0;
-  z-index: 99;
+  z-index: 0;
 
   &.--thin {
     padding-top: var(--spacing-s);
