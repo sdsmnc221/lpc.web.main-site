@@ -53,7 +53,7 @@ const text = computed(() => primary.value?.text);
   }
 }
 
-@container app (min-width: 768px) {
+@container app (min-width: 700px) {
   .headline-pill {
     padding: 50px;
 
@@ -68,7 +68,7 @@ const text = computed(() => primary.value?.text);
   }
 }
 
-@container app (min-width: 1200px) {
+@container app (min-width: 1000px) {
   .headline-pill {
     &__icon {
       width: 64px;

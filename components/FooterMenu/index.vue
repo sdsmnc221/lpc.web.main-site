@@ -59,7 +59,7 @@ const props = defineProps<Props>();
   }
 }
 
-@container nuxt (min-width: 768px) {
+@container nuxt (min-width: 700px) {
   .footer-menu {
     gap: var(--spacing-l);
     justify-content: space-between;

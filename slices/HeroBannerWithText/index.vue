@@ -89,12 +89,25 @@ const buttons = computed(() => primary.value?.buttonsgroups);
 
 .hero-banner-with-text {
   display: flex;
-  padding: var(--spacing-m);
   gap: var(--spacing-l);
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
+  position: relative;
+  // padding: var(--spacing-m) 0 var(--spacing-l) 0;
+
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200%;
+    height: 100%;
+    z-index: -1;
+  }
 
   &.--light {
     @extend .bg-white;
@@ -102,6 +115,10 @@ const buttons = computed(() => primary.value?.buttonsgroups);
     .hero-banner-with-text__heading *,
     .hero-banner-with-text__description * {
       @extend .cl-black;
+    }
+
+    &::after {
+      @extend .bg-white;
     }
   }
 
@@ -111,6 +128,10 @@ const buttons = computed(() => primary.value?.buttonsgroups);
     .hero-banner-with-text__heading *,
     .hero-banner-with-text__description * {
       @extend .cl-white;
+    }
+
+    &::after {
+      @extend .bg-black;
     }
   }
 
@@ -211,12 +232,27 @@ const buttons = computed(() => primary.value?.buttonsgroups);
   }
 }
 
-@container app (min-width: 768px) {
+@container app (max-width: 700px) {
+  .app {
+    .hero-banner-with-text {
+      &__image-content {
+        flex: 1;
+      }
+
+      &__hero-image.--square {
+        --w: 72vw !important;
+        --h: auto !important;
+        aspect-ratio: 1/1;
+      }
+    }
+  }
+}
+
+@container app (min-width: 700px) {
   .hero-banner-with-text {
     align-items: flex-start;
     justify-content: flex-start;
     gap: var(--spacing-m);
-    padding: var(--spacing-l);
     min-height: 0;
 
     &.--with-description {
@@ -235,7 +271,7 @@ const buttons = computed(() => primary.value?.buttonsgroups);
       & > * {
         width: calc(100vw / 2 - var(--spacing-m) * 3);
         display: flex;
-        justify-content: flex-end;
+        // justify-content: flex-end;
       }
 
       .hero-banner-with-text__hero-image {
@@ -311,14 +347,13 @@ const buttons = computed(() => primary.value?.buttonsgroups);
   }
 }
 
-@container app (min-width: 1200px) {
+@container app (min-width: 1000px) {
   .hero-banner-with-text {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     gap: var(--spacing-l);
     min-height: 100vh;
-    padding: 12vh 12vw;
 
     * {
       text-align: left;

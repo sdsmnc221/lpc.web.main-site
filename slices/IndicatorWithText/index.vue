@@ -49,6 +49,10 @@ const description = computed(() => primary.value?.description);
     margin-bottom: var(--spacing-m);
   }
 
+  & > div {
+    margin-bottom: var(--spacing-s);
+  }
+
   &__heading * {
     @extend .size-large;
   }
@@ -58,7 +62,7 @@ const description = computed(() => primary.value?.description);
   }
 }
 
-@container app (min-width: 768px) {
+@container app (min-width: 700px) {
   .indicator-with-text {
     gap: var(--spacing-m);
 
@@ -76,9 +80,8 @@ const description = computed(() => primary.value?.description);
   }
 }
 
-@container app (min-width: 1200px) {
+@container app (min-width: 1000px) {
   .indicator-with-text {
-    gap: var(--spacing-l);
   }
 }
 </style>

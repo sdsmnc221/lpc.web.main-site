@@ -58,7 +58,6 @@ const popOutText = computed(() =>
 
   .home-headlines {
     display: flex;
-    padding: var(--spacing-m);
     gap: var(--spacing-l);
     flex-direction: column;
     justify-content: flex-start;
@@ -68,28 +67,24 @@ const popOutText = computed(() =>
   }
 }
 
-@container app (min-width: 768px) {
+@container app (min-width: 700px) {
   .app.--index {
     .home-headlines {
       flex-direction: row;
       align-items: flex-start;
       margin-top: var(--spacing-m);
-      padding: var(--spacing-l);
     }
   }
 }
 
-@container app (min-width: 1200px) {
+@container app (min-width: 1000px) {
   .app.--index {
     .home-headlines {
       flex-direction: row;
       margin-top: var(--spacing-m);
-      padding: 10vh 12vw;
     }
 
     .multi-text-block {
-      padding: var(--spacing-l) 12vw;
-
       &__block {
         padding-left: 0;
         padding-right: 0;

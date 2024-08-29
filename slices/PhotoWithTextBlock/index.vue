@@ -76,7 +76,7 @@ const description = computed(() => primary.value?.description);
   }
 }
 
-@container app (min-width: 768px) {
+@container app (min-width: 700px) {
   .photo-with-text-block {
     align-items: flex-start;
     flex: 1;
@@ -90,7 +90,7 @@ const description = computed(() => primary.value?.description);
   }
 }
 
-@container app (min-width: 1200px) {
+@container app (min-width: 1000px) {
   .photo-with-text-block {
     flex: 1;
 

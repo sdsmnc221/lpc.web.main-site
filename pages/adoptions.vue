@@ -72,16 +72,14 @@ const popOutText = computed(() =>
   }
 }
 
-@container app (min-width: 768px) {
+@container app (min-width: 700px) {
   .app {
   }
 }
 
-@container app (min-width: 1200px) {
+@container app (min-width: 1000px) {
   .app.--adoptions {
     .multi-text-block {
-      padding: var(--spacing-l) 12vw;
-
       &__block {
         padding-left: 0;
         padding-right: 0;

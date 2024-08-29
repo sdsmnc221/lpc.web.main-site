@@ -250,7 +250,7 @@ onMounted(() => console.log(props));
   }
 }
 
-@container app (min-width: 768px) {
+@container app (min-width: 700px) {
   .cat-item {
     width: 32%;
 
@@ -260,13 +260,13 @@ onMounted(() => console.log(props));
   }
 }
 
-@container app (min-width: 1200px) {
+@container app (min-width: 1000px) {
   .cat-item {
     width: 25%;
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 700px) {
   .cat-item {
     &__fiche {
       height: 64vh;
@@ -309,7 +309,7 @@ onMounted(() => console.log(props));
   }
 }
 
-@media screen and (min-width: 768px) and (orientation: landscape) {
+@media screen and (min-width: 700px) and (orientation: landscape) {
   .cat-item {
     &__fiche {
       padding-left: 10vw;
@@ -322,7 +322,7 @@ onMounted(() => console.log(props));
   }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1000px) {
   .cat-item {
     &__fiche {
       &__avatar {

@@ -59,12 +59,7 @@ onMounted(() => console.log("contact", contact.value));
   }
 }
 
-@container app (min-width: 768px) {
-  .app {
-  }
-}
-
-@container app (min-width: 1200px) {
+@container app (min-width: 1000px) {
   .app.--contact {
     .hero-banner-with-text {
       &.--emphasis {
@@ -75,8 +70,6 @@ onMounted(() => console.log("contact", contact.value));
     }
 
     .multi-text-block {
-      padding: var(--spacing-l) 12vw;
-
       &__block {
         padding-left: 0;
         padding-right: 0;

@@ -105,13 +105,11 @@ onMounted(() => {
 @import "@/styles/imports";
 
 .pop-out-text {
-  margin: var(--spacing-s) var(--spacing-m);
-
   *:not(text) {
     line-height: 1.2em;
     text-align: center;
     // @extend .size-medium;
-    font-size: calc((var(--base-ft-size) * 2));
+    font-size: calc((var(--base-ft-size) * 2.4));
   }
 
   &.--with-heading {
@@ -147,11 +145,9 @@ onMounted(() => {
   }
 }
 
-@container app (min-width: 768px) {
+@container app (min-width: 700px) {
   .pop-out-text {
-    margin: var(--spacing-l) 12vw;
-
-    * {
+    *:not(text) {
       // @extend .size-large;
       font-size: calc((var(--base-ft-size) * 4));
     }
@@ -172,10 +168,8 @@ onMounted(() => {
   }
 }
 
-@container app (min-width: 1200px) {
+@container app (min-width: 1000px) {
   .pop-out-text {
-    margin: var(--spacing-l) 16vw;
-
     *:not(text) {
       // @extend .size-xxlarge;
       font-size: calc((var(--base-ft-size) * 5));

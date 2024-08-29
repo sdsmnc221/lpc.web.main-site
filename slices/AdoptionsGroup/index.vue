@@ -78,12 +78,12 @@ const { data: itemsData } = await useAsyncData(props.slice.id, async () => {
   }
 }
 
-@container app (min-width: 768px) {
+@container app (min-width: 700px) {
   .adoptions-group {
   }
 }
 
-@container app (min-width: 1200px) {
+@container app (min-width: 1000px) {
   .adoptions-group {
     padding: 0 12vw;
     margin-top: calc(var(--spacing-l) * 2);

@@ -61,7 +61,7 @@ const props = defineProps<Props>();
   }
 }
 
-@container nuxt (min-width: 768px) {
+@container nuxt (min-width: 700px) {
   .navigation-menu {
     flex-wrap: nowrap;
 

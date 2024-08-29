@@ -96,7 +96,7 @@ const popOutText = computed(() =>
     justify-content: flex-start;
     align-items: flex-start;
     gap: var(--spacing-m);
-    padding: var(--spacing-m);
+
     margin-bottom: var(--spacing-m);
   }
 
@@ -118,13 +118,13 @@ const popOutText = computed(() =>
   }
 }
 
-@container app (min-width: 768px) {
+@container app (min-width: 700px) {
   .app.--about {
     .indicators-group,
     .photos-group,
     .pills-group {
       gap: var(--spacing-s);
-      padding: var(--spacing-m) var(--spacing-l);
+
       margin-bottom: var(--spacing-s);
     }
 
@@ -147,13 +147,13 @@ const popOutText = computed(() =>
   }
 }
 
-@container app (min-width: 1200px) {
+@container app (min-width: 1000px) {
   .app.--about {
     .indicators-group,
     .photos-group,
     .pills-group {
       gap: var(--spacing-s);
-      padding: var(--spacing-m) 12vw;
+
       margin-bottom: var(--spacing-s);
     }
 
@@ -176,8 +176,6 @@ const popOutText = computed(() =>
     }
 
     .multi-text-block {
-      padding: var(--spacing-l) 12vw;
-
       &__block {
         padding-left: 0;
         padding-right: 0;

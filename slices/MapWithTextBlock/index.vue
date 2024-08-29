@@ -64,7 +64,6 @@ const zoom = ref(24);
 
 .map-with-text-block {
   display: flex;
-  padding: var(--spacing-m);
   gap: var(--spacing-l);
   flex-direction: column;
   justify-content: flex-start;
@@ -108,13 +107,12 @@ const zoom = ref(24);
   }
 }
 
-@container app (min-width: 768px) {
+@container app (min-width: 700px) {
   .map-with-text-block {
     align-items: flex-start;
     justify-content: space-between;
     flex-direction: row;
     gap: var(--spacing-m);
-    padding: var(--spacing-l);
 
     &__text-content {
       flex: 1;
@@ -126,10 +124,9 @@ const zoom = ref(24);
   }
 }
 
-@container app (min-width: 1200px) {
+@container app (min-width: 1000px) {
   .map-with-text-block {
     gap: var(--spacing-l);
-    padding: var(--spacing-l) 12vw;
   }
 }
 </style>

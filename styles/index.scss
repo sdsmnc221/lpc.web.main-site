@@ -17,6 +17,9 @@ body {
   #__nuxt {
     container-name: nuxt;
     container-type: inline-size;
+
+    container-name: nuxt;
+    container-type: inline-size;
   }
 
   .app {
@@ -29,6 +32,13 @@ body {
 
     container-name: app;
     container-type: inline-size;
+
+    padding: var(--spacing-m);
+    padding-top: 0;
+
+    & > * {
+      padding: var(--spacing-l) 0;
+    }
   }
 
   h1,
@@ -67,4 +77,18 @@ body {
   width: 0;
   height: 0;
   margin: 0;
+}
+
+@container nuxt (min-width: 700px) {
+  body .app {
+    padding: var(--spacing-l);
+    padding-top: 0;
+  }
+}
+
+@container nuxt (min-width: 1000px) {
+  body .app {
+    padding: var(--spacing-l) 12vw;
+    padding-top: 0;
+  }
 }

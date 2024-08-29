@@ -46,11 +46,6 @@ const backgroundImage = computed(() => primary.value?.backgroundimage?.url);
   align-items: center;
   text-align: center;
 
-  background-image: var(--bg-img);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-
   position: relative;
 
   filter: saturate(0);
@@ -58,14 +53,31 @@ const backgroundImage = computed(() => primary.value?.backgroundimage?.url);
   &::after {
     content: "";
     position: absolute;
-    width: 100%;
+    width: calc(100% + 24vw);
     height: 100%;
     top: 0;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 1;
     background-color: var(--white);
     pointer-events: none;
     opacity: 0.48;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: calc(100% + 24vw);
+    height: 100%;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 0;
+
+    background-image: var(--bg-img);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
   }
 
   &__text-content {
@@ -78,10 +90,9 @@ const backgroundImage = computed(() => primary.value?.backgroundimage?.url);
   }
 }
 
-@container app (min-width: 768px) {
+@container app (min-width: 700px) {
   .hero-photo-background {
     &__text-content {
-      padding: 0 16vw;
       * {
         @extend .size-xlarge;
       }

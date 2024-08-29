@@ -52,8 +52,6 @@ const textBlocks = computed(() => primary.value?.textblocksgroup);
 @import "@/styles/imports";
 
 .multi-text-block {
-  padding: var(--spacing-m);
-
   &__title {
     margin-bottom: var(--spacing-m);
     * {
@@ -86,10 +84,8 @@ const textBlocks = computed(() => primary.value?.textblocksgroup);
   }
 }
 
-@container app (min-width: 768px) {
+@container app (min-width: 700px) {
   .multi-text-block {
-    padding: var(--spacing-l);
-
     & > div {
       display: flex;
       justify-content: space-between;
@@ -104,10 +100,8 @@ const textBlocks = computed(() => primary.value?.textblocksgroup);
   }
 }
 
-@container app (min-width: 1200px) {
+@container app (min-width: 1000px) {
   .multi-text-block {
-    padding: var(--spacing-l);
-
     &__block {
       padding: 0 var(--spacing-l);
 
