@@ -144,5 +144,9 @@
 
     https://stackoverflow.com/a/39269074/24528175
   */
-  font-size: calc((100vw - 2 * 48px) / 12);
+  font-size: calc((100vw - 2 * 48px) / 9);
+
+  @media screen and (min-width: 700px) {
+    font-size: calc((100vw - 2 * 48px) / 12);
+  }
 }

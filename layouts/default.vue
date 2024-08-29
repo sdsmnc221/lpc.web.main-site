@@ -1,5 +1,7 @@
 <template>
   <div>
+    <accordion-navigation :links="links"></accordion-navigation>
+
     <navigation-menu :links="links"></navigation-menu>
 
     <main class="app" :class="`--${route.name as string}`">
@@ -16,6 +18,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
+import AccordionNavigation from "@/components/AccordionNavigation/index.vue";
 import NavigationMenu from "@/components/NavigationMenu/index.vue";
 import FooterMenu from "@/components/FooterMenu/index.vue";
 

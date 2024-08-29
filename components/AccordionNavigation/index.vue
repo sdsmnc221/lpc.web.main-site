@@ -1,0 +1,140 @@
+<template>
+  <div ref="node" class="accordion-navigation" :class="{ '--hidden': hidden }">
+    <Accordion type="single" collapsible>
+      <AccordionItem value="item-1">
+        <AccordionTrigger class="accordion-navigation__current-pages">{{
+          currentPage.linklabel
+        }}</AccordionTrigger>
+        <AccordionContent class="accordion-navigation__pages">
+          <a
+            v-for="(link, index) in links"
+            :key="`navigation-menu-link-${index}`"
+            :href="`${link.linkitem.type === 'homepage' ? '/' : '/' + link.linkitem.uid}`"
+            class="link albert-sans-light size-16"
+            >{{ link.linklabel }}</a
+          >
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  </div>
+</template>
+
+<script setup lang="ts">
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { computed, ref } from "vue";
+import { type Link } from "~/interfaces/Navigation";
+
+type Props = {
+  links: Link[] | undefined;
+};
+
+const props = defineProps<Props>();
+
+const route = useRoute();
+
+const currentPage = computed(() => {
+  const { name: page } = route;
+  return (
+    props.links?.find((link) =>
+      page === "index"
+        ? link.linkitem?.type === "homepage"
+        : link.linkitem?.uid === page
+    ) ?? {
+      linklabel: "Accueil",
+      linkhref: "/",
+    }
+  );
+});
+
+const node = ref(null);
+const hidden = ref(true);
+
+onMounted(() => {
+  nextTick(() => {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY < window.innerHeight) {
+        hidden.value = true;
+      } else {
+        hidden.value = false;
+      }
+    });
+  });
+});
+</script>
+
+<style lang="scss">
+@import "@/styles/imports";
+
+.accordion-navigation {
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  display: block;
+
+  background-color: var(--black);
+
+  * {
+    color: var(--white);
+  }
+
+  &.--hidden {
+    display: none;
+  }
+
+  & > div {
+    button {
+      margin-left: var(--spacing-s);
+      justify-content: flex-start;
+      gap: 8px;
+      text-decoration: none;
+
+      font-size: 24px;
+      font-family: "Albert Sans", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 300;
+      font-style: normal;
+
+      &.hover\:underline:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  &__pages {
+    padding: var(--spacing-s);
+    padding-top: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    a {
+      display: block;
+      color: var(--white);
+      text-decoration: none;
+      width: 50%;
+      cursor: pointer;
+      margin-bottom: var(--spacing-s);
+
+      &:nth-child(n) {
+        text-align: left;
+      }
+
+      &:nth-child(2n) {
+        text-align: right;
+      }
+    }
+  }
+}
+
+@container nuxt (min-width: 700px) {
+  .accordion-navigation {
+    display: none;
+    visibility: hidden;
+  }
+}
+</style>

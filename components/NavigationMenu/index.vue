@@ -1,39 +1,50 @@
 <template>
-  <nav class="navigation-menu bg-black" v-if="links">
+  <nav
+    class="navigation-menu bg-black"
+    :class="{ '--thin': thin }"
+    v-if="links"
+  >
     <a
       v-for="(link, index) in links"
       :key="`navigation-menu-link-${index}`"
       :href="`${link.linkitem.type === 'homepage' ? '/' : '/' + link.linkitem.uid}`"
       class="albert-sans-light size-16"
+      :class="{
+        '--current':
+          route.name === 'index'
+            ? link.linkitem.type === 'homepage'
+            : link.linkitem.uid === route.name,
+      }"
       >{{ link.linklabel }}</a
     >
   </nav>
 </template>
 
 <script setup lang="ts">
-type LinkItem = {
-  id: string;
-  type: string;
-  tags: string[];
-  lang: string;
-  slug: string;
-  first_publication_date: string;
-  last_publication_date: string;
-  link_type: string;
-  isBroken: boolean;
-  uid?: string;
-};
-
-type Link = {
-  linkitem: LinkItem;
-  linklabel: string;
-};
+import { type Link } from "~/interfaces/Navigation";
+import { ref } from "vue";
 
 type Props = {
   links: Link[] | undefined;
 };
 
 const props = defineProps<Props>();
+
+const route = useRoute();
+
+const thin = ref(false);
+
+onMounted(() => {
+  nextTick(() => {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY < window.innerHeight) {
+        thin.value = false;
+      } else {
+        thin.value = true;
+      }
+    });
+  });
+});
 </script>
 
 <style lang="scss">
@@ -42,6 +53,17 @@ const props = defineProps<Props>();
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+
+  position: sticky;
+  top: 0;
+  z-index: 99;
+
+  &.--thin {
+    padding-top: var(--spacing-s);
+    padding-bottom: 0;
+    align-items: center;
+    justify-content: center;
+  }
 
   a {
     display: block;
@@ -57,6 +79,10 @@ const props = defineProps<Props>();
 
     &:nth-child(2n) {
       text-align: right;
+    }
+
+    &.--current {
+      font-weight: 600;
     }
   }
 }

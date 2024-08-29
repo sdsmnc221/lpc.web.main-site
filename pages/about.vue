@@ -96,7 +96,6 @@ const popOutText = computed(() =>
     justify-content: flex-start;
     align-items: flex-start;
     gap: var(--spacing-m);
-
     margin-bottom: var(--spacing-m);
   }
 
@@ -124,7 +123,6 @@ const popOutText = computed(() =>
     .photos-group,
     .pills-group {
       gap: var(--spacing-s);
-
       margin-bottom: var(--spacing-s);
     }
 
@@ -153,7 +151,6 @@ const popOutText = computed(() =>
     .photos-group,
     .pills-group {
       gap: var(--spacing-s);
-
       margin-bottom: var(--spacing-s);
     }
 
@@ -166,14 +163,14 @@ const popOutText = computed(() =>
       }
     }
 
-    .hero-banner-with-text {
-      &.--emphasis {
-        .hero-banner-with-text__heading * {
-          text-align: center;
-          font-size: calc((var(--base-ft-size) * 8)) !important;
-        }
-      }
-    }
+    // .hero-banner-with-text {
+    //   &.--emphasis {
+    //     .hero-banner-with-text__heading * {
+    //       text-align: center;
+    //       font-size: calc((var(--base-ft-size) * 8)) !important;
+    //     }
+    //   }
+    // }
 
     .multi-text-block {
       &__block {
