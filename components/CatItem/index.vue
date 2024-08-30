@@ -286,7 +286,7 @@ onMounted(() => console.log(props));
 <style lang="scss">
 @container app (min-width: 700px) {
   .cat-item {
-    width: 32%;
+    width: 32% !important;
 
     &__name {
       min-width: 32%;
@@ -296,7 +296,7 @@ onMounted(() => console.log(props));
 
 @container app (min-width: 1000px) {
   .cat-item {
-    width: 25%;
+    width: 25% !important;
   }
 }
 
