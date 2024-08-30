@@ -16,9 +16,14 @@
             {{ catagenumber }} {{ catagetype }}
           </p>
           <p v-if="adoptionstatus">
-            {{
-              adoptionstatus.replace("Adoptable -", "").replace("Adopté - ", "")
-            }}
+            <span>
+              {{
+                adoptionstatus
+                  .replace("Adoptable -", "")
+                  .replace("Adopté - ", "")
+              }}
+            </span>
+            <span class="albert-sans-light" v-if="catsexe">{{ catsexe }}</span>
           </p>
         </div>
       </DrawerTrigger>
@@ -38,7 +43,8 @@
               </h4>
 
               <p class="cat-item__fiche__status albert-sans-regular size-20">
-                {{ adoptionstatus }}
+                <span v-if="adoptionstatus">{{ adoptionstatus }} </span>
+                <span v-if="catsexe"> {{ catsexe }}</span>
               </p>
 
               <div class="cat-item__fiche__row">
@@ -113,6 +119,7 @@ type CatInfo = {
   createddate: string;
   catphoto: Image;
   catname: string;
+  catsexe?: string;
   catbirth: string;
   catagenumber?: number;
   catagetype?: string;
