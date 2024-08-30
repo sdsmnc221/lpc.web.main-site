@@ -33,6 +33,7 @@
           <DrawerTitle>
             <prismic-image
               class="cat-item__fiche__avatar"
+              :class="{ '--placeholder': !catHasAvatar }"
               :field="catHasAvatar ? catphoto : avatarPlaceholder"
             />
           </DrawerTitle>
@@ -280,7 +281,9 @@ onMounted(() => console.log(props));
     }
   }
 }
+</style>
 
+<style lang="scss">
 @container app (min-width: 700px) {
   .cat-item {
     width: 32%;
@@ -357,9 +360,16 @@ onMounted(() => console.log(props));
   .cat-item {
     &__fiche {
       &__avatar {
-        top: 50%;
-        left: 10%;
-        transform: translate(-10%, -50%);
+        top: 50% !important;
+        left: -2px !important;
+        transform: translateY(-50%) !important;
+        width: 32% !important;
+        height: 100% !important;
+        border-radius: 0 32px 32px 0 !important;
+
+        &.--placeholder {
+          object-fit: contain !important;
+        }
       }
     }
   }
