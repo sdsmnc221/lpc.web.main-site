@@ -26,17 +26,18 @@
       <DrawerContent>
         <DrawerHeader class="cat-item__fiche">
           <DrawerTitle>
-            <prismic-image class="cat-item__fiche__avatar" :field="catphoto" />
+            <prismic-image
+              class="cat-item__fiche__avatar"
+              :field="catHasAvatar ? catphoto : avatarPlaceholder"
+            />
           </DrawerTitle>
           <DrawerDescription>
             <div class="cat-item__fiche__content">
               <h4 class="cat-item__fiche__title">
-                <span class="albert-sans-bold size-large">{{ catname }}</span>
+                <span class="albert-sans-bold size-medium">{{ catname }}</span>
               </h4>
 
-              <p
-                class="cat-item__fiche__status albert-sans-regular size-medium"
-              >
+              <p class="cat-item__fiche__status albert-sans-regular size-20">
                 {{ adoptionstatus }}
               </p>
 
@@ -139,7 +140,7 @@ const hasInfo = computed(
 onMounted(() => console.log(props));
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "@/styles/imports";
 
 .cat-item {
@@ -224,6 +225,7 @@ onMounted(() => console.log(props));
 
     &__title,
     &__status {
+      width: 100%;
       text-align: center;
     }
 
