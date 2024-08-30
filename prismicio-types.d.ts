@@ -53,15 +53,26 @@ interface CatficheDocumentData {
   catsexe: prismic.SelectField<"♂️" | "♀️">;
 
   /**
-   * catAge field in *CatFiche*
+   * catAgeNumber field in *CatFiche*
    *
-   * - **Field Type**: Rich Text
+   * - **Field Type**: Number
    * - **Placeholder**: *None*
-   * - **API ID Path**: catfiche.catage
+   * - **API ID Path**: catfiche.catagenumber
    * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   * - **Documentation**: https://prismic.io/docs/field#number
    */
-  catage: prismic.RichTextField;
+  catagenumber: prismic.NumberField;
+
+  /**
+   * catAgeType field in *CatFiche*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: catfiche.catagetype
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  catagetype: prismic.SelectField<"Mois" | "An(s)">;
 
   /**
    * catBirth field in *CatFiche*

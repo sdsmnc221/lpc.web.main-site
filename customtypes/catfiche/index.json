@@ -42,13 +42,19 @@
           "options": ["♂️", "♀️"]
         }
       },
-      "catage": {
-        "type": "StructuredText",
+      "catagenumber": {
+        "type": "Number",
         "config": {
-          "label": "catAge",
+          "label": "catAgeNumber",
+          "placeholder": ""
+        }
+      },
+      "catagetype": {
+        "type": "Select",
+        "config": {
+          "label": "catAgeType",
           "placeholder": "",
-          "allowTargetBlank": true,
-          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          "options": ["Mois", "An(s)"]
         }
       },
       "catbirth": {

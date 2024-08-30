@@ -12,8 +12,10 @@
         </h4>
 
         <div class="cat-item__info albert-sans-light size-regular">
-          <p>{{ catage }} an(s)</p>
-          <p>
+          <p v-if="catagenumber && catagetype">
+            {{ catagenumber }} {{ catagetype }}
+          </p>
+          <p v-if="adoptionstatus">
             {{
               adoptionstatus.replace("Adoptable -", "").replace("Adopté - ", "")
             }}
@@ -39,10 +41,12 @@
               </p>
 
               <div class="cat-item__fiche__row">
-                <div class="cat-item__fiche__info">
-                  <p>Âge : {{ catage }} an(s)</p>
+                <div class="cat-item__fiche__info" v-if="hasInfo">
+                  <p v-if="catagenumber && catagetype">
+                    Âge : {{ catagenumber }} {{ catagetype }}
+                  </p>
                   <p v-if="catbirth">Né.e le : {{ catbirth }}</p>
-                  <p>Zone : {{ zipcode ?? 91 }}</p>
+                  <p v-if="zipcode">Zone : {{ zipcode }}</p>
                 </div>
 
                 <div class="cat-item__fiche__badges">
@@ -108,17 +112,18 @@ type CatInfo = {
   createddate: string;
   catphoto: Image;
   catname: string;
-  catage: number;
   catbirth: string;
-  catdescription: any;
-  catidentification: string;
-  catvaccination: boolean;
-  catsterilization: boolean;
-  zipcode: null | number;
-  relatedcat: any | null;
-  adoptionstatus: string;
-  contactInfo: any;
-  adoptionRequirements: any;
+  catagenumber?: number;
+  catagetype?: string;
+  catdescription?: any;
+  catidentification?: string;
+  catvaccination?: boolean;
+  catsterilization?: boolean;
+  zipcode?: null | number;
+  relatedcat?: any | null;
+  adoptionstatus?: string;
+  contactInfo?: any;
+  adoptionRequirements?: any;
   avatarPlaceholder?: Image;
 };
 
@@ -126,7 +131,12 @@ const props = defineProps<CatInfo>();
 
 const catHasAvatar = computed(() => props.catphoto.hasOwnProperty("url"));
 
-onMounted(() => console.log(props.catphoto));
+const hasInfo = computed(
+  () =>
+    props.catbirth || props.zipcode || (props.catagenumber && props.catagetype)
+);
+
+onMounted(() => console.log(props));
 </script>
 
 <style lang="scss">
@@ -244,6 +254,10 @@ onMounted(() => console.log(props.catphoto));
 
     &__footnote {
       margin-top: var(--spacing-m);
+
+      * {
+        text-align: center;
+      }
 
       & > *:last-child {
         margin-top: var(--spacing-s);

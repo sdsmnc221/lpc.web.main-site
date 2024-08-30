@@ -63,8 +63,6 @@ const { data: catAvatarPlaceholder } = await useAsyncData(
 const avatarPlaceholder = computed(
   () => catAvatarPlaceholder.value?.data?.image ?? null
 );
-
-onMounted(() => console.log(catAvatarPlaceholder.value));
 </script>
 
 <style lang="scss">
@@ -86,7 +84,7 @@ onMounted(() => console.log(catAvatarPlaceholder.value));
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
   }
 }
 
