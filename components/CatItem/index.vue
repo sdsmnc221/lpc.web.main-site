@@ -2,7 +2,10 @@
   <div class="cat-item">
     <Drawer>
       <DrawerTrigger>
-        <prismic-image class="cat-item__photo" :field="catphoto" />
+        <prismic-image
+          class="cat-item__photo"
+          :field="catHasAvatar ? catphoto : avatarPlaceholder"
+        />
 
         <h4 class="cat-item__name">
           <span class="albert-sans-bold">{{ catname }}</span>
@@ -89,19 +92,21 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 
+type Image = {
+  dimensions: {
+    width: number;
+    height: number;
+  };
+  alt: null | string;
+  copyright: null | string;
+  url: string;
+  id: string;
+  edit: any;
+};
+
 type CatInfo = {
   createddate: string;
-  catphoto: {
-    dimensions: {
-      width: number;
-      height: number;
-    };
-    alt: null | string;
-    copyright: null | string;
-    url: string;
-    id: string;
-    edit: any;
-  };
+  catphoto: Image;
   catname: string;
   catage: number;
   catbirth: string;
@@ -114,11 +119,14 @@ type CatInfo = {
   adoptionstatus: string;
   contactInfo: any;
   adoptionRequirements: any;
+  avatarPlaceholder?: Image;
 };
 
 const props = defineProps<CatInfo>();
 
-onMounted(() => console.log(props));
+const catHasAvatar = computed(() => props.catphoto.hasOwnProperty("url"));
+
+onMounted(() => console.log(props.catphoto));
 </script>
 
 <style lang="scss">

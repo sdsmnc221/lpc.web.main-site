@@ -16,6 +16,7 @@
         v-bind="cat.data"
         :contact-info="contactInfo"
         :adoption-requirements="adoptionRequirements"
+        :avatar-placeholder="avatarPlaceholder"
       ></cat-item>
     </div>
   </section>
@@ -53,6 +54,17 @@ const { data: itemsData } = await useAsyncData(props.slice.id, async () => {
 
   return items;
 });
+
+const { data: catAvatarPlaceholder } = await useAsyncData(
+  "catAvatarPlaceholder",
+  async () => client.getByID(primary.value.catavatarplaceholder.id)
+);
+
+const avatarPlaceholder = computed(
+  () => catAvatarPlaceholder.value?.data?.image ?? null
+);
+
+onMounted(() => console.log(catAvatarPlaceholder.value));
 </script>
 
 <style lang="scss">
