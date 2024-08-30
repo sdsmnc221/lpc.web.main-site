@@ -26,11 +26,23 @@
 				]
 			},
 			"geopoint": {
-				"__TYPE__": "GeoPointContent",
 				"position": {
 					"lat": 48.8841267,
 					"lng": 2.3300579
+				},
+				"__TYPE__": "GeoPointContent"
+			},
+			"infolink": {
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "http://twitter.com"
 				}
+			},
+			"infotext": {
+				"__TYPE__": "FieldContent",
+				"value": "review",
+				"type": "Text"
 			}
 		},
 		"items": []

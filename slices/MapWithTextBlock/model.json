@@ -35,6 +35,21 @@
           "config": {
             "label": "geoPoint"
           }
+        },
+        "infotext": {
+          "type": "Text",
+          "config": {
+            "label": "infoText",
+            "placeholder": ""
+          }
+        },
+        "infolink": {
+          "type": "Link",
+          "config": {
+            "label": "infoLink",
+            "placeholder": "",
+            "select": null
+          }
         }
       },
       "items": {}

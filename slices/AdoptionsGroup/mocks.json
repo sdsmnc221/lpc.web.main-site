@@ -62,6 +62,17 @@
 					"__TYPE__": "DocumentLink",
 					"id": "mock_document_id"
 				}
+			},
+			"description": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Culpa aute sunt laboris nostrud nostrud. Veniam ea aute do pariatur voluptate. Amet sunt sit sunt aliquip."
+						}
+					}
+				]
 			}
 		},
 		"items": []

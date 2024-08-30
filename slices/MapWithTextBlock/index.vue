@@ -11,9 +11,15 @@
       />
 
       <prismic-rich-text
-        class="hero-banner-with-text__description albert-sans-regular"
+        class="map-with-text-block__description albert-sans-regular"
         :field="descriptionParagraph"
       />
+
+      <ui-button variant="dark" class="map-with-text-block__info">
+        <prismic-link v-if="infoLabel && infoLink" :field="infoLink">
+          {{ infoLabel }}
+        </prismic-link>
+      </ui-button>
     </div>
 
     <div class="map-with-text-block__map-content" v-if="geoPoint">
@@ -55,6 +61,8 @@ const primary = computed(() => props.slice.primary);
 const title = computed(() => primary.value?.title);
 const descriptionParagraph = computed(() => primary.value?.description);
 const geoPoint = computed(() => primary.value?.geopoint);
+const infoLabel = computed(() => primary.value?.infotext);
+const infoLink = computed(() => primary.value?.infolink);
 
 const zoom = ref(24);
 </script>
@@ -75,6 +83,7 @@ const zoom = ref(24);
     gap: var(--spacing-m);
     flex-direction: column;
     justify-content: flex-start;
+    align-items: flex-start;
   }
 
   &__map-content {

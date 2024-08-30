@@ -1,12 +1,18 @@
 <template>
-  <button class="ui-button">{{ label }}</button>
+  <button class="ui-button" :class="`--${variant}`">
+    <span v-if="label">{{ label }}</span>
+    <slot></slot>
+  </button>
 </template>
 
 <script setup lang="ts">
 type Props = {
-  label: string;
+  label?: string;
+  variant?: "dark" | "light";
 };
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  variant: "light",
+});
 </script>
 
 <style lang="scss">
@@ -15,7 +21,7 @@ const props = defineProps<Props>();
 .ui-button {
   display: inline-block;
   padding: 12px 24px;
-  background-color: var(--white);
+
   border: none;
   outline: none;
   cursor: pointer;
@@ -25,6 +31,16 @@ const props = defineProps<Props>();
   container-type: normal;
 
   @extend .size-16;
+
+  &.--light {
+    background-color: var(--white);
+    color: var(--black);
+  }
+
+  &.--dark {
+    background-color: var(--black);
+    color: var(--white);
+  }
 }
 
 @container app (width >= 1200px) {

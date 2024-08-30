@@ -649,6 +649,16 @@ export interface AdoptionsGroupSliceDefaultPrimary {
   title: prismic.RichTextField;
 
   /**
+   * description field in *AdoptionsGroup → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: adoptions_group.default.primary.description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+
+  /**
    * CatAvatarPlaceholder field in *AdoptionsGroup → Default → Primary*
    *
    * - **Field Type**: Content Relationship
@@ -1255,6 +1265,26 @@ export interface MapWithTextBlockSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#geopoint
    */
   geopoint: prismic.GeoPointField;
+
+  /**
+   * infoText field in *MapWithTextBlock → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: map_with_text_block.default.primary.infotext
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  infotext: prismic.KeyTextField;
+
+  /**
+   * infoLink field in *MapWithTextBlock → Default → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: map_with_text_block.default.primary.infolink
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  infolink: prismic.LinkField;
 }
 
 /**
