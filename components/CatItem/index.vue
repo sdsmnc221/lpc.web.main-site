@@ -375,13 +375,13 @@ onMounted(() => console.log(props));
   }
 }
 
-@media screen and (max-height: 800px) {
+@media screen and (max-height: 720px) {
   .cat-item {
     &__fiche {
       height: 66vh !important;
 
       &__avatar {
-        top: -24 !important;
+        top: -24% !important;
       }
     }
   }
