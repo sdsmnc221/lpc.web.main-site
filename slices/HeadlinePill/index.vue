@@ -50,6 +50,7 @@ const text = computed(() => primary.value?.text);
 
   p {
     font-size: 20px;
+    line-height: 20px;
   }
 }
 
