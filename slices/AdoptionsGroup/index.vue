@@ -9,6 +9,12 @@
       :field="title"
     />
 
+    <prismic-rich-text
+      v-if="description"
+      class="adoptions-group__description cl-black"
+      :field="description"
+    />
+
     <div class="adoptions-group__items" v-if="itemsData?.length">
       <cat-item
         v-for="cat in itemsData"
@@ -46,6 +52,7 @@ const contactInfo = computed(() => primary.value?.contactinfo);
 const adoptionRequirements = computed(
   () => primary.value?.adoptionrequirements
 );
+const description = computed(() => primary.value?.description);
 
 const { data: itemsData } = await useAsyncData(props.slice.id, async () => {
   const itemsId = primary.value?.catsgroup?.map((item) => item.catitem.id);
@@ -75,6 +82,27 @@ const avatarPlaceholder = computed(
     margin-bottom: var(--spacing-m);
     * {
       font-size: calc((var(--base-ft-size) * 3));
+    }
+  }
+
+  &__description {
+    width: 100%;
+
+    * {
+      @extend .albert-sans-light;
+      @extend .size-20;
+    }
+
+    & > * {
+      margin-top: var(--spacing-m);
+    }
+
+    ul {
+      list-style-type: square;
+
+      li {
+        margin-left: var(--spacing-m);
+      }
     }
   }
 
