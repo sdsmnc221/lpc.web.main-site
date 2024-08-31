@@ -44,8 +44,6 @@ const faq = computed(() =>
 const popOutText = computed(() =>
   contact.value?.data?.slices.find((s) => s?.slice_type === "pop_out_text")
 );
-
-onMounted(() => console.log("contact", contact.value));
 </script>
 
 <style lang="scss">

@@ -89,8 +89,6 @@ const headingText = computed(
 );
 
 onMounted(() => {
-  console.log(props.slice, primary.value);
-
   computedViewBoxHeading.value = `0 0 ${window.innerWidth / 2} ${16 * (window.innerWidth < 768 ? 4 : 8)}`;
   computedViewBoxParagraph.value = `0 0 ${window.innerWidth / 2} ${(window.innerWidth < 768 ? 16 : 16 * 3) * textContent.value.length}`;
 

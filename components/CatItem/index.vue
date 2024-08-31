@@ -144,8 +144,6 @@ const hasInfo = computed(
   () =>
     props.catbirth || props.zipcode || (props.catagenumber && props.catagetype)
 );
-
-onMounted(() => console.log(props));
 </script>
 
 <style lang="scss" scoped>
