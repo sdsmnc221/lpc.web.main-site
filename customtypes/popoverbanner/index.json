@@ -20,6 +20,13 @@
           "thumbnails": []
         }
       },
+      "ctalabel": {
+        "type": "Text",
+        "config": {
+          "label": "ctaLabel",
+          "placeholder": ""
+        }
+      },
       "text": {
         "type": "StructuredText",
         "config": {

@@ -735,6 +735,17 @@ interface PopoverbannerDocumentData {
   banner: prismic.ImageField<never>;
 
   /**
+   * ctaLabel field in *PopoverBanner*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: popoverbanner.ctalabel
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  ctalabel: prismic.KeyTextField;
+
+  /**
    * text field in *PopoverBanner*
    *
    * - **Field Type**: Rich Text

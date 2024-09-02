@@ -3,18 +3,22 @@
     <p class="footer-menu__copyright albert-sans-light" v-if="copyright">
       {{ copyright }}
     </p>
-    <div
-      class="footer-menu__social-medias"
-      v-if="socialmedias && socialmedias.length"
-    >
-      <a
-        v-for="(sc, index) in socialmedias"
-        :key="`social-media-lpc-${index}`"
-        :href="sc.socialmediaLink.url"
-        target="_blank"
+    <div class="footer-menu__aside">
+      <div
+        class="footer-menu__social-medias"
+        v-if="socialmedias && socialmedias.length"
       >
-        <prismic-image :field="sc.socialmediaicon" />
-      </a>
+        <a
+          v-for="(sc, index) in socialmedias"
+          :key="`social-media-lpc-${index}`"
+          :href="sc.socialmediaLink.url"
+          target="_blank"
+        >
+          <prismic-image :field="sc.socialmediaicon" />
+        </a>
+      </div>
+
+      <slot name="popover-banner"></slot>
     </div>
   </footer>
 </template>
@@ -49,6 +53,15 @@ const props = defineProps<Props>();
     font-size: var(--base-ft-size);
   }
 
+  &__aside {
+    display: flex;
+    flex: 1;
+    gap: var(--spacing-s);
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+  }
+
   a {
     img {
       display: inline-block;
@@ -70,7 +83,14 @@ const props = defineProps<Props>();
       font-size: 1rem;
     }
 
-    a {
+    &__aside {
+      justify-content: flex-end;
+      gap: var(--spacing-m);
+      margin-right: var(--spacing-s);
+      margin-left: 0;
+    }
+
+    &__social a {
       img {
         display: inline-block;
         width: 20px;
