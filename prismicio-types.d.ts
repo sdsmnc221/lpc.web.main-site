@@ -621,6 +621,147 @@ export type NavigationpageDocument<Lang extends string = string> =
     Lang
   >;
 
+type PagelayoutDocumentDataSlicesSlice = never;
+
+/**
+ * Content for PageLayout documents
+ */
+interface PagelayoutDocumentData {
+  /**
+   * footer field in *PageLayout*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: pagelayout.footer
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  footer: prismic.ContentRelationshipField<"footermenu">;
+
+  /**
+   * navigationMenu field in *PageLayout*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: pagelayout.navigationmenu
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  navigationmenu: prismic.ContentRelationshipField<"navigationmenu">;
+
+  /**
+   * popoverBanner field in *PageLayout*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: pagelayout.popoverbanner
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  popoverbanner: prismic.ContentRelationshipField<"popoverbanner">;
+
+  /**
+   * Slice Zone field in *PageLayout*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: pagelayout.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<PagelayoutDocumentDataSlicesSlice> /**
+   * Meta Title field in *PageLayout*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: pagelayout.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *PageLayout*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: pagelayout.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *PageLayout*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: pagelayout.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * PageLayout document from Prismic
+ *
+ * - **API ID**: `pagelayout`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type PagelayoutDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<PagelayoutDocumentData>,
+    "pagelayout",
+    Lang
+  >;
+
+/**
+ * Content for PopoverBanner documents
+ */
+interface PopoverbannerDocumentData {
+  /**
+   * banner field in *PopoverBanner*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: popoverbanner.banner
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  banner: prismic.ImageField<never>;
+
+  /**
+   * text field in *PopoverBanner*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: popoverbanner.text
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  text: prismic.RichTextField;
+}
+
+/**
+ * PopoverBanner document from Prismic
+ *
+ * - **API ID**: `popoverbanner`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type PopoverbannerDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<PopoverbannerDocumentData>,
+    "popoverbanner",
+    Lang
+  >;
+
 export type AllDocumentTypes =
   | CatficheDocument
   | FootermenuDocument
@@ -628,7 +769,9 @@ export type AllDocumentTypes =
   | ImageplaceholderDocument
   | MultiphotosblockDocument
   | NavigationmenuDocument
-  | NavigationpageDocument;
+  | NavigationpageDocument
+  | PagelayoutDocument
+  | PopoverbannerDocument;
 
 /**
  * Item in *AdoptionsGroup → Default → Primary → catsGroup*
@@ -1612,6 +1755,11 @@ declare module "@prismicio/client" {
       NavigationpageDocument,
       NavigationpageDocumentData,
       NavigationpageDocumentDataSlicesSlice,
+      PagelayoutDocument,
+      PagelayoutDocumentData,
+      PagelayoutDocumentDataSlicesSlice,
+      PopoverbannerDocument,
+      PopoverbannerDocumentData,
       AllDocumentTypes,
       AdoptionsGroupSlice,
       AdoptionsGroupSliceDefaultPrimaryCatsgroupItem,
