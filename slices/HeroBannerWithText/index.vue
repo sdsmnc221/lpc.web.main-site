@@ -3,7 +3,7 @@
     :data-slice-type="slice.slice_type"
     :data-slice-variation="slice.variation"
     class="hero-banner-with-text"
-    :class="`--${variant} ${descriptionParagraph.length > 0 ? '--with-description' : ''} --image-${heroImagePosition} ${withEmphasis ? '--emphasis' : ''} }`"
+    :class="`--${variant} ${descriptionParagraph.length > 0 ? '--with-description' : ''} --image-${heroImagePosition} ${withEmphasis ? '--emphasis' : ''} `"
   >
     <div class="hero-banner-with-text__text-content">
       <prismic-rich-text
@@ -33,6 +33,7 @@
           v-for="(btn, index) in buttons"
           :key="`hero-banner-with-text__button-item-${index}`"
           :label="btn.buttonlabel"
+          variant="dark"
         ></ui-button>
       </div>
     </div>

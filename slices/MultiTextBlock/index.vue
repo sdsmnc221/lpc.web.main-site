@@ -82,6 +82,22 @@ const textBlocks = computed(() => primary.value?.textblocksgroup);
       }
     }
   }
+
+  a {
+    display: inline-block;
+    padding: 12px 24px;
+    margin-top: 20px;
+
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 32px;
+
+    @extend .size-16;
+
+    background-color: var(--black);
+    color: var(--white);
+  }
 }
 
 @container app (min-width: 700px) {
@@ -103,10 +119,12 @@ const textBlocks = computed(() => primary.value?.textblocksgroup);
 @container app (min-width: 1000px) {
   .multi-text-block {
     &__block {
-      padding: 0 var(--spacing-l);
+      padding: 0 var(--spacing-m);
+
+      width: 50%;
 
       &:not(:last-child) {
-        margin-right: 20%;
+        margin-right: 10%;
       }
     }
   }
