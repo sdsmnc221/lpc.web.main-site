@@ -86,7 +86,7 @@ const textBlocks = computed(() => primary.value?.textblocksgroup);
   a {
     display: inline-block;
     padding: 12px 24px;
-    margin-top: 20px;
+    margin: var(--spacing-m) 0;
 
     border: none;
     outline: none;

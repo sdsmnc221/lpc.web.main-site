@@ -113,13 +113,18 @@ const popOutText = computed(() =>
         text-underline-offset: 4px;
         text-decoration-thickness: from-font;
       }
+
+      a {
+        background-color: var(--white);
+        color: var(--black);
+        padding: 0;
+      }
     }
   }
 }
 
 @container app (min-width: 700px) {
   .app.--about {
-    .indicators-group,
     .photos-group,
     .pills-group {
       gap: var(--spacing-s);
@@ -142,12 +147,22 @@ const popOutText = computed(() =>
         }
       }
     }
+
+    .multi-text-block {
+      & > div {
+        flex-direction: column;
+
+        div a {
+          margin: 0;
+          padding: 0;
+        }
+      }
+    }
   }
 }
 
 @container app (min-width: 1000px) {
   .app.--about {
-    .indicators-group,
     .photos-group,
     .pills-group {
       gap: var(--spacing-s);

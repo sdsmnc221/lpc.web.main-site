@@ -43,15 +43,7 @@ const description = computed(() => primary.value?.description);
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  gap: var(--spacing-m);
-
-  &:not(:last-child) {
-    margin-bottom: var(--spacing-m);
-  }
-
-  & > div {
-    margin-bottom: var(--spacing-s);
-  }
+  gap: 0;
 
   &__heading * {
     @extend .size-large;
@@ -59,17 +51,12 @@ const description = computed(() => primary.value?.description);
 
   &__description * {
     @extend .size-24;
+    margin-top: calc(var(--spacing-m) * -1);
   }
 }
 
 @container app (min-width: 700px) {
   .indicator-with-text {
-    gap: var(--spacing-m);
-
-    &:not(:last-child) {
-      margin-bottom: var(--spacing-l);
-    }
-
     &__heading * {
       @extend .size-xlarge;
     }
