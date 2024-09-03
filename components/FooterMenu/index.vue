@@ -56,10 +56,18 @@ const props = defineProps<Props>();
   &__aside {
     display: flex;
     flex: 1;
+    width: 100%;
+    gap: var(--spacing-s);
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: row;
+  }
+
+  &__social-medias {
+    display: flex;
     gap: var(--spacing-s);
     justify-content: flex-start;
-    align-items: center;
-    flex-direction: row;
+    flex-direction: column;
   }
 
   a {
@@ -90,12 +98,16 @@ const props = defineProps<Props>();
       margin-left: 0;
     }
 
-    &__social a {
-      img {
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        aspect-ratio: 1;
+    &__social-medias {
+      flex-direction: row;
+
+      a {
+        img {
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          aspect-ratio: 1;
+        }
       }
     }
   }

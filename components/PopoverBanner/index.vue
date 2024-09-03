@@ -3,7 +3,7 @@
     <PopoverTrigger>
       <Badge class="popover-banner__cta">{{ ctalabel }} </Badge>
     </PopoverTrigger>
-    <PopoverContent>
+    <PopoverContent class="popover-banner__content">
       <prismic-image class="popover-banner__image" :field="banner" />
       <prismic-rich-text
         class="popover-banner__text size-16 albert-sans-light"
@@ -34,6 +34,7 @@ const props = defineProps<Prop>();
 .popover-banner {
   &__cta {
     font-weight: 400 !important;
+    margin-right: var(--spacing-s);
   }
 
   &__image {
