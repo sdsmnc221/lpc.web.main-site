@@ -87,7 +87,6 @@ const seo = computed(() => ({
 }));
 
 onMounted(() => {
-  console.log(popoverBanners.value);
   useSeoMeta({
     title: seo.value.title,
     ogTitle: seo.value.title,
