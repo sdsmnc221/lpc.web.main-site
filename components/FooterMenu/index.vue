@@ -57,7 +57,7 @@ const props = defineProps<Props>();
     display: flex;
     flex: 1;
     width: 100%;
-    gap: var(--spacing-s);
+    gap: var(--spacing-s) / 2;
     justify-content: space-between;
     align-items: flex-start;
     flex-direction: row;
@@ -65,7 +65,7 @@ const props = defineProps<Props>();
 
   &__social-medias {
     display: flex;
-    gap: var(--spacing-s);
+    gap: 0;
     justify-content: flex-start;
     flex-direction: column;
   }
@@ -100,6 +100,7 @@ const props = defineProps<Props>();
 
     &__social-medias {
       flex-direction: row;
+      gap: var(--spacing-s);
 
       a {
         img {

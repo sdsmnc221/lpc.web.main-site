@@ -34,7 +34,6 @@ const props = defineProps<Prop>();
 .popover-banner {
   &__cta {
     font-weight: 400 !important;
-    margin-right: var(--spacing-s);
   }
 
   &__image {
