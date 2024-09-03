@@ -33,7 +33,7 @@
           v-for="(btn, index) in buttons"
           :key="`hero-banner-with-text__button-item-${index}`"
           :label="btn.buttonlabel"
-          variant="dark"
+          :variant="withEmphasis ? 'light' : 'dark'"
         ></ui-button>
       </div>
     </div>

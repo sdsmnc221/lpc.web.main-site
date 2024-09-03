@@ -88,6 +88,8 @@ const textBlocks = computed(() => primary.value?.textblocksgroup);
     padding: 12px 24px;
     margin: var(--spacing-m) 0;
 
+    font-weight: 200;
+
     border: none;
     outline: none;
     cursor: pointer;
