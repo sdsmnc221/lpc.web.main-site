@@ -621,6 +621,21 @@ export type NavigationpageDocument<Lang extends string = string> =
     Lang
   >;
 
+/**
+ * Item in *PageLayout → popoverBanners*
+ */
+export interface PagelayoutDocumentDataPopoverbannersItem {
+  /**
+   * banner field in *PageLayout → popoverBanners*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: pagelayout.popoverbanners[].banner
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  banner: prismic.ContentRelationshipField<"popoverbanner">;
+}
+
 type PagelayoutDocumentDataSlicesSlice = never;
 
 /**
@@ -650,15 +665,17 @@ interface PagelayoutDocumentData {
   navigationmenu: prismic.ContentRelationshipField<"navigationmenu">;
 
   /**
-   * popoverBanner field in *PageLayout*
+   * popoverBanners field in *PageLayout*
    *
-   * - **Field Type**: Content Relationship
+   * - **Field Type**: Group
    * - **Placeholder**: *None*
-   * - **API ID Path**: pagelayout.popoverbanner
+   * - **API ID Path**: pagelayout.popoverbanners[]
    * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   * - **Documentation**: https://prismic.io/docs/field#group
    */
-  popoverbanner: prismic.ContentRelationshipField<"popoverbanner">;
+  popoverbanners: prismic.GroupField<
+    Simplify<PagelayoutDocumentDataPopoverbannersItem>
+  >;
 
   /**
    * Slice Zone field in *PageLayout*
@@ -1768,6 +1785,7 @@ declare module "@prismicio/client" {
       NavigationpageDocumentDataSlicesSlice,
       PagelayoutDocument,
       PagelayoutDocumentData,
+      PagelayoutDocumentDataPopoverbannersItem,
       PagelayoutDocumentDataSlicesSlice,
       PopoverbannerDocument,
       PopoverbannerDocumentData,

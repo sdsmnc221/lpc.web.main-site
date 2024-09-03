@@ -58,6 +58,14 @@ body {
     @extend .size-medium;
   }
 
+  ul {
+    list-style-type: square;
+
+    li {
+      margin-left: var(--spacing-m);
+    }
+  }
+
   img {
     display: block;
     border-radius: 32px;

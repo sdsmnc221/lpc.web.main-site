@@ -18,7 +18,9 @@
         </a>
       </div>
 
-      <slot name="popover-banner"></slot>
+      <div class="footer-menu__pop-banners">
+        <slot name="popover-banner"></slot>
+      </div>
     </div>
   </footer>
 </template>
@@ -63,10 +65,12 @@ const props = defineProps<Props>();
     flex-direction: row;
   }
 
-  &__social-medias {
+  &__social-medias,
+  &__pop-banners {
     display: flex;
-    gap: 0;
+    gap: var;
     justify-content: flex-start;
+    align-items: flex-end;
     flex-direction: column;
   }
 
@@ -98,7 +102,8 @@ const props = defineProps<Props>();
       margin-left: 0;
     }
 
-    &__social-medias {
+    &__social-medias,
+    &__pop-banners {
       flex-direction: row;
       gap: var(--spacing-s);
 

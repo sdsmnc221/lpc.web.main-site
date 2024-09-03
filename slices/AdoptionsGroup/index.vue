@@ -96,14 +96,6 @@ const avatarPlaceholder = computed(
     & > * {
       margin-top: var(--spacing-m);
     }
-
-    ul {
-      list-style-type: square;
-
-      li {
-        margin-left: var(--spacing-m);
-      }
-    }
   }
 
   &__items {

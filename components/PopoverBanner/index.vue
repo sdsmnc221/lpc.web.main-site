@@ -28,6 +28,8 @@ type Prop = {
 };
 
 const props = defineProps<Prop>();
+
+onMounted(() => console.log(props));
 </script>
 
 <style lang="scss">
@@ -43,7 +45,7 @@ const props = defineProps<Prop>();
   &__text {
     width: 100%;
 
-    & > * {
+    & > *:not(:first-child) {
       margin-top: var(--spacing-s);
     }
 

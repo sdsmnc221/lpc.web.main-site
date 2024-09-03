@@ -9,8 +9,12 @@
     </main>
 
     <footer-menu v-if="footer && footer.data" v-bind="footer.data">
-      <template v-if="popoverBanner" #popover-banner>
-        <popover-banner v-bind="popoverBanner"></popover-banner>
+      <template v-if="popoverBanners?.length" #popover-banner>
+        <popover-banner
+          v-for="banner in popoverBanners"
+          :key="`footer-banner-${banner.id}`"
+          v-bind="banner.data"
+        ></popover-banner>
       </template>
     </footer-menu>
   </div>
@@ -32,19 +36,23 @@ const { data: defaultLayout } = await useAsyncData("defaultLayout", () =>
   client.getByUID("pagelayout", "default-layout")
 );
 
-const { data: popoverBanner } = await useAsyncData(
+const { data: popoverBanners } = await useAsyncData(
   "popoverBanner",
   async () => {
     const { data: defaultLayout } = await client.getByUID(
       "pagelayout",
       "default-layout"
     );
-    const { popoverbanner } = defaultLayout;
+    const { popoverbanners } = defaultLayout;
 
-    if (popoverbanner && popoverbanner.id) {
-      const { data: pbData } = await client.getByID(popoverbanner.id);
+    if (popoverbanners && popoverbanners.length) {
+      const bannersData = await Promise.all(
+        popoverbanners.map(
+          async ({ banner }) => await client.getByID(banner.id)
+        )
+      );
 
-      return pbData;
+      return bannersData;
     }
 
     return null;
@@ -79,6 +87,7 @@ const seo = computed(() => ({
 }));
 
 onMounted(() => {
+  console.log(popoverBanners.value);
   useSeoMeta({
     title: seo.value.title,
     ogTitle: seo.value.title,

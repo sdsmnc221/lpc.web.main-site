@@ -28,12 +28,21 @@
           "customtypes": ["navigationmenu"]
         }
       },
-      "popoverbanner": {
-        "type": "Link",
+      "popoverbanners": {
+        "type": "Group",
         "config": {
-          "label": "popoverBanner",
-          "select": "document",
-          "customtypes": ["popoverbanner"]
+          "label": "popoverBanners",
+          "repeat": true,
+          "fields": {
+            "banner": {
+              "type": "Link",
+              "config": {
+                "label": "banner",
+                "select": "document",
+                "customtypes": ["popoverbanner"]
+              }
+            }
+          }
         }
       },
       "slices": {
