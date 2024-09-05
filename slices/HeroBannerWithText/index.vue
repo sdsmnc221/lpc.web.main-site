@@ -203,7 +203,7 @@ const buttons = computed(() => primary.value?.buttonsgroups);
   &__description {
     * {
       line-height: 1.5em;
-      @extend .size-16;
+      @include ft-s(16);
     }
   }
 
@@ -421,7 +421,7 @@ const buttons = computed(() => primary.value?.buttonsgroups);
     }
 
     &__description * {
-      @extend .size-20;
+      @include ft-s(20);
     }
 
     &__hero-image {

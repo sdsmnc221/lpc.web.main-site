@@ -28,7 +28,7 @@ const props = withDefaults(defineProps<Props>(), {
   container-name: ui-button;
   container-type: normal;
 
-  @extend .size-16;
+  @include ft-s(16);
 
   &.--light {
     background-color: var(--white);
@@ -44,7 +44,7 @@ const props = withDefaults(defineProps<Props>(), {
 @container app (width >= 1200px) {
   /* Change the flex direction of the .child element. */
   .ui-button {
-    @extend .size-medium;
+    @include ft-s(medium);
   }
 }
 

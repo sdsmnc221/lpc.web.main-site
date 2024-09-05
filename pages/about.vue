@@ -100,7 +100,7 @@ const popOutText = computed(() =>
   .multi-text-block {
     &__title * {
       @extend .albert-sans-regular;
-      @extend .size-large;
+      @include ft-s(large);
     }
     &__block {
       * {

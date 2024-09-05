@@ -70,7 +70,7 @@ const description = computed(() => primary.value?.description);
 
   &__description * {
     line-height: 1.5em;
-    @extend .size-16;
+    @include ft-s(16);
   }
 }
 
@@ -100,7 +100,7 @@ const description = computed(() => primary.value?.description);
     }
 
     &__description * {
-      @extend .size-20;
+      @include ft-s(20);
     }
   }
 }

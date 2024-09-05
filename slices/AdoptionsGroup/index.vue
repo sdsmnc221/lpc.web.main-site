@@ -88,7 +88,7 @@ const avatarPlaceholder = computed(
 
     * {
       @extend .albert-sans-light;
-      @extend .size-20;
+      @include ft-s(20);
     }
 
     & > * {

@@ -92,7 +92,7 @@ const backgroundImage = computed(() => primary.value?.backgroundimage?.url);
   .hero-photo-background {
     &__text-content {
       * {
-        @extend .size-xlarge;
+        @include ft-s(xlarge);
       }
     }
   }

@@ -71,7 +71,7 @@ const textBlocks = computed(() => primary.value?.textblocksgroup);
     }
 
     &__title {
-      @extend .size-20;
+      @include ft-s(20);
     }
 
     &__description {
@@ -93,7 +93,7 @@ const textBlocks = computed(() => primary.value?.textblocksgroup);
     cursor: pointer;
     border-radius: 32px;
 
-    @extend .size-16;
+    @include ft-s(16);
 
     background-color: var(--black);
     color: var(--white);

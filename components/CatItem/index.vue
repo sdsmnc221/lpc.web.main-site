@@ -180,7 +180,7 @@ const hasInfo = computed(
     min-width: 64%;
 
     span {
-      @extend .size-16;
+      @include ft-s(16);
     }
   }
 

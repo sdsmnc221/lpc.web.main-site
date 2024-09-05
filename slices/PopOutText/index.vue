@@ -134,7 +134,7 @@ onMounted(() => {
           @extend .size-large;
         }
         &.content-text-svg {
-          @extend .size-16;
+          @include ft-s(16);
         }
       }
     }
@@ -167,7 +167,7 @@ onMounted(() => {
 @container app (min-width: 1000px) {
   .pop-out-text {
     *:not(text) {
-      // @extend .size-xxlarge;
+      // @include ft-s(xxlarge);
       font-size: calc((var(--base-ft-size) * 5));
     }
   }

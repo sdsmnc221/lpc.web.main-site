@@ -102,14 +102,14 @@ const zoom = ref(24);
     h1,
     h2,
     h3 {
-      @extend .size-large;
+      @include ft-s(large);
     }
   }
 
   &__description {
     * {
       line-height: 1.5em;
-      @extend .size-16;
+      @include ft-s(16);
     }
   }
 }

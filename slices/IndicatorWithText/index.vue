@@ -48,7 +48,7 @@ const description = computed(() => primary.value?.description);
   }
 
   &__description * {
-    @extend .size-24;
+    @include ft-s(24);
     margin-top: calc(var(--spacing-m) * -1);
   }
 }

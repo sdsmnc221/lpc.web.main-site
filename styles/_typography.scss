@@ -159,3 +159,25 @@
     font-size: calc((100vw - 2 * 48px) / 12);
   }
 }
+
+@mixin ft-s($size) {
+  @if $size == regular {
+    @extend .size-regular;
+  } @else if $size == medium {
+    @extend .size-medium;
+  } @else if $size == large {
+    @extend .size-large;
+  } @else if $size == xlarge {
+    @extend .size-xlarge;
+  } @else if $size == xxlarge {
+    @extend .size-xxlarge;
+  } @else if $size == 16 {
+    @extend .size-16;
+  } @else if $size == 20 {
+    @extend .size-20;
+  } @else if $size == 24 {
+    @extend .size-24;
+  } @else {
+    @error "Invalid size parameter: #{$size}. Valid options are regular, medium, large, xlarge, xxlarge, 16, 20, or 24.";
+  }
+}
