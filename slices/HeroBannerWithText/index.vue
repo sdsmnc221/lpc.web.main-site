@@ -145,7 +145,7 @@ const buttons = computed(() => primary.value?.buttonsgroups);
           text-transform: uppercase;
           width: 100%;
           text-align: center;
-          @extend .size-xxlarge;
+          @include ft-s(xxlarge);
         }
       }
 
@@ -184,15 +184,6 @@ const buttons = computed(() => primary.value?.buttonsgroups);
       line-height: 1.2em;
     }
 
-    h1 {
-      @extend .size-xlarge;
-    }
-
-    h2,
-    h3 {
-      @extend .size-large;
-    }
-
     &.--text-centered {
       * {
         text-align: center;
@@ -213,6 +204,10 @@ const buttons = computed(() => primary.value?.buttonsgroups);
     justify-content: center;
     align-items: center;
     gap: var(--spacing-m);
+
+    .ui-button {
+      align-self: start;
+    }
   }
 
   &__hero-image {
@@ -243,7 +238,7 @@ const buttons = computed(() => primary.value?.buttonsgroups);
       }
 
       &__hero-image.--square {
-        --w: 72vw !important;
+        --w: 100% !important;
         --h: auto !important;
         aspect-ratio: 1/1;
       }
@@ -410,14 +405,6 @@ const buttons = computed(() => primary.value?.buttonsgroups);
 
     &__heading {
       text-align: center;
-      h1 {
-        @extend .size-xlarge;
-      }
-
-      h2,
-      h3 {
-        @extend .size-large;
-      }
     }
 
     &__description * {

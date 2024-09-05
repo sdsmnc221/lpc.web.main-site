@@ -44,7 +44,7 @@ const description = computed(() => primary.value?.description);
   gap: 0;
 
   &__heading * {
-    @extend .size-large;
+    @include ft-s(large);
   }
 
   &__description * {
@@ -56,11 +56,11 @@ const description = computed(() => primary.value?.description);
 @container app (min-width: 700px) {
   .indicator-with-text {
     &__heading * {
-      @extend .size-xlarge;
+      @include ft-s(xlarge);
     }
 
     &__description * {
-      @extend .size-large;
+      @include ft-s(large);
     }
   }
 }

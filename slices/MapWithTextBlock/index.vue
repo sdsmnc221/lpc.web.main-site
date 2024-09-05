@@ -98,12 +98,6 @@ const zoom = ref(24);
     * {
       line-height: 1.2em;
     }
-
-    h1,
-    h2,
-    h3 {
-      @include ft-s(large);
-    }
   }
 
   &__description {

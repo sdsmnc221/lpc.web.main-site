@@ -105,7 +105,7 @@ const popOutText = computed(() =>
     &__block {
       * {
         @extend .albert-sans-light;
-        @extend .size-medium;
+        @include ft-s(medium);
         line-height: 1em;
         text-decoration: underline;
         text-underline-offset: 4px;

@@ -51,7 +51,7 @@ const props = withDefaults(defineProps<Props>(), {
 @container ui-button (width <= 200px) {
   /* Change the flex direction of the .child element. */
   button.ui-button {
-    @extend .size-16;
+    @include ft-s(16);
   }
 }
 </style>

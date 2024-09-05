@@ -65,7 +65,7 @@ const description = computed(() => primary.value?.description);
   }
 
   h3 {
-    @extend .size-medium;
+    @include ft-s(medium);
   }
 
   &__description * {

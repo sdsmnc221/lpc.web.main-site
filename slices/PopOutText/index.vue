@@ -104,17 +104,17 @@ onMounted(() => {
   *:not(text) {
     line-height: 1.2em;
     text-align: center;
-    // @extend .size-medium;
+    // @include ft-s(medium);;
     font-size: calc((var(--base-ft-size) * 2.4));
   }
 
   &.--with-heading {
     .heading-text * {
-      @extend .size-xlarge;
+      @include ft-s(xlarge);
       letter-spacing: 0.24rem;
     }
     .content-text * {
-      @extend .size-medium;
+      @include ft-s(medium);
       @extend .gloock-regular;
       letter-spacing: 0.2rem;
     }
@@ -131,7 +131,7 @@ onMounted(() => {
         @extend .gloock-regular;
 
         &.heading-text-svg {
-          @extend .size-large;
+          @include ft-s(large);
         }
         &.content-text-svg {
           @include ft-s(16);
@@ -144,7 +144,7 @@ onMounted(() => {
 @container app (min-width: 700px) {
   .pop-out-text {
     *:not(text) {
-      // @extend .size-large;
+      // @include ft-s(large);
       font-size: calc((var(--base-ft-size) * 4));
     }
 

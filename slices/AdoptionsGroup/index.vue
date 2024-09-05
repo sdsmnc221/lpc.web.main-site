@@ -78,9 +78,6 @@ const avatarPlaceholder = computed(
 
   &__title {
     margin-bottom: var(--spacing-m);
-    * {
-      font-size: calc((var(--base-ft-size) * 3));
-    }
   }
 
   &__description {

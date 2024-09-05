@@ -83,7 +83,7 @@ const backgroundImage = computed(() => primary.value?.backgroundimage?.url);
     z-index: 2;
     padding: 0 10vw;
     * {
-      @extend .size-large;
+      @include ft-s(large);
     }
   }
 }

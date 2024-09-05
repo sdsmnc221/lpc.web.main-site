@@ -52,9 +52,6 @@ const textBlocks = computed(() => primary.value?.textblocksgroup);
 .multi-text-block {
   &__title {
     margin-bottom: var(--spacing-m);
-    * {
-      font-size: calc((var(--base-ft-size) * 3));
-    }
   }
 
   & > div:not(:first-child) {
