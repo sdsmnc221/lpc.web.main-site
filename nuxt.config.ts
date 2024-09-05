@@ -1,6 +1,16 @@
 import { apiEndpoint, repositoryName } from "./slicemachine.config.json";
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  // css: ["@/styles/imports.scss"],
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@use "@/styles/imports.scss" as *;',
+        },
+      },
+    },
+  },
   compatibilityDate: "2024-04-03",
   devtools: { enabled: true },
   modules: [

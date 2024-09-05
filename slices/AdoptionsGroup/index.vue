@@ -73,8 +73,6 @@ const avatarPlaceholder = computed(
 </script>
 
 <style lang="scss">
-@import "@/styles/imports";
-
 .adoptions-group {
   padding: var(--spacing-m);
 

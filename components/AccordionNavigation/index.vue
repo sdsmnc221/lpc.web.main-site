@@ -68,8 +68,6 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-@import "@/styles/imports";
-
 .accordion-navigation {
   position: sticky;
   top: 0;

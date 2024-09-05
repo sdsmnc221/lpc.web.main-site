@@ -49,8 +49,6 @@ const textBlocks = computed(() => primary.value?.textblocksgroup);
 </script>
 
 <style lang="scss">
-@import "@/styles/imports";
-
 .multi-text-block {
   &__title {
     margin-bottom: var(--spacing-m);

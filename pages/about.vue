@@ -85,8 +85,6 @@ const popOutText = computed(() =>
 </script>
 
 <style lang="scss">
-@import "../styles/index.scss";
-
 .app.--about {
   .indicators-group,
   .photos-group,

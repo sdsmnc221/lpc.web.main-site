@@ -30,8 +30,6 @@ const text = computed(() => primary.value?.text);
 </script>
 
 <style lang="scss">
-@import "@/styles/imports";
-
 .headline-pill {
   display: flex;
   justify-content: flex-start;

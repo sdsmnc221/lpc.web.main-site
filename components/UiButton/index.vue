@@ -16,8 +16,6 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 
 <style lang="scss">
-@import "@/styles/imports";
-
 .ui-button {
   display: inline-block;
   padding: 12px 24px;

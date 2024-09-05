@@ -39,8 +39,6 @@ const props = defineProps<Props>();
 </script>
 
 <style lang="scss">
-@import "@/styles/imports";
-
 .footer-menu {
   display: flex;
   padding: var(--spacing-l) var(--spacing-m);

@@ -43,8 +43,6 @@ const description = computed(() => primary.value?.description);
 </script>
 
 <style lang="scss">
-@import "@/styles/imports";
-
 .photo-with-text-block {
   display: flex;
   flex-direction: column;

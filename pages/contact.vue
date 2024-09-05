@@ -47,8 +47,6 @@ const popOutText = computed(() =>
 </script>
 
 <style lang="scss">
-@import "../styles/index.scss";
-
 .app.--contact {
   .multi-text-block {
     & > div:not(:first-of-type) {

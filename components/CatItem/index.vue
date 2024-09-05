@@ -147,8 +147,6 @@ const hasInfo = computed(
 </script>
 
 <style lang="scss" scoped>
-@import "@/styles/imports";
-
 .cat-item {
   width: 50%;
   margin-bottom: var(--spacing-m);

@@ -100,8 +100,6 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-@import "@/styles/imports";
-
 .pop-out-text {
   *:not(text) {
     line-height: 1.2em;

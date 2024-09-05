@@ -90,8 +90,6 @@ const buttons = computed(() => primary.value?.buttonsgroups);
 </script>
 
 <style lang="scss">
-@import "@/styles/imports";
-
 .hero-banner-with-text {
   display: flex;
   gap: var(--spacing-l);

@@ -36,8 +36,6 @@ const description = computed(() => primary.value?.description);
 </script>
 
 <style lang="scss">
-@import "@/styles/imports";
-
 .indicator-with-text {
   display: flex;
   flex-direction: column;

@@ -32,8 +32,6 @@ const backgroundImage = computed(() => primary.value?.backgroundimage?.url);
 </script>
 
 <style lang="scss">
-@import "@/styles/imports";
-
 .hero-photo-background {
   --bg-img: "";
 

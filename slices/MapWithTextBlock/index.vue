@@ -68,8 +68,6 @@ const zoom = ref(24);
 </script>
 
 <style lang="scss">
-@import "@/styles/imports";
-
 .map-with-text-block {
   display: flex;
   gap: var(--spacing-l);
