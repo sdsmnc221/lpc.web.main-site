@@ -204,10 +204,6 @@ const buttons = computed(() => primary.value?.buttonsgroups);
     justify-content: center;
     align-items: center;
     gap: var(--spacing-m);
-
-    .ui-button {
-      align-self: start;
-    }
   }
 
   &__hero-image {

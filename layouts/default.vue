@@ -98,4 +98,46 @@ onMounted(() => {
 
 <style lang="scss">
 @import "../styles/index.scss";
+
+@container nuxt (min-width: 701px) {
+  .app {
+    padding: var(--spacing-l);
+    padding-top: 0;
+
+    h1 {
+      // @include ft-s(xlarge);
+      font-size: calc((var(--base-ft-size) * 4));
+    }
+
+    h2,
+    h3 {
+      // @include ft-s(large);
+      font-size: calc((var(--base-ft-size) * 3));
+    }
+  }
+}
+
+@container nuxt (min-width: 1000px) {
+  .app {
+    padding: var(--spacing-l) 12vw;
+    padding-top: 0;
+  }
+}
+
+@container nuxt (max-width: 700px) {
+  .app {
+    padding: var(--spacing-m);
+
+    h1 {
+      // @include ft-s(large);
+      font-size: calc((var(--base-ft-size) * 3));
+    }
+
+    h2,
+    h3 {
+      // @include ft-s(medium);
+      font-size: calc((var(--base-ft-size) * 2));
+    }
+  }
+}
 </style>

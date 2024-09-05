@@ -48,6 +48,13 @@ const popOutText = computed(() =>
 
 <style lang="scss">
 .app.--contact {
+  .hero-banner-with-text {
+    &__buttons-group {
+      .ui-button {
+        align-self: start;
+      }
+    }
+  }
   .multi-text-block {
     & > div:not(:first-of-type) {
       margin-top: var(--spacing-m);

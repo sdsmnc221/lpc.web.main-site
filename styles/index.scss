@@ -35,7 +35,7 @@ body {
     container-name: app;
     container-type: inline-size;
 
-    padding: var(--spacing-m);
+    // padding: var(--spacing-m);
     padding-top: 0;
 
     & > * {
@@ -78,38 +78,4 @@ body {
   width: 0;
   height: 0;
   margin: 0;
-}
-
-@container bd (min-width: 700px) {
-  body .app {
-    padding: var(--spacing-l);
-    padding-top: 0;
-  }
-}
-
-@container bd (min-width: 1000px) {
-  .app {
-    padding: var(--spacing-l) 12vw !important;
-    padding-top: 0 !important;
-  }
-
-  h1 {
-    @include ft-s(xxlarge);
-  }
-
-  h2,
-  h3 {
-    @include ft-s(large);
-  }
-}
-
-@container bd (max-width: 700px) {
-  h1 {
-    @include ft-s(xlarge);
-  }
-
-  h2,
-  h3 {
-    @include ft-s(medium);
-  }
 }
