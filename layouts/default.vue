@@ -117,13 +117,6 @@ onMounted(() => {
   }
 }
 
-@container nuxt (min-width: 1000px) {
-  .app {
-    padding: var(--spacing-l) 12vw;
-    padding-top: 0;
-  }
-}
-
 @container nuxt (max-width: 700px) {
   .app {
     padding: var(--spacing-m);
@@ -137,6 +130,31 @@ onMounted(() => {
     h3 {
       // @include ft-s(medium);
       font-size: calc((var(--base-ft-size) * 2));
+    }
+  }
+}
+
+@container nuxt (min-width: 1000px) {
+  .app {
+    padding: var(--spacing-l) 12vw;
+    padding-top: 0;
+  }
+}
+
+@container nuxt (min-width: 1200px) {
+  .app {
+    padding: var(--spacing-l) 8vw;
+    padding-top: 0;
+
+    h1 {
+      // @include ft-s(xxlarge);
+      font-size: calc((var(--base-ft-size) * 5));
+    }
+
+    h2,
+    h3 {
+      // @include ft-s(xlarge);
+      font-size: calc((var(--base-ft-size) * 4));
     }
   }
 }

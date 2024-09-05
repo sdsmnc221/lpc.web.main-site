@@ -413,4 +413,24 @@ const buttons = computed(() => primary.value?.buttonsgroups);
     }
   }
 }
+
+@container app (min-width: 1200px) {
+  .hero-banner-with-text {
+    &.--with-description {
+      min-height: 0;
+
+      .hero-banner-with-text__hero-image {
+        width: var(--w);
+        height: auto;
+        object-fit: cover;
+        aspect-ratio: 1/1;
+
+        &.--square {
+          --w: 72% !important;
+          --h: auto !important;
+        }
+      }
+    }
+  }
+}
 </style>
