@@ -353,6 +353,12 @@ const buttons = computed(() => primary.value?.buttonsgroups);
       text-align: left;
     }
 
+    &.--image-right {
+      .hero-banner-with-text__image-content {
+        justify-content: flex-end;
+      }
+    }
+
     &.--with-description {
       min-height: 0;
 
@@ -414,8 +420,19 @@ const buttons = computed(() => primary.value?.buttonsgroups);
   }
 }
 
-@container app (min-width: 1200px) {
+@container app (min-width: 1600px) {
   .hero-banner-with-text {
+    &:not(.--emphasis):not(:has(.hero-banner-with-text__buttons-group)) {
+      .hero-banner-with-text__text-content {
+        align-self: center;
+      }
+    }
+
+    .hero-banner-with-text__hero-image {
+      --w: 72vw !important;
+      height: 50%;
+    }
+
     &.--with-description {
       min-height: 0;
 

@@ -172,4 +172,25 @@ onMounted(() => {
     }
   }
 }
+
+@container app (min-width: 1600px) {
+  .pop-out-text {
+    padding: 7.2vw 3.6vw !important;
+
+    *:not(text) {
+      // @include ft-s(xxlarge);
+      font-size: calc((var(--base-ft-size) * 7));
+    }
+
+    &:has(svg) {
+      svg {
+        text {
+          &.content-text-svg {
+            font-size: calc((var(--base-ft-size) * 4));
+          }
+        }
+      }
+    }
+  }
+}
 </style>
