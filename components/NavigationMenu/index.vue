@@ -56,7 +56,7 @@ onMounted(() => {
 
   position: sticky;
   top: 0;
-  z-index: 0;
+  z-index: 1;
 
   &.--thin {
     padding-top: var(--spacing-s);
@@ -84,6 +84,12 @@ onMounted(() => {
     &.--current {
       font-weight: 600;
     }
+  }
+}
+
+@container nuxt (max-width: 700px) {
+  .navigation-menu {
+    z-index: 0;
   }
 }
 
