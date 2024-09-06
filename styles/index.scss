@@ -14,9 +14,6 @@
 }
 
 body {
-  container-name: bd;
-  container-type: inline-size;
-
   #__nuxt {
     container-name: nuxt;
     container-type: inline-size;
@@ -35,7 +32,6 @@ body {
     container-name: app;
     container-type: inline-size;
 
-    // padding: var(--spacing-m);
     padding-top: 0;
 
     & > * {

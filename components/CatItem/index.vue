@@ -91,7 +91,6 @@
 </template>
 
 <script setup lang="ts">
-// import ItemDrawer from "@/components/ItemDrawer/index.vue";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import {
