@@ -1,5 +1,5 @@
 <template>
-  <button class="ui-button" :class="`--${variant}`">
+  <button class="ui-button" :class="`--${variant}`" @click="travel">
     <span v-if="label">{{ label }}</span>
     <slot></slot>
   </button>
@@ -9,10 +9,21 @@
 type Props = {
   label?: string;
   variant?: "dark" | "light";
+  link?: {
+    url?: string;
+    uid?: string;
+    target?: string;
+  };
 };
 const props = withDefaults(defineProps<Props>(), {
   variant: "light",
 });
+
+const travel = () => {
+  if (props.link && (props.link.url || props.link.uid)) {
+    window.open(props.link.url || props.link.uid, props.link.target ?? "_self");
+  }
+};
 </script>
 
 <style lang="scss">

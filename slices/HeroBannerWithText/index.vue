@@ -38,6 +38,7 @@
               ? 'light'
               : 'dark'
           "
+          :link="btn.buttonitem"
         ></ui-button>
       </div>
     </div>
