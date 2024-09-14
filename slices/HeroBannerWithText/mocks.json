@@ -182,29 +182,6 @@
 		"__TYPE__": "SharedSliceContent",
 		"variation": "heroBannerWithTextEmphasis",
 		"primary": {
-			"heroimage": {
-				"origin": {
-					"id": "main",
-					"url": "https://images.unsplash.com/photo-1607582278043-57198ac8da43",
-					"width": 4024,
-					"height": 4024
-				},
-				"url": "https://images.unsplash.com/photo-1607582278043-57198ac8da43",
-				"width": 4024,
-				"height": 4024,
-				"edit": {
-					"zoom": 1,
-					"crop": {
-						"x": 0,
-						"y": 0
-					},
-					"background": "transparent"
-				},
-				"credits": null,
-				"alt": null,
-				"__TYPE__": "ImageContent",
-				"thumbnails": {}
-			},
 			"subtext": {
 				"__TYPE__": "StructuredTextContent",
 				"value": [
@@ -242,34 +219,84 @@
 				"__TYPE__": "FieldContent",
 				"value": "light",
 				"type": "Select"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "heroBanneWithTextHeading",
+		"primary": {
+			"heroimage": {
+				"origin": {
+					"id": "main",
+					"url": "https://images.unsplash.com/photo-1589321578146-4c1ba445cc88",
+					"width": 3168,
+					"height": 4752
+				},
+				"url": "https://images.unsplash.com/photo-1589321578146-4c1ba445cc88",
+				"width": 3168,
+				"height": 4752,
+				"edit": {
+					"zoom": 1,
+					"crop": {
+						"x": 0,
+						"y": 0
+					},
+					"background": "transparent"
+				},
+				"credits": null,
+				"alt": null,
+				"__TYPE__": "ImageContent",
+				"thumbnails": {}
 			},
-			"buttonsgroups": {
-				"__TYPE__": "GroupContentType",
+			"heroimageposition": {
+				"__TYPE__": "FieldContent",
+				"value": "right",
+				"type": "Select"
+			},
+			"subtext": {
+				"__TYPE__": "StructuredTextContent",
 				"value": [
 					{
-						"__TYPE__": "GroupItemContent",
-						"value": [
-							[
-								"buttonitem",
-								{
-									"__TYPE__": "LinkContent",
-									"value": {
-										"__TYPE__": "ExternalLink",
-										"url": "https://slicemachine.dev"
-									}
-								}
-							],
-							[
-								"buttonlabel",
-								{
-									"__TYPE__": "FieldContent",
-									"value": "account",
-									"type": "Text"
-								}
-							]
-						]
+						"type": "paragraph",
+						"content": {
+							"text": "Laboris id fugiat quis Lorem dolore. Mollit aliquip nisi irure non reprehenderit est eu ea. Laborum ullamco commodo aliquip non quis commodo sunt aute."
+						}
 					}
 				]
+			},
+			"headingtext": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Aliquip labore dolore consectetur commodo mollit duis duis incididunt reprehenderit magna laboris pariatur. Do nostrud excepteur aliqua sint. Anim commodo deserunt aute adipisicing irure pariatur cupidatat laborum esse consequat."
+						}
+					}
+				]
+			},
+			"descriptionparagraph": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Eu duis velit tempor ea aute esse laboris. Cupidatat do irure deserunt dolor dolore esse cupidatat pariatur minim eu laboris eiusmod fugiat. Ipsum anim laboris labore."
+						}
+					}
+				]
+			},
+			"variant": {
+				"__TYPE__": "FieldContent",
+				"value": "dark",
+				"type": "Select"
 			}
 		},
 		"items": [

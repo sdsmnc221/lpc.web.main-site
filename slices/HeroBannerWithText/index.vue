@@ -3,7 +3,7 @@
     :data-slice-type="slice.slice_type"
     :data-slice-variation="slice.variation"
     class="hero-banner-with-text"
-    :class="`--${variant} ${descriptionParagraph.length > 0 ? '--with-description' : ''} --image-${heroImagePosition} ${withEmphasis ? '--emphasis' : ''} `"
+    :class="`--${variant} ${withTextOnly ? '--text-only' : ''} ${descriptionParagraph.length > 0 ? '--with-description' : ''} --image-${heroImagePosition} ${withEmphasis ? '--emphasis' : ''} `"
   >
     <div class="hero-banner-with-text__text-content">
       <prismic-rich-text
@@ -42,7 +42,7 @@
       </div>
     </div>
 
-    <div class="hero-banner-with-text__image-content">
+    <div class="hero-banner-with-text__image-content" v-if="!withTextOnly">
       <prismic-image
         class="hero-banner-with-text__hero-image"
         :class="{ '--square': descriptionParagraph.length > 0 }"
@@ -74,6 +74,9 @@ const withButton = computed(() =>
 const withEmphasis = computed(() =>
   variation.value.toLowerCase().includes("emphasis")
 );
+const withTextOnly = computed(() =>
+  variation.value.toLowerCase().includes("heading")
+);
 
 const primary = computed(() => props.slice.primary);
 
@@ -99,6 +102,16 @@ const buttons = computed(() => primary.value?.buttonsgroups);
   width: 100%;
   position: relative;
   // padding: var(--spacing-m) 0 var(--spacing-l) 0;
+
+  &.--text-only {
+    padding-bottom: 0;
+    align-items: flex-start;
+
+    & + * {
+      margin-top: 0 !important;
+      padding-top: var(--spacing-m);
+    }
+  }
 
   &::after {
     content: "";
@@ -348,7 +361,10 @@ const buttons = computed(() => primary.value?.buttonsgroups);
     align-items: center;
     justify-content: space-between;
     gap: var(--spacing-l);
-    min-height: 100vh;
+
+    &:not(.--text-only) {
+      min-height: 100vh;
+    }
 
     * {
       text-align: left;

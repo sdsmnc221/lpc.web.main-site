@@ -1005,31 +1005,6 @@ export interface HeroBannerWithTextSliceHeroBannerWithTextButtonsPrimaryButtonsg
 }
 
 /**
- * Item in *HeroBannerWithText → HeroBannerWithText-Emphasis → Primary → buttonsGroups*
- */
-export interface HeroBannerWithTextSliceHeroBannerWithTextEmphasisPrimaryButtonsgroupsItem {
-  /**
-   * buttonLink field in *HeroBannerWithText → HeroBannerWithText-Emphasis → Primary → buttonsGroups*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: hero_banner_with_text.heroBannerWithTextEmphasis.primary.buttonsgroups[].buttonitem
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  buttonitem: prismic.LinkField;
-
-  /**
-   * buttonLabel field in *HeroBannerWithText → HeroBannerWithText-Emphasis → Primary → buttonsGroups*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: hero_banner_with_text.heroBannerWithTextEmphasis.primary.buttonsgroups[].buttonlabel
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  buttonlabel: prismic.KeyTextField;
-}
-
-/**
  * Primary content in *HeroBannerWithText → Default → Primary*
  */
 export interface HeroBannerWithTextSliceDefaultPrimary {
@@ -1207,16 +1182,6 @@ export type HeroBannerWithTextSliceHeroBannerWithTextButtons =
  */
 export interface HeroBannerWithTextSliceHeroBannerWithTextEmphasisPrimary {
   /**
-   * heroImage field in *HeroBannerWithText → HeroBannerWithText-Emphasis → Primary*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: hero_banner_with_text.heroBannerWithTextEmphasis.primary.heroimage
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  heroimage: prismic.ImageField<never>;
-
-  /**
    * subText field in *HeroBannerWithText → HeroBannerWithText-Emphasis → Primary*
    *
    * - **Field Type**: Rich Text
@@ -1256,18 +1221,6 @@ export interface HeroBannerWithTextSliceHeroBannerWithTextEmphasisPrimary {
    * - **Documentation**: https://prismic.io/docs/field#select
    */
   variant: prismic.SelectField<"dark" | "light", "filled">;
-
-  /**
-   * buttonsGroups field in *HeroBannerWithText → HeroBannerWithText-Emphasis → Primary*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: hero_banner_with_text.heroBannerWithTextEmphasis.primary.buttonsgroups[]
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  buttonsgroups: prismic.GroupField<
-    Simplify<HeroBannerWithTextSliceHeroBannerWithTextEmphasisPrimaryButtonsgroupsItem>
-  >;
 }
 
 /**
@@ -1285,12 +1238,94 @@ export type HeroBannerWithTextSliceHeroBannerWithTextEmphasis =
   >;
 
 /**
+ * Primary content in *HeroBannerWithText → HeroBanneWithText-Heading → Primary*
+ */
+export interface HeroBannerWithTextSliceHeroBanneWithTextHeadingPrimary {
+  /**
+   * heroImage field in *HeroBannerWithText → HeroBanneWithText-Heading → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero_banner_with_text.heroBanneWithTextHeading.primary.heroimage
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  heroimage: prismic.ImageField<never>;
+
+  /**
+   * heroImagePosition field in *HeroBannerWithText → HeroBanneWithText-Heading → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: right
+   * - **API ID Path**: hero_banner_with_text.heroBanneWithTextHeading.primary.heroimageposition
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  heroimageposition: prismic.SelectField<"right" | "left", "filled">;
+
+  /**
+   * subText field in *HeroBannerWithText → HeroBanneWithText-Heading → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero_banner_with_text.heroBanneWithTextHeading.primary.subtext
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  subtext: prismic.RichTextField;
+
+  /**
+   * headingText field in *HeroBannerWithText → HeroBanneWithText-Heading → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero_banner_with_text.heroBanneWithTextHeading.primary.headingtext
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  headingtext: prismic.RichTextField;
+
+  /**
+   * descriptionParagraph field in *HeroBannerWithText → HeroBanneWithText-Heading → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero_banner_with_text.heroBanneWithTextHeading.primary.descriptionparagraph
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  descriptionparagraph: prismic.RichTextField;
+
+  /**
+   * variant field in *HeroBannerWithText → HeroBanneWithText-Heading → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: dark
+   * - **API ID Path**: hero_banner_with_text.heroBanneWithTextHeading.primary.variant
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  variant: prismic.SelectField<"dark" | "light", "filled">;
+}
+
+/**
+ * HeroBanneWithText-Heading variation for HeroBannerWithText Slice
+ *
+ * - **API ID**: `heroBanneWithTextHeading`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type HeroBannerWithTextSliceHeroBanneWithTextHeading =
+  prismic.SharedSliceVariation<
+    "heroBanneWithTextHeading",
+    Simplify<HeroBannerWithTextSliceHeroBanneWithTextHeadingPrimary>,
+    never
+  >;
+
+/**
  * Slice variation for *HeroBannerWithText*
  */
 type HeroBannerWithTextSliceVariation =
   | HeroBannerWithTextSliceDefault
   | HeroBannerWithTextSliceHeroBannerWithTextButtons
-  | HeroBannerWithTextSliceHeroBannerWithTextEmphasis;
+  | HeroBannerWithTextSliceHeroBannerWithTextEmphasis
+  | HeroBannerWithTextSliceHeroBanneWithTextHeading;
 
 /**
  * HeroBannerWithText Shared Slice
@@ -1803,12 +1838,13 @@ declare module "@prismicio/client" {
       HeroBannerWithTextSliceDefaultPrimary,
       HeroBannerWithTextSliceHeroBannerWithTextButtonsPrimaryButtonsgroupsItem,
       HeroBannerWithTextSliceHeroBannerWithTextButtonsPrimary,
-      HeroBannerWithTextSliceHeroBannerWithTextEmphasisPrimaryButtonsgroupsItem,
       HeroBannerWithTextSliceHeroBannerWithTextEmphasisPrimary,
+      HeroBannerWithTextSliceHeroBanneWithTextHeadingPrimary,
       HeroBannerWithTextSliceVariation,
       HeroBannerWithTextSliceDefault,
       HeroBannerWithTextSliceHeroBannerWithTextButtons,
       HeroBannerWithTextSliceHeroBannerWithTextEmphasis,
+      HeroBannerWithTextSliceHeroBanneWithTextHeading,
       HeroPhotoBackgroundSlice,
       HeroPhotoBackgroundSliceDefaultPrimary,
       HeroPhotoBackgroundSliceVariation,
