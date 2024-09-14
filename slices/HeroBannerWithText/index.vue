@@ -207,16 +207,17 @@ const buttons = computed(() => primary.value?.buttonsgroups);
   }
 
   &__hero-image {
-    --w: 532px;
-    --h: 680px;
+    --w: 640px;
 
     width: var(--w);
-    height: var(--h);
+    height: auto;
     object-fit: cover;
+    aspect-ratio: 1;
 
     &.--square {
       --w: 360px !important;
-      --h: 360px !important;
+
+      aspect-ratio: 1;
     }
   }
 
