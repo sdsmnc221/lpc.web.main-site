@@ -346,6 +346,11 @@ const buttons = computed(() => primary.value?.buttonsgroups);
     &__buttons-group {
       flex-direction: row;
       justify-content: flex-start;
+
+      &:has(.ui-button:nth-child(3)) {
+        flex-direction: column;
+        margin-top: calc(-1 * var(--spacing-s));
+      }
     }
 
     &__hero-image {

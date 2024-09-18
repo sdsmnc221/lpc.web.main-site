@@ -54,8 +54,11 @@ const description = computed(() => primary.value?.description);
   text-align: left;
 
   &__photo {
-    width: var(--w);
-    height: var(--h);
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    min-width: var(--w);
+    min-height: var(--h);
     object-fit: cover;
 
     &.--square {

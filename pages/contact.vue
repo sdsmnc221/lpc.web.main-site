@@ -5,7 +5,7 @@
     :slice="hero"
   ></hero-banner-with-text>
 
-  <map-with-text-block :slice="mapHeadquarter"></map-with-text-block>
+  <!-- <map-with-text-block :slice="mapHeadquarter"></map-with-text-block> -->
 
   <multi-text-block :slice="faq"></multi-text-block>
 
@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import HeroBannerWithText from "@/slices/HeroBannerWithText/index.vue";
-import MapWithTextBlock from "@/slices/MapWithTextBlock/index.vue";
+// import MapWithTextBlock from "@/slices/MapWithTextBlock/index.vue";
 import MultiTextBlock from "@/slices/MultiTextBlock/index.vue";
 import PopOutText from "@/slices/PopOutText/index.vue";
 
@@ -31,11 +31,11 @@ const heroBanners = computed(
     ) ?? []
 );
 
-const mapHeadquarter = computed(() =>
-  contact.value?.data?.slices.find(
-    (s) => s?.slice_type === "map_with_text_block"
-  )
-);
+// const mapHeadquarter = computed(() =>
+//   contact.value?.data?.slices.find(
+//     (s) => s?.slice_type === "map_with_text_block"
+//   )
+// );
 
 const faq = computed(() =>
   contact.value?.data?.slices.find((s) => s?.slice_type === "multi_text_block")

@@ -66,6 +66,13 @@ body {
       filter: grayscale(0);
     }
   }
+
+  .hero-banner-with-text,
+  .multi-text-block {
+    p:not(:first-of-type) {
+      margin: var(--spacing-s) 0;
+    }
+  }
 }
 
 .fake-hidden {
