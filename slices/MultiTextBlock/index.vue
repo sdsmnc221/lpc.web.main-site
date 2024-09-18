@@ -84,13 +84,14 @@ const textBlocks = computed(() => primary.value?.textblocksgroup);
     margin: var(--spacing-m) 0;
 
     font-weight: 200;
+    letter-spacing: -0.2px;
 
     border: none;
     outline: none;
     cursor: pointer;
     border-radius: 32px;
 
-    @include ft-s(16);
+    @include ft-s(regular);
 
     background-color: var(--black);
     color: var(--white);
