@@ -179,7 +179,8 @@ watch(
 
 <style lang="scss" scoped>
 .cat-item {
-  width: 50%;
+  width: 40%;
+  margin: 0 var(--spacing-s);
   margin-bottom: var(--spacing-m);
   display: flex;
   justify-content: center;
@@ -197,7 +198,6 @@ watch(
     display: block;
     aspect-ratio: 1/1;
     object-fit: cover;
-    width: 150px;
     background-color: var(--gray);
     border-radius: 32px;
   }
@@ -314,6 +314,7 @@ watch(
 @container app (min-width: 700px) {
   .cat-item {
     width: 32% !important;
+    max-width: 220px;
 
     &__name {
       min-width: 32%;
@@ -329,6 +330,8 @@ watch(
 
 @media screen and (min-width: 700px) {
   .cat-item {
+    width: 25%;
+
     &__fiche {
       height: 64vh;
 
@@ -354,6 +357,10 @@ watch(
 
       &__badges {
         gap: var(--spacing-m);
+      }
+
+      &__photo {
+        width: 150px;
       }
 
       &__footnote {

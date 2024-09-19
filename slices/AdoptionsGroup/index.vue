@@ -11,7 +11,7 @@
 
     <prismic-rich-text
       v-if="description"
-      class="adoptions-group__description cl-black"
+      class="adoptions-group__description cl-black albert-sans-regular"
       :field="description"
     />
 
@@ -83,11 +83,6 @@ const avatarPlaceholder = computed(
 
   &__description {
     width: 100%;
-
-    * {
-      @extend .albert-sans-light;
-      @include ft-s(20);
-    }
 
     & > * {
       margin-top: var(--spacing-m);
