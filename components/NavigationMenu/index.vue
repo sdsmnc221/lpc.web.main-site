@@ -89,9 +89,9 @@ onMounted(() => {
   }
 }
 
-@container nuxt (max-width: 700px) {
+@container nuxt (max-width: 699px) {
   .navigation-menu {
-    z-index: 0;
+    z-index: -1;
   }
 }
 

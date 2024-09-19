@@ -160,7 +160,7 @@ onMounted(() => {
   }
 }
 
-@container nuxt (max-width: 700px) {
+@container nuxt (max-width: 699px) {
   .app {
     padding: var(--spacing-m);
 

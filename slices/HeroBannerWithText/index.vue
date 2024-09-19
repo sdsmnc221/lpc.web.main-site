@@ -241,7 +241,7 @@ const buttons = computed(() => primary.value?.buttonsgroups);
   }
 }
 
-@container app (max-width: 700px) {
+@container app (max-width: 699px) {
   .app {
     .hero-banner-with-text {
       &__image-content {
