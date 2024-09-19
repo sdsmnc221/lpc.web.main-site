@@ -102,7 +102,13 @@ const buttons = computed(() => primary.value?.buttonsgroups);
   align-items: center;
   width: 100%;
   position: relative;
+
   // padding: var(--spacing-m) 0 var(--spacing-l) 0;
+
+  & > * {
+    position: relative;
+    z-index: 1;
+  }
 
   &.--text-only {
     padding-bottom: 0;
@@ -123,7 +129,7 @@ const buttons = computed(() => primary.value?.buttonsgroups);
     transform: translateX(-50%);
     width: 200%;
     height: 100%;
-    z-index: -1;
+    z-index: 0;
   }
 
   &.--light {
