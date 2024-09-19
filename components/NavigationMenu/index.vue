@@ -49,7 +49,9 @@ onMounted(() => {
 
 <style lang="scss">
 .navigation-menu {
-  padding: var(--spacing-m);
+  padding: 0 var(--spacing-m);
+  padding-top: var(--spacing-s);
+  padding-bottom: 0;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
