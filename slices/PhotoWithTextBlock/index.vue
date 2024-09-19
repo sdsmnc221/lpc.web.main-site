@@ -62,8 +62,7 @@ const description = computed(() => primary.value?.description);
     object-fit: cover;
 
     &.--square {
-      --w: 360px !important;
-      --h: 360px !important;
+      //
     }
   }
 

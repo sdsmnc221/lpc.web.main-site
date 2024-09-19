@@ -21,12 +21,19 @@
 </template>
 
 <script setup lang="ts">
-import { computed, watch } from "vue";
+import { computed } from "vue";
+import Lenis from "lenis";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import AccordionNavigation from "@/components/AccordionNavigation/index.vue";
 import NavigationMenu from "@/components/NavigationMenu/index.vue";
 import FooterMenu from "@/components/FooterMenu/index.vue";
 import PopoverBanner from "@/components/PopoverBanner/index.vue";
+
+import "lenis/dist/lenis.css";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const route = useRoute();
 
@@ -92,6 +99,42 @@ onMounted(() => {
     ogTitle: seo.value.title,
     description: seo.value.description,
     ogDescription: seo.value.description,
+  });
+
+  const lenis = new Lenis({
+    // wrapper: document.body.querySelector("#__nuxt") as HTMLElement,
+  });
+
+  lenis.on("scroll", ScrollTrigger.update);
+
+  const raf = (time) => {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  };
+
+  gsap.ticker.add((time) => {
+    lenis.raf(time * 1000);
+  });
+
+  gsap.ticker.lagSmoothing(0);
+
+  nextTick(() => {
+    requestAnimationFrame(raf);
+
+    const children = [...document.body.querySelectorAll(".app > * > *")];
+
+    children.forEach((section) => {
+      gsap.from(section as any, {
+        y: 240,
+        opacity: 0,
+        backgroundColor: "transparent",
+        filter: "blur(16px)",
+        scrollTrigger: {
+          trigger: section as any,
+          start: "top bottom",
+        },
+      });
+    });
   });
 });
 </script>
