@@ -60,10 +60,6 @@ const description = computed(() => primary.value?.description);
     min-width: var(--w);
     min-height: var(--h);
     object-fit: cover;
-
-    &.--square {
-      //
-    }
   }
 
   h3 {

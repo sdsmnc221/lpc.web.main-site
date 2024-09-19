@@ -64,7 +64,7 @@
 }
 
 // <uniquifier>: Use a unique and descriptive class name
-// <weight>: Use a value from 100 to 900
+// <                                                                                                                                                                                                                                                                                                                                                                            >: Use a value from 100 to 900
 
 // .albert-sans-<uniquifier> {
 //     font-family: "Albert Sans", sans-serif;
@@ -124,6 +124,10 @@
   }
 }
 
+.size-small {
+  font-size: calc((var(--base-ft-size) * 0.9));
+}
+
 .size-medium {
   font-size: calc((var(--base-ft-size) * 2));
 }
@@ -163,6 +167,8 @@
 @mixin ft-s($size) {
   @if $size == regular {
     @extend .size-regular;
+  } @else if $size == small {
+    @extend .size-small;
   } @else if $size == medium {
     @extend .size-medium;
   } @else if $size == large {

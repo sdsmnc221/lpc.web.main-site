@@ -49,6 +49,11 @@
         :class="{ '--square': descriptionParagraph.length > 0 }"
         :field="heroImage"
       />
+      <prismic-rich-text
+        v-if="heroImageDescription?.length > 0"
+        class="hero-banner-with-text__hero-image-description"
+        :field="heroImageDescription"
+      />
     </div>
   </section>
 </template>
@@ -85,6 +90,9 @@ const variant = computed(() => primary.value.variant);
 const heroImagePosition = computed(() => primary.value?.heroimageposition);
 
 const heroImage = computed(() => primary.value?.heroimage);
+const heroImageDescription = computed(
+  () => primary.value?.heroimagedescription
+);
 const subText = computed(() => primary.value?.subtext);
 const headingText = computed(() => primary.value?.headingtext);
 const descriptionParagraph = computed(
@@ -234,6 +242,27 @@ const buttons = computed(() => primary.value?.buttonsgroups);
     object-fit: cover;
     aspect-ratio: 1;
 
+    &-description {
+      width: 72%;
+      margin: 0;
+      margin-top: var(--spacing-s);
+      display: flex;
+      justify-content: flex-end;
+      flex-direction: column;
+      align-items: center;
+
+      * {
+        text-align: left;
+        line-height: 1.5em;
+        @include ft-s(small);
+        margin: 0 !important;
+      }
+
+      a {
+        text-decoration: underline;
+      }
+    }
+
     &.--square {
       --w: 360px !important;
 
@@ -244,6 +273,7 @@ const buttons = computed(() => primary.value?.buttonsgroups);
   &__image-content {
     display: flex;
     justify-content: center;
+    flex-direction: column;
   }
 }
 
@@ -258,6 +288,11 @@ const buttons = computed(() => primary.value?.buttonsgroups);
         --w: 100% !important;
         --h: auto !important;
         aspect-ratio: 1/1;
+      }
+
+      &__hero-image-description {
+        width: 100%;
+        align-items: flex-start;
       }
     }
   }
