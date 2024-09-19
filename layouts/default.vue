@@ -131,7 +131,7 @@ onMounted(() => {
         filter: "blur(16px)",
         scrollTrigger: {
           trigger: section as any,
-          start: "top bottom",
+          start: "top bottom-=120",
         },
       });
     });
