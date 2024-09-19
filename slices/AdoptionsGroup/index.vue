@@ -23,6 +23,7 @@
         :contact-info="contactInfo"
         :adoption-requirements="adoptionRequirements"
         :avatar-placeholder="avatarPlaceholder"
+        :id="cat.id"
       ></cat-item>
     </div>
   </section>

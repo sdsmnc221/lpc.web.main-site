@@ -1,6 +1,6 @@
 <template>
   <div class="cat-item">
-    <Drawer>
+    <Drawer :open="defaultOpen" @update:open="onOpen">
       <DrawerTrigger>
         <prismic-image
           class="cat-item__photo"
@@ -116,6 +116,7 @@ type Image = {
 };
 
 type CatInfo = {
+  id: string;
   createddate: string;
   catphoto: Image;
   catname: string;
@@ -135,6 +136,8 @@ type CatInfo = {
   avatarPlaceholder?: Image;
 };
 
+const router = useRouter();
+
 const props = defineProps<CatInfo>();
 
 const catHasAvatar = computed(() => props.catphoto.hasOwnProperty("url"));
@@ -142,6 +145,35 @@ const catHasAvatar = computed(() => props.catphoto.hasOwnProperty("url"));
 const hasInfo = computed(
   () =>
     props.catbirth || props.zipcode || (props.catagenumber && props.catagetype)
+);
+
+const defaultOpen = ref(false);
+const onOpen = (opened: boolean) => {
+  if (opened) {
+    router.push({
+      name: router.currentRoute.value.name,
+      query: { id: props.id },
+    });
+    defaultOpen.value = true;
+  } else {
+    router.push({
+      name: router.currentRoute.value.name,
+    });
+  }
+};
+
+watch(
+  () => router.currentRoute.value,
+  (newRoute, oldRoute) => {
+    if (!newRoute.query.id) {
+      defaultOpen.value = false;
+    } else {
+      setTimeout(() => {
+        defaultOpen.value = props.id === newRoute.query.id;
+      }, 320);
+    }
+  },
+  { immediate: true, deep: true }
 );
 </script>
 

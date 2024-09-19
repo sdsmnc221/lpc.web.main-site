@@ -59,6 +59,8 @@ const adoptionsGroup = computed(() =>
 const popOutText = computed(() =>
   adoptions.value?.data?.slices.find((s) => s?.slice_type === "pop_out_text")
 );
+
+const router = useRouter();
 </script>
 
 <style lang="scss">
