@@ -478,8 +478,8 @@ const buttons = computed(() => primary.value?.buttonsgroups);
     }
 
     &__hero-image {
+      --w: 72vw !important;
       width: auto;
-      min-width: var(--w);
     }
   }
 }
