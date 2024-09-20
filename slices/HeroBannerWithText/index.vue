@@ -420,6 +420,7 @@ const buttons = computed(() => primary.value?.buttonsgroups);
     &.--image-right {
       .hero-banner-with-text__image-content {
         justify-content: flex-end;
+        align-items: flex-end;
       }
     }
 
