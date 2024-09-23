@@ -82,10 +82,13 @@ const backgroundImage = computed(() => primary.value?.backgroundimage?.url);
     position: relative;
     z-index: 2;
     padding: 0 10vw;
-    backdrop-filter: blur(3.2px);
 
     * {
       @include ft-s(large);
+    }
+
+    strong {
+      @extend .gloock-regular;
     }
   }
 }
