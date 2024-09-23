@@ -51,6 +51,16 @@ const description = computed(() => primary.value?.description);
     @include ft-s(24);
     margin-top: calc(var(--spacing-m) * -1);
   }
+
+  &__description {
+    p {
+      line-height: 2rem;
+    }
+
+    li {
+      line-height: 3.2rem;
+    }
+  }
 }
 
 @container app (min-width: 700px) {
@@ -60,7 +70,13 @@ const description = computed(() => primary.value?.description);
     }
 
     &__description * {
-      @include ft-s(large);
+      @include ft-s(medium);
+    }
+
+    a {
+      display: inline-block;
+      text-decoration: underline;
+      @include ft-s(16);
     }
   }
 }

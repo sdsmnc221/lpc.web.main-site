@@ -5,7 +5,16 @@
     :slice="hero"
   ></hero-banner-with-text>
 
-  <multi-text-block :slice="introduction"></multi-text-block>
+  <multi-text-block
+    class="introduction-timeline"
+    :slice="introductions[0]"
+  ></multi-text-block>
+
+  <hero-photo-background :slice="missionvisions"></hero-photo-background>
+  <multi-text-block
+    class="introduction-vision"
+    :slice="introductions[1]"
+  ></multi-text-block>
 
   <div class="indicators-group">
     <indicator-with-text
@@ -41,6 +50,7 @@ import IndicatorWithText from "@/slices/IndicatorWithText/index.vue";
 import PhotoWithTextBlock from "@/slices/PhotoWithTextBlock/index.vue";
 import HeadlinePill from "@/slices/HeadlinePill/index.vue";
 import PopOutText from "@/slices/PopOutText/index.vue";
+import HeroPhotoBackground from "@/slices/HeroPhotoBackground/index.vue";
 
 const { client } = usePrismic();
 
@@ -55,8 +65,14 @@ const heroBanners = computed(
     ) ?? []
 );
 
-const introduction = computed(() =>
-  about.value?.data?.slices.find((s) => s?.slice_type === "multi_text_block")
+const introductions = computed(() =>
+  about.value?.data?.slices.filter((s) => s?.slice_type === "multi_text_block")
+);
+
+const missionvisions = computed(() =>
+  about.value?.data?.slices.find(
+    (s) => s?.slice_type === "hero_photo_background"
+  )
 );
 
 const indicators = computed(
@@ -97,25 +113,50 @@ const popOutText = computed(() =>
     margin-bottom: var(--spacing-m);
   }
 
+  .introduction- {
+    &vision {
+      text-align: center;
+      margin-top: 12vh;
+      margin-bottom: 0 !important;
+      padding-left: 12vw;
+      padding-right: 12vw;
+
+      strong {
+        font-weight: 800;
+      }
+    }
+  }
+
   .multi-text-block {
+    margin-top: 6vh;
+    margin-bottom: 12vh;
+    & > div:not(:first-child) {
+      margin-top: var(--spacing-m) !important;
+    }
     &__title * {
-      @extend .albert-sans-regular;
+      @extend .gloock-regular;
       @include ft-s(large);
     }
     &__block {
+      width: 100%;
       * {
         @extend .albert-sans-light;
         @include ft-s(medium);
-        line-height: 1em;
-        text-decoration: underline;
-        text-underline-offset: 4px;
-        text-decoration-thickness: from-font;
+        line-height: 1.2em;
+        // text-decoration: underline;
+        // text-underline-offset: 4px;
+        // text-decoration-thickness: from-font;
       }
 
+      strong,
+      a {
+        font-weight: 600;
+      }
       a {
         background-color: var(--white);
         color: var(--black);
         padding: 0;
+        text-decoration: underline;
       }
     }
   }
@@ -146,6 +187,12 @@ const popOutText = computed(() =>
       }
     }
 
+    .hero-banner-with-text {
+      &__sub-text * {
+        text-align: center;
+      }
+    }
+
     .multi-text-block {
       & > div {
         flex-direction: column;
@@ -170,9 +217,10 @@ const popOutText = computed(() =>
     .indicators-group {
       flex-direction: row;
       flex-wrap: wrap;
+      justify-content: space-between;
 
       & > * {
-        width: 48%;
+        width: 24%;
       }
     }
 
