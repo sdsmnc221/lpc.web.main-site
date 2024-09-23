@@ -1,6 +1,7 @@
 <template>
   <nav
     class="navigation-menu bg-black"
+    ref="node"
     :class="{ '--thin': thin }"
     v-if="links"
   >
@@ -34,9 +35,27 @@ const route = useRoute();
 
 const thin = ref(false);
 
+const node = ref(null);
+
 onMounted(() => {
   nextTick(() => {
+    if (window.innerWidth < 699 && node.value) {
+      if (window.scrollY < window.innerHeight / 8) {
+        node.value.style.zIndex = 0;
+      } else {
+        node.value.style.zIndex = -1;
+      }
+    }
+
     window.addEventListener("scroll", () => {
+      if (window.innerWidth < 699 && node.value) {
+        if (window.scrollY < window.innerHeight / 8) {
+          node.value.style.zIndex = 0;
+        } else {
+          node.value.style.zIndex = -1;
+        }
+      }
+
       if (window.scrollY < window.innerHeight) {
         thin.value = false;
       } else {
@@ -91,7 +110,7 @@ onMounted(() => {
 
 @container nuxt (max-width: 699px) {
   .navigation-menu {
-    z-index: 0;
+    z-index: -1;
   }
 }
 
