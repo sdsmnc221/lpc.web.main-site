@@ -125,6 +125,7 @@ const popOutText = computed(() =>
 
       strong {
         font-weight: 800;
+        @include ft-s(large);
       }
     }
   }

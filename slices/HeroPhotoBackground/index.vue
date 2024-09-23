@@ -89,6 +89,7 @@ const backgroundImage = computed(() => primary.value?.backgroundimage?.url);
 
     strong {
       @extend .gloock-regular;
+      filter: blur(1.2px);
     }
   }
 }
@@ -97,7 +98,12 @@ const backgroundImage = computed(() => primary.value?.backgroundimage?.url);
   .hero-photo-background {
     &__text-content {
       * {
-        @include ft-s(xlarge);
+        @include ft-s(large);
+      }
+
+      strong {
+        @include ft-s(xxlarge);
+        filter: blur(1.2px);
       }
     }
   }
