@@ -91,7 +91,7 @@ onMounted(() => {
 
 @container nuxt (max-width: 699px) {
   .navigation-menu {
-    z-index: -1;
+    z-index: 0;
   }
 }
 
