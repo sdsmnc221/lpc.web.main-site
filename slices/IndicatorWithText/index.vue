@@ -47,9 +47,9 @@ const description = computed(() => primary.value?.description);
     @include ft-s(large);
   }
 
-  &__description * {
+  &__description p {
     @include ft-s(24);
-    margin-top: calc(var(--spacing-m) * -1);
+    margin-top: calc(var(--spacing-s) * -1);
   }
 
   &__description {
@@ -64,6 +64,8 @@ const description = computed(() => primary.value?.description);
     a {
       text-decoration: underline;
       line-height: normal;
+      display: inline-block;
+      margin-top: var(--spacing-s);
     }
   }
 }
