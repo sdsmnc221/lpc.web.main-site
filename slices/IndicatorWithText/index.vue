@@ -54,11 +54,16 @@ const description = computed(() => primary.value?.description);
 
   &__description {
     p {
-      line-height: 2rem;
+      line-height: 2.4rem;
     }
 
     li {
       line-height: 3.2rem;
+    }
+
+    a {
+      text-decoration: underline;
+      line-height: normal;
     }
   }
 }
@@ -75,14 +80,35 @@ const description = computed(() => primary.value?.description);
 
     a {
       display: inline-block;
-      text-decoration: underline;
+
       @include ft-s(16);
     }
   }
 }
 
-@container app (min-width: 1000px) {
+@container app (max-width: 699px) {
   .indicator-with-text {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 24px;
+
+    .indicator-with-text__description {
+      margin-top: var(--spacing-s);
+      * {
+        line-height: 1.6rem;
+      }
+    }
+
+    a {
+      display: inline-block;
+      letter-spacing: -0.101px;
+      margin-top: var(--spacing-m);
+      line-height: normal;
+      margin-top: 30px;
+      display: inline-block;
+    }
   }
 }
 </style>

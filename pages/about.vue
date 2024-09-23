@@ -10,7 +10,7 @@
     :slice="introductions[0]"
   ></multi-text-block>
 
-  <hero-photo-background :slice="missionvisions"></hero-photo-background>
+  <hero-photo-background :slice="missionvisions[0]"></hero-photo-background>
   <multi-text-block
     class="introduction-vision"
     :slice="introductions[1]"
@@ -24,13 +24,7 @@
     ></indicator-with-text>
   </div>
 
-  <div class="photos-group">
-    <photo-with-text-block
-      v-for="photo in photos"
-      :key="`about-page-${photo.id}`"
-      :slice="photo"
-    ></photo-with-text-block>
-  </div>
+  <hero-photo-background :slice="missionvisions[1]"></hero-photo-background>
 
   <div class="pills-group">
     <headline-pill
@@ -38,6 +32,14 @@
       :key="`about-page-${pill.id}`"
       :slice="pill"
     ></headline-pill>
+  </div>
+
+  <div class="photos-group">
+    <photo-with-text-block
+      v-for="photo in photos"
+      :key="`about-page-${photo.id}`"
+      :slice="photo"
+    ></photo-with-text-block>
   </div>
 
   <pop-out-text :slice="popOutText"></pop-out-text>
@@ -70,7 +72,7 @@ const introductions = computed(() =>
 );
 
 const missionvisions = computed(() =>
-  about.value?.data?.slices.find(
+  about.value?.data?.slices.filter(
     (s) => s?.slice_type === "hero_photo_background"
   )
 );
@@ -157,6 +159,7 @@ const popOutText = computed(() =>
         color: var(--black);
         padding: 0;
         text-decoration: underline;
+        margin: 0;
       }
     }
   }
@@ -202,6 +205,26 @@ const popOutText = computed(() =>
           padding: 0;
         }
       }
+    }
+  }
+}
+
+@container app (max-width:699px) {
+  .app.--about {
+    .introduction-timeline {
+      h2 {
+        @include ft-s(medium);
+      }
+      h4,
+      ul,
+      li,
+      strong,
+      a {
+        @include ft-s(20);
+      }
+    }
+    .introduction-vision h2 {
+      @include ft-s(medium);
     }
   }
 }
