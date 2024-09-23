@@ -57,7 +57,7 @@ const backgroundImage = computed(() => primary.value?.backgroundimage?.url);
     left: 50%;
     transform: translateX(-50%);
     z-index: 1;
-    background-color: var(--white);
+    background-color: rgba(0, 0, 0, 0.4);
     pointer-events: none;
     opacity: 0.48;
   }
@@ -82,6 +82,8 @@ const backgroundImage = computed(() => primary.value?.backgroundimage?.url);
     position: relative;
     z-index: 2;
     padding: 0 10vw;
+    backdrop-filter: blur(3.2px);
+
     * {
       @include ft-s(large);
     }
