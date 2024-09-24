@@ -129,7 +129,7 @@ const playFade = (playOnMounted = false) => {
       y: 240,
       opacity: 0,
       backgroundColor: "transparent",
-      delay: index < 2 && playOnMounted ? 0.9 + index * 0.2 : 0,
+      delay: index < 2 && playOnMounted ? 1 + index * 0.4 : 0,
       filter: "blur(16px)",
       scrollTrigger: {
         trigger: section as any,

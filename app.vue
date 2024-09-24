@@ -15,7 +15,7 @@ const loading = ref(true);
 onMounted(() => {
   setTimeout(() => {
     loading.value = false;
-  }, 980);
+  }, 1400);
 });
 </script>
 
@@ -23,8 +23,8 @@ onMounted(() => {
 .page-enter-active,
 .page-leave-active {
   transition:
-    all 1s ease-in-out,
-    filter 0.64s ease-in-out;
+    all 1.6s ease-in-out,
+    filter 0.8s ease-in-out;
 }
 .page-enter-from,
 .page-leave-to {
