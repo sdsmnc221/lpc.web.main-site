@@ -6,12 +6,12 @@
           currentPage.linklabel
         }}</AccordionTrigger>
         <AccordionContent class="accordion-navigation__pages">
-          <a
+          <NuxtLink
             v-for="(link, index) in links"
             :key="`navigation-menu-link-${index}`"
-            :href="`${link.linkitem.type === 'homepage' ? '/' : '/' + link.linkitem.uid}`"
+            :to="`${link.linkitem.type === 'homepage' ? '/' : '/' + link.linkitem.uid}`"
             class="link albert-sans-light size-16"
-            >{{ link.linklabel }}</a
+            >{{ link.linklabel }}</NuxtLink
           >
         </AccordionContent>
       </AccordionItem>

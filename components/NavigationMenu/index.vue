@@ -5,10 +5,10 @@
     :class="{ '--thin': thin }"
     v-if="links"
   >
-    <a
+    <NuxtLink
       v-for="(link, index) in links"
-      :key="`navigation-menu-link-${index}`"
-      :href="`${link.linkitem.type === 'homepage' ? '/' : '/' + link.linkitem.uid}`"
+      :key="`navigation-menu-link-${link.linkitem?.id}-${index}`"
+      :to="`${link.linkitem.type === 'homepage' ? '/' : '/' + link.linkitem.uid}`"
       class="albert-sans-light size-16"
       :class="{
         '--current':
@@ -16,8 +16,9 @@
             ? link.linkitem.type === 'homepage'
             : link.linkitem.uid === route.name,
       }"
-      >{{ link.linklabel }}</a
     >
+      {{ link.linklabel }}
+    </NuxtLink>
   </nav>
 </template>
 

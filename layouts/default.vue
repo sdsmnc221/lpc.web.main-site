@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, watch } from "vue";
 import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -75,32 +75,30 @@ const { data: footer } = await useAsyncData("footer", () =>
   client.getSingle("footermenu")
 );
 
-const { data: currentPage } = await useAsyncData("currentPage", async () => {
-  const { name: currentPageName } = route;
+const currentPage = ref({ data: {} });
 
-  const data =
-    currentPageName === "index"
-      ? await client.getSingle("homepage")
-      : await client.getByUID("navigationpage", currentPageName as string);
+const getPage = async () => {
+  await useAsyncData("currentPage", async () => {
+    const { name: currentPageName } = route;
 
-  return data;
-});
+    const data =
+      currentPageName === "index"
+        ? await client.getSingle("homepage")
+        : await client.getByUID("navigationpage", currentPageName as string);
+
+    currentPage.value = data;
+  });
+};
+
 const seo = computed(() => ({
   title:
-    currentPage.value?.data.meta_title ?? defaultLayout.value?.data.meta_title,
+    currentPage.value?.data?.meta_title ?? defaultLayout.value?.data.meta_title,
   description:
-    currentPage.value?.data.meta_description ??
-    defaultLayout.value?.data?.meta_description,
+    currentPage.value?.data?.meta_description ??
+    defaultLayout.value?.data.meta_description,
 }));
 
-onMounted(() => {
-  useSeoMeta({
-    title: seo.value.title,
-    ogTitle: seo.value.title,
-    description: seo.value.description,
-    ogDescription: seo.value.description,
-  });
-
+const playMagic = () => {
   const lenis = new Lenis({
     // wrapper: document.body.querySelector("#__nuxt") as HTMLElement,
   });
@@ -118,25 +116,65 @@ onMounted(() => {
 
   gsap.ticker.lagSmoothing(0);
 
-  nextTick(() => {
-    requestAnimationFrame(raf);
+  requestAnimationFrame(raf);
+};
 
-    const children = [...document.body.querySelectorAll(".app > * > *")];
+const playFade = () => {
+  const children = [
+    ...document.body.querySelectorAll(".app > *:not(.adoptions-group) > *"),
+  ];
 
-    children.forEach((section) => {
-      gsap.from(section as any, {
-        y: 240,
-        opacity: 0,
-        backgroundColor: "transparent",
-        filter: "blur(16px)",
-        scrollTrigger: {
-          trigger: section as any,
-          start: "top bottom",
-        },
-      });
+  children.forEach((section) => {
+    gsap.from(section as any, {
+      y: 240,
+      opacity: 0,
+      backgroundColor: "transparent",
+      filter: "blur(16px)",
+      delay: 0.2,
+      scrollTrigger: {
+        trigger: section as any,
+        start: "top bottom",
+      },
     });
   });
+};
+
+onMounted(() => {
+  getPage();
+
+  playMagic();
+
+  playFade();
 });
+
+onUpdated(() => {
+  getPage();
+
+  playFade();
+});
+
+watch(
+  () => seo.value,
+  (newSeo) => {
+    useSeoMeta({
+      title: newSeo.title,
+      ogTitle: newSeo.title,
+      description: newSeo.description,
+      ogDescription: newSeo.description,
+    });
+  },
+  { immediate: true }
+);
+
+watch(
+  () => route.name,
+  (newRoute, oldRoute) => {
+    if (newRoute !== oldRoute) {
+      // setTimeout(() => {
+      // }, 100);
+    }
+  }
+);
 </script>
 
 <style lang="scss">
