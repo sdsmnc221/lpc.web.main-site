@@ -77,6 +77,8 @@ const { data: footer } = await useAsyncData("footer", () =>
 
 const currentPage = ref({ data: {} });
 
+const updateCount = ref(0);
+
 const getPage = async () => {
   await useAsyncData("currentPage", async () => {
     const { name: currentPageName } = route;
@@ -148,9 +150,13 @@ onMounted(() => {
 });
 
 onUpdated(() => {
+  updateCount.value++;
+
   getPage();
 
-  playFade();
+  if (updateCount.value < 1) {
+    playFade();
+  }
 });
 
 watch(
