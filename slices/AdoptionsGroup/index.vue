@@ -15,7 +15,11 @@
       :field="description"
     />
 
-    <div class="adoptions-group__items" v-if="itemsData?.length">
+    <div
+      class="adoptions-group__items"
+      :class="{ '--special': isSpecialAdoptionsGroup }"
+      v-if="itemsData?.length"
+    >
       <cat-item
         v-for="cat in itemsData"
         :key="`adoptions-group-cat-${cat.id}`"
@@ -36,6 +40,8 @@ import CatItem from "@/components/CatItem/index.vue";
 
 const { client } = usePrismic();
 
+const runtimeConfig = useRuntimeConfig();
+
 // The array passed to `getSliceComponentProps` is purely optional.
 // Consider it as a visual hint for you when templating your slice.
 const props = defineProps(
@@ -48,7 +54,13 @@ const props = defineProps(
 );
 
 const primary = computed(() => props.slice.primary);
+
+const isSpecialAdoptionsGroup = computed(() =>
+  props.slice.id.includes(runtimeConfig.public.SPECIAL_ADOPTIONS_GROUP)
+);
+
 const title = computed(() => primary.value?.title);
+
 const contactInfo = computed(() => primary.value?.contactinfo);
 const adoptionRequirements = computed(
   () => primary.value?.adoptionrequirements
@@ -96,11 +108,26 @@ const avatarPlaceholder = computed(
     flex-direction: row;
     justify-content: center;
     align-items: flex-start;
+
+    &.--special {
+      .cat-item {
+        margin: 0 calc((100% - 22% * 4) / 4);
+        margin-top: var(--spacing-m);
+      }
+    }
   }
 }
 
 @container app (min-width: 700px) {
   .adoptions-group {
+    &__items {
+      &.--special {
+        .cat-item {
+          margin: 0 calc((100% - 20% * 4) / 4);
+          margin-top: var(--spacing-l);
+        }
+      }
+    }
   }
 }
 

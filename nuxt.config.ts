@@ -6,6 +6,12 @@ export default defineNuxtConfig({
     // layoutTransition: { name: "page", mode: "out-in" },
   },
 
+  runtimeConfig: {
+    public: {
+      SPECIAL_ADOPTIONS_GROUP: process.env.SPECIAL_ADOPTIONS_GROUP,
+    },
+  },
+
   // css: ["@/styles/imports.scss"],
   vite: {
     css: {
