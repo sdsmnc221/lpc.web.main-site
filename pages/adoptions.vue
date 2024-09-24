@@ -86,17 +86,23 @@ const playFade = () => {
   });
 };
 
-watch(
-  () => status.value,
-  (newStatus) => {
-    if (newStatus === "success") {
-      setTimeout(() => {
-        playFade();
-      }, 480);
-    }
-  },
-  { immediate: true }
-);
+onMounted(() => {
+  setTimeout(() => {
+    playFade();
+  }, 480);
+});
+
+// watch(
+//   () => status.value,
+//   (newStatus) => {
+//     if (newStatus === "success") {
+//       setTimeout(() => {
+//         playFade();
+//       }, 480);
+//     }
+//   },
+//   { immediate: true }
+// );
 </script>
 
 <style lang="scss">
