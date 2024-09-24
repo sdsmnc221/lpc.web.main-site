@@ -1,3 +1,5 @@
+<!-- https://uiverse.io/alexruix/tame-fly-42 -->
+
 <template>
   <div class="page-loader"><div class="loader"></div></div>
 </template>
