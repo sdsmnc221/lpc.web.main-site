@@ -92,7 +92,7 @@ watch(
     if (newStatus === "success") {
       setTimeout(() => {
         playFade();
-      }, 100);
+      }, 480);
     }
   },
   { immediate: true }
