@@ -119,18 +119,18 @@ const playMagic = () => {
   requestAnimationFrame(raf);
 };
 
-const playFade = () => {
+const playFade = (playOnMounted = false) => {
   const children = [
     ...document.body.querySelectorAll(".app > *:not(.adoptions-group) > *"),
   ];
 
-  children.forEach((section) => {
+  children.forEach((section, index) => {
     gsap.from(section as any, {
       y: 240,
       opacity: 0,
       backgroundColor: "transparent",
+      delay: index < 2 && playOnMounted ? 0.9 + index * 0.2 : 0,
       filter: "blur(16px)",
-      delay: 0.2,
       scrollTrigger: {
         trigger: section as any,
         start: "top bottom",
@@ -144,7 +144,7 @@ onMounted(() => {
 
   playMagic();
 
-  playFade();
+  playFade(true);
 });
 
 onUpdated(() => {
@@ -164,16 +164,6 @@ watch(
     });
   },
   { immediate: true }
-);
-
-watch(
-  () => route.name,
-  (newRoute, oldRoute) => {
-    if (newRoute !== oldRoute) {
-      // setTimeout(() => {
-      // }, 100);
-    }
-  }
 );
 </script>
 

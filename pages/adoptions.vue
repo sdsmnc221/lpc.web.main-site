@@ -115,7 +115,7 @@ onMounted(() => {
 }
 
 @container app (min-width: 700px) {
-  .app {
+  .app.--adoptions {
     .hero-banner-with-text {
       &__sub-text * {
         text-align: center;
