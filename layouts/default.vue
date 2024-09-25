@@ -140,6 +140,8 @@ const playFade = (playOnMounted = false) => {
         },
       });
     });
+
+    updateCount.value += 1;
   }
  
 };
