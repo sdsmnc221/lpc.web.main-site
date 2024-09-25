@@ -153,10 +153,8 @@ onMounted(() => {
 });
 
 onUpdated(() => {
-
   getPage();
 
-  
   playFade();
 
   updateCount.value += 1;
@@ -180,7 +178,7 @@ watch(() => route.name, (newRoute, oldRoute) => {
   if (newRoute !== oldRoute) {
     updateCount.value = 0;
   }
-})
+}, { immediate: true })
 </script>
 
 <style lang="scss">
