@@ -122,7 +122,8 @@ const avatarPlaceholder = computed(
   .adoptions-group {
 
     &__description {
-      columns: 40vw 2;
+      columns: 2;
+      column-gap: 12%;
     }
 
     &__items {
