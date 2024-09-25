@@ -123,8 +123,8 @@ const playMagic = () => {
 
 const playFade = (playOnMounted = false) => {
   if (updateCount.value === 0) {
-  const children = [
-      ...document.body.querySelectorAll(".app > *:not(.adoptions-group) > *"),
+    const children = [
+        ...document.body.querySelectorAll(".app > *:not(.adoptions-group) > *"),
     ];
 
     children.forEach((section, index) => {
@@ -153,12 +153,13 @@ onMounted(() => {
 });
 
 onUpdated(() => {
-  updateCount.value += 1;
 
   getPage();
 
   
   playFade();
+
+  updateCount.value += 1;
   
 });
 
