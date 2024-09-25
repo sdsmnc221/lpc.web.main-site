@@ -150,11 +150,11 @@ onMounted(() => {
 });
 
 onUpdated(() => {
-  updateCount.value++;
+  updateCount.value += 1;
 
   getPage();
 
-  if (updateCount.value < 1) {
+  if (updateCount.value <= 1) {
     playFade();
   }
 });
