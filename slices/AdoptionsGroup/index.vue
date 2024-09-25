@@ -96,7 +96,7 @@ const avatarPlaceholder = computed(
   &__description {
     width: 100%;
 
-    & > * {
+    & > *:not(:first-child) {
       margin-top: var(--spacing-m);
     }
   }
@@ -124,7 +124,7 @@ const avatarPlaceholder = computed(
     &__description {
       columns: 2;
     }
-    
+
     &__items {
       &.--special {
         .cat-item {
