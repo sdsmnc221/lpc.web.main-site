@@ -122,23 +122,26 @@ const playMagic = () => {
 };
 
 const playFade = (playOnMounted = false) => {
+  if (updateCount.value === 0) {
   const children = [
-    ...document.body.querySelectorAll(".app > *:not(.adoptions-group) > *"),
-  ];
+      ...document.body.querySelectorAll(".app > *:not(.adoptions-group) > *"),
+    ];
 
-  children.forEach((section, index) => {
-    gsap.from(section as any, {
-      y: 240,
-      opacity: 0,
-      backgroundColor: "transparent",
-      delay: index < 2 && playOnMounted ? 1 + index * 0.4 : 0,
-      filter: "blur(16px)",
-      scrollTrigger: {
-        trigger: section as any,
-        start: "top bottom",
-      },
+    children.forEach((section, index) => {
+      gsap.from(section as any, {
+        y: 240,
+        opacity: 0,
+        backgroundColor: "transparent",
+        delay: index < 2 && playOnMounted ? 1 + index * 0.4 : 0,
+        filter: "blur(16px)",
+        scrollTrigger: {
+          trigger: section as any,
+          start: "top bottom",
+        },
+      });
     });
-  });
+  }
+ 
 };
 
 onMounted(() => {
@@ -154,9 +157,9 @@ onUpdated(() => {
 
   getPage();
 
-  if (updateCount.value <= 1) {
-    playFade();
-  }
+  
+  playFade();
+  
 });
 
 watch(
