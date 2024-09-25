@@ -171,6 +171,12 @@ watch(
   },
   { immediate: true }
 );
+
+watch(() => route.name, (newRoute, oldRoute) => {
+  if (newRoute !== oldRoute) {
+    updateCount.value = 0;
+  }
+})
 </script>
 
 <style lang="scss">
