@@ -120,6 +120,11 @@ const avatarPlaceholder = computed(
 
 @container app (min-width: 700px) {
   .adoptions-group {
+
+    &__description {
+      columns: 2;
+    }
+    
     &__items {
       &.--special {
         .cat-item {
