@@ -244,7 +244,7 @@ const popOutText = computed(() =>
       justify-content: space-between;
 
       & > * {
-        width: 24%;
+        width: 30%;
       }
     }
 

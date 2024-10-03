@@ -57,15 +57,62 @@ const description = computed(() => primary.value?.description);
       line-height: 2.4rem;
     }
 
+    & > p:first-child {
+      text-align: center;
+    }
+
     li {
-      line-height: 3.2rem;
+      line-height: 2.4rem;
     }
 
     a {
       text-decoration: underline;
       line-height: normal;
       display: inline-block;
+
+      &:not(:has(strong)) {
+        margin-top: var(--spacing-s);
+      }
+
+      &:has(strong) {
+        line-height: unset !important;
+      }
+
+      strong {
+        display: inline-block;
+        padding: 12px 24px;
+
+        font-weight: 200;
+        letter-spacing: -0.2px;
+
+        border: none;
+        outline: none;
+        cursor: pointer;
+        border-radius: 32px;
+
+        @include ft-s(regular);
+
+        background-color: var(--black);
+        color: var(--white);
+      }
+    }
+
+    em {
+      line-height: 2rem;
+    }
+
+    p:not(:first-child) {
       margin-top: var(--spacing-s);
+    }
+
+    p:not(:first-child),
+    a,
+    li {
+      line-height: 1.2rem;
+
+      &:has(em) * {
+        @include ft-s(16);
+      }
     }
   }
 }
@@ -76,14 +123,30 @@ const description = computed(() => primary.value?.description);
       @include ft-s(xlarge);
     }
 
-    &__description * {
-      @include ft-s(medium);
+    &__description {
+      * {
+        @include ft-s(medium);
+      }
+
+      & > p:first-child {
+        text-align: left;
+      }
     }
 
     a {
       display: inline-block;
 
       @include ft-s(16);
+    }
+
+    p:not(:first-child),
+    a,
+    li {
+      line-height: 1.2rem;
+
+      &:has(em) * {
+        @include ft-s(16);
+      }
     }
   }
 }
@@ -93,7 +156,7 @@ const description = computed(() => primary.value?.description);
     width: 100%;
     justify-content: center;
     align-items: center;
-    text-align: center;
+    text-align: left;
     padding: 0 24px;
 
     .indicator-with-text__description {
@@ -108,7 +171,7 @@ const description = computed(() => primary.value?.description);
       letter-spacing: -0.101px;
       margin-top: var(--spacing-m);
       line-height: normal;
-      margin-top: 30px;
+      margin: 30px 0;
       display: inline-block;
     }
   }
