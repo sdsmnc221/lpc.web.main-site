@@ -124,7 +124,9 @@ const playMagic = () => {
 const playFade = (playOnMounted = false) => {
   if (updateCount.value === 0) {
     const children = [
-        ...document.body.querySelectorAll(".app > *:not(.adoptions-group) > *"),
+      ...document.body.querySelectorAll(
+        ".app > *:not(.adoptions-group):not(.emoji-banner) > *"
+      ),
     ];
 
     children.forEach((section, index) => {
@@ -143,7 +145,6 @@ const playFade = (playOnMounted = false) => {
 
     updateCount.value += 1;
   }
- 
 };
 
 onMounted(() => {
@@ -160,7 +161,6 @@ onUpdated(() => {
   playFade();
 
   updateCount.value += 1;
-  
 });
 
 watch(
@@ -176,11 +176,15 @@ watch(
   { immediate: true }
 );
 
-watch(() => route.name, (newRoute, oldRoute) => {
-  if (newRoute !== oldRoute) {
-    updateCount.value = 0;
-  }
-}, { immediate: true })
+watch(
+  () => route.name,
+  (newRoute, oldRoute) => {
+    if (newRoute !== oldRoute) {
+      updateCount.value = 0;
+    }
+  },
+  { immediate: true }
+);
 </script>
 
 <style lang="scss">
