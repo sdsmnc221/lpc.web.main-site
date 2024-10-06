@@ -1,4 +1,7 @@
 <template>
+  <transition name="page" mode="out-in">
+    <page-loader v-if="loading"></page-loader>
+  </transition>
   <NuxtLayout name="default">
     <div
       class="emoji-banner"
@@ -10,7 +13,14 @@
         </div>
       </div>
 
-      <div class="emoji-banner__text albert-sans-bold">OOPS....</div>
+      <div class="emoji-banner__text albert-sans-bold">{{ errorHeading }}</div>
+    </div>
+    <div class="error-content">
+      <h2>{{ errorTitle }}</h2>
+      <prismic-rich-text
+        :field="errorBody"
+        class="error-content__body"
+      ></prismic-rich-text>
     </div>
   </NuxtLayout>
 </template>
@@ -18,9 +28,17 @@
 <script setup lang="ts">
 import type { NuxtError } from "#app";
 
+import PageLoader from "@/components/PageLoader/index.vue";
+
+type ErrorCode = {
+  errorcode: string;
+  errordisplaymessage: string;
+};
 const props = defineProps({
   error: Object as () => NuxtError,
 });
+
+const loading = ref(true);
 
 const EMOJIS = ["🙀", "⚠️"];
 const CELLS_ROW_COUNT = 8;
@@ -28,9 +46,38 @@ const CELLS_COL_COUNT = 6;
 
 const GAP = 32;
 
-const cellSize = ref(32);
+const cellSize: Ref<number> = ref(32);
+
+const { client } = usePrismic();
+
+const { data: errorPage } = await useAsyncData("errorPage", () =>
+  client.getSingle("errorpage")
+);
+
+const errorsList: ComputedRef<ErrorCode[]> = computed(() => {
+  return errorPage.value?.data?.errorslist;
+});
+
+const defaultError: ComputedRef<ErrorCode | null> = computed(() => {
+  return errorsList.value?.find((e) => e.errorcode === "default") ?? null;
+});
+
+const errorHeading = computed(() => errorPage.value?.data?.errorheading);
+
+const errorTitle = computed(() => {
+  const currentError =
+    errorsList.value.find((e) => e.errorcode == props.error?.statusCode) ??
+    defaultError.value;
+  return `${currentError?.errordisplaymessage} ${props.error?.statusCode ? `${props.error.statusCode}` : ""}.`;
+});
+
+const errorBody = computed(() => errorPage.value?.data?.errorcontent);
 
 onMounted(() => {
+  setTimeout(() => {
+    loading.value = false;
+  }, 1400);
+
   window.addEventListener("resize", () => {
     cellSize.value = window.innerWidth / CELLS_ROW_COUNT;
   });
@@ -42,7 +89,17 @@ onMounted(() => {
 </script>
 <style lang="scss">
 .app:has(.emoji-banner) {
-  padding: 0 !important;
+  .emoji-banner {
+    transform: translateX(-8vw);
+  }
+}
+
+@container nuxt (max-width: 699px) {
+  .app:has(.emoji-banner) {
+    .emoji-banner {
+      transform: translateX(calc(var(--spacing-m) * -1));
+    }
+  }
 }
 </style>
 
@@ -85,6 +142,23 @@ onMounted(() => {
   }
 }
 
+.error-content {
+  margin: var(--spacing-m) 0;
+
+  &__body {
+    padding-right: 32vw;
+
+    * {
+      @include ft-s(medium);
+      @extend .albert-sans-regular;
+    }
+
+    & > * {
+      margin-top: var(--spacing-m);
+    }
+  }
+}
+
 @container nuxt (max-width: 699px) {
   .app {
     .emoji-banner {
@@ -92,6 +166,18 @@ onMounted(() => {
         top: calc(var(--cell-size) * 2 + var(--gap) / 2);
         left: var(--cell-size);
         padding: var(--spacing-m) var(--spacing-l);
+      }
+    }
+
+    .error-content {
+      &__body {
+        padding-right: 0;
+        margin: 0;
+
+        * {
+          @include ft-s(20);
+          @extend .albert-sans-light;
+        }
       }
     }
   }

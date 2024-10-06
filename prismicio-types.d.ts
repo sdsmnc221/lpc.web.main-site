@@ -193,6 +193,129 @@ export type CatficheDocument<Lang extends string = string> =
   >;
 
 /**
+ * Item in *ErrorPage → errorsList*
+ */
+export interface ErrorpageDocumentDataErrorslistItem {
+  /**
+   * errorCode field in *ErrorPage → errorsList*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: errorpage.errorslist[].errorcode
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  errorcode: prismic.KeyTextField;
+
+  /**
+   * errorDisplayMessage field in *ErrorPage → errorsList*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: errorpage.errorslist[].errordisplaymessage
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  errordisplaymessage: prismic.KeyTextField;
+}
+
+type ErrorpageDocumentDataSlicesSlice = never;
+
+/**
+ * Content for ErrorPage documents
+ */
+interface ErrorpageDocumentData {
+  /**
+   * errorsList field in *ErrorPage*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: errorpage.errorslist[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  errorslist: prismic.GroupField<Simplify<ErrorpageDocumentDataErrorslistItem>>;
+
+  /**
+   * errorContent field in *ErrorPage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: errorpage.errorcontent
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  errorcontent: prismic.RichTextField;
+
+  /**
+   * errorHeading field in *ErrorPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: errorpage.errorheading
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  errorheading: prismic.KeyTextField;
+
+  /**
+   * Slice Zone field in *ErrorPage*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: errorpage.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<ErrorpageDocumentDataSlicesSlice> /**
+   * Meta Title field in *ErrorPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: errorpage.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *ErrorPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: errorpage.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *ErrorPage*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: errorpage.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * ErrorPage document from Prismic
+ *
+ * - **API ID**: `errorpage`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type ErrorpageDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<ErrorpageDocumentData>,
+    "errorpage",
+    Lang
+  >;
+
+/**
  * Item in *FooterMenu → linksGroup*
  */
 export interface FootermenuDocumentDataLinksgroupItem {
@@ -792,6 +915,7 @@ export type PopoverbannerDocument<Lang extends string = string> =
 
 export type AllDocumentTypes =
   | CatficheDocument
+  | ErrorpageDocument
   | FootermenuDocument
   | HomepageDocument
   | ImageplaceholderDocument
@@ -1800,6 +1924,10 @@ declare module "@prismicio/client" {
     export type {
       CatficheDocument,
       CatficheDocumentData,
+      ErrorpageDocument,
+      ErrorpageDocumentData,
+      ErrorpageDocumentDataErrorslistItem,
+      ErrorpageDocumentDataSlicesSlice,
       FootermenuDocument,
       FootermenuDocumentData,
       FootermenuDocumentDataLinksgroupItem,
