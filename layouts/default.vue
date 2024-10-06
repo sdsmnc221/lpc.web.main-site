@@ -151,8 +151,6 @@ onMounted(() => {
   getPage();
 
   playMagic();
-
-  playFade(true);
 });
 
 onUpdated(() => {
