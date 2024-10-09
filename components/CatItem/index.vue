@@ -221,7 +221,7 @@ watch(
     margin-top: var(--spacing-m);
     min-width: 64%;
     position: absolute;
-    top: 20%;
+    top: 14%;
     transform: translateY(-50%);
     left: 0;
 
