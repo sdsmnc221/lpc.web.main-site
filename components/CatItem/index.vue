@@ -11,6 +11,10 @@
           <span class="albert-sans-bold">{{ catname }}</span>
         </h4>
 
+        <div class="cat-item__explore">
+          <span>+ Fiche</span>
+        </div>
+
         <div class="cat-item__info albert-sans-light size-regular">
           <p v-if="catagenumber && catagetype">
             {{ catagenumber }} {{ catagetype }}
@@ -180,11 +184,19 @@ watch(
 <style lang="scss" scoped>
 .cat-item {
   width: 40%;
-  margin: 0 var(--spacing-s);
-  margin-bottom: var(--spacing-m);
+  // margin: 0 var(--spacing-s);
+  // margin-bottom: var(--spacing-m);
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+
+  &:nth-of-type(n) {
+    transform: translateY(var(--spacing-l));
+  }
+  &:nth-of-type(2n) {
+    transform: translateY(calc(var(--spacing-l) * -1));
+  }
 
   button {
     display: flex;
@@ -203,35 +215,81 @@ watch(
   }
 
   &__name {
-    text-align: center;
+    text-align: left;
     text-transform: uppercase;
     position: relative;
-    border: thin solid var(--gray);
-    max-width: 120px;
+    margin-top: var(--spacing-m);
     min-width: 64%;
+    position: absolute;
+    top: 20%;
+    transform: translateY(-50%);
+    left: 0;
 
     span {
-      @include ft-s(16);
+      @include ft-s(xxlarge);
+      line-height: calc((var(--base-ft-size) * 4));
+    }
+  }
+
+  &__explore {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: var(--white);
+    background-color: var(--gray-dark);
+    display: inline-block;
+    padding: 0 var(--spacing-m);
+    padding-bottom: 12vh;
+    transition: all ease-in-out 0.64s;
+
+    &:hover {
+      background-color: var(--black);
+    }
+
+    * {
+      @include ft-s(20);
+      text-transform: uppercase;
     }
   }
 
   &__info {
-    text-align: center;
+    text-align: left;
     margin-top: calc(var(--spacing-s) * -1);
     padding: calc(var(--spacing-s) * 0.5);
-    position: relative;
+    position: absolute;
+    bottom: 20%;
+    right: 0;
+    display: flex;
 
-    &::after {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 20%;
-      bottom: 0;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: var(--gray);
-      opacity: 0.24;
-      border-radius: 8px;
+    & > * {
+      display: block;
+      margin-left: var(--spacing-m);
+      position: relative;
+
+      &:nth-of-type(n) {
+        transform: translateY(var(--spacing-m));
+      }
+
+      &:nth-of-type(2n) {
+        transform: translateY(0);
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 20%;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: var(--gray);
+        opacity: 0.24;
+        border-radius: 8px;
+      }
+    }
+
+    & * {
+      @include ft-s(medium);
     }
   }
 
@@ -314,7 +372,7 @@ watch(
 @container app (min-width: 700px) {
   .cat-item {
     width: 32% !important;
-    max-width: 220px;
+    // max-width: 220px;
 
     &__name {
       min-width: 32%;
@@ -322,9 +380,37 @@ watch(
   }
 }
 
+@container app (max-width: 699px) {
+  .adoptions-group {
+    .cat-item {
+      width: 72vw;
+
+      &__name {
+        span {
+          @include ft-s(xlarge);
+        }
+      }
+
+      &__info {
+        * {
+          @include ft-s(20);
+        }
+
+        flex-direction: column;
+        gap: var(--spacing-m);
+        bottom: 16%;
+
+        &:nth-of-type(n) {
+          transform: translateY(0);
+        }
+      }
+    }
+  }
+}
+
 @container app (min-width: 1000px) {
   .cat-item {
-    width: 25% !important;
+    width: 25vw !important;
   }
 }
 

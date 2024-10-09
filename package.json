@@ -13,8 +13,10 @@
   "dependencies": {
     "@nuxtjs/leaflet": "^1.2.2",
     "@prismicio/vue": "^4.2.2",
+    "@vueuse/core": "^11.1.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "embla-carousel-vue": "^8.3.0",
     "gsap": "^3.12.5",
     "lenis": "^1.1.13",
     "lucide-vue-next": "^0.429.0",

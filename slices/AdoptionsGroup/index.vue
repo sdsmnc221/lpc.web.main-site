@@ -1,34 +1,39 @@
 <template>
   <section
+    ref="section"
     :data-slice-type="slice.slice_type"
     :data-slice-variation="slice.variation"
     class="adoptions-group bg-white"
   >
-    <prismic-rich-text
-      class="adoptions-group__title cl-black gloock-regular"
-      :field="title"
-    />
+    <div ref="scrollContainer" class="adoptions-group__container">
+      <div
+        class="adoptions-group__items"
+        :class="{ '--special': isSpecialAdoptionsGroup }"
+        v-if="itemsData?.length"
+      >
+        <div class="adoptions-group__text-content">
+          <prismic-rich-text
+            class="adoptions-group__title cl-black gloock-regular"
+            :field="title"
+          />
 
-    <prismic-rich-text
-      v-if="description"
-      class="adoptions-group__description cl-black albert-sans-regular"
-      :field="description"
-    />
+          <prismic-rich-text
+            v-if="description"
+            class="adoptions-group__description cl-black albert-sans-regular"
+            :field="description"
+          />
+        </div>
 
-    <div
-      class="adoptions-group__items"
-      :class="{ '--special': isSpecialAdoptionsGroup }"
-      v-if="itemsData?.length"
-    >
-      <cat-item
-        v-for="cat in itemsData"
-        :key="`adoptions-group-cat-${cat.id}`"
-        v-bind="cat.data"
-        :contact-info="contactInfo"
-        :adoption-requirements="adoptionRequirements"
-        :avatar-placeholder="avatarPlaceholder"
-        :id="cat.id"
-      ></cat-item>
+        <cat-item
+          v-for="cat in itemsData"
+          :key="`adoptions-group-cat-${cat.id}`"
+          v-bind="cat.data"
+          :contact-info="contactInfo"
+          :adoption-requirements="adoptionRequirements"
+          :avatar-placeholder="avatarPlaceholder"
+          :id="cat.id"
+        ></cat-item>
+      </div>
     </div>
   </section>
 </template>
@@ -39,6 +44,9 @@ import { type Content } from "@prismicio/client";
 import CatItem from "@/components/CatItem/index.vue";
 
 const { client } = usePrismic();
+
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const runtimeConfig = useRuntimeConfig();
 
@@ -83,6 +91,40 @@ const { data: catAvatarPlaceholder } = await useAsyncData(
 const avatarPlaceholder = computed(
   () => catAvatarPlaceholder.value?.data?.image ?? null
 );
+
+gsap.registerPlugin(ScrollTrigger);
+
+const scrollContainer = ref(null);
+const section = ref(null);
+
+const initHorizontalScroll = () => {
+  const container = scrollContainer.value;
+  if (container) {
+    const containerWidth = (container as HTMLElement).scrollWidth;
+    const windowWidth = window.innerWidth;
+    const GAP = window.innerWidth / 8;
+
+    gsap.to(container, {
+      x: -(containerWidth - windowWidth),
+      ease: "sine.inOut",
+      scrollTrigger: {
+        trigger: section.value,
+        start: "top top",
+        end: `+=${containerWidth}`,
+        scrub: true,
+        pin: true,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+      },
+    });
+  }
+};
+
+onMounted(() => {
+  nextTick(() => {
+    initHorizontalScroll();
+  });
+});
 </script>
 
 <style lang="scss">
@@ -103,35 +145,69 @@ const avatarPlaceholder = computed(
 
   &__items {
     margin-top: var(--spacing-l);
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-start;
-
-    &.--special {
-      .cat-item {
-        margin: 0 calc((100% - 22% * 4) / 4);
-        margin-top: var(--spacing-m);
-      }
-    }
   }
 }
 
-@container app (min-width: 700px) {
-  .adoptions-group {
+.adoptions-group {
+  height: 100vh;
+  overflow: hidden;
+  overflow-x: scroll;
+  display: flex;
 
-    &__description {
-      columns: 2;
-      column-gap: 12%;
+  &__container {
+    height: 100%;
+  }
+
+  &__items {
+    display: flex;
+    height: 100%;
+
+    & > * {
+      margin-right: 6vw;
+      margin-left: 6vw;
+    }
+  }
+
+  &__text-content {
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+@container app (max-width: 699px) {
+  .adoptions-group {
+    &__container {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    &__text-content {
+      width: auto;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      & > * {
+        width: 100vw;
+        padding: 8vw;
+
+        &:first-child {
+          * {
+            @include ft-s(large);
+          }
+        }
+      }
     }
 
     &__items {
-      &.--special {
-        .cat-item {
-          margin: 0 calc((100% - 20% * 4) / 4);
-          margin-top: var(--spacing-l);
-        }
+      & > * {
+        margin-right: 6vh;
+        margin-left: 6vh;
       }
     }
   }

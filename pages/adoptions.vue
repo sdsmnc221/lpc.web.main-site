@@ -107,6 +107,14 @@ onMounted(() => {
 
 <style lang="scss">
 .app.--adoptions {
+  padding-right: 0;
+  padding-left: 0;
+
+  & > *:not(.adoptions-group) {
+    padding-right: 8vw;
+    padding-left: 8vw;
+  }
+
   .multi-text-block {
     & > div:not(:first-of-type) {
       margin-top: var(--spacing-m);
