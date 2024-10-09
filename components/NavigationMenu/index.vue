@@ -85,6 +85,7 @@ onMounted(() => {
     padding-bottom: 0;
     align-items: center;
     justify-content: center;
+    z-index: 3;
   }
 
   a {

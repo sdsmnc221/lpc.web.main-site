@@ -102,7 +102,6 @@ const initHorizontalScroll = () => {
   if (container) {
     const containerWidth = (container as HTMLElement).scrollWidth;
     const windowWidth = window.innerWidth;
-    const GAP = window.innerWidth / 8;
 
     gsap.to(container, {
       x: -(containerWidth - windowWidth),
@@ -113,6 +112,7 @@ const initHorizontalScroll = () => {
         end: `+=${containerWidth}`,
         scrub: true,
         pin: true,
+        pinnedContainer: section.value,
         anticipatePin: 1,
         invalidateOnRefresh: true,
       },
