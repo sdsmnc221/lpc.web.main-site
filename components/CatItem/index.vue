@@ -1,7 +1,7 @@
 <template>
   <div class="cat-item">
-    <Drawer :open="defaultOpen" @update:open="onOpen">
-      <DrawerTrigger>
+    <Sheet :open="defaultOpen" @update:open="onOpen">
+      <SheetTrigger>
         <prismic-image
           class="cat-item__photo"
           :field="catHasAvatar ? catphoto : avatarPlaceholder"
@@ -30,18 +30,18 @@
             <span class="albert-sans-light" v-if="catsexe">{{ catsexe }}</span>
           </p>
         </div>
-      </DrawerTrigger>
+      </SheetTrigger>
 
-      <DrawerContent>
-        <DrawerHeader class="cat-item__fiche">
-          <DrawerTitle>
+      <SheetContent side="bottom">
+        <SheetHeader class="cat-item__fiche">
+          <SheetTitle>
             <prismic-image
               class="cat-item__fiche__avatar"
               :class="{ '--placeholder': !catHasAvatar }"
               :field="catHasAvatar ? catphoto : avatarPlaceholder"
             />
-          </DrawerTitle>
-          <DrawerDescription>
+          </SheetTitle>
+          <SheetDescription>
             <div class="cat-item__fiche__content">
               <h4 class="cat-item__fiche__title">
                 <span class="albert-sans-bold size-medium">{{ catname }}</span>
@@ -82,30 +82,30 @@
                 <prismic-rich-text :field="adoptionRequirements" />
               </div>
             </div>
-          </DrawerDescription>
-        </DrawerHeader>
-        <DrawerFooter>
+          </SheetDescription>
+        </SheetHeader>
+        <SheetFooter>
           <p class="cat-item__fiche__footer albert-sans-light size-regular">
             Fiche publiée le {{ createddate }}
           </p>
-        </DrawerFooter>
-      </DrawerContent>
-    </Drawer>
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
   </div>
 </template>
 
 <script setup lang="ts">
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+
 import {
-  Drawer,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 type Image = {
   dimensions: {
