@@ -107,6 +107,67 @@ const groupTitle = ref(null);
 const groupDescription = ref(null);
 const catItems = ref([]);
 
+const goParallax = (containerWidth, windowWidth) => {
+  gsap.to(textContent.value, {
+    x: windowWidth * 0.05,
+    ease: "circ.out",
+    scrollTrigger: {
+      trigger: section.value,
+      start: "top top",
+      end: `+=${containerWidth}`,
+      scrub: true,
+    },
+  });
+
+  if (groupTitle.value?.$el) {
+    gsap.to(groupTitle.value.$el, {
+      x: windowWidth * 0.2,
+      ease: "circ.in",
+      scrollTrigger: {
+        trigger: section.value,
+        start: "top top",
+        end: `+=${containerWidth}`,
+        scrub: true,
+      },
+    });
+  }
+
+  if (groupDescription.value?.$el) {
+    gsap.to(groupDescription.value.$el, {
+      x: windowWidth * 0.05,
+      ease: "circ.out",
+      scrollTrigger: {
+        trigger: section.value,
+        start: "top top",
+        end: `+=${containerWidth}`,
+        scrub: true,
+      },
+    });
+  }
+
+  catItems.value.forEach((item, itemIndex) => {
+    const childrenNodes = [
+      ...(item as HTMLElement).querySelectorAll(
+        "button > *:not(.cat-item__explore)"
+      ),
+    ];
+
+    childrenNodes.forEach((child, index) => {
+      gsap.to(child, {
+        y: 32 * (index + 1), // Staggered parallax effect
+        x: 32 * (0.02 * (index + 1) * (itemIndex + 1)), // Staggered parallax effect
+        ease: "sine.out",
+        scrollTrigger: {
+          trigger: section.value,
+          start: "top top",
+          end: `+=${containerWidth}`,
+          scrub: true,
+        },
+      });
+    });
+  });
+};
+
 const initHorizontalScroll = () => {
   const container = scrollContainer.value;
 
@@ -115,6 +176,8 @@ const initHorizontalScroll = () => {
 
     const containerWidth = (container as HTMLElement).scrollWidth;
     const windowWidth = window.innerWidth;
+
+    const usingSmoothScroll = !matchMedia("(hover: none)").matches;
 
     // Main horizontal scroll animation
     gsap.to(container, {
@@ -127,71 +190,14 @@ const initHorizontalScroll = () => {
         scrub: true,
         pin: true,
         pinnedContainer: section.value,
-        pinType: "transform",
+        pinType: usingSmoothScroll ? "transform" : "fixed",
         anticipatePin: 1,
         invalidateOnRefresh: true,
       },
     });
 
     // Parallax effect
-    gsap.to(textContent.value, {
-      x: windowWidth * 0.05,
-      ease: "circ.out",
-      scrollTrigger: {
-        trigger: section.value,
-        start: "top top",
-        end: `+=${containerWidth}`,
-        scrub: true,
-      },
-    });
-
-    if (groupTitle.value?.$el) {
-      gsap.to(groupTitle.value.$el, {
-        x: windowWidth * 0.2,
-        ease: "circ.in",
-        scrollTrigger: {
-          trigger: section.value,
-          start: "top top",
-          end: `+=${containerWidth}`,
-          scrub: true,
-        },
-      });
-    }
-
-    if (groupDescription.value?.$el) {
-      gsap.to(groupDescription.value.$el, {
-        x: windowWidth * 0.05,
-        ease: "circ.out",
-        scrollTrigger: {
-          trigger: section.value,
-          start: "top top",
-          end: `+=${containerWidth}`,
-          scrub: true,
-        },
-      });
-    }
-
-    catItems.value.forEach((item, itemIndex) => {
-      const childrenNodes = [
-        ...(item as HTMLElement).querySelectorAll(
-          "button > *:not(.cat-item__explore)"
-        ),
-      ];
-
-      childrenNodes.forEach((child, index) => {
-        gsap.to(child, {
-          y: 32 * (index + 1), // Staggered parallax effect
-          x: 32 * (0.02 * (index + 1) * (itemIndex + 1)), // Staggered parallax effect
-          ease: "sine.out",
-          scrollTrigger: {
-            trigger: section.value,
-            start: "top top",
-            end: `+=${containerWidth}`,
-            scrub: true,
-          },
-        });
-      });
-    });
+    goParallax(containerWidth, windowWidth);
 
     emits("gsap-init-done");
   }
