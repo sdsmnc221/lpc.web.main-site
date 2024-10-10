@@ -12,6 +12,7 @@
       v-for="(group, index) in adoptionsGroup"
       :key="`${group.id}-${index}`"
       :slice="group"
+      @gsap-init-done="onGsapInitDone"
     ></adoptions-group>
   </Suspense>
 
@@ -21,7 +22,6 @@
 </template>
 
 <script setup lang="ts">
-import { watch } from "vue";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -67,6 +67,16 @@ const adoptionsGroup = computed(() =>
 const popOutText = computed(() =>
   adoptions.value?.data?.slices.find((s) => s?.slice_type === "pop_out_text")
 );
+
+const emits = defineEmits(["gsap-init-done"]);
+const gsapPartialInitDone = ref(0);
+const onGsapInitDone = () => {
+  gsapPartialInitDone.value += 1;
+
+  if (gsapPartialInitDone.value === adoptionsGroup.value?.length) {
+    emits("gsap-init-done");
+  }
+};
 
 const playFade = () => {
   const children = [...document.body.querySelectorAll(".adoptions-group > *")];

@@ -1,10 +1,16 @@
 <!-- https://uiverse.io/alexruix/tame-fly-42 -->
 
 <template>
-  <div class="page-loader slide-out-bottom">
+  <div class="page-loader" :class="{ 'slide-out-bottom': !show }">
     <div class="loader"></div>
   </div>
 </template>
+
+<script setup lang="ts">
+const props = defineProps<{
+  show: boolean;
+}>();
+</script>
 
 <style lang="css">
 .page-loader {
@@ -65,8 +71,10 @@
     1.4s both;
 }
 .slide-out-bottom {
-	-webkit-animation: slide-out-bottom 0.72s cubic-bezier(0.550, 0.085, 0.680, 0.530) 1.4s both;
-	        animation: slide-out-bottom 0.72s cubic-bezier(0.550, 0.085, 0.680, 0.530) 1.4s both;
+  -webkit-animation: slide-out-bottom 0.72s
+    cubic-bezier(0.55, 0.085, 0.68, 0.53) 1.4s both;
+  animation: slide-out-bottom 0.72s cubic-bezier(0.55, 0.085, 0.68, 0.53) 1.4s
+    both;
 }
 
 @keyframes loading-bounce {
@@ -171,26 +179,25 @@
 @-webkit-keyframes slide-out-bottom {
   0% {
     -webkit-transform: translateY(0);
-            transform: translateY(0);
+    transform: translateY(0);
     opacity: 1;
   }
   100% {
     -webkit-transform: translateY(1000px);
-            transform: translateY(1000px);
+    transform: translateY(1000px);
     opacity: 0;
   }
 }
 @keyframes slide-out-bottom {
   0% {
     -webkit-transform: translateY(0);
-            transform: translateY(0);
+    transform: translateY(0);
     opacity: 1;
   }
   100% {
     -webkit-transform: translateY(1000px);
-            transform: translateY(1000px);
+    transform: translateY(1000px);
     opacity: 0;
   }
 }
-
 </style>

@@ -1,21 +1,30 @@
 <template>
-  <transition name="page" mode="out-in">
-    <page-loader v-if="loading"></page-loader>
-  </transition>
+  <page-loader :show="loading"></page-loader>
+
   <NuxtLayout>
-    <NuxtPage />
+    <NuxtPage @gsap-init-done="onGsapInitDone" />
   </NuxtLayout>
 </template>
 
 <script setup lang="ts">
 import PageLoader from "@/components/PageLoader/index.vue";
 
+const route = useRoute();
+
 const loading = ref(true);
 
-onMounted(() => {
+const onGsapInitDone = () => {
   setTimeout(() => {
     loading.value = false;
   }, 1400);
+};
+
+onMounted(() => {
+  if (!route.path.includes("adoptions")) {
+    setTimeout(() => {
+      loading.value = false;
+    }, 1400);
+  }
 });
 </script>
 
@@ -35,7 +44,7 @@ onMounted(() => {
 
 <style lang="scss">
 #__nuxt {
-  &:has(.page-loader) {
+  &:has(.page-loader:not(.slide-out-bottom)) {
     width: 100dvw;
     height: 100svh;
     overflow: hidden;

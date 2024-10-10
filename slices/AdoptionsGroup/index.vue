@@ -11,14 +11,16 @@
         :class="{ '--special': isSpecialAdoptionsGroup }"
         v-if="itemsData?.length"
       >
-        <div class="adoptions-group__text-content">
+        <div ref="textContent" class="adoptions-group__text-content">
           <prismic-rich-text
+            ref="groupTitle"
             class="adoptions-group__title cl-black gloock-regular"
             :field="title"
           />
 
           <prismic-rich-text
             v-if="description"
+            ref="groupDescription"
             class="adoptions-group__description cl-black albert-sans-regular"
             :field="description"
           />
@@ -94,15 +96,26 @@ const avatarPlaceholder = computed(
 
 gsap.registerPlugin(ScrollTrigger);
 
+const emits = defineEmits(["gsap-init-done"]);
+
 const scrollContainer = ref(null);
 const section = ref(null);
 
+const textContent = ref(null);
+const groupTitle = ref(null);
+const groupDescription = ref(null);
+const catItems = ref([]);
+
 const initHorizontalScroll = () => {
   const container = scrollContainer.value;
+
   if (container) {
+    catItems.value = [...container.querySelectorAll(".cat-item")];
+
     const containerWidth = (container as HTMLElement).scrollWidth;
     const windowWidth = window.innerWidth;
 
+    // Main horizontal scroll animation
     gsap.to(container, {
       x: -(containerWidth - windowWidth),
       ease: "sine.inOut",
@@ -113,17 +126,86 @@ const initHorizontalScroll = () => {
         scrub: true,
         pin: true,
         pinnedContainer: section.value,
+        pinType: "transform",
         anticipatePin: 1,
         invalidateOnRefresh: true,
       },
     });
+
+    // Parallax effect
+    gsap.to(textContent.value, {
+      x: windowWidth * 0.05,
+      ease: "circ.out",
+      scrollTrigger: {
+        trigger: section.value,
+        start: "top top",
+        end: `+=${containerWidth}`,
+        scrub: true,
+      },
+    });
+
+    if (groupTitle.value?.$el) {
+      gsap.to(groupTitle.value.$el, {
+        x: windowWidth * 0.2,
+        ease: "circ.in",
+        scrollTrigger: {
+          trigger: section.value,
+          start: "top top",
+          end: `+=${containerWidth}`,
+          scrub: true,
+        },
+      });
+    }
+
+    if (groupDescription.value?.$el) {
+      gsap.to(groupDescription.value.$el, {
+        x: windowWidth * 0.05,
+        ease: "circ.out",
+        scrollTrigger: {
+          trigger: section.value,
+          start: "top top",
+          end: `+=${containerWidth}`,
+          scrub: true,
+        },
+      });
+    }
+
+    catItems.value.forEach((item, itemIndex) => {
+      const childrenNodes = [
+        ...(item as HTMLElement).querySelectorAll("button > *"),
+      ];
+
+      childrenNodes.forEach((child, index) => {
+        gsap.to(child, {
+          y: 32 * (index + 1), // Staggered parallax effect
+          x: 32 * (0.02 * (index + 1) * (itemIndex + 1)), // Staggered parallax effect
+          ease: "sine.out",
+          scrollTrigger: {
+            trigger: section.value,
+            start: "top top",
+            end: `+=${containerWidth}`,
+            scrub: true,
+          },
+        });
+      });
+    });
+
+    emits("gsap-init-done");
   }
+};
+
+const cleanupScrollTrigger = () => {
+  ScrollTrigger.getAll().forEach((st) => st.kill());
 };
 
 onMounted(() => {
   nextTick(() => {
     initHorizontalScroll();
   });
+});
+
+onUnmounted(() => {
+  cleanupScrollTrigger();
 });
 </script>
 
