@@ -176,7 +176,7 @@ const initHorizontalScroll = () => {
     const windowWidth = window.innerWidth;
 
     const usingSmoothScroll =
-      !matchMedia("(hover: none)").matches || !isGalaxyS();
+      !matchMedia("(hover: none)").matches && !isGalaxyS();
 
     // Main horizontal scroll animation
     gsap.to(container, {
