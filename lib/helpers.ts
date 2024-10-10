@@ -10,4 +10,27 @@ function isGalaxyS() {
   return galaxySRegex.test(userAgent);
 }
 
-export { isMobile, isGalaxyS };
+function isPC() {
+  const userAgent = navigator.userAgent.toLowerCase();
+  const mobileKeywords = [
+    "android",
+    "webos",
+    "iphone",
+    "ipad",
+    "ipod",
+    "blackberry",
+    "windows phone",
+  ];
+
+  // Check if the user agent doesn't contain any mobile keywords
+  const notMobile = !mobileKeywords.some((keyword) =>
+    userAgent.includes(keyword)
+  );
+
+  // Check if it's not a tablet (based on screen size)
+  const notTablet = window.innerWidth > 1024 || window.innerHeight > 1024;
+
+  return notMobile && notTablet;
+}
+
+export { isMobile, isGalaxyS, isPC };

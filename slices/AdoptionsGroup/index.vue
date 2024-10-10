@@ -47,7 +47,7 @@ const { client } = usePrismic();
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { isGalaxyS } from "@/lib/helpers";
+import { isPC } from "@/lib/helpers";
 
 const runtimeConfig = useRuntimeConfig();
 
@@ -176,28 +176,27 @@ const initHorizontalScroll = () => {
     const windowWidth = window.innerWidth;
 
     const usingSmoothScroll =
-      !matchMedia("(hover: none)").matches && !isGalaxyS();
+      // !matchMedia("(hover: none)").matches
 
-    // Main horizontal scroll animation
-    gsap.to(container, {
-      x: -(containerWidth - windowWidth),
-      ease: "sine.inOut",
-      scrollTrigger: {
-        trigger: section.value,
-        start: "top top",
-        end: `+=${containerWidth}`,
-        scrub: true,
-        pin: true,
-        pinnedContainer: section.value,
-        // pinType: "fixed", //usingSmoothScroll ? "transform" : "fixed",
-        // pinReparent: true,
-        // ...(usingSmoothScroll
-        //   ? { pinType: "transform" }
-        //   : { pinType: "fixed" }),
-        anticipatePin: 1,
-        invalidateOnRefresh: true,
-      },
-    });
+      // Main horizontal scroll animation
+      gsap.to(container, {
+        x: -(containerWidth - windowWidth),
+        ease: "sine.inOut",
+        scrollTrigger: {
+          trigger: section.value,
+          start: "top top",
+          end: `+=${containerWidth}`,
+          scrub: true,
+          pin: true,
+          pinnedContainer: section.value,
+          // pinType: "fixed", //usingSmoothScroll ? "transform" : "fixed",
+          // pinReparent: true,
+          ...(isPC() ? { pinType: "transform" } : {}),
+
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        },
+      });
 
     // Parallax effect
     goParallax(containerWidth, windowWidth);
