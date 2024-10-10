@@ -1,7 +1,7 @@
 <template>
   <div class="cat-item">
-    <Sheet :open="defaultOpen" @update:open="onOpen">
-      <SheetTrigger>
+    <Sheet>
+      <SheetTrigger @click="onOpen(true)">
         <prismic-image
           class="cat-item__photo"
           :field="catHasAvatar ? catphoto : avatarPlaceholder"
@@ -34,115 +34,42 @@
           </p>
         </div>
       </SheetTrigger>
-
-      <SheetContent side="bottom">
-        <SheetHeader class="cat-item__fiche">
-          <SheetTitle>
-            <prismic-image
-              class="cat-item__fiche__avatar"
-              :class="{ '--placeholder': !catHasAvatar }"
-              :field="catHasAvatar ? catphoto : avatarPlaceholder"
-            />
-          </SheetTitle>
-          <SheetDescription>
-            <div class="cat-item__fiche__content">
-              <h4 class="cat-item__fiche__title">
-                <span class="albert-sans-bold size-medium">{{ catname }}</span>
-              </h4>
-
-              <p class="cat-item__fiche__status albert-sans-regular size-20">
-                <span v-if="adoptionstatus">{{ adoptionstatus }} </span>
-                <span v-if="catsexe"> {{ catsexe }}</span>
-              </p>
-
-              <div class="cat-item__fiche__row">
-                <div class="cat-item__fiche__info" v-if="hasInfo">
-                  <p v-if="catagenumber && catagetype">
-                    Âge : {{ catagenumber }} {{ catagetype }}
-                  </p>
-                  <p v-if="catbirth">Né.e le : {{ catbirth }}</p>
-                  <p v-if="zipcode">Zone : {{ zipcode }}</p>
-                </div>
-
-                <div class="cat-item__fiche__badges">
-                  <Badge>{{ catidentification }}</Badge>
-                  <Badge>
-                    Vaccination : {{ catvaccination ? "✅" : "❌" }}
-                  </Badge>
-                  <Badge>
-                    Stérilisation : {{ catsterilization ? "✅" : "❌" }}
-                  </Badge>
-                </div>
-              </div>
-
-              <div class="cat-item__fiche__footnote">
-                <Separator label="Contact" />
-                <prismic-rich-text :field="contactInfo" />
-              </div>
-
-              <div class="cat-item__fiche__footnote">
-                <Separator label="Contrat d'adoption" />
-                <prismic-rich-text :field="adoptionRequirements" />
-              </div>
-            </div>
-          </SheetDescription>
-        </SheetHeader>
-        <SheetFooter>
-          <p class="cat-item__fiche__footer albert-sans-light size-regular">
-            Fiche publiée le {{ createddate }}
-          </p>
-        </SheetFooter>
-      </SheetContent>
     </Sheet>
+
+    <Teleport to="body">
+      <cat-sheet
+        :open="defaultOpen"
+        v-bind="{
+          id,
+          createddate,
+          catphoto,
+          catname,
+          catsexe,
+          catbirth,
+          catagenumber,
+          catagetype,
+          catdescription,
+          catidentification,
+          catvaccination,
+          catsterilization,
+          zipcode,
+          relatedcat,
+          adoptionstatus,
+          contactInfo,
+          adoptionRequirements,
+          avatarPlaceholder,
+        }"
+        @update:open="onOpen"
+      ></cat-sheet>
+    </Teleport>
   </div>
 </template>
 
 <script setup lang="ts">
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
+import { Sheet, SheetTrigger } from "@/components/ui/sheet";
+import CatSheet from "@/components/CatSheet/index.vue";
 
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-
-type Image = {
-  dimensions: {
-    width: number;
-    height: number;
-  };
-  alt: null | string;
-  copyright: null | string;
-  url: string;
-  id: string;
-  edit: any;
-};
-
-type CatInfo = {
-  index: number;
-  id: string;
-  createddate: string;
-  catphoto: Image;
-  catname: string;
-  catsexe?: string;
-  catbirth: string;
-  catagenumber?: number;
-  catagetype?: string;
-  catdescription?: any;
-  catidentification?: string;
-  catvaccination?: boolean;
-  catsterilization?: boolean;
-  zipcode?: null | number;
-  relatedcat?: any | null;
-  adoptionstatus?: string;
-  contactInfo?: any;
-  adoptionRequirements?: any;
-  avatarPlaceholder?: Image;
-};
+import type { CatInfo } from "~/interfaces/Cat";
 
 const router = useRouter();
 
@@ -150,13 +77,9 @@ const props = defineProps<CatInfo>();
 
 const catHasAvatar = computed(() => props.catphoto.hasOwnProperty("url"));
 
-const hasInfo = computed(
-  () =>
-    props.catbirth || props.zipcode || (props.catagenumber && props.catagetype)
-);
-
 const defaultOpen = ref(false);
 const onOpen = (opened: boolean) => {
+  console.log(opened);
   if (opened) {
     router.push({
       name: router.currentRoute.value.name,
