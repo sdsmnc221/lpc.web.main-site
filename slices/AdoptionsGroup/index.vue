@@ -27,13 +27,14 @@
         </div>
 
         <cat-item
-          v-for="cat in itemsData"
+          v-for="(cat, index) in itemsData"
           :key="`adoptions-group-cat-${cat.id}`"
           v-bind="cat.data"
           :contact-info="contactInfo"
           :adoption-requirements="adoptionRequirements"
           :avatar-placeholder="avatarPlaceholder"
           :id="cat.id"
+          :index="index"
         ></cat-item>
       </div>
     </div>
@@ -172,7 +173,9 @@ const initHorizontalScroll = () => {
 
     catItems.value.forEach((item, itemIndex) => {
       const childrenNodes = [
-        ...(item as HTMLElement).querySelectorAll("button > *"),
+        ...(item as HTMLElement).querySelectorAll(
+          "button > *:not(.cat-item__explore)"
+        ),
       ];
 
       childrenNodes.forEach((child, index) => {

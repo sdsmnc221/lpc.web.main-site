@@ -8,7 +8,10 @@
         />
 
         <h4 class="cat-item__name">
-          <span class="albert-sans-bold">{{ catname }}</span>
+          <span
+            :class="`${index % 2 === 0 ? 'gloock-regular' : 'albert-sans-bold'}`"
+            >{{ catname }}</span
+          >
         </h4>
 
         <div class="cat-item__explore">
@@ -120,6 +123,7 @@ type Image = {
 };
 
 type CatInfo = {
+  index: number;
   id: string;
   createddate: string;
   catphoto: Image;
@@ -192,10 +196,16 @@ watch(
   position: relative;
 
   &:nth-of-type(n) {
-    transform: translateY(var(--spacing-l));
+    transform: translateY(calc(var(--spacing-l) * -3));
   }
   &:nth-of-type(2n) {
     transform: translateY(calc(var(--spacing-l) * -1));
+  }
+
+  &:hover {
+    .cat-item__explore {
+      background-color: var(--black);
+    }
   }
 
   button {
@@ -224,11 +234,6 @@ watch(
     top: 14%;
     transform: translateY(-50%);
     left: 0;
-
-    span {
-      @include ft-s(xxlarge);
-      line-height: calc((var(--base-ft-size) * 4));
-    }
   }
 
   &__explore {
@@ -241,10 +246,6 @@ watch(
     padding: 0 var(--spacing-m);
     padding-bottom: 12vh;
     transition: all ease-in-out 0.64s;
-
-    &:hover {
-      background-color: var(--black);
-    }
 
     * {
       @include ft-s(20);
@@ -385,12 +386,6 @@ watch(
     .cat-item {
       width: 72vw;
 
-      &__name {
-        span {
-          @include ft-s(xlarge);
-        }
-      }
-
       &__info {
         * {
           @include ft-s(20);
@@ -476,6 +471,17 @@ watch(
   }
 }
 
+@media screen and (max-width: 699px) {
+  .cat-item {
+    &__name {
+      span {
+        font-size: calc((var(--base-ft-size) * 4));
+        line-height: calc((var(--base-ft-size) * 3));
+      }
+    }
+  }
+}
+
 @media screen and (min-width: 1000px) {
   .cat-item {
     &__fiche {
@@ -490,6 +496,13 @@ watch(
         &.--placeholder {
           object-fit: contain !important;
         }
+      }
+    }
+
+    &__name {
+      span {
+        font-size: calc((var(--base-ft-size) * 5));
+        line-height: calc((var(--base-ft-size) * 4));
       }
     }
   }
