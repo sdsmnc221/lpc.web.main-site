@@ -6,11 +6,7 @@
     class="adoptions-group bg-white"
   >
     <div ref="scrollContainer" class="adoptions-group__container">
-      <div
-        class="adoptions-group__items"
-        :class="{ '--special': isSpecialAdoptionsGroup }"
-        v-if="itemsData?.length"
-      >
+      <div class="adoptions-group__items" v-if="itemsData?.length">
         <div ref="textContent" class="adoptions-group__text-content">
           <prismic-rich-text
             ref="groupTitle"
