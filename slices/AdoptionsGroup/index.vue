@@ -191,9 +191,9 @@ const initHorizontalScroll = () => {
         pinnedContainer: section.value,
         // pinType: "fixed", //usingSmoothScroll ? "transform" : "fixed",
         // pinReparent: true,
-        ...(usingSmoothScroll
-          ? { pinType: "transform" }
-          : { pinType: "fixed" }),
+        // ...(usingSmoothScroll
+        //   ? { pinType: "transform" }
+        //   : { pinType: "fixed" }),
         anticipatePin: 1,
         invalidateOnRefresh: true,
       },
