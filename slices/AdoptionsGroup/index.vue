@@ -51,6 +51,8 @@ const { client } = usePrismic();
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+import { isMobile } from "@/lib/helpers";
+
 const runtimeConfig = useRuntimeConfig();
 
 // The array passed to `getSliceComponentProps` is purely optional.
@@ -177,7 +179,7 @@ const initHorizontalScroll = () => {
     const containerWidth = (container as HTMLElement).scrollWidth;
     const windowWidth = window.innerWidth;
 
-    const usingSmoothScroll = !matchMedia("(hover: none)").matches;
+    const usingSmoothScroll = isMobile();
 
     // Main horizontal scroll animation
     gsap.to(container, {
