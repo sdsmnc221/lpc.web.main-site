@@ -35,77 +35,24 @@
         </div>
       </SheetTrigger>
     </Sheet>
-
-    <Teleport to="body">
-      <cat-sheet
-        :open="defaultOpen"
-        v-bind="{
-          id,
-          createddate,
-          catphoto,
-          catname,
-          catsexe,
-          catbirth,
-          catagenumber,
-          catagetype,
-          catdescription,
-          catidentification,
-          catvaccination,
-          catsterilization,
-          zipcode,
-          relatedcat,
-          adoptionstatus,
-          contactInfo,
-          adoptionRequirements,
-          avatarPlaceholder,
-        }"
-        @update:open="onOpen"
-      ></cat-sheet>
-    </Teleport>
   </div>
 </template>
 
 <script setup lang="ts">
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
-import CatSheet from "@/components/CatSheet/index.vue";
 
 import type { CatInfo } from "~/interfaces/Cat";
 
-const router = useRouter();
-
 const props = defineProps<CatInfo>();
+
+const emits = defineEmits(["update:open-item"]);
 
 const catHasAvatar = computed(() => props.catphoto.hasOwnProperty("url"));
 
-const defaultOpen = ref(false);
 const onOpen = (opened: boolean) => {
-  console.log(opened);
-  if (opened) {
-    router.push({
-      name: router.currentRoute.value.name,
-      query: { id: props.id },
-    });
-    defaultOpen.value = true;
-  } else {
-    router.push({
-      name: router.currentRoute.value.name,
-    });
-  }
+  console.log(opened, props.id);
+  emits("update:open-item", { opened });
 };
-
-watch(
-  () => router.currentRoute.value,
-  (newRoute, oldRoute) => {
-    if (!newRoute.query.id) {
-      defaultOpen.value = false;
-    } else {
-      setTimeout(() => {
-        defaultOpen.value = props.id === newRoute.query.id;
-      }, 320);
-    }
-  },
-  { immediate: true, deep: true }
-);
 </script>
 
 <style lang="scss" scoped>

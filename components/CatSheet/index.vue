@@ -1,11 +1,11 @@
 <template>
-  <div class="cat-sheet" :class="{ '--hidden': !internalOpen }">
-    <div class="cat-sheet__grid">
+  <div class="cat-sheet" :class="{ '--hidden': !open }">
+    <div v-if="catItem" class="cat-sheet__grid">
       <div class="cat-sheet__grid__div1">
         <prismic-image
           class="cat-sheet__avatar"
           :class="{ '--placeholder': !catHasAvatar }"
-          :field="catHasAvatar ? catphoto : avatarPlaceholder"
+          :field="catHasAvatar ? catItem.catphoto : catItem.avatarPlaceholder"
         />
       </div>
 
@@ -13,7 +13,7 @@
         <prismic-image
           class="cat-sheet__avatar"
           :class="{ '--placeholder': catHasAvatar }"
-          :field="catHasAvatar ? catphoto : avatarPlaceholder"
+          :field="catHasAvatar ? catItem.catphoto : catItem.avatarPlaceholder"
         />
       </div>
 
@@ -23,8 +23,10 @@
 
       <div class="cat-sheet__grid__div4 cat-sheet__details">
         <p class="cat-sheet__details__status albert-sans-regular size-20">
-          <span v-if="adoptionstatus">{{ adoptionstatus }} </span>
-          <span v-if="catsexe"> {{ catsexe }}</span>
+          <span v-if="catItem.adoptionstatus"
+            >{{ catItem.adoptionstatus }}
+          </span>
+          <span v-if="catItem.catsexe"> {{ catItem.catsexe }}</span>
         </p>
 
         <div class="cat-sheet__details__description">
@@ -35,36 +37,42 @@
         </div>
 
         <div class="cat-sheet__details__info" v-if="hasInfo">
-          <p v-if="catagenumber && catagetype">
-            Âge : {{ catagenumber }} {{ catagetype }}
+          <p v-if="catItem.catagenumber && catItem.catagetype">
+            Âge : {{ catItem.catagenumber }} {{ catItem.catagetype }}
           </p>
-          <p v-if="catbirth">Né.e le : {{ catbirth }}</p>
-          <p v-if="zipcode">Zone : {{ zipcode }}</p>
+          <p v-if="catItem.catbirth">Né.e le : {{ catItem.catbirth }}</p>
+          <p v-if="catItem.zipcode">Zone : {{ catItem.zipcode }}</p>
         </div>
 
         <div class="cat-sheet__details__badges">
-          <Badge>{{ catidentification }}</Badge>
-          <Badge> Vaccination : {{ catvaccination ? "✅" : "❌" }} </Badge>
-          <Badge> Stérilisation : {{ catsterilization ? "✅" : "❌" }} </Badge>
+          <Badge>{{ catItem.catidentification }}</Badge>
+          <Badge>
+            Vaccination : {{ catItem.catvaccination ? "✅" : "❌" }}
+          </Badge>
+          <Badge>
+            Stérilisation : {{ catItem.catsterilization ? "✅" : "❌" }}
+          </Badge>
         </div>
       </div>
 
       <div class="cat-sheet__grid__div5">
         <h2 class="cat-sheet__title">
-          <span class="albert-sans-bold size-medium">{{ catname }}</span>
+          <span class="albert-sans-bold size-medium">{{
+            catItem.catname
+          }}</span>
         </h2>
         <p class="cat-sheet__publication albert-sans-light size-regular">
-          Fiche publiée le {{ createddate }}
+          Fiche publiée le {{ catItem.createddate }}
         </p>
       </div>
 
       <div class="cat-sheet__grid__div6 cat-sheet__footnote">
         <Separator label="Contact" />
-        <prismic-rich-text :field="contactInfo" />
+        <prismic-rich-text :field="catItem.contactInfo" />
 
         <div class="cat-sheet__details__footnote">
           <Separator label="Contrat d'adoption" />
-          <prismic-rich-text :field="adoptionRequirements" />
+          <prismic-rich-text :field="catItem.adoptionRequirements" />
         </div>
       </div>
     </div>
@@ -77,46 +85,35 @@ import { Separator } from "@/components/ui/separator";
 
 import type { CatInfo } from "~/interfaces/Cat";
 
-interface CatSheetInfo extends CatInfo {
+type CatSheetInfo = {
   open: boolean;
-}
+  catItem: CatInfo | null;
+};
 
 const props = defineProps<CatSheetInfo>();
 
-const emits = defineEmits(["update:open"]);
+const emits = defineEmits(["update:open-sheet"]);
 
-const internalOpen = ref<boolean>(props.open);
-
-const catHasAvatar = computed(() => props.catphoto?.hasOwnProperty("url"));
+const catHasAvatar = computed(() =>
+  props.catItem?.catphoto?.hasOwnProperty("url")
+);
 
 const hasInfo = computed(
   () =>
-    props.catbirth || props.zipcode || (props.catagenumber && props.catagetype)
+    props.catItem?.catbirth ||
+    props.catItem?.zipcode ||
+    (props.catItem?.catagenumber && props.catItem?.catagetype)
 );
 
 const closeSheet = () => {
-  internalOpen.value = false;
+  emits("update:open-sheet", { opened: false });
 };
-
-watch(
-  () => props.open,
-  (newOpen) => {
-    internalOpen.value = newOpen;
-  }
-);
-
-watch(
-  () => internalOpen.value,
-  (newOpen) => {
-    emits("update:open", newOpen);
-  }
-);
 </script>
 
 <style lang="scss" scoped>
 .cat-sheet {
-  width: 100vw;
-  height: 100vh;
+  // width: 100vw;
+  // height: 100vh;
   overflow: hidden;
   position: fixed;
   top: 0;
@@ -124,15 +121,12 @@ watch(
 
   z-index: 9;
 
-  background-color: red;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
+  display: block;
+  pointer-events: all;
 
   &.--hidden {
     display: none;
+    pointer-events: none;
   }
 
   &__grid {
@@ -142,20 +136,17 @@ watch(
     grid-column-gap: 0px;
     grid-row-gap: 0px;
 
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    background-color: var(--black);
 
     &__div1 {
       grid-area: 1 / 2 / 2 / 3;
-      background-color: blue;
     }
 
     &__div2 {
       grid-area: 3 / 4 / 4 / 5;
-      background-color: pink;
     }
 
     &__div3 {
@@ -167,6 +158,8 @@ watch(
       display: flex;
       justify-content: center;
       align-items: center;
+
+      cursor: pointer;
 
       &:hover {
         background-color: var(--black);
@@ -232,11 +225,16 @@ watch(
     }
 
     & > div {
+      position: relative;
       .cat-sheet__avatar {
         display: block;
         width: 100%;
-        height: 100%;
+        height: auto;
+        position: absolute;
+
         object-fit: cover;
+
+        border-radius: 0;
 
         &.--placeholder {
           object-fit: contain !important;

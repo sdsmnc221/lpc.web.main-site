@@ -31,16 +31,39 @@
           :avatar-placeholder="avatarPlaceholder"
           :id="cat.id"
           :index="index"
+          @update:open-item="
+            ({ opened }) =>
+              onOpenItem({
+                opened,
+                catItem: {
+                  ...cat.data,
+                  id: cat.id,
+                  contactInfo,
+                  adoptionRequirements,
+                  avatarPlaceholder,
+                },
+              })
+          "
         ></cat-item>
       </div>
     </div>
+
+    <Teleport to="body">
+      <cat-sheet
+        :open="defaultOpen"
+        :cat-item="currentCatItem"
+        @update:open-sheet="({ opened }) => onOpenSheet({ opened })"
+      ></cat-sheet>
+    </Teleport>
   </section>
 </template>
 
 <script setup lang="ts">
 import { type Content } from "@prismicio/client";
+import type { CatInfo } from "~/interfaces/Cat";
 
 import CatItem from "@/components/CatItem/index.vue";
+import CatSheet from "@/components/CatSheet/index.vue";
 
 const { client } = usePrismic();
 
@@ -48,8 +71,6 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { isPC } from "@/lib/helpers";
-
-const runtimeConfig = useRuntimeConfig();
 
 const router = useRouter();
 
@@ -65,10 +86,6 @@ const props = defineProps(
 );
 
 const primary = computed(() => props.slice.primary);
-
-const isSpecialAdoptionsGroup = computed(() =>
-  props.slice.id.includes(runtimeConfig.public.SPECIAL_ADOPTIONS_GROUP)
-);
 
 const title = computed(() => primary.value?.title);
 
@@ -95,6 +112,57 @@ const avatarPlaceholder = computed(
   () => catAvatarPlaceholder.value?.data?.image ?? null
 );
 
+const currentCatItem = ref<CatInfo | null>(null);
+
+const defaultOpen = ref(false);
+
+const commonOpen = (opened: boolean, catItem = null) => {
+  defaultOpen.value = opened;
+  if (opened) {
+    if (catItem) {
+      currentCatItem.value = catItem;
+
+      router.push({
+        name: router.currentRoute.value.name,
+        query: { id: catItem.id },
+      });
+    }
+  } else {
+    router.push({
+      name: router.currentRoute.value.name,
+    });
+
+    currentCatItem.value = null;
+  }
+};
+
+const onOpenItem = (details) => {
+  const { opened, catItem } = details;
+
+  commonOpen(opened, catItem);
+};
+
+const onOpenSheet = (details) => {
+  const { opened } = details;
+
+  commonOpen(opened);
+};
+
+watch(
+  () => router.currentRoute.value,
+  (newRoute, oldRoute) => {
+    if (!newRoute.query.id) {
+      defaultOpen.value = false;
+    } else {
+      setTimeout(() => {
+        defaultOpen.value = currentCatItem.value?.id === newRoute.query.id;
+      }, 320);
+    }
+  },
+  { immediate: true, deep: true }
+);
+
+/** GSAP */
 gsap.registerPlugin(ScrollTrigger);
 
 const emits = defineEmits(["gsap-init-done"]);
