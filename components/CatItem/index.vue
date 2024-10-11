@@ -221,18 +221,18 @@ watch(
     height: 52vh;
     position: relative;
 
-    &__avatar {
-      top: -32%;
-      left: 50%;
-      transform: translateX(-50%);
-      position: absolute;
-      display: block;
-      aspect-ratio: 1/1;
-      object-fit: cover;
-      width: 172px;
-      background-color: var(--gray);
-      border-radius: 50%;
-    }
+    // &__avatar {
+    //   top: -32%;
+    //   left: 50%;
+    //   transform: translateX(-50%);
+    //   position: absolute;
+    //   display: block;
+    //   aspect-ratio: 1/1;
+    //   object-fit: cover;
+    //   width: 172px;
+    //   background-color: var(--gray);
+    //   border-radius: 50%;
+    // }
 
     &__content {
       display: flex;
@@ -339,11 +339,11 @@ watch(
     &__fiche {
       height: 64vh;
 
-      &__avatar {
-        top: -32%;
-        width: 320px;
-        z-index: 10;
-      }
+      // &__avatar {
+      //   top: -32%;
+      //   width: 320px;
+      //   z-index: 10;
+      // }
 
       &__content {
         gap: var(--spacing-m);
@@ -385,11 +385,11 @@ watch(
   .cat-item {
     &__fiche {
       padding-left: 10vw;
-      &__avatar {
-        top: 50%;
-        left: 10%;
-        transform: translate(0, -50%);
-      }
+      // &__avatar {
+      //   top: 50%;
+      //   left: 10%;
+      //   transform: translate(0, -50%);
+      // }
     }
   }
 }
@@ -408,18 +408,18 @@ watch(
 @media screen and (min-width: 1000px) {
   .cat-item {
     &__fiche {
-      &__avatar {
-        top: 50% !important;
-        left: -2px !important;
-        transform: translateY(-50%) !important;
-        width: 32% !important;
-        height: 100% !important;
-        border-radius: 0 32px 32px 0 !important;
+      // &__avatar {
+      //   top: 50% !important;
+      //   left: -2px !important;
+      //   transform: translateY(-50%) !important;
+      //   width: 32% !important;
+      //   height: 100% !important;
+      //   border-radius: 0 32px 32px 0 !important;
 
-        &.--placeholder {
-          object-fit: contain !important;
-        }
-      }
+      //   &.--placeholder {
+      //     object-fit: contain !important;
+      //   }
+      // }
     }
 
     &__name {
@@ -436,9 +436,9 @@ watch(
     &__fiche {
       height: 66vh !important;
 
-      &__avatar {
-        top: -24% !important;
-      }
+      // &__avatar {
+      //   top: -24% !important;
+      // }
     }
   }
 }
