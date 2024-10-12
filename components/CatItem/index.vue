@@ -70,10 +70,22 @@ const onOpen = (opened: boolean) => {
   &:nth-of-type(2n) {
     transform: translateY(calc(var(--spacing-l) * -1));
   }
+  .cat-item__explore {
+    span {
+      display: inline-block;
+      position: relative;
+      transition: all ease-in-out 0.64s;
+    }
+  }
 
   &:hover {
     .cat-item__explore {
       background-color: var(--black);
+
+      span {
+        filter: blur(2.4px);
+        transform: translateY(48%) scale(1.2);
+      }
     }
   }
 

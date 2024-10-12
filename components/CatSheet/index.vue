@@ -1,6 +1,10 @@
 <template>
   <div class="cat-sheet" :class="{ '--hidden': !open }">
-    <div v-if="catItem" class="cat-sheet__grid">
+    <div
+      v-if="catItem"
+      class="cat-sheet__grid"
+      :style="`--random-tint: ${tint};`"
+    >
       <div class="cat-sheet__grid__div7">"></div>
       <div class="cat-sheet__grid__div8">"></div>
 
@@ -102,6 +106,7 @@ import type { CatInfo } from "~/interfaces/Cat";
 type CatSheetInfo = {
   open: boolean;
   catItem: CatInfo | null;
+  tint: string;
 };
 
 const props = defineProps<CatSheetInfo>();
@@ -148,6 +153,8 @@ const closeSheet = () => {
   }
 
   &__grid {
+    --random-tint: var(--white);
+
     display: grid;
     grid-template-columns: 0.5fr 1.2fr 1fr 1.2fr;
     grid-template-rows: 1.6fr 1fr 1.6fr 0.72fr;
@@ -158,6 +165,25 @@ const closeSheet = () => {
     height: 100vh;
 
     background-color: var(--black);
+
+    background-color: hsla(211.57894736842098, 8%, 58%, 1);
+    background-image: radial-gradient(
+        circle at 15% 85%,
+        hsla(0, 0%, 0%, 1) 19%,
+        transparent 84%
+      ),
+      radial-gradient(circle at 31% 1%, var(--random-tint), transparent 85%),
+      radial-gradient(
+        circle at 88% 87%,
+        hsla(209.99999999999997, 6%, 38%, 1) 3.6400864520532363%,
+        transparent 75.20902830975928%
+      ),
+      radial-gradient(
+        circle at 30% 27%,
+        hsla(314.00000000000006, 0%, 100%, 1) 14%,
+        transparent 90%
+      );
+    background-blend-mode: normal, normal, normal, normal;
 
     &__div1 {
       grid-area: 1 / 1 / 4 / 3;
@@ -174,8 +200,6 @@ const closeSheet = () => {
     &__div3 {
       grid-area: 4 / 1 / 5 / 3;
 
-      transition: all ease-in-out 0.64s;
-
       display: flex;
       justify-content: flex-start;
       align-items: center;
@@ -184,8 +208,11 @@ const closeSheet = () => {
 
       cursor: pointer;
 
+      transform-origin: left center;
+
       &:hover {
-        background-color: var(--black);
+        filter: blur(2.4px);
+        transform: scale(1.2);
       }
 
       .cat-sheet__trigger {
@@ -291,10 +318,11 @@ const closeSheet = () => {
         }
 
         &__publication {
-          width: 100%;
+          align-self: flex-start;
           padding: 0 var(--spacing-m);
           margin-top: var(--spacing-s);
           color: var(--gray);
+          background-color: var(--white);
           @include ft-s(small);
           font-style: italic;
           text-align: left;
@@ -325,12 +353,12 @@ const closeSheet = () => {
 
     &__div7 {
       grid-area: 1 / 1 / 5 / 2;
-      background-color: black;
+      // background-color: black;
     }
 
     &__div8 {
       grid-area: 1 / 2 / 5 / 2;
-      background-color: black;
+      // background-color: black;
     }
 
     & > div {
@@ -390,7 +418,7 @@ const closeSheet = () => {
 
         &__div3 {
           grid-area: 3 / 1 / 4 / 3;
-          background-color: black;
+
           justify-content: center;
           padding: 0;
 
@@ -464,9 +492,9 @@ const closeSheet = () => {
             }
 
             &__publication {
-              background-color: var(--white);
               color: var(--black);
               width: auto;
+              align-self: flex-end;
             }
           }
         }

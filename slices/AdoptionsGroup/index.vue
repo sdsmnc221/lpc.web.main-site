@@ -46,6 +46,7 @@
       <cat-sheet
         :open="defaultOpen"
         :cat-item="currentCatItem"
+        :tint="randomTint"
         @update:open-sheet="({ opened }) => onOpenSheet({ opened })"
       ></cat-sheet>
     </Teleport>
@@ -64,7 +65,7 @@ const { client } = usePrismic();
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { isPC } from "@/lib/helpers";
+import { isPC, randomHSLA } from "@/lib/helpers";
 
 const router = useRouter();
 
@@ -109,6 +110,7 @@ const avatarPlaceholder = computed(
 const currentCatItem = ref<CatInfo | null>(null);
 
 const defaultOpen = ref(false);
+const randomTint = ref(randomHSLA());
 
 const commonOpen = (opened: boolean, catItem = null) => {
   defaultOpen.value = opened;
@@ -156,6 +158,8 @@ const onOpenSheet = (details) => {
 watch(
   () => router.currentRoute.value,
   (newRoute, oldRoute) => {
+    randomTint.value = randomHSLA();
+
     if (!newRoute.query.id) {
       defaultOpen.value = false;
     } else {
