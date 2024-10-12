@@ -273,9 +273,9 @@ const closeSheet = () => {
           position: relative;
 
           & > div {
+            max-height: 20vh;
             overflow-y: scroll;
             text-align: right;
-            padding: var(--spacing-s);
             @include ft-s(regular);
             width: 100%;
           }
