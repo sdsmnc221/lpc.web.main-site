@@ -12,6 +12,7 @@
       v-for="(group, index) in adoptionsGroup"
       :key="`${group.id}-${index}`"
       :slice="group"
+      :index="index"
       @gsap-init-done="onGsapInitDone"
     ></adoptions-group>
   </Suspense>
