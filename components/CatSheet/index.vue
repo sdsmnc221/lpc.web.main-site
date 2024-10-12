@@ -22,19 +22,15 @@
       </div>
 
       <div class="cat-sheet__grid__div4 cat-sheet__details">
-        <p class="cat-sheet__details__status albert-sans-regular size-20">
-          <span v-if="catItem.adoptionstatus"
-            >{{ catItem.adoptionstatus }}
+        <p v-if="catItem.adoptionstatus" class="cat-sheet__details__status">
+          <span
+            v-for="(part, index) in catItem.adoptionstatus.split('-')"
+            :key="`${catItem.id}-status-${index}`"
+            :class="`${catItem.index % 2 === 0 ? 'gloock-regular' : 'albert-sans-bold'}`"
+            >{{ part }}
           </span>
           <span v-if="catItem.catsexe"> {{ catItem.catsexe }}</span>
         </p>
-
-        <div class="cat-sheet__details__description">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laborum
-          aliquam voluptatem enim, quaerat vitae, obcaecati error quasi sequi
-          quis aspernatur earum. Distinctio aliquid voluptates molestiae
-          sapiente deserunt atque ipsam quas.
-        </div>
 
         <div class="cat-sheet__details__info" v-if="hasInfo">
           <p v-if="catItem.catagenumber && catItem.catagetype">
@@ -42,6 +38,13 @@
           </p>
           <p v-if="catItem.catbirth">Né.e le : {{ catItem.catbirth }}</p>
           <p v-if="catItem.zipcode">Zone : {{ catItem.zipcode }}</p>
+        </div>
+
+        <div
+          v-if="catItem.catdescription"
+          class="cat-sheet__details__description"
+        >
+          <prismic-rich-text :field="catItem.catdescription" />
         </div>
 
         <div class="cat-sheet__details__badges">
@@ -57,9 +60,10 @@
 
       <div class="cat-sheet__grid__div5">
         <h2 class="cat-sheet__title">
-          <span class="albert-sans-bold size-medium">{{
-            catItem.catname
-          }}</span>
+          <span
+            :class="`${catItem.index % 2 === 0 ? 'gloock-regular' : 'albert-sans-bold'}`"
+            >{{ catItem.catname }}</span
+          >
         </h2>
         <p class="cat-sheet__publication albert-sans-light size-regular">
           Fiche publiée le {{ catItem.createddate }}
@@ -67,11 +71,13 @@
       </div>
 
       <div class="cat-sheet__grid__div6 cat-sheet__footnote">
-        <Separator label="Contact" />
-        <prismic-rich-text :field="catItem.contactInfo" />
+        <div class="cat-sheet__footnote__section">
+          <p class="cat-sheet__footnote__heading">Contact</p>
+          <prismic-rich-text :field="catItem.contactInfo" />
+        </div>
 
-        <div class="cat-sheet__details__footnote">
-          <Separator label="Contrat d'adoption" />
+        <div class="cat-sheet__footnote__section">
+          <p class="cat-sheet__footnote__heading">Contrat d'adoption</p>
           <prismic-rich-text :field="catItem.adoptionRequirements" />
         </div>
       </div>
@@ -81,7 +87,6 @@
 
 <script setup lang="ts">
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 
 import type { CatInfo } from "~/interfaces/Cat";
 
@@ -146,7 +151,7 @@ const closeSheet = () => {
     }
 
     &__div2 {
-      grid-area: 3 / 4 / 4 / 5;
+      grid-area: 2 / 4 / 3 / 5;
     }
 
     &__div3 {
@@ -169,25 +174,60 @@ const closeSheet = () => {
         color: var(--white);
         display: inline-block;
 
-        * {
-          @include ft-s(20);
-          text-transform: uppercase;
-        }
+        @include ft-s(24);
+        text-transform: uppercase;
       }
     }
 
     &__div4 {
       grid-area: 2 / 3 / 4 / 4;
-      background-color: chartreuse;
 
       display: flex;
       flex-direction: column;
       gap: var(--spacing-m);
 
+      color: var(--white);
+
       .cat-sheet__details {
-        &__status {
+        &__status,
+        &__info {
           width: 100%;
-          text-align: center;
+          text-align: right;
+          padding: 0 var(--spacing-s);
+          position: relative;
+
+          span {
+            @include ft-s(large);
+            font-weight: bold;
+            display: block;
+            line-height: 2.4rem;
+
+            &:nth-child(2) {
+              font-weight: normal;
+            }
+          }
+        }
+
+        &__status {
+          &::after {
+            content: "";
+            width: 100%;
+            height: 1px;
+            position: absolute;
+            bottom: -24%;
+            left: 0;
+            background-color: black;
+          }
+        }
+
+        &__info {
+          position: absolute;
+          width: unset;
+          right: 0;
+          top: 24%;
+          padding: 0 var(--spacing-s);
+          background-color: black;
+          z-index: 1;
         }
 
         &__description {
@@ -195,12 +235,34 @@ const closeSheet = () => {
           display: flex;
           justify-content: flex-end;
           align-items: flex-end;
+          padding: var(--spacing-m);
+          padding-bottom: var(--spacing-m);
+          position: relative;
+
+          & > * {
+            text-align: left;
+            padding: var(--spacing-s);
+            @include ft-s(regular);
+            width: 100%;
+
+            &::after {
+              content: "";
+              width: 100%;
+              height: 1px;
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              background-color: black;
+            }
+          }
         }
 
         &__badges {
           flex: 1;
           display: flex;
           flex-direction: column;
+          gap: 0.72rem;
+          padding: var(--spacing-m);
 
           justify-content: flex-end;
           align-items: flex-end;
@@ -211,17 +273,55 @@ const closeSheet = () => {
 
     &__div5 {
       grid-area: 1 / 4 / 2 / 5;
-      background-color: aqua;
 
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+
+      .cat-sheet {
+        &__title {
+          width: 100%;
+          color: var(--white);
+          text-transform: uppercase;
+          padding: 0 var(--spacing-m);
+          text-align: left;
+          position: relative;
+
+          span {
+            font-size: calc((var(--base-ft-size) * 5));
+            line-height: calc((var(--base-ft-size) * 4));
+          }
+        }
+
+        &__publication {
+          width: 100%;
+          padding: 0 var(--spacing-m);
+          margin-top: var(--spacing-s);
+          color: var(--gray);
+          @include ft-s(small);
+          font-style: italic;
+          text-align: left;
+        }
+      }
     }
 
     &__div6 {
       grid-area: 4 / 2 / 5 / 5;
-      background-color: magenta;
+      .cat-sheet {
+        &__footnote {
+          &__section {
+            color: var(--white);
+            line-height: 1.2rem;
+          }
+
+          &__heading {
+            font-weight: bold;
+            margin-top: var(--spacing-s);
+            text-decoration: underline;
+          }
+        }
+      }
     }
 
     & > div {

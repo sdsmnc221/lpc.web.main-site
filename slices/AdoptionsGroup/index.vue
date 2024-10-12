@@ -37,6 +37,7 @@
                 opened,
                 catItem: {
                   ...cat.data,
+                  index,
                   id: cat.id,
                   contactInfo,
                   adoptionRequirements,
