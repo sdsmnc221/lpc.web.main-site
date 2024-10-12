@@ -148,16 +148,10 @@ const playFade = (playOnMounted = false) => {
 };
 
 onMounted(() => {
-  getPage();
-
   playMagic();
 });
 
 onUpdated(() => {
-  getPage();
-
-  playFade();
-
   updateCount.value += 1;
 });
 
@@ -178,7 +172,11 @@ watch(
   () => route.name,
   (newRoute, oldRoute) => {
     if (newRoute !== oldRoute) {
+      getPage();
+
       updateCount.value = 0;
+
+      playFade();
     }
   },
   { immediate: true }
