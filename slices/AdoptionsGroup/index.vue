@@ -31,25 +31,43 @@
           :avatar-placeholder="avatarPlaceholder"
           :id="cat.id"
           :index="index"
+          @update:open-item="
+            ({ opened }) =>
+              onOpenItem({
+                opened,
+                catItem: formatCatItem({ cat, index }),
+              })
+          "
         ></cat-item>
       </div>
     </div>
+
+    <Teleport to="body">
+      <cat-sheet
+        :open="defaultOpen"
+        :cat-item="currentCatItem"
+        :tint="randomTint"
+        @update:open-sheet="({ opened }) => onOpenSheet({ opened })"
+      ></cat-sheet>
+    </Teleport>
   </section>
 </template>
 
 <script setup lang="ts">
 import { type Content } from "@prismicio/client";
+import type { CatInfo } from "~/interfaces/Cat";
 
 import CatItem from "@/components/CatItem/index.vue";
+import CatSheet from "@/components/CatSheet/index.vue";
 
 const { client } = usePrismic();
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { isPC } from "@/lib/helpers";
+import { isPC, randomHSLA } from "@/lib/helpers";
 
-const runtimeConfig = useRuntimeConfig();
+const router = useRouter();
 
 // The array passed to `getSliceComponentProps` is purely optional.
 // Consider it as a visual hint for you when templating your slice.
@@ -63,10 +81,6 @@ const props = defineProps(
 );
 
 const primary = computed(() => props.slice.primary);
-
-const isSpecialAdoptionsGroup = computed(() =>
-  props.slice.id.includes(runtimeConfig.public.SPECIAL_ADOPTIONS_GROUP)
-);
 
 const title = computed(() => primary.value?.title);
 
@@ -93,6 +107,101 @@ const avatarPlaceholder = computed(
   () => catAvatarPlaceholder.value?.data?.image ?? null
 );
 
+const currentCatItem = ref<CatInfo | null>(null);
+
+const defaultOpen = ref(false);
+const randomTint = ref(randomHSLA());
+
+const commonOpen = (opened: boolean, catItem = null) => {
+  defaultOpen.value = opened;
+  if (opened) {
+    if (catItem) {
+      currentCatItem.value = catItem;
+
+      router.push({
+        name: router.currentRoute.value.name,
+        query: { id: catItem.id },
+      });
+    }
+  } else {
+    router.push({
+      name: router.currentRoute.value.name,
+    });
+
+    currentCatItem.value = null;
+  }
+};
+
+const formatCatItem = ({ cat, index }) => {
+  return {
+    ...cat.data,
+    index,
+    id: cat.id,
+    contactInfo: contactInfo.value,
+    adoptionRequirements: adoptionRequirements.value,
+    avatarPlaceholder: avatarPlaceholder.value,
+  };
+};
+
+const onOpenItem = (details) => {
+  const { opened, catItem } = details;
+
+  commonOpen(opened, catItem);
+};
+
+const onOpenSheet = (details) => {
+  const { opened } = details;
+
+  commonOpen(opened);
+};
+
+watch(
+  () => defaultOpen.value,
+  () => {
+    if (defaultOpen.value) {
+      window.lenis?.stop();
+    } else {
+      window.lenis?.start();
+    }
+  }
+);
+
+watch(
+  () => router.currentRoute.value,
+  (newRoute, oldRoute) => {
+    randomTint.value = randomHSLA();
+
+    if (!newRoute.query.id) {
+      defaultOpen.value = false;
+    } else {
+      setTimeout(() => {
+        if (itemsData.value) {
+          const theCatIndex = itemsData.value?.findIndex(
+            (cat) => cat.id === newRoute.query.id
+          );
+
+          const theCat = formatCatItem({
+            cat: itemsData.value[theCatIndex],
+            index: theCatIndex,
+          });
+
+          currentCatItem.value = theCat;
+
+          defaultOpen.value = true;
+        } else {
+          router.push({
+            name: router.currentRoute.value.name,
+          });
+
+          currentCatItem.value = null;
+        }
+      }, 320);
+    }
+  },
+  { immediate: true, deep: true }
+);
+
+/** GSAP */
 gsap.registerPlugin(ScrollTrigger);
 
 const emits = defineEmits(["gsap-init-done"]);
@@ -105,9 +214,9 @@ const groupTitle = ref(null);
 const groupDescription = ref(null);
 const catItems = ref([]);
 
-const goParallax = (containerWidth, windowWidth) => {
+const goParallax = (TL, containerWidth, windowWidth) => {
   gsap.to(textContent.value, {
-    x: windowWidth * 0.05,
+    x: windowWidth * -0.032,
     ease: "circ.out",
     scrollTrigger: {
       trigger: section.value,
@@ -119,12 +228,12 @@ const goParallax = (containerWidth, windowWidth) => {
 
   if (groupTitle.value?.$el) {
     gsap.to(groupTitle.value.$el, {
-      x: windowWidth * 0.2,
+      x: windowWidth * 0.1,
       ease: "circ.in",
       scrollTrigger: {
         trigger: section.value,
         start: "top top",
-        end: `+=${containerWidth}`,
+        end: `+=${containerWidth * 3.2}`,
         scrub: true,
       },
     });
@@ -132,16 +241,64 @@ const goParallax = (containerWidth, windowWidth) => {
 
   if (groupDescription.value?.$el) {
     gsap.to(groupDescription.value.$el, {
-      x: windowWidth * 0.05,
-      ease: "circ.out",
+      x: windowWidth * 0.1,
+      ease: "circ.in",
       scrollTrigger: {
         trigger: section.value,
         start: "top top",
-        end: `+=${containerWidth}`,
+        end: `+=${containerWidth * 2}`,
         scrub: true,
       },
     });
+
+    const words = groupDescription.value.$el.textContent.split(" ");
+
+    groupDescription.value.$el.innerHTML = "";
+
+    const spans = words.map((w) => {
+      let sp = document.createElement("span");
+      sp.innerHTML = w + " ";
+
+      groupDescription.value.$el.appendChild(sp);
+
+      return sp;
+    });
+
+    // Create a separate timeline for spans animation
+    const spansTL = gsap.timeline({});
+
+    // Add span animations to the spans timeline
+    spans.forEach((span, index) => {
+      spansTL.to(span, {
+        backgroundColor: "red",
+        color: "black",
+        scrollTrigger: {
+          trigger: groupDescription.value.$el,
+          containerAnimation: TL,
+          start: `top+=${index * 20} top`,
+          end: `top+=${(index + 2) * 20}px top`,
+          scrub: true,
+        },
+        ease: "circ.out",
+      });
+    });
+
+    // Link the spans timeline to the main timeline's pause point
+    TL.add(spansTL, "pausePoint+=2%");
   }
+
+  // Continue horizontal scroll after pause
+  TL.to(
+    scrollContainer.value,
+    {
+      x: -(containerWidth - windowWidth),
+      ease: "sine.inOut",
+      onStart: () => {
+        console.log("Started horizontal scroll");
+      },
+    },
+    "pausePoint+=120%"
+  );
 
   catItems.value.forEach((item, itemIndex) => {
     const childrenNodes = [
@@ -150,16 +307,19 @@ const goParallax = (containerWidth, windowWidth) => {
       ),
     ];
 
+    const childTL = gsap.timeline({});
+
     childrenNodes.forEach((child, index) => {
-      gsap.to(child, {
-        y: 32 * (index + 1), // Staggered parallax effect
-        x: 32 * (0.02 * (index + 1) * (itemIndex + 1)), // Staggered parallax effect
+      childTL.to(child, {
+        y: 240 * (0.2 * (itemIndex + 1)), // Staggered parallax effect
+        x: -32 * (0.2 * (itemIndex + 1)), // Staggered parallax effect
         ease: "sine.out",
         scrollTrigger: {
-          trigger: section.value,
-          start: "top top",
-          end: `+=${containerWidth}`,
-          scrub: true,
+          trigger: child,
+          start: `top top`,
+          end: `top+=${containerWidth * (itemIndex + 1) * 0.72}px top`,
+          scrub: 0.2,
+          containerAnimation: TL,
         },
       });
     });
@@ -175,31 +335,38 @@ const initHorizontalScroll = () => {
     const containerWidth = (container as HTMLElement).scrollWidth;
     const windowWidth = window.innerWidth;
 
-    const usingSmoothScroll =
-      // !matchMedia("(hover: none)").matches
+    // const usingSmoothScroll = // !matchMedia("(hover: none)").matches
 
-      // Main horizontal scroll animation
-      gsap.to(container, {
-        x: -(containerWidth - windowWidth),
-        ease: "sine.inOut",
-        scrollTrigger: {
-          trigger: section.value,
-          start: "top top",
-          end: `+=${containerWidth}`,
-          scrub: true,
-          pin: true,
-          pinnedContainer: section.value,
-          // pinType: "fixed", //usingSmoothScroll ? "transform" : "fixed",
-          // pinReparent: true,
-          ...(isPC() ? { pinType: "transform" } : {}),
-
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
+    const TL = gsap.timeline({
+      scrollTrigger: {
+        trigger: section.value,
+        start: "top top",
+        end: `+=${containerWidth + windowWidth}`,
+        scrub: true,
+        pin: true,
+        pinnedContainer: section.value,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        ...(isPC() ? { pinType: "transform" } : {}),
+        onUpdate: (self) => {
+          // Ensure we're not exceeding the bounds of the animation
+          if (self.progress < 0) self.progress = 0;
+          if (self.progress > 1) self.progress = 1;
         },
-      });
+      },
+    });
+
+    // Main horizontal scroll animation
+    // Scroll to -10
+    TL.to(container, {
+      // x: -(containerWidth - windowWidth),
+      x: -10,
+    });
+
+    TL.add("pausePoint");
 
     // Parallax effect
-    goParallax(containerWidth, windowWidth);
+    goParallax(TL, containerWidth, windowWidth);
 
     emits("gsap-init-done");
   }
@@ -232,7 +399,7 @@ onUnmounted(() => {
     width: 100%;
 
     & > *:not(:first-child) {
-      margin-top: var(--spacing-m);
+      margin-top: var(--spacing-s);
     }
   }
 
@@ -307,10 +474,39 @@ onUnmounted(() => {
 }
 
 @container app (min-width: 1000px) {
-  .adoptions-group {
-    padding: 0 12vw;
-    margin-top: calc(var(--spacing-l) * 2);
-    margin-bottom: var(--spacing-l);
+  .app {
+    .adoptions-group {
+      margin-top: calc(var(--spacing-l) * 2);
+      margin-bottom: var(--spacing-l);
+
+      &__title {
+        position: absolute;
+        top: 0;
+        padding-right: 4.8vw;
+
+        h3 {
+          font-size: calc((var(--base-ft-size) * 6));
+        }
+      }
+
+      &__description {
+        position: absolute;
+        bottom: 10vh;
+
+        * {
+          @include ft-s(20);
+          color: var(--gray);
+        }
+
+        em {
+          font-weight: bold;
+          display: inline-block;
+          @include ft-s(large);
+          margin-bottom: var(--spacing-m);
+          padding-right: 4.8vw;
+        }
+      }
+    }
   }
 }
 </style>

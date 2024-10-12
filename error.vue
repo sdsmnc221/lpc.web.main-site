@@ -74,6 +74,7 @@ const errorTitle = computed(() => {
 const errorBody = computed(() => errorPage.value?.data?.errorcontent);
 
 onMounted(() => {
+  console.log(props.error);
   setTimeout(() => {
     loading.value = false;
   }, 1400);
@@ -90,14 +91,14 @@ onMounted(() => {
 <style lang="scss">
 .app:has(.emoji-banner) {
   .emoji-banner {
-    transform: translateX(-8vw);
+    // transform: translateX(-8vw);
   }
 }
 
 @container nuxt (max-width: 699px) {
   .app:has(.emoji-banner) {
     .emoji-banner {
-      transform: translateX(calc(var(--spacing-m) * -1));
+      // transform: translateX(calc(var(--spacing-m) * -1));
     }
   }
 }

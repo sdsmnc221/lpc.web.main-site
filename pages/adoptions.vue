@@ -12,6 +12,7 @@
       v-for="(group, index) in adoptionsGroup"
       :key="`${group.id}-${index}`"
       :slice="group"
+      :index="index"
       @gsap-init-done="onGsapInitDone"
     ></adoptions-group>
   </Suspense>
@@ -35,7 +36,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const { client } = usePrismic();
 
-const { data: adoptions, status } = await useAsyncData("adoptions", () =>
+const { data: adoptions } = await useAsyncData("adoptions", () =>
   client.getByUID("navigationpage", "adoptions")
 );
 
@@ -75,6 +76,7 @@ const onGsapInitDone = () => {
 
   if (gsapPartialInitDone.value === adoptionsGroup.value?.length) {
     emits("gsap-init-done");
+    playFade();
   }
 };
 
@@ -97,22 +99,8 @@ const playFade = () => {
 };
 
 onMounted(() => {
-  setTimeout(() => {
-    playFade();
-  }, 480);
+  // playFade();
 });
-
-// watch(
-//   () => status.value,
-//   (newStatus) => {
-//     if (newStatus === "success") {
-//       setTimeout(() => {
-//         playFade();
-//       }, 480);
-//     }
-//   },
-//   { immediate: true }
-// );
 </script>
 
 <style lang="scss">

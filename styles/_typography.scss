@@ -157,32 +157,52 @@
 
     https://stackoverflow.com/a/39269074/24528175
   */
-  font-size: calc((100vw - 2 * 48px) / 9);
+  font-size: calc((100vw - 2 * 48px) / 9) !important;
 
   @media screen and (min-width: 700px) {
-    font-size: calc((100vw - 2 * 48px) / 12);
+    font-size: calc((100vw - 2 * 48px) / 12) !important;
   }
 }
 
 @mixin ft-s($size) {
   @if $size == regular {
-    @extend .size-regular;
+    // @extend .size-regular;
+    font-size: var(--base-ft-size);
   } @else if $size == small {
-    @extend .size-small;
+    // @extend .size-small;
+    font-size: calc((var(--base-ft-size) * 0.9));
   } @else if $size == medium {
-    @extend .size-medium;
+    // @extend .size-medium;
+    font-size: calc((var(--base-ft-size) * 2));
   } @else if $size == large {
-    @extend .size-large;
+    // @extend .size-large;
+    font-size: calc((var(--base-ft-size) * 3));
   } @else if $size == xlarge {
-    @extend .size-xlarge;
+    // @extend .size-xlarge;
+    font-size: calc((var(--base-ft-size) * 4));
   } @else if $size == xxlarge {
-    @extend .size-xxlarge;
+    // @extend .size-xxlarge;
+    font-size: calc((var(--base-ft-size) * 5));
   } @else if $size == 16 {
-    @extend .size-16;
+    // @extend .size-16;
+    font-size: 1rem;
+    height: auto !important;
+    * {
+      line-height: 1.2rem;
+    }
   } @else if $size == 20 {
-    @extend .size-20;
+    // @extend .size-20;
+    font-size: 20px;
+    height: auto !important;
+    * {
+      line-height: 2.4rem;
+    }
   } @else if $size == 24 {
-    @extend .size-24;
+    // @extend .size-24;
+    font-size: 24px;
+    * {
+      line-height: 2.8rem;
+    }
   } @else {
     @error "Invalid size parameter: #{$size}. Valid options are regular, medium, large, xlarge, xxlarge, 16, 20, or 24.";
   }

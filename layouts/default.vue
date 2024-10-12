@@ -105,6 +105,8 @@ const playMagic = () => {
     // wrapper: document.body.querySelector("#__nuxt") as HTMLElement,
   });
 
+  window.lenis = lenis;
+
   lenis.on("scroll", ScrollTrigger.update);
 
   const raf = (time) => {
@@ -121,21 +123,19 @@ const playMagic = () => {
   requestAnimationFrame(raf);
 };
 
-const playFade = (playOnMounted = false) => {
+const playFade = () => {
   if (updateCount.value === 0) {
     const children = [
-      ...document.body.querySelectorAll(
-        ".app > *:not(.adoptions-group):not(.emoji-banner) > *"
-      ),
+      ...document.body.querySelectorAll(".app > *:not(.emoji-banner) > *"),
     ];
 
-    children.forEach((section, index) => {
+    children.forEach((section) => {
       gsap.from(section as any, {
         y: 240,
         opacity: 0,
         backgroundColor: "transparent",
-        delay: index < 2 && playOnMounted ? 1 + index * 0.4 : 0,
         filter: "blur(16px)",
+        delay: 0.2,
         scrollTrigger: {
           trigger: section as any,
           start: "top bottom",
@@ -148,16 +148,12 @@ const playFade = (playOnMounted = false) => {
 };
 
 onMounted(() => {
-  getPage();
-
   playMagic();
 });
 
 onUpdated(() => {
   getPage();
-
   playFade();
-
   updateCount.value += 1;
 });
 
