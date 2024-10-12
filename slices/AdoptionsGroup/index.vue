@@ -216,7 +216,7 @@ const catItems = ref([]);
 
 const goParallax = (TL, containerWidth, windowWidth) => {
   gsap.to(textContent.value, {
-    x: windowWidth * 0.05,
+    x: windowWidth * -0.032,
     ease: "circ.out",
     scrollTrigger: {
       trigger: section.value,
@@ -228,7 +228,7 @@ const goParallax = (TL, containerWidth, windowWidth) => {
 
   if (groupTitle.value?.$el) {
     gsap.to(groupTitle.value.$el, {
-      x: windowWidth * 0.2,
+      x: windowWidth * 0.048,
       ease: "circ.in",
       scrollTrigger: {
         trigger: section.value,
@@ -240,6 +240,17 @@ const goParallax = (TL, containerWidth, windowWidth) => {
   }
 
   if (groupDescription.value?.$el) {
+    gsap.to(groupDescription.value.$el, {
+      x: windowWidth * 0.1,
+      ease: "circ.in",
+      scrollTrigger: {
+        trigger: section.value,
+        start: "top top",
+        end: `+=${containerWidth}`,
+        scrub: true,
+      },
+    });
+
     const words = groupDescription.value.$el.textContent.split(" ");
 
     groupDescription.value.$el.innerHTML = "";
