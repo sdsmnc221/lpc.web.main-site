@@ -180,7 +180,7 @@ const closeSheet = () => {
       ),
       radial-gradient(
         circle at 30% 27%,
-        hsla(314.00000000000006, 0%, 100%, 1) 14%,
+        hsla(209.99999999999997, 6%, 38%, 1) 14%,
         transparent 90%
       );
     background-blend-mode: normal, normal, normal, normal;

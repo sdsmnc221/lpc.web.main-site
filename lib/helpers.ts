@@ -37,7 +37,7 @@ function randomHSLA() {
   const h = Math.floor(Math.random() * 360);
   const s = Math.floor(Math.random() * 100);
   const l = Math.floor(Math.random() * 100);
-  const a = Math.random().toFixed(2);
+  const a = (Math.random() * 0.48).toFixed(2);
   return `hsla(${h}, ${s}%, ${l}%, ${a})`;
 }
 
