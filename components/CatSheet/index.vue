@@ -419,22 +419,22 @@ const closeSheet = () => {
             &__badges {
               padding: var(--spacing-s);
               align-self: center;
-              align-items: center;
-              position: relative;
-              top: calc(var(--spacing-m) * -1);
+              position: fixed;
+              bottom: 32vh;
+              left: 0;
             }
 
             &__description {
               padding: var(--spacing-s);
               margin-top: var(--spacing-l);
-              margin-bottom: var(--spacing-l);
+
               padding-top: var(--spacing-l);
 
               width: 56vw;
 
-              * {
+              & > * {
                 text-align: right;
-                @include ft-s(small);
+                font-size: calc(var(--base-ft-size) * 0.72);
               }
             }
           }
@@ -446,7 +446,7 @@ const closeSheet = () => {
           .cat-sheet {
             &__title {
               padding-top: var(--spacing-m);
-              text-align: center;
+              text-align: right;
 
               span {
                 font-size: calc((var(--base-ft-size) * 3));
@@ -458,6 +458,7 @@ const closeSheet = () => {
               background-color: var(--white);
               color: var(--black);
               width: auto;
+              margin-left: var(--spacing-s);
             }
           }
         }
@@ -465,7 +466,6 @@ const closeSheet = () => {
         &__div6 {
           grid-area: 3 / 3 / 4 / 4;
           padding: var(--spacing-s);
-          border-top: thin solid black;
 
           .cat-sheet {
             &__footnote {
