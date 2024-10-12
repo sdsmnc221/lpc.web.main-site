@@ -156,6 +156,17 @@ const onOpenSheet = (details) => {
 };
 
 watch(
+  () => defaultOpen.value,
+  () => {
+    if (defaultOpen.value) {
+      window.lenis?.stop();
+    } else {
+      window.lenis?.start();
+    }
+  }
+);
+
+watch(
   () => router.currentRoute.value,
   (newRoute, oldRoute) => {
     randomTint.value = randomHSLA();

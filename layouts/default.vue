@@ -105,6 +105,8 @@ const playMagic = () => {
     // wrapper: document.body.querySelector("#__nuxt") as HTMLElement,
   });
 
+  window.lenis = lenis;
+
   lenis.on("scroll", ScrollTrigger.update);
 
   const raf = (time) => {
