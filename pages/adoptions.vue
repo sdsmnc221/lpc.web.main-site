@@ -75,6 +75,7 @@ const onGsapInitDone = () => {
 
   if (gsapPartialInitDone.value === adoptionsGroup.value?.length) {
     emits("gsap-init-done");
+    playFade();
   }
 };
 
@@ -97,7 +98,7 @@ const playFade = () => {
 };
 
 onMounted(() => {
-  playFade();
+  // playFade();
 });
 </script>
 
