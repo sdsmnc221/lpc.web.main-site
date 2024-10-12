@@ -272,7 +272,8 @@ const closeSheet = () => {
           padding-bottom: var(--spacing-m);
           position: relative;
 
-          & > * {
+          & > div {
+            overflow-y: scroll;
             text-align: right;
             padding: var(--spacing-s);
             @include ft-s(regular);
@@ -468,7 +469,7 @@ const closeSheet = () => {
 
               & > div {
                 text-align: right;
-                overflow-y: scroll;
+
                 height: 164px;
                 font-size: calc(var(--base-ft-size) * 0.72);
               }

@@ -156,11 +156,9 @@ onMounted(() => {
 onUpdated(() => {
   getPage();
 
-  setTimeout(() => {
-    playFade();
+  playFade();
 
-    updateCount.value += 1;
-  }, 480);
+  updateCount.value += 1;
 });
 
 watch(
