@@ -214,7 +214,7 @@ const groupTitle = ref(null);
 const groupDescription = ref(null);
 const catItems = ref([]);
 
-const goParallax = (containerWidth, windowWidth) => {
+const goParallax = (TL, containerWidth, windowWidth) => {
   gsap.to(textContent.value, {
     x: windowWidth * 0.05,
     ease: "circ.out",
@@ -240,15 +240,33 @@ const goParallax = (containerWidth, windowWidth) => {
   }
 
   if (groupDescription.value?.$el) {
-    gsap.to(groupDescription.value.$el, {
-      x: windowWidth * 0.05,
-      ease: "circ.out",
-      scrollTrigger: {
-        trigger: section.value,
-        start: "top top",
-        end: `+=${containerWidth}`,
-        scrub: true,
-      },
+    const words = groupDescription.value.$el.textContent.split(" ");
+
+    groupDescription.value.$el.innerHTML = "";
+
+    const spans = words.map((w) => {
+      let sp = document.createElement("span");
+      sp.innerHTML = w + " ";
+
+      groupDescription.value.$el.appendChild(sp);
+
+      return sp;
+    });
+
+    spans.forEach((span, index) => {
+      gsap.to(span, {
+        backgroundColor: "red",
+        color: "black",
+        scrollTrigger: {
+          trigger: groupDescription.value.$el,
+          containerAnimation: TL,
+          start: `left right-=${index * (windowWidth / 100)}`,
+          end: `+=${(index + 2) * (windowWidth / 100 + 20) - 20}`,
+
+          scrub: true,
+        },
+        ease: "circ.out",
+      });
     });
   }
 
@@ -264,12 +282,6 @@ const goParallax = (containerWidth, windowWidth) => {
         y: 32 * (index + 1), // Staggered parallax effect
         x: 32 * (0.02 * (index + 1) * (itemIndex + 1)), // Staggered parallax effect
         ease: "sine.out",
-        scrollTrigger: {
-          trigger: section.value,
-          start: "top top",
-          end: `+=${containerWidth}`,
-          scrub: true,
-        },
       });
     });
   });
@@ -284,31 +296,32 @@ const initHorizontalScroll = () => {
     const containerWidth = (container as HTMLElement).scrollWidth;
     const windowWidth = window.innerWidth;
 
-    const usingSmoothScroll =
-      // !matchMedia("(hover: none)").matches
+    // const usingSmoothScroll = // !matchMedia("(hover: none)").matches
 
-      // Main horizontal scroll animation
-      gsap.to(container, {
-        x: -(containerWidth - windowWidth),
-        ease: "sine.inOut",
-        scrollTrigger: {
-          trigger: section.value,
-          start: "top top",
-          end: `+=${containerWidth}`,
-          scrub: true,
-          pin: true,
-          pinnedContainer: section.value,
-          // pinType: "fixed", //usingSmoothScroll ? "transform" : "fixed",
-          // pinReparent: true,
-          ...(isPC() ? { pinType: "transform" } : {}),
-
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
+    // Main horizontal scroll animation
+    const TL = gsap.to(container, {
+      x: -(containerWidth - windowWidth),
+      ease: "none",
+      scrollTrigger: {
+        trigger: section.value,
+        start: "top top",
+        end: `+=${containerWidth + 120 * 20}`,
+        scrub: true,
+        pin: true,
+        pinnedContainer: section.value,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        ...(isPC() ? { pinType: "transform" } : {}),
+        onUpdate: (self) => {
+          // Ensure we're not exceeding the bounds of the animation
+          if (self.progress < 0) self.progress = 0;
+          if (self.progress > 1) self.progress = 1;
         },
-      });
+      },
+    });
 
     // Parallax effect
-    goParallax(containerWidth, windowWidth);
+    goParallax(TL, containerWidth, windowWidth);
 
     emits("gsap-init-done");
   }
@@ -341,7 +354,7 @@ onUnmounted(() => {
     width: 100%;
 
     & > *:not(:first-child) {
-      margin-top: var(--spacing-m);
+      margin-top: var(--spacing-s);
     }
   }
 
@@ -416,10 +429,39 @@ onUnmounted(() => {
 }
 
 @container app (min-width: 1000px) {
-  .adoptions-group {
-    padding: 0 12vw;
-    margin-top: calc(var(--spacing-l) * 2);
-    margin-bottom: var(--spacing-l);
+  .app {
+    .adoptions-group {
+      margin-top: calc(var(--spacing-l) * 2);
+      margin-bottom: var(--spacing-l);
+
+      &__title {
+        position: absolute;
+        top: 0;
+        padding-right: 4.8vw;
+
+        h3 {
+          font-size: calc((var(--base-ft-size) * 6));
+        }
+      }
+
+      &__description {
+        position: absolute;
+        bottom: 10vh;
+
+        * {
+          @include ft-s(20);
+          color: var(--gray);
+        }
+
+        em {
+          font-weight: bold;
+          display: inline-block;
+          @include ft-s(large);
+          margin-bottom: var(--spacing-m);
+          padding-right: 4.8vw;
+        }
+      }
+    }
   }
 }
 </style>
