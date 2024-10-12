@@ -253,38 +253,94 @@ const goParallax = (TL, containerWidth, windowWidth) => {
       return sp;
     });
 
-    spans.forEach((span, index) => {
-      gsap.to(span, {
-        backgroundColor: "red",
-        color: "black",
-        scrollTrigger: {
-          trigger: groupDescription.value.$el,
-          containerAnimation: TL,
-          start: `left right-=${index * (windowWidth / 100)}`,
-          end: `+=${(index + 2) * (windowWidth / 100 + 20) - 20}`,
-
-          scrub: true,
-        },
-        ease: "circ.out",
-      });
+    // Create a separate timeline for spans animation
+    const spansTL = gsap.timeline({
+      scrollTrigger: {
+        trigger: groupDescription.value.$el,
+        start: `top top`,
+        end: `+=${windowWidth * 2}px`,
+        scrub: 0.2,
+        containerAnimation: TL,
+      },
     });
+
+    // Add span animations to the spans timeline
+    spans.forEach((span, index) => {
+      spansTL.to(
+        span,
+        {
+          backgroundColor: "red",
+          color: "black",
+          duration: 4,
+          scrollTrigger: {
+            trigger: groupDescription.value.$el,
+            containerAnimation: TL,
+            start: `top+=${index * 20} top`,
+            end: `top+=${(index + 2) * 20} top`,
+            scrub: true,
+          },
+          ease: "circ.out",
+        },
+        index * 0.1
+      );
+    });
+
+    // Link the spans timeline to the main timeline's pause point
+    TL.add(spansTL, "pausePoint+=2%");
+
+    TL.add("catsStartingPoint");
   }
 
-  catItems.value.forEach((item, itemIndex) => {
-    const childrenNodes = [
-      ...(item as HTMLElement).querySelectorAll(
-        "button > *:not(.cat-item__explore)"
-      ),
-    ];
+  // catItems.value.forEach((item, itemIndex) => {
+  //   const childrenNodes = [
+  //     ...(item as HTMLElement).querySelectorAll(
+  //       "button > *:not(.cat-item__explore)"
+  //     ),
+  //   ];
 
-    childrenNodes.forEach((child, index) => {
-      gsap.to(child, {
-        y: 32 * (index + 1), // Staggered parallax effect
-        x: 32 * (0.02 * (index + 1) * (itemIndex + 1)), // Staggered parallax effect
-        ease: "sine.out",
-      });
-    });
-  });
+  //   const childTL = gsap.timeline({
+  //     scrollTrigger: {
+  //       trigger: scrollContainer.value,
+  //       start: `top top`,
+  //       end: `top+=${windowWidth * (itemIndex + 1) * 0.72}px top`,
+  //       scrub: 0.2,
+  //       containerAnimation: TL,
+  //     },
+  //   });
+
+  //   childrenNodes.forEach((child, index) => {
+  //     childTL.to(
+  //       child,
+  //       {
+  //         y: 32 * (index + 1), // Staggered parallax effect
+  //         x: 32 * (0.02 * (index + 1) * (itemIndex + 1)), // Staggered parallax effect
+  //         ease: "sine.out",
+  //         scrollTrigger: {
+  //           trigger: item,
+  //           start: `top top`,
+  //           end: `+=${windowWidth * 2}px`,
+  //         },
+  //       },
+  //       itemIndex * 0.1
+  //     );
+  //   });
+
+  //   TL.add(childTL, `catsStartingPoint`);
+
+  // Continue horizontal scroll after pause
+  TL.to(
+    scrollContainer.value,
+    {
+      x: -(containerWidth - windowWidth),
+      ease: "sine.inOut",
+      duration: 4,
+      onStart: () => {
+        console.log("Started horizontal scroll");
+      },
+    },
+    "pausePoint+=80%"
+  );
+  // });
 };
 
 const initHorizontalScroll = () => {
@@ -298,14 +354,11 @@ const initHorizontalScroll = () => {
 
     // const usingSmoothScroll = // !matchMedia("(hover: none)").matches
 
-    // Main horizontal scroll animation
-    const TL = gsap.to(container, {
-      x: -(containerWidth - windowWidth),
-      ease: "none",
+    const TL = gsap.timeline({
       scrollTrigger: {
         trigger: section.value,
         start: "top top",
-        end: `+=${containerWidth + 120 * 20}`,
+        end: `+=${containerWidth + windowWidth}`,
         scrub: true,
         pin: true,
         pinnedContainer: section.value,
@@ -319,6 +372,15 @@ const initHorizontalScroll = () => {
         },
       },
     });
+
+    // Main horizontal scroll animation
+    // Scroll to -10
+    TL.to(container, {
+      // x: -(containerWidth - windowWidth),
+      x: -10,
+    });
+
+    TL.add("pausePoint");
 
     // Parallax effect
     goParallax(TL, containerWidth, windowWidth);

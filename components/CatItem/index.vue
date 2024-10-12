@@ -83,7 +83,6 @@ const onOpen = (opened: boolean) => {
       background-color: var(--black);
 
       span {
-        filter: blur(2.4px);
         transform: translateY(48%) scale(1.2);
       }
     }
