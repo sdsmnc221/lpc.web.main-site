@@ -1,6 +1,9 @@
 <template>
   <div class="cat-sheet" :class="{ '--hidden': !open }">
     <div v-if="catItem" class="cat-sheet__grid">
+      <div class="cat-sheet__grid__div7">"></div>
+      <div class="cat-sheet__grid__div8">"></div>
+
       <div class="cat-sheet__grid__div1">
         <prismic-image
           class="cat-sheet__avatar"
@@ -12,7 +15,7 @@
       <div class="cat-sheet__grid__div2">
         <prismic-image
           class="cat-sheet__avatar"
-          :class="{ '--placeholder': catHasAvatar }"
+          :class="{ '--placeholder': !catHasAvatar }"
           :field="catHasAvatar ? catItem.catphoto : catItem.avatarPlaceholder"
         />
       </div>
@@ -130,6 +133,10 @@ const closeSheet = () => {
   top: 0;
   left: 0;
 
+  * {
+    transition: all ease-in-out 0.64s;
+  }
+
   z-index: 9;
 
   display: block;
@@ -153,22 +160,27 @@ const closeSheet = () => {
     background-color: var(--black);
 
     &__div1 {
-      grid-area: 1 / 2 / 2 / 3;
+      grid-area: 1 / 1 / 4 / 3;
     }
 
     &__div2 {
-      grid-area: 2 / 4 / 3 / 5;
+      grid-area: 2 / 4 / 4 / 5;
+
+      .cat-sheet__avatar {
+        object-fit: contain !important;
+      }
     }
 
     &__div3 {
-      grid-area: 1 / 1 / 2 / 2;
-      background-color: var(--gray-dark);
+      grid-area: 4 / 1 / 5 / 3;
 
       transition: all ease-in-out 0.64s;
 
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
+
+      padding-left: var(--spacing-m);
 
       cursor: pointer;
 
@@ -214,18 +226,6 @@ const closeSheet = () => {
           }
         }
 
-        &__status {
-          &::after {
-            content: "";
-            width: 100%;
-            height: 1px;
-            position: absolute;
-            bottom: -24%;
-            left: 0;
-            background-color: black;
-          }
-        }
-
         &__info {
           position: absolute;
           width: unset;
@@ -246,20 +246,10 @@ const closeSheet = () => {
           position: relative;
 
           & > * {
-            text-align: left;
+            text-align: right;
             padding: var(--spacing-s);
             @include ft-s(regular);
             width: 100%;
-
-            &::after {
-              content: "";
-              width: 100%;
-              height: 1px;
-              position: absolute;
-              bottom: 0;
-              left: 0;
-              background-color: black;
-            }
           }
         }
 
@@ -313,7 +303,10 @@ const closeSheet = () => {
     }
 
     &__div6 {
-      grid-area: 4 / 2 / 5 / 5;
+      grid-area: 4 / 3 / 5 / 5;
+      text-align: right;
+      padding: 0 var(--spacing-m);
+
       .cat-sheet {
         &__footnote {
           &__section {
@@ -330,12 +323,22 @@ const closeSheet = () => {
       }
     }
 
+    &__div7 {
+      grid-area: 1 / 1 / 5 / 2;
+      background-color: black;
+    }
+
+    &__div8 {
+      grid-area: 1 / 2 / 5 / 2;
+      background-color: black;
+    }
+
     & > div {
       position: relative;
       .cat-sheet__avatar {
         display: block;
         width: 100%;
-        height: auto;
+        height: 100%;
         position: absolute;
 
         object-fit: cover;
@@ -364,6 +367,7 @@ const closeSheet = () => {
 
         &__div1 {
           grid-area: 1 / 1 / 3 / 3;
+          background-color: black;
 
           .cat-sheet {
             &__avatar {
@@ -386,12 +390,14 @@ const closeSheet = () => {
 
         &__div3 {
           grid-area: 3 / 1 / 4 / 3;
+          background-color: black;
+          justify-content: center;
+          padding: 0;
+
           .cat-sheet__trigger {
             position: relative;
             z-index: 2;
-            @include ft-s(small);
-            background-color: var(--gray-dark);
-            padding: var(--spacing-s) var(--spacing-m);
+            @include ft-s(20);
           }
         }
 
@@ -406,6 +412,7 @@ const closeSheet = () => {
             }
 
             &__status {
+              margin-top: var(--spacing-s);
               & > *:first-child {
                 @include ft-s(medium);
               }
@@ -426,15 +433,15 @@ const closeSheet = () => {
             }
 
             &__description {
-              padding: var(--spacing-s);
               margin-top: var(--spacing-l);
-
-              padding-top: var(--spacing-l);
+              padding-right: var(--spacing-s);
 
               width: 56vw;
 
-              & > * {
+              & > div {
                 text-align: right;
+                overflow-y: scroll;
+                height: 164px;
                 font-size: calc(var(--base-ft-size) * 0.72);
               }
             }
@@ -443,6 +450,7 @@ const closeSheet = () => {
 
         &__div5 {
           grid-area: 1 / 2 / 2 / 4;
+          align-items: flex-end;
 
           .cat-sheet {
             &__title {
@@ -459,7 +467,6 @@ const closeSheet = () => {
               background-color: var(--white);
               color: var(--black);
               width: auto;
-              margin-left: var(--spacing-s);
             }
           }
         }
