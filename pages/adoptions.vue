@@ -97,7 +97,9 @@ const playFade = () => {
 };
 
 onMounted(() => {
-  playFade();
+  setTimeout(() => {
+    playFade();
+  }, 480);
 });
 </script>
 

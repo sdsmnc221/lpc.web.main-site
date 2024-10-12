@@ -128,7 +128,6 @@ const playFade = (playOnMounted = false) => {
         ".app > *:not(.adoptions-group):not(.emoji-banner) > *"
       ),
     ];
-    console.log(children);
 
     children.forEach((section, index) => {
       gsap.from(section as any, {
@@ -152,16 +151,16 @@ onMounted(() => {
   getPage();
 
   playMagic();
-
-  playFade();
 });
 
 onUpdated(() => {
   getPage();
 
-  playFade();
+  setTimeout(() => {
+    playFade();
 
-  updateCount.value += 1;
+    updateCount.value += 1;
+  }, 480);
 });
 
 watch(
