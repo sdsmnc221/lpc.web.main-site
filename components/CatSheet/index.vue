@@ -73,12 +73,18 @@
       <div class="cat-sheet__grid__div6 cat-sheet__footnote">
         <div class="cat-sheet__footnote__section">
           <p class="cat-sheet__footnote__heading">Contact</p>
-          <prismic-rich-text :field="catItem.contactInfo" />
+          <prismic-rich-text
+            :field="catItem.contactInfo"
+            class="cat-sheet__footnote__content"
+          />
         </div>
 
         <div class="cat-sheet__footnote__section">
           <p class="cat-sheet__footnote__heading">Contrat d'adoption</p>
-          <prismic-rich-text :field="catItem.adoptionRequirements" />
+          <prismic-rich-text
+            :field="catItem.adoptionRequirements"
+            class="cat-sheet__footnote__content"
+          />
         </div>
       </div>
     </div>
@@ -345,9 +351,140 @@ const closeSheet = () => {
 }
 
 @media screen and (max-width: 699px) {
-  .cat-sheet {
-    &__grid {
-      //mob
+  body {
+    .cat-sheet {
+      z-index: 999;
+
+      .cat-sheet__grid {
+        display: grid;
+        grid-template-columns: 0.5fr repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+
+        &__div1 {
+          grid-area: 1 / 1 / 3 / 3;
+
+          .cat-sheet {
+            &__avatar {
+              height: 100%;
+              width: auto;
+            }
+          }
+        }
+
+        &__div2 {
+          grid-area: 3 / 3 / 4 / 4;
+
+          img.cat-sheet__avatar {
+            bottom: 0;
+            height: 100%;
+            width: 100%;
+            object-fit: cover !important;
+          }
+        }
+
+        &__div3 {
+          grid-area: 3 / 1 / 4 / 3;
+          .cat-sheet__trigger {
+            position: relative;
+            z-index: 2;
+            @include ft-s(small);
+            background-color: var(--gray-dark);
+            padding: var(--spacing-s) var(--spacing-m);
+          }
+        }
+
+        &__div4 {
+          grid-area: 2 / 3 / 3 / 4;
+          gap: var(--spacing-s);
+
+          .cat-sheet__details {
+            &__info {
+              @include ft-s(small);
+              top: 28%;
+            }
+
+            &__status {
+              & > *:first-child {
+                @include ft-s(medium);
+              }
+
+              & > *:not(:first-child) {
+                line-height: 0.8rem;
+                @include ft-s(small);
+              }
+            }
+
+            &__badges {
+              padding: var(--spacing-s);
+              align-self: center;
+              align-items: center;
+              position: relative;
+              top: calc(var(--spacing-m) * -1);
+            }
+
+            &__description {
+              padding: var(--spacing-s);
+              margin-top: var(--spacing-l);
+              margin-bottom: var(--spacing-l);
+              padding-top: var(--spacing-l);
+
+              width: 56vw;
+
+              * {
+                text-align: right;
+                @include ft-s(small);
+              }
+            }
+          }
+        }
+
+        &__div5 {
+          grid-area: 1 / 2 / 2 / 4;
+
+          .cat-sheet {
+            &__title {
+              padding-top: var(--spacing-m);
+              text-align: center;
+
+              span {
+                font-size: calc((var(--base-ft-size) * 3));
+                line-height: calc((var(--base-ft-size) * 3));
+              }
+            }
+
+            &__publication {
+              background-color: var(--white);
+              color: var(--black);
+              width: auto;
+            }
+          }
+        }
+
+        &__div6 {
+          grid-area: 3 / 3 / 4 / 4;
+          padding: var(--spacing-s);
+          border-top: thin solid black;
+
+          .cat-sheet {
+            &__footnote {
+              justify-content: flex-end;
+              flex-direction: column;
+              display: flex;
+
+              &__section {
+                @include ft-s(small);
+                line-height: 0.98rem;
+              }
+
+              &__content {
+                background-color: rgba(0, 0, 0, 0.64);
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
