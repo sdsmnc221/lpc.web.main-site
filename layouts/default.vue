@@ -121,20 +121,17 @@ const playMagic = () => {
   requestAnimationFrame(raf);
 };
 
-const playFade = (playOnMounted = false) => {
+const playFade = () => {
   if (updateCount.value === 0) {
     const children = [
-      ...document.body.querySelectorAll(
-        ".app > *:not(.adoptions-group):not(.emoji-banner) > *"
-      ),
+      ...document.body.querySelectorAll(".app > *:not(.emoji-banner) > *"),
     ];
 
-    children.forEach((section, index) => {
+    children.forEach((section) => {
       gsap.from(section as any, {
         y: 240,
         opacity: 0,
         backgroundColor: "transparent",
-        delay: index < 2 && playOnMounted ? 1 + index * 0.4 : 0,
         filter: "blur(16px)",
         scrollTrigger: {
           trigger: section as any,
@@ -152,6 +149,7 @@ onMounted(() => {
 });
 
 onUpdated(() => {
+  getPage();
   updateCount.value += 1;
 });
 
@@ -172,11 +170,9 @@ watch(
   () => route.name,
   (newRoute, oldRoute) => {
     if (newRoute !== oldRoute) {
-      getPage();
-
       updateCount.value = 0;
 
-      // playFade();
+      playFade();
     }
   },
   { immediate: true }

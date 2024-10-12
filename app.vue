@@ -26,6 +26,15 @@ onMounted(() => {
     }, 1400);
   }
 });
+
+watch(
+  () => route.path,
+  (newRoute) => {
+    if (newRoute.includes("adoptions")) {
+      loading.value = true;
+    }
+  }
+);
 </script>
 
 <style>
