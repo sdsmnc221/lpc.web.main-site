@@ -176,7 +176,7 @@ watch(
 
       updateCount.value = 0;
 
-      playFade();
+      // playFade();
     }
   },
   { immediate: true }
