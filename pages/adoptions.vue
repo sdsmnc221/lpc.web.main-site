@@ -35,7 +35,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const { client } = usePrismic();
 
-const { data: adoptions, status } = await useAsyncData("adoptions", () =>
+const { data: adoptions } = await useAsyncData("adoptions", () =>
   client.getByUID("navigationpage", "adoptions")
 );
 
@@ -101,18 +101,6 @@ onMounted(() => {
     playFade();
   }, 480);
 });
-
-// watch(
-//   () => status.value,
-//   (newStatus) => {
-//     if (newStatus === "success") {
-//       setTimeout(() => {
-//         playFade();
-//       }, 480);
-//     }
-//   },
-//   { immediate: true }
-// );
 </script>
 
 <style lang="scss">

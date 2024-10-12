@@ -50,7 +50,6 @@ const emits = defineEmits(["update:open-item"]);
 const catHasAvatar = computed(() => props.catphoto.hasOwnProperty("url"));
 
 const onOpen = (opened: boolean) => {
-  console.log(opened, props.id);
   emits("update:open-item", { opened });
 };
 </script>

@@ -35,14 +35,7 @@
             ({ opened }) =>
               onOpenItem({
                 opened,
-                catItem: {
-                  ...cat.data,
-                  index,
-                  id: cat.id,
-                  contactInfo,
-                  adoptionRequirements,
-                  avatarPlaceholder,
-                },
+                catItem: formatCatItem({ cat, index }),
               })
           "
         ></cat-item>
@@ -137,6 +130,17 @@ const commonOpen = (opened: boolean, catItem = null) => {
   }
 };
 
+const formatCatItem = ({ cat, index }) => {
+  return {
+    ...cat.data,
+    index,
+    id: cat.id,
+    contactInfo: contactInfo.value,
+    adoptionRequirements: adoptionRequirements.value,
+    avatarPlaceholder: avatarPlaceholder.value,
+  };
+};
+
 const onOpenItem = (details) => {
   const { opened, catItem } = details;
 
@@ -156,7 +160,26 @@ watch(
       defaultOpen.value = false;
     } else {
       setTimeout(() => {
-        defaultOpen.value = currentCatItem.value?.id === newRoute.query.id;
+        if (itemsData.value) {
+          const theCatIndex = itemsData.value?.findIndex(
+            (cat) => cat.id === newRoute.query.id
+          );
+
+          const theCat = formatCatItem({
+            cat: itemsData.value[theCatIndex],
+            index: theCatIndex,
+          });
+
+          currentCatItem.value = theCat;
+
+          defaultOpen.value = true;
+        } else {
+          router.push({
+            name: router.currentRoute.value.name,
+          });
+
+          currentCatItem.value = null;
+        }
       }, 320);
     }
   },
