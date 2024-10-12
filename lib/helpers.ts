@@ -38,7 +38,7 @@ function randomHSLA() {
   const s = Math.floor(Math.random() * 100);
   const l = Math.floor(Math.random() * 100);
   const a = Math.random().toFixed(2);
-  return `hsla(${h}, ${s}%, ${l}%, 1)`;
+  return `hsla(${h}, ${s}%, ${l}%, ${a})`;
 }
 
 export { isMobile, isGalaxyS, isPC, randomHSLA };
