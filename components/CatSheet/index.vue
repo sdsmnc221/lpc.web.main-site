@@ -422,6 +422,7 @@ const closeSheet = () => {
               position: fixed;
               bottom: 32vh;
               left: 0;
+              margin-bottom: var(--spacing-s);
             }
 
             &__description {
@@ -466,6 +467,7 @@ const closeSheet = () => {
         &__div6 {
           grid-area: 3 / 3 / 4 / 4;
           padding: var(--spacing-s);
+          align-content: flex-end;
 
           .cat-sheet {
             &__footnote {
