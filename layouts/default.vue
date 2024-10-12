@@ -122,26 +122,28 @@ const playMagic = () => {
 };
 
 const playFade = () => {
-  if (updateCount.value === 0) {
-    const children = [
-      ...document.body.querySelectorAll(".app > *:not(.emoji-banner) > *"),
-    ];
+  nextTick(() => {
+    if (updateCount.value === 0) {
+      const children = [
+        ...document.body.querySelectorAll(".app > *:not(.emoji-banner) > *"),
+      ];
 
-    children.forEach((section) => {
-      gsap.from(section as any, {
-        y: 240,
-        opacity: 0,
-        backgroundColor: "transparent",
-        filter: "blur(16px)",
-        scrollTrigger: {
-          trigger: section as any,
-          start: "top bottom",
-        },
+      children.forEach((section) => {
+        gsap.from(section as any, {
+          y: 240,
+          opacity: 0,
+          backgroundColor: "transparent",
+          filter: "blur(16px)",
+          scrollTrigger: {
+            trigger: section as any,
+            start: "top bottom",
+          },
+        });
       });
-    });
 
-    updateCount.value += 1;
-  }
+      updateCount.value += 1;
+    }
+  });
 };
 
 onMounted(() => {
