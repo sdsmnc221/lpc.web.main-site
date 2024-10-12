@@ -33,7 +33,8 @@ watch(
     if (newRoute.includes("adoptions")) {
       loading.value = true;
     }
-  }
+  },
+  { immediate: true }
 );
 </script>
 

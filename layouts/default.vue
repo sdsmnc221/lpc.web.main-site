@@ -133,6 +133,7 @@ const playFade = () => {
         opacity: 0,
         backgroundColor: "transparent",
         filter: "blur(16px)",
+        delay: 0.2,
         scrollTrigger: {
           trigger: section as any,
           start: "top bottom",
