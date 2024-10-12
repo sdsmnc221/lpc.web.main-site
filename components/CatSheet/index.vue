@@ -241,7 +241,7 @@ const closeSheet = () => {
           display: flex;
           justify-content: flex-end;
           align-items: flex-end;
-          padding: var(--spacing-m);
+          padding-left: var(--spacing-m);
           padding-bottom: var(--spacing-m);
           position: relative;
 
