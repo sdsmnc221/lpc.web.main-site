@@ -1,7 +1,7 @@
 <template>
   <div class="cat-item">
-    <Sheet :open="defaultOpen" @update:open="onOpen">
-      <SheetTrigger>
+    <Sheet>
+      <SheetTrigger @click="onOpen(true)">
         <prismic-image
           class="cat-item__photo"
           :field="catHasAvatar ? catphoto : avatarPlaceholder"
@@ -34,155 +34,24 @@
           </p>
         </div>
       </SheetTrigger>
-
-      <SheetContent side="bottom">
-        <SheetHeader class="cat-item__fiche">
-          <SheetTitle>
-            <prismic-image
-              class="cat-item__fiche__avatar"
-              :class="{ '--placeholder': !catHasAvatar }"
-              :field="catHasAvatar ? catphoto : avatarPlaceholder"
-            />
-          </SheetTitle>
-          <SheetDescription>
-            <div class="cat-item__fiche__content">
-              <h4 class="cat-item__fiche__title">
-                <span class="albert-sans-bold size-medium">{{ catname }}</span>
-              </h4>
-
-              <p class="cat-item__fiche__status albert-sans-regular size-20">
-                <span v-if="adoptionstatus">{{ adoptionstatus }} </span>
-                <span v-if="catsexe"> {{ catsexe }}</span>
-              </p>
-
-              <div class="cat-item__fiche__row">
-                <div class="cat-item__fiche__info" v-if="hasInfo">
-                  <p v-if="catagenumber && catagetype">
-                    Âge : {{ catagenumber }} {{ catagetype }}
-                  </p>
-                  <p v-if="catbirth">Né.e le : {{ catbirth }}</p>
-                  <p v-if="zipcode">Zone : {{ zipcode }}</p>
-                </div>
-
-                <div class="cat-item__fiche__badges">
-                  <Badge>{{ catidentification }}</Badge>
-                  <Badge>
-                    Vaccination : {{ catvaccination ? "✅" : "❌" }}
-                  </Badge>
-                  <Badge>
-                    Stérilisation : {{ catsterilization ? "✅" : "❌" }}
-                  </Badge>
-                </div>
-              </div>
-
-              <div class="cat-item__fiche__footnote">
-                <Separator label="Contact" />
-                <prismic-rich-text :field="contactInfo" />
-              </div>
-
-              <div class="cat-item__fiche__footnote">
-                <Separator label="Contrat d'adoption" />
-                <prismic-rich-text :field="adoptionRequirements" />
-              </div>
-            </div>
-          </SheetDescription>
-        </SheetHeader>
-        <SheetFooter>
-          <p class="cat-item__fiche__footer albert-sans-light size-regular">
-            Fiche publiée le {{ createddate }}
-          </p>
-        </SheetFooter>
-      </SheetContent>
     </Sheet>
   </div>
 </template>
 
 <script setup lang="ts">
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
+import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-
-type Image = {
-  dimensions: {
-    width: number;
-    height: number;
-  };
-  alt: null | string;
-  copyright: null | string;
-  url: string;
-  id: string;
-  edit: any;
-};
-
-type CatInfo = {
-  index: number;
-  id: string;
-  createddate: string;
-  catphoto: Image;
-  catname: string;
-  catsexe?: string;
-  catbirth: string;
-  catagenumber?: number;
-  catagetype?: string;
-  catdescription?: any;
-  catidentification?: string;
-  catvaccination?: boolean;
-  catsterilization?: boolean;
-  zipcode?: null | number;
-  relatedcat?: any | null;
-  adoptionstatus?: string;
-  contactInfo?: any;
-  adoptionRequirements?: any;
-  avatarPlaceholder?: Image;
-};
-
-const router = useRouter();
+import type { CatInfo } from "~/interfaces/Cat";
 
 const props = defineProps<CatInfo>();
 
+const emits = defineEmits(["update:open-item"]);
+
 const catHasAvatar = computed(() => props.catphoto.hasOwnProperty("url"));
 
-const hasInfo = computed(
-  () =>
-    props.catbirth || props.zipcode || (props.catagenumber && props.catagetype)
-);
-
-const defaultOpen = ref(false);
 const onOpen = (opened: boolean) => {
-  if (opened) {
-    router.push({
-      name: router.currentRoute.value.name,
-      query: { id: props.id },
-    });
-    defaultOpen.value = true;
-  } else {
-    router.push({
-      name: router.currentRoute.value.name,
-    });
-  }
+  emits("update:open-item", { opened });
 };
-
-watch(
-  () => router.currentRoute.value,
-  (newRoute, oldRoute) => {
-    if (!newRoute.query.id) {
-      defaultOpen.value = false;
-    } else {
-      setTimeout(() => {
-        defaultOpen.value = props.id === newRoute.query.id;
-      }, 320);
-    }
-  },
-  { immediate: true, deep: true }
-);
 </script>
 
 <style lang="scss" scoped>
@@ -201,10 +70,22 @@ watch(
   &:nth-of-type(2n) {
     transform: translateY(calc(var(--spacing-l) * -1));
   }
+  .cat-item__explore {
+    span {
+      display: inline-block;
+      position: relative;
+      transition: all ease-in-out 0.64s;
+    }
+  }
 
   &:hover {
     .cat-item__explore {
       background-color: var(--black);
+
+      span {
+        filter: blur(2.4px);
+        transform: translateY(48%) scale(1.2);
+      }
     }
   }
 
@@ -298,18 +179,18 @@ watch(
     height: 52vh;
     position: relative;
 
-    &__avatar {
-      top: -32%;
-      left: 50%;
-      transform: translateX(-50%);
-      position: absolute;
-      display: block;
-      aspect-ratio: 1/1;
-      object-fit: cover;
-      width: 172px;
-      background-color: var(--gray);
-      border-radius: 50%;
-    }
+    // &__avatar {
+    //   top: -32%;
+    //   left: 50%;
+    //   transform: translateX(-50%);
+    //   position: absolute;
+    //   display: block;
+    //   aspect-ratio: 1/1;
+    //   object-fit: cover;
+    //   width: 172px;
+    //   background-color: var(--gray);
+    //   border-radius: 50%;
+    // }
 
     &__content {
       display: flex;
@@ -416,11 +297,11 @@ watch(
     &__fiche {
       height: 64vh;
 
-      &__avatar {
-        top: -32%;
-        width: 320px;
-        z-index: 10;
-      }
+      // &__avatar {
+      //   top: -32%;
+      //   width: 320px;
+      //   z-index: 10;
+      // }
 
       &__content {
         gap: var(--spacing-m);
@@ -462,11 +343,11 @@ watch(
   .cat-item {
     &__fiche {
       padding-left: 10vw;
-      &__avatar {
-        top: 50%;
-        left: 10%;
-        transform: translate(0, -50%);
-      }
+      // &__avatar {
+      //   top: 50%;
+      //   left: 10%;
+      //   transform: translate(0, -50%);
+      // }
     }
   }
 }
@@ -485,18 +366,18 @@ watch(
 @media screen and (min-width: 1000px) {
   .cat-item {
     &__fiche {
-      &__avatar {
-        top: 50% !important;
-        left: -2px !important;
-        transform: translateY(-50%) !important;
-        width: 32% !important;
-        height: 100% !important;
-        border-radius: 0 32px 32px 0 !important;
+      // &__avatar {
+      //   top: 50% !important;
+      //   left: -2px !important;
+      //   transform: translateY(-50%) !important;
+      //   width: 32% !important;
+      //   height: 100% !important;
+      //   border-radius: 0 32px 32px 0 !important;
 
-        &.--placeholder {
-          object-fit: contain !important;
-        }
-      }
+      //   &.--placeholder {
+      //     object-fit: contain !important;
+      //   }
+      // }
     }
 
     &__name {
@@ -513,9 +394,9 @@ watch(
     &__fiche {
       height: 66vh !important;
 
-      &__avatar {
-        top: -24% !important;
-      }
+      // &__avatar {
+      //   top: -24% !important;
+      // }
     }
   }
 }
