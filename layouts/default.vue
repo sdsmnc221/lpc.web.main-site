@@ -149,6 +149,7 @@ const playFade = () => {
 
 onMounted(() => {
   playMagic();
+  playFade();
 });
 
 onUpdated(() => {

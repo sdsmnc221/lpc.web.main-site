@@ -373,7 +373,7 @@ const initHorizontalScroll = () => {
 };
 
 const cleanupScrollTrigger = () => {
-  ScrollTrigger.getAll().forEach((st) => st.kill());
+  // ScrollTrigger.getAll().forEach((st) => st.kill());
 };
 
 onMounted(() => {
