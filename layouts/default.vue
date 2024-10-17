@@ -31,6 +31,9 @@ import NavigationMenu from "@/components/NavigationMenu/index.vue";
 import FooterMenu from "@/components/FooterMenu/index.vue";
 import PopoverBanner from "@/components/PopoverBanner/index.vue";
 
+import "splitting/dist/splitting.css";
+import "splitting/dist/splitting-cells.css";
+
 import "lenis/dist/lenis.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -154,6 +157,7 @@ onMounted(() => {
 
 onUpdated(() => {
   getPage();
+  split();
   playFade();
   updateCount.value += 1;
 });

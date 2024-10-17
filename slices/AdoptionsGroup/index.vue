@@ -214,6 +214,21 @@ const groupTitle = ref(null);
 const groupDescription = ref(null);
 const catItems = ref([]);
 
+const split = (el) => {
+  nextTick(async () => {
+    const Splitting = await import("splitting");
+    console.log(Splitting);
+    Splitting.default({
+      /* target: String selector, Element, Array of Elements, or NodeList */
+      target: el,
+      /* by: String of the plugin name */
+      by: "lines",
+      /* key: Optional String to prefix the CSS variables */
+      key: null,
+    });
+  });
+};
+
 const goParallax = (TL, containerWidth, windowWidth) => {
   gsap.to(textContent.value, {
     x: windowWidth * -0.032,
@@ -251,40 +266,36 @@ const goParallax = (TL, containerWidth, windowWidth) => {
       },
     });
 
-    const words = groupDescription.value.$el.textContent.split(" ");
+    split(groupDescription.value.$el);
+    // groupDescription.value.$el.innerHTML = "";
 
-    groupDescription.value.$el.innerHTML = "";
+    setTimeout(() => {
+      const spans = [...groupDescription.value.$el.querySelectorAll(".word")];
 
-    const spans = words.map((w) => {
-      let sp = document.createElement("span");
-      sp.innerHTML = w + " ";
+      console.log(spans);
 
-      groupDescription.value.$el.appendChild(sp);
+      // Create a separate timeline for spans animation
+      const spansTL = gsap.timeline({});
 
-      return sp;
-    });
-
-    // Create a separate timeline for spans animation
-    const spansTL = gsap.timeline({});
-
-    // Add span animations to the spans timeline
-    spans.forEach((span, index) => {
-      spansTL.to(span, {
-        backgroundColor: "red",
-        color: "black",
-        scrollTrigger: {
-          trigger: groupDescription.value.$el,
-          containerAnimation: TL,
-          start: `top+=${index * 20} top`,
-          end: `top+=${(index + 2) * 20}px top`,
-          scrub: true,
-        },
-        ease: "circ.out",
+      // Add span animations to the spans timeline
+      spans.forEach((span, index) => {
+        spansTL.to(span, {
+          backgroundColor: "red",
+          color: "black",
+          scrollTrigger: {
+            trigger: scrollContainer.value,
+            containerAnimation: TL,
+            start: `top+=${index * 20} top`,
+            end: `top+=${(index + 2) * 20}px top`,
+            scrub: true,
+          },
+          ease: "circ.out",
+        });
       });
-    });
 
-    // Link the spans timeline to the main timeline's pause point
-    TL.add(spansTL, "pausePoint+=2%");
+      // Link the spans timeline to the main timeline's pause point
+      TL.add(spansTL, "pausePoint+=2%");
+    }, 2400);
   }
 
   // Continue horizontal scroll after pause
