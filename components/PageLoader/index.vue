@@ -18,7 +18,7 @@ const props = defineProps<{
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.64);
+  background-color: rgba(0, 0, 0, 0.9);
   backdrop-filter: blur(7.2px) brightness(1.2);
   width: 100dvw;
   height: 100svh;
@@ -26,6 +26,10 @@ const props = defineProps<{
   top: 0;
   left: 0;
   z-index: 999;
+}
+
+.page-loader:is(.fade-out-fwd) {
+  pointer-events: none;
 }
 
 /* HTML: <div class="loader"></div> */
