@@ -157,7 +157,6 @@ onMounted(() => {
 
 onUpdated(() => {
   getPage();
-  split();
   playFade();
   updateCount.value += 1;
 });
