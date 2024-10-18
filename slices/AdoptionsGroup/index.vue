@@ -9,7 +9,7 @@
       <div ref="textContent" class="adoptions-group__text-content">
         <prismic-rich-text
           ref="groupTitle"
-          class="adoptions-group__title cl-black gloock-regular"
+          class="adoptions-group__title"
           :field="title"
         />
 
@@ -223,7 +223,7 @@ const groupTitle = ref(null);
 const groupDescription = ref(null);
 const catItems = ref([]);
 
-const split = (el) => {
+const split = (el, mode = "lines") => {
   nextTick(async () => {
     const Splitting = await import("splitting");
 
@@ -231,7 +231,7 @@ const split = (el) => {
       /* target: String selector, Element, Array of Elements, or NodeList */
       target: [...el.querySelectorAll(":scope > *")],
       /* by: String of the plugin name */
-      by: "lines",
+      by: mode,
       /* key: Optional String to prefix the CSS variables */
       key: null,
     });
@@ -239,32 +239,49 @@ const split = (el) => {
 };
 
 const playScroll = (TL, containerWidth, windowWidth) => {
-  // gsap.to(textContent.value, {
-  //   x: windowWidth * -0.032,
-  //   ease: "circ.out",
-  //   scrollTrigger: {
-  //     containerAnimation: TL,
-  //     trigger: section.value,
-  //     start: "top top",
-  //     end: `+=${containerWidth}`,
-  //     scrub: true,
-  //   },
-  // });
+  if (groupTitle.value?.$el) {
+    split(groupTitle.value.$el, "words");
 
-  // if (groupTitle.value?.$el) {
-  //   gsap.to(groupTitle.value.$el, {
-  //     x: windowWidth * 0.1,
-  //     ease: "circ.in",
-  //     scrollTrigger: {
-  //       containerAnimation: TL,
-  //       trigger: section.value,
-  //       start: "top top",
-  //       // end: `+=${containerWidth * 3.2}`,
-  //       end: `+=${windowWidth}`,
-  //       scrub: true,
-  //     },
-  //   });
-  // }
+    setTimeout(() => {
+      const titleTL = gsap.timeline({});
+
+      const words = [...groupTitle.value.$el.querySelectorAll(".word")];
+
+      console.log(groupTitle.value.$el.querySelectorAll(".word"));
+
+      words.forEach((word, index) => {
+        titleTL.fromTo(
+          word,
+          {
+            scaleX: 0,
+            y: index * -24,
+            x: index * (windowWidth / 4) * (index % 2 === 0) ? 1 : -1,
+            filter: "blur(4px)",
+            opacity: 0,
+            color: "var(--gray)",
+          },
+          {
+            scaleX: 1,
+            y: 0,
+            x: 0,
+            filter: "blur(0)",
+            opacity: 1,
+            color: "var(--vlack)",
+            ease: "power4.inOut",
+            scrollTrigger: {
+              containerAnimation: TL,
+              trigger: groupTitle.value.$el,
+              start: "top top",
+              end: `top+=${(index + 3) * 20}px top`,
+              scrub: true,
+            },
+          }
+        );
+      });
+
+      TL.add(titleTL, 0);
+    }, 2400);
+  }
 
   if (groupDescription.value) {
     split(groupDescription.value);
@@ -303,18 +320,6 @@ const playScroll = (TL, containerWidth, windowWidth) => {
     },
     "pausePoint+=50%"
   );
-
-  // gsap.to(scrollContainer.value, {
-  //   x: -(containerWidth - windowWidth),
-  //   ease: "sine.inOut",
-  //   scrollTrigger: {
-  //     containerAnimation: TL,
-  //     trigger: scrollContainer.value,
-  //     start: `top+=${windowWidth}px top`,
-  //     end: `+=${containerWidth}`,
-  //     scrub: true,
-  //   },
-  // });
 
   catItems.value.forEach((item, itemIndex) => {
     const childrenNodes = [
@@ -429,6 +434,13 @@ onUnmounted(() => {
 
   &__title {
     margin-bottom: var(--spacing-m);
+
+    .word {
+      @extend .gloock-regular;
+      color: black;
+      opacity: 1;
+      filter: none !important;
+    }
   }
 
   &__container {
@@ -555,7 +567,7 @@ onUnmounted(() => {
           display: flex;
           flex-direction: column;
           width: 100vw;
-          padding: 4vw;
+          padding: 2vw;
           justify-content: center;
           text-align: center;
 
