@@ -6,28 +6,28 @@
     class="adoptions-group bg-white"
   >
     <div ref="scrollContainer" class="adoptions-group__container">
-      <div class="adoptions-group__items" v-if="itemsData?.length">
-        <div ref="textContent" class="adoptions-group__text-content">
+      <div ref="textContent" class="adoptions-group__text-content">
+        <prismic-rich-text
+          ref="groupTitle"
+          class="adoptions-group__title cl-black gloock-regular"
+          :field="title"
+        />
+
+        <div
+          class="adoptions-group__description"
+          ref="groupDescription"
+          v-if="description"
+        >
           <prismic-rich-text
-            ref="groupTitle"
-            class="adoptions-group__title cl-black gloock-regular"
-            :field="title"
+            v-for="(text, index) in description"
+            :key="`description-${slice.id}-${index}`"
+            :data-index="index"
+            :field="text.paragraph"
           />
-
-          <div
-            class="adoptions-group__description"
-            ref="groupDescription"
-            v-if="description"
-          >
-            <prismic-rich-text
-              v-for="(text, index) in description"
-              :key="`description-${slice.id}-${index}`"
-              :data-index="index"
-              :field="text.paragraph"
-            />
-          </div>
         </div>
+      </div>
 
+      <div class="adoptions-group__items" v-if="itemsData?.length">
         <cat-item
           v-for="(cat, index) in itemsData"
           :key="`adoptions-group-cat-${cat.id}`"
@@ -360,7 +360,7 @@ const initHorizontalScroll = () => {
         anticipatePin: 1,
         invalidateOnRefresh: true,
         ...(isPC() ? { pinType: "transform" } : {}),
-
+        pinType: "transform", //debug
         onUpdate: (self) => {
           // Ensure we're not exceeding the bounds of the animation
           if (self.progress < 0) self.progress = 0;
@@ -402,38 +402,25 @@ onUnmounted(() => {
 
 <style lang="scss">
 .adoptions-group {
+  height: 100vh;
+  overflow: hidden;
+  overflow-x: scroll;
+  display: flex;
   padding: var(--spacing-m);
 
   &__title {
     margin-bottom: var(--spacing-m);
   }
 
-  &__description {
-    width: 100%;
-
-    & > *:not(:first-child) {
-      margin-top: var(--spacing-s);
-    }
-  }
-
-  &__items {
-    margin-top: var(--spacing-l);
-  }
-}
-
-.adoptions-group {
-  height: 100vh;
-  overflow: hidden;
-  overflow-x: scroll;
-  display: flex;
-
   &__container {
     height: 100%;
+    display: flex;
   }
 
   &__items {
     display: flex;
     height: 100%;
+    margin-top: var(--spacing-l);
 
     & > * {
       margin-right: 6vw;
@@ -471,6 +458,12 @@ onUnmounted(() => {
     gap: 4.8vw;
 
     flex: 1;
+
+    width: 100%;
+
+    & > *:not(:first-child) {
+      margin-top: var(--spacing-s);
+    }
 
     img {
       display: inline-block;
@@ -538,14 +531,13 @@ onUnmounted(() => {
     &__text-content {
       width: auto;
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
 
       & > * {
         &:first-child {
           display: flex;
           flex-direction: column;
           height: 50vh;
-          justify-content: flex-end;
           text-align: center;
 
           * {
@@ -556,7 +548,7 @@ onUnmounted(() => {
     }
 
     &__description {
-      position: relative;
+      flex-direction: column;
 
       & > * {
         padding: 8vw;
@@ -566,7 +558,7 @@ onUnmounted(() => {
         flex-direction: column;
         padding: 8vw;
         width: 100vw;
-        height: 100vh;
+        min-height: 100vh;
 
         &:has(img) {
           padding-top: 12vh;
