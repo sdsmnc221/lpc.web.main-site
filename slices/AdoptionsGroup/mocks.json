@@ -63,14 +63,27 @@
 					"id": "mock_document_id"
 				}
 			},
-			"description": {
-				"__TYPE__": "StructuredTextContent",
+			"descriptiontext": {
+				"__TYPE__": "GroupContentType",
 				"value": [
 					{
-						"type": "paragraph",
-						"content": {
-							"text": "Culpa aute sunt laboris nostrud nostrud. Veniam ea aute do pariatur voluptate. Amet sunt sit sunt aliquip."
-						}
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"paragraph",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Fugiat nisi incididunt reprehenderit non nostrud cillum aliquip labore. Commodo est ea esse elit cillum."
+											}
+										}
+									]
+								}
+							]
+						]
 					}
 				]
 			}

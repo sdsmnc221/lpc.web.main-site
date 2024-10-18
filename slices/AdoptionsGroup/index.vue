@@ -14,12 +14,18 @@
             :field="title"
           />
 
-          <prismic-rich-text
-            v-if="description"
+          <div
+            class="adoptions-group__description"
             ref="groupDescription"
-            class="adoptions-group__description cl-black albert-sans-regular"
-            :field="description"
-          />
+            v-if="description"
+          >
+            <prismic-rich-text
+              v-for="(text, index) in description"
+              :key="`description-${slice.id}-${index}`"
+              class="cl-black albert-sans-regular"
+              :field="text.paragraph"
+            />
+          </div>
         </div>
 
         <cat-item
@@ -88,7 +94,7 @@ const contactInfo = computed(() => primary.value?.contactinfo);
 const adoptionRequirements = computed(
   () => primary.value?.adoptionrequirements
 );
-const description = computed(() => primary.value?.description);
+const description = computed(() => primary.value?.descriptiontext);
 
 const { data: itemsData } = await useAsyncData(props.slice.id, async () => {
   const itemsId = primary.value?.catsgroup?.map((item) => item.catitem.id);
@@ -217,10 +223,10 @@ const catItems = ref([]);
 const split = (el) => {
   nextTick(async () => {
     const Splitting = await import("splitting");
-    console.log(Splitting);
+
     Splitting.default({
       /* target: String selector, Element, Array of Elements, or NodeList */
-      target: el,
+      target: [...el.querySelectorAll("> *")],
       /* by: String of the plugin name */
       by: "lines",
       /* key: Optional String to prefix the CSS variables */
@@ -254,8 +260,8 @@ const goParallax = (TL, containerWidth, windowWidth) => {
     });
   }
 
-  if (groupDescription.value?.$el) {
-    gsap.to(groupDescription.value.$el, {
+  if (groupDescription.value) {
+    gsap.to(groupDescription.value, {
       x: windowWidth * 0.1,
       ease: "circ.in",
       scrollTrigger: {
@@ -266,11 +272,10 @@ const goParallax = (TL, containerWidth, windowWidth) => {
       },
     });
 
-    split(groupDescription.value.$el);
-    // groupDescription.value.$el.innerHTML = "";
+    split(groupDescription.value);
 
     setTimeout(() => {
-      const spans = [...groupDescription.value.$el.querySelectorAll(".word")];
+      const spans = [...groupDescription.value.querySelectorAll(".word")];
 
       console.log(spans);
 
