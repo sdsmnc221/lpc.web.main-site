@@ -14,12 +14,18 @@
             :field="title"
           />
 
-          <prismic-rich-text
-            v-if="description"
+          <div
+            class="adoptions-group__description"
             ref="groupDescription"
-            class="adoptions-group__description cl-black albert-sans-regular"
-            :field="description"
-          />
+            v-if="description"
+          >
+            <prismic-rich-text
+              v-for="(text, index) in description"
+              :key="`description-${slice.id}-${index}`"
+              :data-index="index"
+              :field="text.paragraph"
+            />
+          </div>
         </div>
 
         <cat-item
@@ -88,7 +94,7 @@ const contactInfo = computed(() => primary.value?.contactinfo);
 const adoptionRequirements = computed(
   () => primary.value?.adoptionrequirements
 );
-const description = computed(() => primary.value?.description);
+const description = computed(() => primary.value?.descriptiontext);
 
 const { data: itemsData } = await useAsyncData(props.slice.id, async () => {
   const itemsId = primary.value?.catsgroup?.map((item) => item.catitem.id);
@@ -158,12 +164,15 @@ const onOpenSheet = (details) => {
 watch(
   () => defaultOpen.value,
   () => {
-    if (defaultOpen.value) {
-      window.lenis?.stop();
-    } else {
-      window.lenis?.start();
-    }
-  }
+    setTimeout(() => {
+      if (defaultOpen.value) {
+        window.lenis?.stop();
+      } else {
+        window.lenis?.start();
+      }
+    }, 480);
+  },
+  { immediate: true }
 );
 
 watch(
@@ -214,9 +223,24 @@ const groupTitle = ref(null);
 const groupDescription = ref(null);
 const catItems = ref([]);
 
-const goParallax = (containerWidth, windowWidth) => {
+const split = (el) => {
+  nextTick(async () => {
+    const Splitting = await import("splitting");
+
+    Splitting.default({
+      /* target: String selector, Element, Array of Elements, or NodeList */
+      target: [...el.querySelectorAll(":scope > *")],
+      /* by: String of the plugin name */
+      by: "lines",
+      /* key: Optional String to prefix the CSS variables */
+      key: null,
+    });
+  });
+};
+
+const playScroll = (TL, containerWidth, windowWidth) => {
   gsap.to(textContent.value, {
-    x: windowWidth * 0.05,
+    x: windowWidth * -0.032,
     ease: "circ.out",
     scrollTrigger: {
       trigger: section.value,
@@ -228,29 +252,65 @@ const goParallax = (containerWidth, windowWidth) => {
 
   if (groupTitle.value?.$el) {
     gsap.to(groupTitle.value.$el, {
-      x: windowWidth * 0.2,
+      x: windowWidth * 0.1,
       ease: "circ.in",
       scrollTrigger: {
         trigger: section.value,
         start: "top top",
-        end: `+=${containerWidth}`,
+        // end: `+=${containerWidth * 3.2}`,
+        end: `+=${windowWidth}`,
         scrub: true,
       },
     });
   }
 
-  if (groupDescription.value?.$el) {
-    gsap.to(groupDescription.value.$el, {
-      x: windowWidth * 0.05,
-      ease: "circ.out",
+  if (groupDescription.value) {
+    gsap.to(groupDescription.value, {
+      x: windowWidth * 0.1,
+      ease: "circ.in",
       scrollTrigger: {
         trigger: section.value,
         start: "top top",
-        end: `+=${containerWidth}`,
+        end: `+=${containerWidth * 2}`,
         scrub: true,
       },
     });
+    split(groupDescription.value);
+    setTimeout(() => {
+      const spans = [...groupDescription.value.querySelectorAll(".word")];
+      // Create a separate timeline for spans animation
+      const spansTL = gsap.timeline({});
+      // Add span animations to the spans timeline
+      spans.forEach((span, index) => {
+        spansTL.to(span, {
+          color: "black",
+          opacity: 1,
+          delay: 0.1 + index * 0.05,
+          filter: "blur(0)",
+          scrollTrigger: {
+            containerAnimation: TL,
+            trigger: scrollContainer.value,
+            start: `top+=${index * 20} top`,
+            end: `top+=${(index + 2) * 20}px top`,
+            scrub: true,
+          },
+          ease: "circ.out",
+        });
+      });
+      // Link the spans timeline to the main timeline's pause point
+      TL.add(spansTL, "pausePoint+=2%");
+    }, 2400);
   }
+
+  // Continue horizontal scroll after pause
+  TL.to(
+    scrollContainer.value,
+    {
+      x: -(containerWidth - windowWidth),
+      ease: "sine.inOut",
+    },
+    "pausePoint+=120%"
+  );
 
   catItems.value.forEach((item, itemIndex) => {
     const childrenNodes = [
@@ -259,16 +319,19 @@ const goParallax = (containerWidth, windowWidth) => {
       ),
     ];
 
+    const childTL = gsap.timeline({});
+
     childrenNodes.forEach((child, index) => {
-      gsap.to(child, {
-        y: 32 * (index + 1), // Staggered parallax effect
-        x: 32 * (0.02 * (index + 1) * (itemIndex + 1)), // Staggered parallax effect
+      childTL.to(child, {
+        y: 240 * (0.2 * (itemIndex + 1)), // Staggered parallax effect
+        x: -32 * (0.2 * (itemIndex + 1)), // Staggered parallax effect
         ease: "sine.out",
         scrollTrigger: {
-          trigger: section.value,
-          start: "top top",
-          end: `+=${containerWidth}`,
-          scrub: true,
+          trigger: child,
+          start: `top top`,
+          end: `top+=${containerWidth * (itemIndex + 1) * 0.72}px top`,
+          scrub: 0.2,
+          containerAnimation: TL,
         },
       });
     });
@@ -284,38 +347,46 @@ const initHorizontalScroll = () => {
     const containerWidth = (container as HTMLElement).scrollWidth;
     const windowWidth = window.innerWidth;
 
-    const usingSmoothScroll =
-      // !matchMedia("(hover: none)").matches
+    // const usingSmoothScroll = // !matchMedia("(hover: none)").matches
 
-      // Main horizontal scroll animation
-      gsap.to(container, {
-        x: -(containerWidth - windowWidth),
-        ease: "sine.inOut",
-        scrollTrigger: {
-          trigger: section.value,
-          start: "top top",
-          end: `+=${containerWidth}`,
-          scrub: true,
-          pin: true,
-          pinnedContainer: section.value,
-          // pinType: "fixed", //usingSmoothScroll ? "transform" : "fixed",
-          // pinReparent: true,
-          ...(isPC() ? { pinType: "transform" } : {}),
+    const TL = gsap.timeline({
+      scrollTrigger: {
+        trigger: section.value,
+        start: "top top",
+        end: `+=${containerWidth + windowWidth}`,
+        scrub: true,
+        pin: true,
+        pinnedContainer: section.value,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        ...(isPC() ? { pinType: "transform" } : {}),
 
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          // Ensure we're not exceeding the bounds of the animation
+          if (self.progress < 0) self.progress = 0;
+          if (self.progress > 1) self.progress = 1;
         },
-      });
+      },
+    });
+
+    // Main horizontal scroll animation
+    // Scroll to -10
+    TL.to(container, {
+      // x: -(containerWidth - windowWidth),
+      x: -10,
+    });
+
+    TL.add("pausePoint");
 
     // Parallax effect
-    goParallax(containerWidth, windowWidth);
+    playScroll(TL, containerWidth, windowWidth);
 
     emits("gsap-init-done");
   }
 };
 
 const cleanupScrollTrigger = () => {
-  ScrollTrigger.getAll().forEach((st) => st.kill());
+  // ScrollTrigger.getAll().forEach((st) => st.kill());
 };
 
 onMounted(() => {
@@ -341,7 +412,7 @@ onUnmounted(() => {
     width: 100%;
 
     & > *:not(:first-child) {
-      margin-top: var(--spacing-m);
+      margin-top: var(--spacing-s);
     }
   }
 
@@ -371,10 +442,88 @@ onUnmounted(() => {
   }
 
   &__text-content {
-    width: 50vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    [data-index="0"] {
+      --index: 0;
+    }
+    [data-index="1"] {
+      --index: 1;
+    }
+    [data-index="2"] {
+      --index: 2;
+    }
+    [data-index="3"] {
+      --index: 3;
+    }
+    [data-index="4"] {
+      --index: 4;
+    }
+    /* Add more if needed */
+  }
+
+  &__description {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    gap: 4.8vw;
+
+    flex: 1;
+
+    img {
+      display: inline-block;
+      position: absolute;
+      bottom: 8vh;
+      left: 4vw;
+      transform: scale(1.4);
+      border-radius: 0;
+      z-index: -1;
+    }
+  }
+
+  li {
+    list-style-type: none;
+    margin-top: 8px;
+
+    .word {
+      position: relative;
+
+      &::after {
+        display: block;
+        content: "";
+        width: 100%;
+        height: 2px;
+        background: var(--gray);
+      }
+    }
+  }
+
+  .word {
+    color: var(--gray);
+    opacity: 0;
+    filter: blur(4px);
+  }
+
+  em,
+  strong {
+    font-weight: bold;
+    display: inline-block;
+  }
+
+  strong {
+    &:has(em) {
+      margin-bottom: 3.2vh;
+    }
+
+    &:not(:has(em)) {
+      margin-top: 1.6vh;
+    }
+
+    * {
+      font-weight: bold;
+    }
   }
 }
 
@@ -388,26 +537,59 @@ onUnmounted(() => {
 
     &__text-content {
       width: auto;
-
       display: flex;
       flex-direction: row;
-      justify-content: center;
-      align-items: center;
 
       & > * {
-        width: 100vw;
-        padding: 8vw;
-
         &:first-child {
+          display: flex;
+          flex-direction: column;
+          height: 50vh;
+          justify-content: flex-end;
+          text-align: center;
+
           * {
-            @include ft-s(large);
+            @include ft-s(xlarge);
           }
         }
       }
     }
 
-    &__items {
+    &__description {
+      position: relative;
+
       & > * {
+        padding: 8vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 8vw;
+        width: 100vw;
+        height: 100vh;
+
+        &:has(img) {
+          padding-top: 12vh;
+        }
+
+        em {
+          * {
+            font-weight: bold;
+            @include ft-s(medium);
+          }
+        }
+
+        img {
+          width: 100vw;
+          left: 0;
+          bottom: 0;
+          transform: scale(1);
+        }
+      }
+    }
+
+    &__items {
+      & > *:not(:first-child) {
         margin-right: 6vh;
         margin-left: 6vh;
       }
@@ -416,10 +598,56 @@ onUnmounted(() => {
 }
 
 @container app (min-width: 1000px) {
-  .adoptions-group {
-    padding: 0 12vw;
-    margin-top: calc(var(--spacing-l) * 2);
-    margin-bottom: var(--spacing-l);
+  .app {
+    .adoptions-group {
+      margin-top: calc(var(--spacing-l) * 2);
+      margin-bottom: var(--spacing-l);
+
+      &__title {
+        position: absolute;
+        top: 0;
+        padding: 4.8vw;
+
+        h3 {
+          font-size: calc((var(--base-ft-size) * 7.2));
+        }
+      }
+
+      &__text-content {
+        width: 100vw;
+        max-height: 100vh;
+        padding: 0 6vh;
+        margin: 0;
+      }
+
+      &__description {
+        padding-left: 2.4vw;
+        padding-right: 2.4vw;
+        padding-bottom: 16vh;
+
+        [data-index] {
+          width: 100vw;
+          margin-bottom: calc(var(--spacing-l) * 3.2 * var(--index_, 2));
+        }
+
+        [data-index="1"],
+        [data-index="3"],
+        [data-index="5"] {
+          --index_: calc((var(--index) +1) * 3.2 + var(--index));
+        }
+
+        * {
+          @include ft-s(medium);
+        }
+
+        em {
+          * {
+            font-weight: bold;
+            @include ft-s(large);
+          }
+        }
+      }
+    }
   }
 }
 </style>
