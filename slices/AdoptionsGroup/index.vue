@@ -332,8 +332,8 @@ const playScroll = (TL, containerWidth, windowWidth) => {
 
     childrenNodes.forEach((child, index) => {
       childTL.to(child, {
-        y: 240 * (0.2 * (itemIndex + 1)), // Staggered parallax effect
-        x: -32 * (0.2 * (itemIndex + 1)), // Staggered parallax effect
+        y: 240 * (0.2 * (itemIndex + 1)),
+        x: -32 * (0.2 * (itemIndex + 1)),
         ease: "sine.out",
         scrollTrigger: {
           trigger: child,
@@ -392,18 +392,7 @@ const initHorizontalScroll = () => {
 
     TL.add("pausePoint");
 
-    // Parallax effect
     playScroll(TL, containerWidth, windowWidth);
-
-    // Continue horizontal scroll after pause
-    // TL.to(
-    //   scrollContainer.value,
-    //   {
-    //     x: -(containerWidth - windowWidth),
-    //     ease: "sine.inOut",
-    //   },
-    //   "pausePoint+=120%"
-    // );
 
     emits("gsap-init-done");
   }
