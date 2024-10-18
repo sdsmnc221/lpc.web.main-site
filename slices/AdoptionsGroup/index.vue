@@ -360,7 +360,7 @@ const initHorizontalScroll = () => {
         anticipatePin: 1,
         invalidateOnRefresh: true,
         ...(isPC() ? { pinType: "transform" } : {}),
-        pinType: "transform", //debug
+        // pinType: "transform", //debug
         onUpdate: (self) => {
           // Ensure we're not exceeding the bounds of the animation
           if (self.progress < 0) self.progress = 0;
@@ -523,21 +523,21 @@ onUnmounted(() => {
 @container app (max-width: 699px) {
   .adoptions-group {
     &__container {
-      display: flex;
-      flex-direction: column;
       height: 100%;
     }
 
     &__text-content {
       width: auto;
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
 
       & > * {
         &:first-child {
           display: flex;
           flex-direction: column;
-          height: 50vh;
+          width: 100vw;
+          padding: 4vw;
+          justify-content: center;
           text-align: center;
 
           * {
@@ -548,8 +548,6 @@ onUnmounted(() => {
     }
 
     &__description {
-      flex-direction: column;
-
       & > * {
         padding: 8vw;
         display: flex;
@@ -581,6 +579,8 @@ onUnmounted(() => {
     }
 
     &__items {
+      margin-left: 24vw;
+
       & > *:not(:first-child) {
         margin-right: 6vh;
         margin-left: 6vh;
