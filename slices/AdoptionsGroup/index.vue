@@ -22,7 +22,7 @@
             <prismic-rich-text
               v-for="(text, index) in description"
               :key="`description-${slice.id}-${index}`"
-              class="cl-black albert-sans-regular"
+              :data-index="index"
               :field="text.paragraph"
             />
           </div>
@@ -226,7 +226,7 @@ const split = (el) => {
 
     Splitting.default({
       /* target: String selector, Element, Array of Elements, or NodeList */
-      target: [...el.querySelectorAll("> *")],
+      target: [...el.querySelectorAll(":scope > *")],
       /* by: String of the plugin name */
       by: "lines",
       /* key: Optional String to prefix the CSS variables */
@@ -445,10 +445,26 @@ onUnmounted(() => {
   }
 
   &__text-content {
-    width: 50vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    [data-index="0"] {
+      --index: 0;
+    }
+    [data-index="1"] {
+      --index: 1;
+    }
+    [data-index="2"] {
+      --index: 2;
+    }
+    [data-index="3"] {
+      --index: 3;
+    }
+    [data-index="4"] {
+      --index: 4;
+    }
+    /* Add more if needed */
   }
 }
 
@@ -498,28 +514,78 @@ onUnmounted(() => {
       &__title {
         position: absolute;
         top: 0;
-        padding-right: 4.8vw;
+        padding: 4.8vw;
 
         h3 {
           font-size: calc((var(--base-ft-size) * 6));
         }
       }
 
+      &__text-content {
+        width: 100vw;
+        max-height: 100vh;
+        padding: 0 6vh;
+        margin: 0;
+      }
+
       &__description {
-        position: absolute;
-        bottom: 10vh;
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-end;
+        gap: 4.8vw;
+        padding-left: 2.4vw;
+        padding-right: 2.4vw;
+        padding-bottom: 16vh;
+
+        flex: 1;
+
+        [data-index] {
+          width: 100vw;
+          margin-bottom: calc(var(--spacing-l) * 3.2 * var(--index_, 2));
+        }
+
+        [data-index="1"],
+        [data-index="3"],
+        [data-index="5"] {
+          --index_: calc((var(--index) +1) * 3.2 + var(--index));
+        }
 
         * {
-          @include ft-s(20);
+          @include ft-s(medium);
           color: var(--gray);
         }
 
-        em {
+        em,
+        strong {
           font-weight: bold;
           display: inline-block;
-          @include ft-s(large);
-          margin-bottom: var(--spacing-m);
-          padding-right: 4.8vw;
+        }
+
+        strong {
+          &:has(em) {
+            margin-bottom: 3.2vh;
+          }
+
+          * {
+            font-weight: bold;
+          }
+        }
+
+        em {
+          * {
+            font-weight: bold;
+            @include ft-s(large);
+          }
+        }
+
+        img {
+          display: inline-block;
+          position: absolute;
+          bottom: 8vh;
+          left: 4vw;
+          transform: scale(1.4);
+          border-radius: 0;
+          z-index: -1;
         }
       }
     }

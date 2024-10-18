@@ -84,17 +84,26 @@ const playFade = () => {
   const children = [...document.body.querySelectorAll(".adoptions-group > *")];
 
   children.forEach((section) => {
-    gsap.from(section as any, {
-      y: 240,
-      opacity: 0,
-      backgroundColor: "transparent",
-      filter: "blur(16px)",
-      delay: 0.2,
-      scrollTrigger: {
-        trigger: section as any,
-        start: "top bottom-=120",
+    gsap.fromTo(
+      section as any,
+      {
+        y: 240,
+        opacity: 0,
+        backgroundColor: "transparent",
+        filter: "blur(16px)",
       },
-    });
+      {
+        y: 0,
+        opacity: 1,
+        filter: "blur(0)",
+        delay: 0.2,
+        willChange: "opacity, transform, filter",
+        scrollTrigger: {
+          trigger: section.parentElement as any,
+          start: "top bottom-=120",
+        },
+      }
+    );
   });
 };
 
