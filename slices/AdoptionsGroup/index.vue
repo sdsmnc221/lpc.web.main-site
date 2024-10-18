@@ -301,6 +301,7 @@ const playScroll = (TL, containerWidth, windowWidth) => {
             start: `top+=${index * 20} top`,
             end: `top+=${(index + 2) * 20}px top`,
             scrub: true,
+            ...(isPC() ? { pinType: "transform" } : {}),
           },
           ease: "circ.out",
         });
@@ -471,6 +472,44 @@ onUnmounted(() => {
     }
     /* Add more if needed */
   }
+
+  &__description {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    gap: 4.8vw;
+
+    flex: 1;
+  }
+
+  li {
+    list-style-type: none;
+    margin-top: 8px;
+
+    .word {
+      position: relative;
+
+      &::after {
+        display: block;
+        content: "";
+        width: 100%;
+        height: 2px;
+        background: var(--gray);
+      }
+    }
+  }
+
+  .word {
+    color: var(--gray);
+    opacity: 0;
+    filter: blur(4px);
+  }
+
+  em,
+  strong {
+    font-weight: bold;
+    display: inline-block;
+  }
 }
 
 @container app (max-width: 699px) {
@@ -483,11 +522,6 @@ onUnmounted(() => {
 
     &__text-content {
       width: auto;
-
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
 
       & > * {
         width: 100vw;
@@ -534,15 +568,9 @@ onUnmounted(() => {
       }
 
       &__description {
-        display: flex;
-        justify-content: space-around;
-        align-items: flex-end;
-        gap: 4.8vw;
         padding-left: 2.4vw;
         padding-right: 2.4vw;
         padding-bottom: 16vh;
-
-        flex: 1;
 
         [data-index] {
           width: 100vw;
@@ -557,35 +585,6 @@ onUnmounted(() => {
 
         * {
           @include ft-s(medium);
-        }
-
-        li {
-          list-style-type: none;
-          margin-top: 8px;
-
-          .word {
-            position: relative;
-
-            &::after {
-              display: block;
-              content: "";
-              width: 100%;
-              height: 2px;
-              background: var(--gray);
-            }
-          }
-        }
-
-        .word {
-          color: var(--gray);
-          opacity: 0;
-          filter: blur(4px);
-        }
-
-        em,
-        strong {
-          font-weight: bold;
-          display: inline-block;
         }
 
         strong {
