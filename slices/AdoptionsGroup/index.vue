@@ -164,12 +164,15 @@ const onOpenSheet = (details) => {
 watch(
   () => defaultOpen.value,
   () => {
-    if (defaultOpen.value) {
-      window.lenis?.stop();
-    } else {
-      window.lenis?.start();
-    }
-  }
+    setTimeout(() => {
+      if (defaultOpen.value) {
+        window.lenis?.stop();
+      } else {
+        window.lenis?.start();
+      }
+    }, 480);
+  },
+  { immediate: true }
 );
 
 watch(
@@ -220,6 +223,11 @@ const groupTitle = ref(null);
 const groupDescription = ref(null);
 const catItems = ref([]);
 
+const animationDefaults = {
+  duration: 0.1,
+  ease: "sine",
+};
+
 const split = (el) => {
   nextTick(async () => {
     const Splitting = await import("splitting");
@@ -235,7 +243,7 @@ const split = (el) => {
   });
 };
 
-const goParallax = (TL, containerWidth, windowWidth) => {
+const playScroll = (TL, containerWidth, windowWidth) => {
   gsap.to(textContent.value, {
     x: windowWidth * -0.032,
     ease: "circ.out",
@@ -277,16 +285,16 @@ const goParallax = (TL, containerWidth, windowWidth) => {
     setTimeout(() => {
       const spans = [...groupDescription.value.querySelectorAll(".word")];
 
-      console.log(spans);
-
       // Create a separate timeline for spans animation
       const spansTL = gsap.timeline({});
 
       // Add span animations to the spans timeline
       spans.forEach((span, index) => {
         spansTL.to(span, {
-          backgroundColor: "red",
           color: "black",
+          opacity: 1,
+          delay: 0.1 + index * 0.05,
+          filter: "blur(0)",
           scrollTrigger: {
             trigger: scrollContainer.value,
             containerAnimation: TL,
@@ -309,9 +317,6 @@ const goParallax = (TL, containerWidth, windowWidth) => {
     {
       x: -(containerWidth - windowWidth),
       ease: "sine.inOut",
-      onStart: () => {
-        console.log("Started horizontal scroll");
-      },
     },
     "pausePoint+=120%"
   );
@@ -382,7 +387,7 @@ const initHorizontalScroll = () => {
     TL.add("pausePoint");
 
     // Parallax effect
-    goParallax(TL, containerWidth, windowWidth);
+    playScroll(TL, containerWidth, windowWidth);
 
     emits("gsap-init-done");
   }
@@ -517,7 +522,7 @@ onUnmounted(() => {
         padding: 4.8vw;
 
         h3 {
-          font-size: calc((var(--base-ft-size) * 6));
+          font-size: calc((var(--base-ft-size) * 7.2));
         }
       }
 
@@ -552,7 +557,29 @@ onUnmounted(() => {
 
         * {
           @include ft-s(medium);
+        }
+
+        li {
+          list-style-type: none;
+          margin-top: 8px;
+
+          .word {
+            position: relative;
+
+            &::after {
+              display: block;
+              content: "";
+              width: 100%;
+              height: 2px;
+              background: var(--gray);
+            }
+          }
+        }
+
+        .word {
           color: var(--gray);
+          opacity: 0;
+          filter: blur(4px);
         }
 
         em,
@@ -564,6 +591,10 @@ onUnmounted(() => {
         strong {
           &:has(em) {
             margin-bottom: 3.2vh;
+          }
+
+          &:not(:has(em)) {
+            margin-top: 1.6vh;
           }
 
           * {

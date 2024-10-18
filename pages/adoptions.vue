@@ -81,7 +81,9 @@ const onGsapInitDone = () => {
 };
 
 const playFade = () => {
-  const children = [...document.body.querySelectorAll(".adoptions-group > *")];
+  const children = [
+    ...document.body.querySelectorAll(".adoptions-group__title"),
+  ];
 
   children.forEach((section) => {
     gsap.fromTo(
