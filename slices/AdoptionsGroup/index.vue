@@ -292,8 +292,6 @@ const playScroll = (TL, containerWidth, windowWidth) => {
 
       // Link the spans timeline to the main timeline's pause point
       TL.add(spansTL, 0);
-
-      TL.add("spansPoint", "pausePoint+=80%");
     }, 2400);
   }
 
@@ -303,8 +301,20 @@ const playScroll = (TL, containerWidth, windowWidth) => {
       x: -(containerWidth - windowWidth),
       ease: "sine.inOut",
     },
-    "spansPoint+=50%"
+    "pausePoint+=50%"
   );
+
+  // gsap.to(scrollContainer.value, {
+  //   x: -(containerWidth - windowWidth),
+  //   ease: "sine.inOut",
+  //   scrollTrigger: {
+  //     containerAnimation: TL,
+  //     trigger: scrollContainer.value,
+  //     start: `top+=${windowWidth}px top`,
+  //     end: `+=${containerWidth}`,
+  //     scrub: true,
+  //   },
+  // });
 
   catItems.value.forEach((item, itemIndex) => {
     const childrenNodes = [
@@ -366,14 +376,14 @@ const initHorizontalScroll = () => {
       },
     });
 
-    // TL.to(
-    //   scrollContainer.value,
-    //   {
-    //     x: -24,
-    //     ease: "sine.inOut",
-    //   },
-    //   0
-    // );
+    TL.to(
+      scrollContainer.value,
+      {
+        x: -24,
+        ease: "sine.inOut",
+      },
+      0
+    );
 
     TL.add("pausePoint");
 
