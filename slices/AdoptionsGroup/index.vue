@@ -223,11 +223,6 @@ const groupTitle = ref(null);
 const groupDescription = ref(null);
 const catItems = ref([]);
 
-const animationDefaults = {
-  duration: 0.1,
-  ease: "sine",
-};
-
 const split = (el) => {
   nextTick(async () => {
     const Splitting = await import("splitting");
@@ -262,7 +257,8 @@ const playScroll = (TL, containerWidth, windowWidth) => {
       scrollTrigger: {
         trigger: section.value,
         start: "top top",
-        end: `+=${containerWidth * 3.2}`,
+        // end: `+=${containerWidth * 3.2}`,
+        end: `+=${windowWidth}`,
         scrub: true,
       },
     });
@@ -279,45 +275,30 @@ const playScroll = (TL, containerWidth, windowWidth) => {
         scrub: true,
       },
     });
-
     split(groupDescription.value);
-
     setTimeout(() => {
       const spans = [...groupDescription.value.querySelectorAll(".word")];
-
       // Create a separate timeline for spans animation
       const spansTL = gsap.timeline({});
-
-      if (isPC()) {
-        // Add span animations to the spans timeline
-        spans.forEach((span, index) => {
-          spansTL.to(span, {
-            color: "black",
-            opacity: 1,
-            delay: 0.1 + index * 0.05,
-            filter: "blur(0)",
-            scrollTrigger: {
-              trigger: scrollContainer.value,
-              containerAnimation: TL,
-              start: `top+=${index * 20} top`,
-              end: `top+=${(index + 2) * 20}px top`,
-              scrub: true,
-            },
-            ease: "circ.out",
-          });
+      // Add span animations to the spans timeline
+      spans.forEach((span, index) => {
+        spansTL.to(span, {
+          color: "black",
+          opacity: 1,
+          delay: 0.1 + index * 0.05,
+          filter: "blur(0)",
+          scrollTrigger: {
+            containerAnimation: TL,
+            trigger: scrollContainer.value,
+            start: `top+=${index * 20} top`,
+            end: `top+=${(index + 2) * 20}px top`,
+            scrub: true,
+          },
+          ease: "circ.out",
         });
-
-        // Link the spans timeline to the main timeline's pause point
-        TL.add(spansTL, "pausePoint+=2%");
-      } else {
-        // Add span animations to the spans timeline
-        spans.forEach((span, index) => {
-          gsap.set(span, {
-            color: "black",
-            opacity: 1,
-          });
-        });
-      }
+      });
+      // Link the spans timeline to the main timeline's pause point
+      TL.add(spansTL, "pausePoint+=2%");
     }, 2400);
   }
 
@@ -378,8 +359,8 @@ const initHorizontalScroll = () => {
         pinnedContainer: section.value,
         anticipatePin: 1,
         invalidateOnRefresh: true,
-        // ...(isPC() ? { pinType: "transform" } : {}),
-        pinType: "transform",
+        ...(isPC() ? { pinType: "transform" } : {}),
+
         onUpdate: (self) => {
           // Ensure we're not exceeding the bounds of the animation
           if (self.progress < 0) self.progress = 0;
@@ -563,9 +544,8 @@ onUnmounted(() => {
         &:first-child {
           display: flex;
           flex-direction: column;
-          height: 100vh;
-          justify-content: center;
-          align-self: center;
+          height: 50vh;
+          justify-content: flex-end;
           text-align: center;
 
           * {
