@@ -239,78 +239,70 @@ const split = (el) => {
 };
 
 const playScroll = (TL, containerWidth, windowWidth) => {
-  gsap.to(textContent.value, {
-    x: windowWidth * -0.032,
-    ease: "circ.out",
-    scrollTrigger: {
-      trigger: section.value,
-      start: "top top",
-      end: `+=${containerWidth}`,
-      scrub: true,
-    },
-  });
+  // gsap.to(textContent.value, {
+  //   x: windowWidth * -0.032,
+  //   ease: "circ.out",
+  //   scrollTrigger: {
+  //     containerAnimation: TL,
+  //     trigger: section.value,
+  //     start: "top top",
+  //     end: `+=${containerWidth}`,
+  //     scrub: true,
+  //   },
+  // });
 
-  if (groupTitle.value?.$el) {
-    gsap.to(groupTitle.value.$el, {
-      x: windowWidth * 0.1,
-      ease: "circ.in",
-      scrollTrigger: {
-        trigger: section.value,
-        start: "top top",
-        // end: `+=${containerWidth * 3.2}`,
-        end: `+=${windowWidth}`,
-        scrub: true,
-      },
-    });
-  }
+  // if (groupTitle.value?.$el) {
+  //   gsap.to(groupTitle.value.$el, {
+  //     x: windowWidth * 0.1,
+  //     ease: "circ.in",
+  //     scrollTrigger: {
+  //       containerAnimation: TL,
+  //       trigger: section.value,
+  //       start: "top top",
+  //       // end: `+=${containerWidth * 3.2}`,
+  //       end: `+=${windowWidth}`,
+  //       scrub: true,
+  //     },
+  //   });
+  // }
 
-  if (groupDescription.value) {
-    gsap.to(groupDescription.value, {
-      x: windowWidth * 0.1,
-      ease: "circ.in",
-      scrollTrigger: {
-        trigger: section.value,
-        start: "top top",
-        end: `+=${containerWidth * 2}`,
-        scrub: true,
-      },
-    });
-    split(groupDescription.value);
-    setTimeout(() => {
-      const spans = [...groupDescription.value.querySelectorAll(".word")];
-      // Create a separate timeline for spans animation
-      const spansTL = gsap.timeline({});
-      // Add span animations to the spans timeline
-      spans.forEach((span, index) => {
-        spansTL.to(span, {
-          color: "black",
-          opacity: 1,
-          delay: 0.1 + index * 0.05,
-          filter: "blur(0)",
-          scrollTrigger: {
-            containerAnimation: TL,
-            trigger: scrollContainer.value,
-            start: `top+=${index * 20} top`,
-            end: `top+=${(index + 2) * 20}px top`,
-            scrub: true,
-          },
-          ease: "circ.out",
-        });
-      });
-      // Link the spans timeline to the main timeline's pause point
-      TL.add(spansTL, "pausePoint+=2%");
-    }, 2400);
-  }
-
-  // Continue horizontal scroll after pause
-  TL.to(
-    scrollContainer.value,
-    {
-      x: -(containerWidth - windowWidth),
-      ease: "sine.inOut",
-    },
-    "pausePoint+=120%"
-  );
+  // if (groupDescription.value) {
+  //   gsap.to(groupDescription.value, {
+  //     x: windowWidth * 0.1,
+  //     ease: "circ.in",
+  //     scrollTrigger: {
+  //       trigger: section.value,
+  //       start: "top top",
+  //       end: `+=${containerWidth * 2}`,
+  //       scrub: true,
+  //     },
+  //   });
+  //   split(groupDescription.value);
+  //   setTimeout(() => {
+  //     const spans = [...groupDescription.value.querySelectorAll(".word")];
+  //     // Create a separate timeline for spans animation
+  //     const spansTL = gsap.timeline({});
+  //     // Add span animations to the spans timeline
+  //     spans.forEach((span, index) => {
+  //       spansTL.to(span, {
+  //         color: "black",
+  //         opacity: 1,
+  //         delay: 0.1 + index * 0.05,
+  //         filter: "blur(0)",
+  //         scrollTrigger: {
+  //           containerAnimation: TL,
+  //           trigger: scrollContainer.value,
+  //           start: `top+=${index * 20} top`,
+  //           end: `top+=${(index + 2) * 20}px top`,
+  //           scrub: true,
+  //         },
+  //         ease: "circ.out",
+  //       });
+  //     });
+  //     // Link the spans timeline to the main timeline's pause point
+  //     TL.add(spansTL, "pausePoint+=2%");
+  //   }, 2400);
+  // }
 
   catItems.value.forEach((item, itemIndex) => {
     const childrenNodes = [
@@ -349,18 +341,20 @@ const initHorizontalScroll = () => {
 
     // const usingSmoothScroll = // !matchMedia("(hover: none)").matches
 
+    // Main horizontal scroll animation
+
     const TL = gsap.timeline({
       scrollTrigger: {
         trigger: section.value,
         start: "top top",
         end: `+=${containerWidth + windowWidth}`,
-        scrub: true,
+        scrub: 0.72,
         pin: true,
         pinnedContainer: section.value,
         anticipatePin: 1,
         invalidateOnRefresh: true,
         ...(isPC() ? { pinType: "transform" } : {}),
-        // pinType: "transform", //debug
+        pinType: "transform", //debug
         onUpdate: (self) => {
           // Ensure we're not exceeding the bounds of the animation
           if (self.progress < 0) self.progress = 0;
@@ -369,17 +363,14 @@ const initHorizontalScroll = () => {
       },
     });
 
-    // Main horizontal scroll animation
-    // Scroll to -10
-    TL.to(container, {
-      // x: -(containerWidth - windowWidth),
-      x: -10,
-    });
-
-    TL.add("pausePoint");
-
     // Parallax effect
     playScroll(TL, containerWidth, windowWidth);
+
+    // Continue horizontal scroll after pause
+    TL.to(scrollContainer.value, {
+      x: -(containerWidth - windowWidth),
+      ease: "sine.inOut",
+    });
 
     emits("gsap-init-done");
   }
