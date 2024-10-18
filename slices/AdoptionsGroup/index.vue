@@ -288,27 +288,36 @@ const playScroll = (TL, containerWidth, windowWidth) => {
       // Create a separate timeline for spans animation
       const spansTL = gsap.timeline({});
 
-      // Add span animations to the spans timeline
-      spans.forEach((span, index) => {
-        spansTL.to(span, {
-          color: "black",
-          opacity: 1,
-          delay: 0.1 + index * 0.05,
-          filter: "blur(0)",
-          scrollTrigger: {
-            trigger: scrollContainer.value,
-            containerAnimation: TL,
-            start: `top+=${index * 20} top`,
-            end: `top+=${(index + 2) * 20}px top`,
-            scrub: true,
-            ...(isPC() ? { pinType: "transform" } : {}),
-          },
-          ease: "circ.out",
+      if (isPC()) {
+        // Add span animations to the spans timeline
+        spans.forEach((span, index) => {
+          spansTL.to(span, {
+            color: "black",
+            opacity: 1,
+            delay: 0.1 + index * 0.05,
+            filter: "blur(0)",
+            scrollTrigger: {
+              trigger: scrollContainer.value,
+              containerAnimation: TL,
+              start: `top+=${index * 20} top`,
+              end: `top+=${(index + 2) * 20}px top`,
+              scrub: true,
+            },
+            ease: "circ.out",
+          });
         });
-      });
 
-      // Link the spans timeline to the main timeline's pause point
-      TL.add(spansTL, "pausePoint+=2%");
+        // Link the spans timeline to the main timeline's pause point
+        TL.add(spansTL, "pausePoint+=2%");
+      } else {
+        // Add span animations to the spans timeline
+        spans.forEach((span, index) => {
+          gsap.set(span, {
+            color: "black",
+            opacity: 1,
+          });
+        });
+      }
     }, 2400);
   }
 
@@ -369,7 +378,8 @@ const initHorizontalScroll = () => {
         pinnedContainer: section.value,
         anticipatePin: 1,
         invalidateOnRefresh: true,
-        ...(isPC() ? { pinType: "transform" } : {}),
+        // ...(isPC() ? { pinType: "transform" } : {}),
+        pinType: "transform",
         onUpdate: (self) => {
           // Ensure we're not exceeding the bounds of the animation
           if (self.progress < 0) self.progress = 0;
@@ -480,6 +490,16 @@ onUnmounted(() => {
     gap: 4.8vw;
 
     flex: 1;
+
+    img {
+      display: inline-block;
+      position: absolute;
+      bottom: 8vh;
+      left: 4vw;
+      transform: scale(1.4);
+      border-radius: 0;
+      z-index: -1;
+    }
   }
 
   li {
@@ -510,6 +530,20 @@ onUnmounted(() => {
     font-weight: bold;
     display: inline-block;
   }
+
+  strong {
+    &:has(em) {
+      margin-bottom: 3.2vh;
+    }
+
+    &:not(:has(em)) {
+      margin-top: 1.6vh;
+    }
+
+    * {
+      font-weight: bold;
+    }
+  }
 }
 
 @container app (max-width: 699px) {
@@ -522,21 +556,60 @@ onUnmounted(() => {
 
     &__text-content {
       width: auto;
+      display: flex;
+      flex-direction: row;
 
       & > * {
-        width: 100vw;
-        padding: 8vw;
-
         &:first-child {
+          display: flex;
+          flex-direction: column;
+          height: 100vh;
+          justify-content: center;
+          align-self: center;
+          text-align: center;
+
           * {
-            @include ft-s(large);
+            @include ft-s(xlarge);
           }
         }
       }
     }
 
-    &__items {
+    &__description {
+      position: relative;
+
       & > * {
+        padding: 8vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 8vw;
+        width: 100vw;
+        height: 100vh;
+
+        &:has(img) {
+          padding-top: 12vh;
+        }
+
+        em {
+          * {
+            font-weight: bold;
+            @include ft-s(medium);
+          }
+        }
+
+        img {
+          width: 100vw;
+          left: 0;
+          bottom: 0;
+          transform: scale(1);
+        }
+      }
+    }
+
+    &__items {
+      & > *:not(:first-child) {
         margin-right: 6vh;
         margin-left: 6vh;
       }
@@ -587,35 +660,11 @@ onUnmounted(() => {
           @include ft-s(medium);
         }
 
-        strong {
-          &:has(em) {
-            margin-bottom: 3.2vh;
-          }
-
-          &:not(:has(em)) {
-            margin-top: 1.6vh;
-          }
-
-          * {
-            font-weight: bold;
-          }
-        }
-
         em {
           * {
             font-weight: bold;
             @include ft-s(large);
           }
-        }
-
-        img {
-          display: inline-block;
-          position: absolute;
-          bottom: 8vh;
-          left: 4vw;
-          transform: scale(1.4);
-          border-radius: 0;
-          z-index: -1;
         }
       }
     }

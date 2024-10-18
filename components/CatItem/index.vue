@@ -98,10 +98,11 @@ const onOpen = (opened: boolean) => {
 
   &__photo {
     display: block;
-    aspect-ratio: 1/1;
+    aspect-ratio: 1;
     object-fit: cover;
     background-color: var(--gray);
     border-radius: 32px;
+    width: 100%;
   }
 
   &__name {
