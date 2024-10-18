@@ -266,43 +266,45 @@ const playScroll = (TL, containerWidth, windowWidth) => {
   //   });
   // }
 
-  // if (groupDescription.value) {
-  //   gsap.to(groupDescription.value, {
-  //     x: windowWidth * 0.1,
-  //     ease: "circ.in",
-  //     scrollTrigger: {
-  //       trigger: section.value,
-  //       start: "top top",
-  //       end: `+=${containerWidth * 2}`,
-  //       scrub: true,
-  //     },
-  //   });
-  //   split(groupDescription.value);
-  //   setTimeout(() => {
-  //     const spans = [...groupDescription.value.querySelectorAll(".word")];
-  //     // Create a separate timeline for spans animation
-  //     const spansTL = gsap.timeline({});
-  //     // Add span animations to the spans timeline
-  //     spans.forEach((span, index) => {
-  //       spansTL.to(span, {
-  //         color: "black",
-  //         opacity: 1,
-  //         delay: 0.1 + index * 0.05,
-  //         filter: "blur(0)",
-  //         scrollTrigger: {
-  //           containerAnimation: TL,
-  //           trigger: scrollContainer.value,
-  //           start: `top+=${index * 20} top`,
-  //           end: `top+=${(index + 2) * 20}px top`,
-  //           scrub: true,
-  //         },
-  //         ease: "circ.out",
-  //       });
-  //     });
-  //     // Link the spans timeline to the main timeline's pause point
-  //     TL.add(spansTL, "pausePoint+=2%");
-  //   }, 2400);
-  // }
+  if (groupDescription.value) {
+    split(groupDescription.value);
+    setTimeout(() => {
+      const spans = [...groupDescription.value.querySelectorAll(".word")];
+      // Create a separate timeline for spans animation
+      const spansTL = gsap.timeline({});
+      // Add span animations to the spans timeline
+      spans.forEach((span, index) => {
+        spansTL.to(span, {
+          color: "black",
+          opacity: 1,
+          delay: 0.1 + index * 0.05,
+          filter: "blur(0)",
+          scrollTrigger: {
+            containerAnimation: TL,
+            trigger: groupDescription.value,
+            start: `top+=${index * 20} top`,
+            end: `top+=${(index + 2) * 20}px top`,
+            scrub: true,
+          },
+          ease: "circ.out",
+        });
+      });
+
+      // Link the spans timeline to the main timeline's pause point
+      TL.add(spansTL, 0);
+
+      TL.add("spansPoint", "pausePoint+=80%");
+    }, 2400);
+  }
+
+  TL.to(
+    scrollContainer.value,
+    {
+      x: -(containerWidth - windowWidth),
+      ease: "sine.inOut",
+    },
+    "spansPoint+=50%"
+  );
 
   catItems.value.forEach((item, itemIndex) => {
     const childrenNodes = [
@@ -347,14 +349,15 @@ const initHorizontalScroll = () => {
       scrollTrigger: {
         trigger: section.value,
         start: "top top",
-        end: `+=${containerWidth + windowWidth}`,
+        end: `+=${containerWidth + windowWidth + windowWidth / 4}`,
         scrub: 0.72,
         pin: true,
         pinnedContainer: section.value,
         anticipatePin: 1,
         invalidateOnRefresh: true,
         ...(isPC() ? { pinType: "transform" } : {}),
-        pinType: "transform", //debug
+        // pinType: "transform", //debug
+        // markers: true, // debug
         onUpdate: (self) => {
           // Ensure we're not exceeding the bounds of the animation
           if (self.progress < 0) self.progress = 0;
@@ -363,14 +366,29 @@ const initHorizontalScroll = () => {
       },
     });
 
+    // TL.to(
+    //   scrollContainer.value,
+    //   {
+    //     x: -24,
+    //     ease: "sine.inOut",
+    //   },
+    //   0
+    // );
+
+    TL.add("pausePoint");
+
     // Parallax effect
     playScroll(TL, containerWidth, windowWidth);
 
     // Continue horizontal scroll after pause
-    TL.to(scrollContainer.value, {
-      x: -(containerWidth - windowWidth),
-      ease: "sine.inOut",
-    });
+    // TL.to(
+    //   scrollContainer.value,
+    //   {
+    //     x: -(containerWidth - windowWidth),
+    //     ease: "sine.inOut",
+    //   },
+    //   "pausePoint+=120%"
+    // );
 
     emits("gsap-init-done");
   }
