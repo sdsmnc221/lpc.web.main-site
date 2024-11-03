@@ -247,8 +247,6 @@ const playScroll = (TL, containerWidth, windowWidth) => {
 
       const words = [...groupTitle.value.$el.querySelectorAll(".word")];
 
-      console.log(groupTitle.value.$el.querySelectorAll(".word"));
-
       words.forEach((word, index) => {
         titleTL.fromTo(
           word,
@@ -258,13 +256,14 @@ const playScroll = (TL, containerWidth, windowWidth) => {
             filter: "blur(4px)",
             opacity: 0,
             color: "var(--gray)",
+            willChange: "transform, filter, opacity, color",
           },
           {
             y: 0,
             x: 0,
             filter: "blur(0)",
             opacity: 1,
-            color: "var(--vlack)",
+            color: "var(--black)",
             ease: "power4.inOut",
             delay: 0.1 + index * 0.2,
             scrollTrigger: {
@@ -287,7 +286,6 @@ const playScroll = (TL, containerWidth, windowWidth) => {
     setTimeout(() => {
       const spans = [...groupDescription.value.querySelectorAll(".word")];
 
-      console.log(spans);
       // Create a separate timeline for spans animation
       const spansTL = gsap.timeline({});
       // Add span animations to the spans timeline
@@ -295,23 +293,21 @@ const playScroll = (TL, containerWidth, windowWidth) => {
         spansTL.fromTo(
           span,
           {
-            color: "var(--gray)",
+            y: index * 8,
+            // x: index * (windowWidth / 4) * (index % 2 === 0) ? 1 : -1,
             opacity: 0,
-            // filter: "blur(4px)",
-            willChange: "color, opacity, filter",
+            willChange: "transform, filter, opacity",
           },
           {
-            color: "black",
+            y: 0,
+            x: 0,
             opacity: 1,
-            // filter: "blur(0)",
-            delay: 0.2 + 0.05 * index,
+            stagger: 0.16 * index,
+            duration: 2,
             scrollTrigger: {
               containerAnimation: TL,
-              trigger: scrollContainer.value,
-              start: `top top`,
-              // end: `top+=${(index + 2) * 20}px top`,
-              // end: `top top+=${20}px`,
-              // scrub: true,
+              trigger: groupDescription.value.parentNode,
+              start: "top top",
             },
             ease: "power4",
           }
@@ -382,7 +378,7 @@ const initHorizontalScroll = () => {
         anticipatePin: 1,
         invalidateOnRefresh: true,
         ...(isPC() ? { pinType: "transform" } : {}),
-        pinType: "transform", //debug
+        // pinType: "transform", //debug
         // markers: true, // debug
         onUpdate: (self) => {
           // Ensure we're not exceeding the bounds of the animation
@@ -476,7 +472,10 @@ onUnmounted(() => {
     [data-index="4"] {
       --index: 4;
     }
-    /* Add more if needed */
+
+    .word {
+      color: var(--black);
+    }
   }
 
   &__description {
@@ -621,9 +620,10 @@ onUnmounted(() => {
         position: absolute;
         top: 0;
         padding: 4.8vw;
+        padding-top: 1.2vw;
 
         h3 {
-          font-size: calc((var(--base-ft-size) * 7.2));
+          font-size: calc((var(--base-ft-size) * 6.4));
         }
       }
 
@@ -651,13 +651,13 @@ onUnmounted(() => {
         }
 
         * {
-          @include ft-s(medium);
+          @include ft-s(16);
         }
 
         em {
           * {
             font-weight: bold;
-            @include ft-s(large);
+            @include ft-s(medium);
           }
         }
       }
