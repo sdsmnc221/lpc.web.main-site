@@ -600,7 +600,8 @@ onUnmounted(() => {
 
       strong {
         &:not(:has(em)) {
-          margin-top: 0;
+          margin-top: 0.8vh;
+          margin-bottom: 0.8vh;
         }
       }
 
