@@ -265,11 +265,11 @@ const onOpen = (opened: boolean) => {
 @container app (max-width: 699px) {
   .adoptions-group {
     .cat-item {
-      width: 74.6vw;
+      width: 72vw;
 
       &__info {
         * {
-          @include ft-s(20);
+          @include ft-s(16);
         }
 
         flex-direction: column;
