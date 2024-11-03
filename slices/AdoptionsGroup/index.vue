@@ -597,6 +597,16 @@ onUnmounted(() => {
           transform: scale(1);
         }
       }
+
+      strong {
+        &:not(:has(em)) {
+          margin-top: 0;
+        }
+      }
+
+      [data-index="1"] {
+        transform: translateY(7.2vh);
+      }
     }
 
     &__items {

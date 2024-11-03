@@ -265,7 +265,7 @@ const onOpen = (opened: boolean) => {
 @container app (max-width: 699px) {
   .adoptions-group {
     .cat-item {
-      width: 72vw;
+      width: 74.6vw;
 
       &__info {
         * {
