@@ -140,7 +140,7 @@ const windowHeight = ref(0);
  * - on mounted, whether if is mobile and sheet is open
  * - on resiize, whether if is mobile and newHeight (height minus adress bar) < oldHeight
  */
-const isAdressBarHidden = ref(false);
+const isAdressBarHidden = ref(true);
 
 const closeSheet = () => {
   emits("update:open-sheet", { opened: false });
