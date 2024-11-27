@@ -3,6 +3,7 @@
     <div
       v-if="catItem"
       class="cat-sheet__grid"
+      :class="{ '--svh': isAdressBarHidden }"
       :style="`--random-tint: ${tint};`"
     >
       <div class="cat-sheet__grid__div7">"></div>
@@ -108,6 +109,7 @@
 import { Badge } from "@/components/ui/badge";
 
 import type { CatInfo } from "~/interfaces/Cat";
+import { isMobile } from "~/lib/helpers";
 
 type CatSheetInfo = {
   open: boolean;
@@ -130,9 +132,31 @@ const hasInfo = computed(
     (props.catItem?.catagenumber && props.catItem?.catagetype)
 );
 
+const windowHeight = ref(0);
+
+const isAdressBarHidden = ref(props.open && isMobile());
+
 const closeSheet = () => {
   emits("update:open-sheet", { opened: false });
 };
+
+onMounted(() => {
+  nextTick(() => {
+    windowHeight.value = window.innerHeight;
+    isAdressBarHidden.value = isMobile() && props.open;
+
+    window.addEventListener("resize", () => {
+      windowHeight.value = window.innerHeight;
+    });
+  });
+});
+
+watch(
+  () => windowHeight.value,
+  (newHeight, oldHeight) => {
+    isAdressBarHidden.value = newHeight < oldHeight && isMobile() && props.open;
+  }
+);
 </script>
 
 <style lang="scss" scoped>
@@ -401,7 +425,9 @@ const closeSheet = () => {
         grid-column-gap: 0px;
         grid-row-gap: 0px;
 
-        height: 100svh;
+        &.--svh {
+          height: 100svh;
+        }
 
         &__div1 {
           grid-area: 1 / 1 / 3 / 3;
