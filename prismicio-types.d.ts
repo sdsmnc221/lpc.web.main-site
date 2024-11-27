@@ -118,7 +118,7 @@ interface CatficheDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#select
    */
   catidentification: prismic.SelectField<
-    "Identifié.e par tatouage" | "Identifié. par puce" | "Non identifiée.",
+    "Identifié.e par tatouage" | "Identifié.e par puce" | "Non identifiée.",
     "filled"
   >;
 
