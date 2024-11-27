@@ -543,7 +543,7 @@ const closeSheet = () => {
     .cat-sheet {
       &__grid {
         &__div6 {
-          height: 24vh;
+          height: 32vh;
         }
       }
 
