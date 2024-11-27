@@ -20,7 +20,13 @@
         <prismic-image
           class="cat-sheet__avatar"
           :class="{ '--placeholder': !catHasAvatar }"
-          :field="catHasAvatar ? catItem.catphoto : catItem.avatarPlaceholder"
+          :field="
+            catHasAvatar
+              ? catItem.catphoto2.hasOwnProperty('url')
+                ? catItem.catphoto2
+                : catItem.catphoto
+              : catItem.avatarPlaceholder
+          "
         />
       </div>
 
