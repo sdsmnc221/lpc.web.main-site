@@ -298,7 +298,7 @@ watch(
           display: flex;
           justify-content: flex-end;
           align-items: flex-end;
-          padding-left: var(--spacing-m);
+          padding-left: calc(var(--spacing-m) * 2);
           padding-bottom: var(--spacing-m);
           padding-top: var(--spacing-m);
           position: relative;
@@ -307,7 +307,7 @@ watch(
             max-height: 20vh;
             overflow-y: scroll;
             text-align: right;
-            font-size: calc(var(--base-ft-size) * 1.2);
+            font-size: var(--base-ft-size);
             width: 100%;
           }
         }
@@ -499,6 +499,7 @@ watch(
             }
 
             &__description {
+              padding-left: var(--spacing-m);
               margin-top: var(--spacing-l);
               padding-right: var(--spacing-s);
               padding-bottom: 0;
