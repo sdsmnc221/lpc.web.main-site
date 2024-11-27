@@ -401,6 +401,8 @@ const closeSheet = () => {
         grid-column-gap: 0px;
         grid-row-gap: 0px;
 
+        height: 100svh;
+
         &__div1 {
           grid-area: 1 / 1 / 3 / 3;
           background-color: black;
@@ -529,6 +531,8 @@ const closeSheet = () => {
 
               &__content {
                 background-color: rgba(0, 0, 0, 0.64);
+                font-size: calc(var(--base-ft-size) * 0.72) !important;
+                line-height: 0.72rem;
               }
             }
           }
