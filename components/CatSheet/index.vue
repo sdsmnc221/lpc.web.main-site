@@ -537,4 +537,20 @@ const closeSheet = () => {
     }
   }
 }
+
+@media screen and (max-height: 720px) {
+  body {
+    .cat-sheet {
+      &__grid {
+        &__div6 {
+          height: 24vh;
+        }
+      }
+
+      &__details {
+        top: -6.4vh;
+      }
+    }
+  }
+}
 </style>
