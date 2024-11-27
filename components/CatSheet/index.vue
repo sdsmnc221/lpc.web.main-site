@@ -78,7 +78,7 @@
             >{{ catItem.catname }}</span
           >
         </h2>
-        <p class="cat-sheet__publication albert-sans-light size-regular">
+        <p class="cat-sheet__publication">
           Fiche publiée le {{ catItem.createddate }}
         </p>
       </div>
@@ -276,13 +276,14 @@ const closeSheet = () => {
           align-items: flex-end;
           padding-left: var(--spacing-m);
           padding-bottom: var(--spacing-m);
+          padding-top: var(--spacing-m);
           position: relative;
 
           & > div {
             max-height: 20vh;
             overflow-y: scroll;
             text-align: right;
-            @include ft-s(regular);
+            font-size: calc(var(--base-ft-size) * 1.2);
             width: 100%;
           }
         }
@@ -319,8 +320,8 @@ const closeSheet = () => {
           position: relative;
 
           span {
-            font-size: calc((var(--base-ft-size) * 5));
-            line-height: calc((var(--base-ft-size) * 4));
+            font-size: calc((var(--base-ft-size) * 6));
+            line-height: calc((var(--base-ft-size) * 5));
           }
         }
 
@@ -330,7 +331,7 @@ const closeSheet = () => {
           margin-top: var(--spacing-s);
           color: var(--gray);
           background-color: var(--white);
-          @include ft-s(small);
+          @include ft-s(medium);
           font-style: italic;
           text-align: left;
         }
@@ -477,7 +478,7 @@ const closeSheet = () => {
                 text-align: right;
 
                 height: 164px;
-                font-size: calc(var(--base-ft-size) * 0.72);
+                font-size: var(--base-ft-size);
               }
             }
           }
