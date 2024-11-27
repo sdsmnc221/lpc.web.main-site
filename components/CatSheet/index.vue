@@ -154,7 +154,7 @@ onMounted(() => {
 watch(
   () => windowHeight.value,
   (newHeight, oldHeight) => {
-    isAdressBarHidden.value = newHeight < oldHeight && isMobile() && props.open;
+    isAdressBarHidden.value = newHeight < oldHeight && isMobile();
   }
 );
 </script>
