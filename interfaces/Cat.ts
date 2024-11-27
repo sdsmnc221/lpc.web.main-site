@@ -5,6 +5,7 @@ export type CatInfo = {
   id: string;
   createddate: string;
   catphoto: Image;
+  catphoto2: Image;
   catname: string;
   catsexe?: string;
   catbirth: string;

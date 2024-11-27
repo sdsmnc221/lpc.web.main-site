@@ -19,6 +19,13 @@
           "placeholder": ""
         }
       },
+      "catname": {
+        "type": "Text",
+        "config": {
+          "label": "catName",
+          "placeholder": ""
+        }
+      },
       "catphoto": {
         "type": "Image",
         "config": {
@@ -27,11 +34,12 @@
           "thumbnails": []
         }
       },
-      "catname": {
-        "type": "Text",
+      "catphoto2": {
+        "type": "Image",
         "config": {
-          "label": "catName",
-          "placeholder": ""
+          "label": "catPhoto2",
+          "constraint": {},
+          "thumbnails": []
         }
       },
       "catsexe": {
@@ -80,7 +88,7 @@
           "placeholder": "",
           "options": [
             "Identifié.e par tatouage",
-            "Identifié. par puce",
+            "Identifié.e par puce",
             "Non identifiée."
           ],
           "default_value": "Identifié.e par tatouage"

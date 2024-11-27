@@ -20,6 +20,17 @@ interface CatficheDocumentData {
   createddate: prismic.DateField;
 
   /**
+   * catName field in *CatFiche*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: catfiche.catname
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  catname: prismic.KeyTextField;
+
+  /**
    * catPhoto field in *CatFiche*
    *
    * - **Field Type**: Image
@@ -31,15 +42,15 @@ interface CatficheDocumentData {
   catphoto: prismic.ImageField<never>;
 
   /**
-   * catName field in *CatFiche*
+   * catPhoto2 field in *CatFiche*
    *
-   * - **Field Type**: Text
+   * - **Field Type**: Image
    * - **Placeholder**: *None*
-   * - **API ID Path**: catfiche.catname
+   * - **API ID Path**: catfiche.catphoto2
    * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#key-text
+   * - **Documentation**: https://prismic.io/docs/field#image
    */
-  catname: prismic.KeyTextField;
+  catphoto2: prismic.ImageField<never>;
 
   /**
    * catSexe field in *CatFiche*
@@ -107,7 +118,7 @@ interface CatficheDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#select
    */
   catidentification: prismic.SelectField<
-    "Identifié.e par tatouage" | "Identifié. par puce" | "Non identifiée.",
+    "Identifié.e par tatouage" | "Identifié.e par puce" | "Non identifiée.",
     "filled"
   >;
 

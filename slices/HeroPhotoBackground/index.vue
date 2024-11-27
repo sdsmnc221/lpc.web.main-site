@@ -78,6 +78,12 @@ const backgroundImage = computed(() => primary.value?.backgroundimage?.url);
     background-position: center;
   }
 
+  &[style*="main-tendue.jpg"] {
+    &::before {
+      background-position: 18%;
+    }
+  }
+
   &__text-content {
     position: relative;
     z-index: 2;
