@@ -370,6 +370,10 @@ onUnmounted(() => {
     }
   }
 
+  &__title {
+    text-transform: lowercase;
+  }
+
   &__text-content {
     width: 50vw;
     display: flex;
