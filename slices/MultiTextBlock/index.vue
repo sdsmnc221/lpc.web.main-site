@@ -20,7 +20,7 @@
         </h4>
 
         <prismic-rich-text
-          class="multi-text-block__block__description albert-sans-regular"
+          class="multi-text-block__block__description albert-sans-bold"
           :field="block.textblockcontent"
         />
       </div>
@@ -83,7 +83,6 @@ const textBlocks = computed(() => primary.value?.textblocksgroup);
     padding: 12px 24px;
     margin: var(--spacing-m) 0;
 
-    font-weight: 200;
     letter-spacing: -0.2px;
 
     border: none;

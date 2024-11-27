@@ -442,6 +442,8 @@ const closeSheet = () => {
           gap: var(--spacing-s);
 
           .cat-sheet__details {
+            top: -6.4vh;
+
             &__info {
               @include ft-s(small);
               top: 28%;
@@ -471,12 +473,13 @@ const closeSheet = () => {
             &__description {
               margin-top: var(--spacing-l);
               padding-right: var(--spacing-s);
+              padding-bottom: 0;
 
               width: 56vw;
 
               & > div {
                 text-align: right;
-
+                overflow-y: visible;
                 height: 164px;
                 font-size: var(--base-ft-size);
               }
