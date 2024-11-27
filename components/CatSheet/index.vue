@@ -134,7 +134,7 @@ const hasInfo = computed(
 
 const windowHeight = ref(0);
 
-const isAdressBarHidden = ref(props.open && isMobile());
+const isAdressBarHidden = ref(!props.open && isMobile());
 
 const closeSheet = () => {
   emits("update:open-sheet", { opened: false });
