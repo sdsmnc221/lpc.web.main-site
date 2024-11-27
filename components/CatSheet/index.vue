@@ -134,7 +134,13 @@ const hasInfo = computed(
 
 const windowHeight = ref(0);
 
-const isAdressBarHidden = ref(!props.open);
+/**
+ * Adress bar is hidden cases:
+ * - on page load, adress bar is show
+ * - on mounted, whether if is mobile and sheet is open
+ * - on resiize, whether if is mobile and newHeight (height minus adress bar) < oldHeight
+ */
+const isAdressBarHidden = ref(false);
 
 const closeSheet = () => {
   emits("update:open-sheet", { opened: false });
@@ -143,7 +149,7 @@ const closeSheet = () => {
 onMounted(() => {
   nextTick(() => {
     windowHeight.value = window.innerHeight;
-    isAdressBarHidden.value = isMobile() && !props.open;
+    isAdressBarHidden.value = isMobile() && props.open;
 
     window.addEventListener("resize", () => {
       windowHeight.value = window.innerHeight;
