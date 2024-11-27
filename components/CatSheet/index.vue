@@ -481,7 +481,7 @@ const closeSheet = () => {
                 text-align: right;
                 overflow-y: visible;
                 height: 164px;
-                font-size: var(--base-ft-size);
+                font-size: calc(var(--base-ft-size) * 0.72);
               }
             }
           }
@@ -506,6 +506,7 @@ const closeSheet = () => {
               color: var(--black);
               width: auto;
               align-self: flex-end;
+              @include ft-s(small);
             }
           }
         }

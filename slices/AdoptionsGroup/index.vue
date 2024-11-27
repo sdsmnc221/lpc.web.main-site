@@ -400,10 +400,18 @@ onUnmounted(() => {
 
         &:first-child {
           * {
-            @include ft-s(large);
+            @include ft-s(medium);
+            text-align: left;
           }
         }
       }
+    }
+
+    &__title {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
     &__items {
