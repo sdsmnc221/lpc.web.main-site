@@ -573,12 +573,12 @@ watch(
     .cat-sheet {
       &__grid {
         &__div6 {
-          height: 32vh;
+          height: 28vh;
         }
       }
 
       &__details {
-        top: -6.4vh;
+        top: -6.4svh;
       }
     }
   }
