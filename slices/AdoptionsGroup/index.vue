@@ -576,7 +576,7 @@ onUnmounted(() => {
           text-align: center;
 
           * {
-            @include ft-s(xlarge);
+            @include ft-s(medium);
           }
         }
       }
