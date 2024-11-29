@@ -596,15 +596,15 @@ onUnmounted(() => {
         &:has(img) {
           padding-top: 12vh;
         }
+      }
 
-        img {
-          width: 72vw;
-          height: auto;
-          left: 0;
-          bottom: auto;
-          top: 10vh;
-          transform: scale(1);
-        }
+      img {
+        width: 72vw !important;
+        height: auto !important;
+        left: 0 !important;
+        bottom: auto !important;
+        top: 10vh !important;
+        transform: scale(1) !important;
       }
 
       strong {
@@ -793,11 +793,11 @@ onUnmounted(() => {
       }
 
       img {
-        // width: 100vw;
-        // height: auto;
-        // left: 0;
-        // bottom: 0;
-        // transform: scale(1);
+        width: 100vw;
+        height: auto;
+        left: 0;
+        bottom: 0;
+        transform: scale(1);
       }
 
       strong {
