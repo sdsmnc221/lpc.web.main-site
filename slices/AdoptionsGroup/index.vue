@@ -670,13 +670,13 @@ onUnmounted(() => {
 
         [data-index] {
           width: 100vw;
-          margin-bottom: calc(var(--spacing-l) * 3.2 * var(--index_, 2));
+          margin-bottom: calc(var(--spacing-l) * 2 * var(--index_, 2));
         }
 
         [data-index="1"],
         [data-index="3"],
         [data-index="5"] {
-          --index_: calc((var(--index) +1) * 3.2 + var(--index));
+          --index_: calc((var(--index) +1) * 2.4 + var(--index));
         }
       }
 
@@ -716,7 +716,11 @@ onUnmounted(() => {
       &__description {
         padding-left: 0;
         padding-right: 0;
-        padding-bottom: 16vh;
+        padding-bottom: 8vh;
+
+        & > * {
+          width: 40vw !important;
+        }
 
         [data-index] {
           width: 100vw;
