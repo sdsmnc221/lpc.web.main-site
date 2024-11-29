@@ -793,11 +793,11 @@ onUnmounted(() => {
       }
 
       img {
-        width: 100vw;
-        height: auto;
-        left: 0;
-        bottom: 0;
-        transform: scale(1);
+        // width: 100vw;
+        // height: auto;
+        // left: 0;
+        // bottom: 0;
+        // transform: scale(1);
       }
 
       strong {
