@@ -15,7 +15,7 @@
         </h4>
 
         <div class="cat-item__explore">
-          <span>+ Fiche</span>
+          <span>Rencontrez-moi !</span>
         </div>
 
         <div class="cat-item__info albert-sans-light size-regular">
