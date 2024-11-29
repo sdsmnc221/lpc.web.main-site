@@ -15,7 +15,8 @@
         </h4>
 
         <div class="cat-item__explore">
-          <span>Rencontrez-moi !</span>
+          <span>Découvrez</span>
+          <span>mon histoire.</span>
         </div>
 
         <div class="cat-item__info albert-sans-light size-regular">
@@ -71,8 +72,12 @@ const onOpen = (opened: boolean) => {
     transform: translateY(calc(var(--spacing-l) * -1));
   }
   .cat-item__explore {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     span {
-      display: inline-block;
+      display: block;
       position: relative;
       transition: all ease-in-out 0.64s;
     }
@@ -273,6 +278,10 @@ const onOpen = (opened: boolean) => {
           font-size: calc((var(--base-ft-size) * 4));
           line-height: calc((var(--base-ft-size) * 3));
         }
+      }
+
+      &__explore {
+        width: 44vw;
       }
 
       &__info {
