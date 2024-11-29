@@ -562,7 +562,7 @@ onUnmounted(() => {
     }
 
     &__title {
-      transform: translate(-10vh);
+      transform: translateY(-10vh);
     }
 
     &__text-content {
