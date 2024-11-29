@@ -686,6 +686,60 @@ onUnmounted(() => {
   }
 }
 
+@media screen and (min-width: 768px) and (orientation: landscape) {
+  .app {
+    .adoptions-group {
+      margin-top: calc(var(--spacing-l) * 2);
+      margin-bottom: var(--spacing-l);
+
+      &__title {
+        position: absolute;
+        top: 0;
+        padding: 4.8vw;
+        padding-top: 1.2vw;
+
+        h3 {
+          font-size: calc((var(--base-ft-size) * 4.8));
+        }
+      }
+
+      &__text-content {
+        width: 100vw;
+        max-height: 100vh;
+        padding: 0 7.2vh;
+        margin: 0;
+      }
+
+      &__description {
+        padding-left: 0;
+        padding-right: 0;
+        padding-bottom: 16vh;
+
+        [data-index] {
+          width: 100vw;
+          margin-bottom: calc(var(--spacing-l) * -0.32 * var(--index_, 2));
+        }
+
+        [data-index="1"],
+        [data-index="3"],
+        [data-index="5"] {
+          --index_: calc((var(--index) +1) * 2 + var(--index));
+        }
+      }
+
+      img {
+        transform: scale(1) translateX(-8%);
+      }
+
+      &__text-content {
+        p * {
+          @include ft-s(16);
+        }
+      }
+    }
+  }
+}
+
 @media screen and (min-width: 768px) and (max-width: 999px) and (orientation: portrait) {
   .adoptions-group {
     &__container {
