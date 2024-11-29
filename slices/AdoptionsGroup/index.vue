@@ -6,22 +6,30 @@
     class="adoptions-group bg-white"
   >
     <div ref="scrollContainer" class="adoptions-group__container">
-      <div class="adoptions-group__items" v-if="itemsData?.length">
-        <div ref="textContent" class="adoptions-group__text-content">
+      <div ref="textContent" class="adoptions-group__text-content">
+        <prismic-rich-text
+          ref="groupTitle"
+          class="adoptions-group__title"
+          :field="title"
+        />
+
+        <div
+          class="adoptions-group__description"
+          ref="groupDescription"
+          v-if="description"
+        >
           <prismic-rich-text
-            ref="groupTitle"
-            class="adoptions-group__title cl-black gloock-regular"
-            :field="title"
+            v-for="(text, index) in description"
+            :key="`description-${slice.id}-${index}`"
+            :data-index="index"
+            :field="text.paragraph"
           />
 
-          <prismic-rich-text
-            v-if="description"
-            ref="groupDescription"
-            class="adoptions-group__description cl-black albert-sans-regular"
-            :field="description"
-          />
+          <img v-if="image" :src="image.url" />
         </div>
+      </div>
 
+      <div class="adoptions-group__items" v-if="itemsData?.length">
         <cat-item
           v-for="(cat, index) in itemsData"
           :key="`adoptions-group-cat-${cat.id}`"
@@ -89,6 +97,9 @@ const adoptionRequirements = computed(
   () => primary.value?.adoptionrequirements
 );
 const description = computed(() => primary.value?.description);
+
+const image = computed(() => primary.value?.image);
+console.log(primary.value);
 
 const { data: itemsData } = await useAsyncData(props.slice.id, async () => {
   const itemsId = primary.value?.catsgroup?.map((item) => item.catitem.id);
@@ -160,12 +171,15 @@ const onOpenSheet = (details) => {
 watch(
   () => defaultOpen.value,
   () => {
-    if (defaultOpen.value) {
-      window.lenis?.stop();
-    } else {
-      window.lenis?.start();
-    }
-  }
+    setTimeout(() => {
+      if (defaultOpen.value) {
+        window.lenis?.stop();
+      } else {
+        window.lenis?.start();
+      }
+    }, 480);
+  },
+  { immediate: true }
 );
 
 watch(
@@ -218,43 +232,110 @@ const groupTitle = ref(null);
 const groupDescription = ref(null);
 const catItems = ref([]);
 
-const goParallax = (containerWidth, windowWidth) => {
-  gsap.to(textContent.value, {
-    x: windowWidth * 0.05,
-    ease: "circ.out",
-    scrollTrigger: {
-      trigger: section.value,
-      start: "top top",
-      end: `+=${containerWidth}`,
-      scrub: true,
-    },
+const split = (el, mode = "lines") => {
+  nextTick(async () => {
+    const Splitting = await import("splitting");
+
+    Splitting.default({
+      /* target: String selector, Element, Array of Elements, or NodeList */
+      target: [...el.querySelectorAll(":scope > *")],
+      /* by: String of the plugin name */
+      by: mode,
+      /* key: Optional String to prefix the CSS variables */
+      key: null,
+    });
   });
+};
 
+const playScroll = (TL, containerWidth, windowWidth) => {
   if (groupTitle.value?.$el) {
-    gsap.to(groupTitle.value.$el, {
-      x: windowWidth * 0.2,
-      ease: "circ.in",
-      scrollTrigger: {
-        trigger: section.value,
-        start: "top top",
-        end: `+=${containerWidth}`,
-        scrub: true,
-      },
-    });
+    split(groupTitle.value.$el, "words");
+
+    setTimeout(() => {
+      const titleTL = gsap.timeline({});
+
+      const words = [...groupTitle.value.$el.querySelectorAll(".word")];
+
+      words.forEach((word, index) => {
+        titleTL.fromTo(
+          word,
+          {
+            y: index * -24,
+            x: index * (windowWidth / 4) * (index % 2 === 0) ? 1 : -1,
+            filter: "blur(4px)",
+            opacity: 0,
+            color: "var(--gray)",
+            willChange: "transform, filter, opacity, color",
+          },
+          {
+            y: 0,
+            x: 0,
+            filter: "blur(0)",
+            opacity: 1,
+            color: "var(--black)",
+            ease: "power4.inOut",
+            delay: 0.1 + index * 0.2,
+            scrollTrigger: {
+              containerAnimation: TL,
+              trigger: groupTitle.value.$el,
+              start: "top top",
+              end: `top+=${(index + 3) * 64}px top`,
+              scrub: true,
+            },
+          }
+        );
+      });
+
+      TL.add(titleTL, 0);
+    }, 2400);
   }
 
-  if (groupDescription.value?.$el) {
-    gsap.to(groupDescription.value.$el, {
-      x: windowWidth * 0.05,
-      ease: "circ.out",
-      scrollTrigger: {
-        trigger: section.value,
-        start: "top top",
-        end: `+=${containerWidth}`,
-        scrub: true,
-      },
-    });
+  if (groupDescription.value) {
+    split(groupDescription.value);
+    setTimeout(() => {
+      const spans = [...groupDescription.value.querySelectorAll(".word")];
+
+      // Create a separate timeline for spans animation
+      const spansTL = gsap.timeline({});
+      // Add span animations to the spans timeline
+      spans.forEach((span, index) => {
+        spansTL.fromTo(
+          span,
+          {
+            y: index * 8,
+            // x: index * (windowWidth / 4) * (index % 2 === 0) ? 1 : -1,
+            opacity: 0,
+            willChange: "transform, filter, opacity",
+          },
+          {
+            y: 0,
+            x: 0,
+            opacity: 1,
+            stagger: 0.16 * index,
+            duration: 2,
+            scrollTrigger: {
+              containerAnimation: TL,
+              trigger: groupDescription.value.parentNode,
+              start: "top top",
+            },
+            ease: "power4",
+          }
+        );
+      });
+
+      // Link the spans timeline to the main timeline's pause point
+      TL.add(spansTL, 0);
+    }, 2400);
   }
+
+  TL.to(
+    scrollContainer.value,
+    {
+      x: -(containerWidth - windowWidth),
+      ease: "sine.inOut",
+    },
+    "pausePoint+=72%"
+  );
 
   catItems.value.forEach((item, itemIndex) => {
     const childrenNodes = [
@@ -263,16 +344,19 @@ const goParallax = (containerWidth, windowWidth) => {
       ),
     ];
 
+    const childTL = gsap.timeline({});
+
     childrenNodes.forEach((child, index) => {
-      gsap.to(child, {
-        y: 32 * (index + 1), // Staggered parallax effect
-        x: 32 * (0.02 * (index + 1) * (itemIndex + 1)), // Staggered parallax effect
+      childTL.to(child, {
+        y: 240 * (0.2 * (itemIndex + 1)),
+        x: -32 * (0.2 * (itemIndex + 1)),
         ease: "sine.out",
         scrollTrigger: {
-          trigger: section.value,
-          start: "top top",
-          end: `+=${containerWidth}`,
-          scrub: true,
+          trigger: child,
+          start: `top top`,
+          end: `top+=${containerWidth * (itemIndex + 1) * 0.72}px top`,
+          scrub: 0.2,
+          containerAnimation: TL,
         },
       });
     });
@@ -288,38 +372,50 @@ const initHorizontalScroll = () => {
     const containerWidth = (container as HTMLElement).scrollWidth;
     const windowWidth = window.innerWidth;
 
-    const usingSmoothScroll =
-      // !matchMedia("(hover: none)").matches
+    // const usingSmoothScroll = // !matchMedia("(hover: none)").matches
 
-      // Main horizontal scroll animation
-      gsap.to(container, {
-        x: -(containerWidth - windowWidth),
-        ease: "sine.inOut",
-        scrollTrigger: {
-          trigger: section.value,
-          start: "top top",
-          end: `+=${containerWidth}`,
-          scrub: true,
-          pin: true,
-          pinnedContainer: section.value,
-          // pinType: "fixed", //usingSmoothScroll ? "transform" : "fixed",
-          // pinReparent: true,
-          ...(isPC() ? { pinType: "transform" } : {}),
+    // Main horizontal scroll animation
 
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
+    const TL = gsap.timeline({
+      scrollTrigger: {
+        trigger: section.value,
+        start: "top top",
+        end: `+=${containerWidth + windowWidth + windowWidth / 4}`,
+        scrub: 0.72,
+        pin: true,
+        pinnedContainer: section.value,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        ...(isPC() ? { pinType: "transform" } : {}),
+        // pinType: "transform", //debug
+        // markers: true, // debug
+        onUpdate: (self) => {
+          // Ensure we're not exceeding the bounds of the animation
+          if (self.progress < 0) self.progress = 0;
+          if (self.progress > 1) self.progress = 1;
         },
-      });
+      },
+    });
 
-    // Parallax effect
-    goParallax(containerWidth, windowWidth);
+    TL.to(
+      scrollContainer.value,
+      {
+        x: -24,
+        ease: "sine.inOut",
+      },
+      0
+    );
+
+    TL.add("pausePoint");
+
+    playScroll(TL, containerWidth, windowWidth);
 
     emits("gsap-init-done");
   }
 };
 
 const cleanupScrollTrigger = () => {
-  ScrollTrigger.getAll().forEach((st) => st.kill());
+  // ScrollTrigger.getAll().forEach((st) => st.kill());
 };
 
 onMounted(() => {
@@ -335,38 +431,29 @@ onUnmounted(() => {
 
 <style lang="scss">
 .adoptions-group {
-  padding: var(--spacing-m);
-
-  &__title {
-    margin-bottom: var(--spacing-m);
-  }
-
-  &__description {
-    width: 100%;
-
-    & > *:not(:first-child) {
-      margin-top: var(--spacing-m);
-    }
-  }
-
-  &__items {
-    margin-top: var(--spacing-l);
-  }
-}
-
-.adoptions-group {
   height: 100vh;
   overflow: hidden;
   overflow-x: scroll;
   display: flex;
+  padding: var(--spacing-m);
+
+  &__title {
+    margin-bottom: var(--spacing-m);
+
+    .word {
+      @extend .gloock-regular;
+    }
+  }
 
   &__container {
     height: 100%;
+    display: flex;
   }
 
   &__items {
     display: flex;
     height: 100%;
+    margin-top: var(--spacing-l);
 
     & > * {
       margin-right: 6vw;
@@ -379,39 +466,154 @@ onUnmounted(() => {
   }
 
   &__text-content {
-    width: 50vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    [data-index="0"] {
+      --index: 0;
+    }
+    [data-index="1"] {
+      --index: 1;
+    }
+    [data-index="2"] {
+      --index: 2;
+    }
+    [data-index="3"] {
+      --index: 3;
+    }
+    [data-index="4"] {
+      --index: 4;
+    }
+
+    .word {
+      color: var(--black);
+    }
+  }
+
+  &__description {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    gap: 4.8vw;
+
+    flex: 1;
+
+    width: 100%;
+
+    & > *:not(:first-child) {
+      margin-top: var(--spacing-s);
+    }
+
+    img {
+      display: inline-block;
+      position: absolute;
+      bottom: 8vh;
+      left: 4vw;
+      transform: scale(0.98);
+      border-radius: 0;
+      z-index: -1;
+    }
+
+    p {
+      margin-top: var(--spacing-m);
+    }
+
+    strong,
+    em {
+      * {
+        font-weight: bold;
+      }
+    }
+
+    h4 {
+      margin-bottom: 2.4vh;
+
+      * {
+        font-weight: bold;
+        @include ft-s(medium);
+        line-height: 2rem;
+      }
+    }
+  }
+
+  li {
+    list-style-type: none;
+    margin-top: 8px;
+
+    .word {
+      position: relative;
+
+      &::after {
+        display: block;
+        content: "";
+        width: 100%;
+        height: 2px;
+        background: var(--gray);
+      }
+    }
   }
 }
 
 @container app (max-width: 699px) {
   .adoptions-group {
     &__container {
-      display: flex;
-      flex-direction: column;
       height: 100%;
     }
 
     &__text-content {
       width: auto;
-
       display: flex;
       flex-direction: row;
-      justify-content: center;
-      align-items: center;
 
       & > * {
-        width: 100vw;
-        padding: 8vw;
-
         &:first-child {
+          display: flex;
+          flex-direction: column;
+          width: 100vw;
+          padding: 2vw;
+          justify-content: center;
+          text-align: center;
+
           * {
             @include ft-s(medium);
-            text-align: left;
           }
         }
+      }
+    }
+
+    &__description {
+      & > *:not(img):not(.adoptions-group__items) {
+        padding: 8vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 8vw;
+        width: 100vw;
+        min-height: 100vh;
+
+        &:has(img) {
+          padding-top: 12vh;
+        }
+      }
+
+      img {
+        height: auto !important;
+        left: 0 !important;
+        bottom: 7.2vh;
+        transform: scale(1) !important;
+      }
+
+      strong {
+        &:not(:has(em)) {
+          margin-top: 0.4vh;
+          margin-bottom: 0.4vh;
+        }
+      }
+
+      [data-index="1"] {
+        transform: translateY(7.2vh);
       }
     }
 
@@ -423,7 +625,9 @@ onUnmounted(() => {
     }
 
     &__items {
-      & > * {
+      margin-left: 24vw;
+
+      & > *:not(:first-child) {
         margin-right: 6vh;
         margin-left: 6vh;
       }
@@ -432,10 +636,195 @@ onUnmounted(() => {
 }
 
 @container app (min-width: 1000px) {
+  .app {
+    .adoptions-group {
+      margin-top: calc(var(--spacing-l) * 2);
+      margin-bottom: var(--spacing-l);
+
+      &__title {
+        position: absolute;
+        top: 0;
+        padding: 4.8vw;
+        padding-top: 1.2vw;
+
+        h3 {
+          font-size: calc((var(--base-ft-size) * 6.4));
+        }
+      }
+
+      &__text-content {
+        width: 100vw;
+        max-height: 100vh;
+        padding: 0 6vh;
+        margin: 0;
+      }
+
+      &__description {
+        padding-left: 2.4vw;
+        padding-right: 2.4vw;
+        padding-bottom: 16vh;
+
+        [data-index] {
+          width: 100vw;
+          margin-bottom: calc(var(--spacing-l) * 3.2 * var(--index_, 2));
+        }
+
+        [data-index="1"],
+        [data-index="3"],
+        [data-index="5"] {
+          --index_: calc((var(--index) +1) * 3.2 + var(--index));
+        }
+      }
+
+      &__text-content {
+        p * {
+          @include ft-s(20);
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) and (orientation: landscape) {
+  .app {
+    .adoptions-group {
+      margin-top: calc(var(--spacing-l) * 2);
+      margin-bottom: var(--spacing-l);
+
+      &__title {
+        position: absolute;
+        top: 0;
+        padding: 4.8vw;
+        padding-top: 1.2vw;
+
+        h3 {
+          font-size: calc((var(--base-ft-size) * 4.8));
+        }
+      }
+
+      &__text-content {
+        width: 100vw;
+        max-height: 100vh;
+        padding: 0 7.2vh;
+        margin: 0;
+      }
+
+      &__description {
+        padding-left: 0;
+        padding-right: 0;
+        padding-bottom: 16vh;
+
+        [data-index] {
+          width: 100vw;
+          margin-bottom: calc(var(--spacing-l) * -0.32 * var(--index_, 2));
+        }
+
+        [data-index="1"],
+        [data-index="3"],
+        [data-index="5"] {
+          --index_: calc((var(--index) +1) * 2 + var(--index));
+        }
+      }
+
+      img {
+        transform: scale(1) translateX(-8%);
+      }
+
+      &__text-content {
+        p * {
+          @include ft-s(16);
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 999px) and (orientation: portrait) {
   .adoptions-group {
-    padding: 0 12vw;
-    margin-top: calc(var(--spacing-l) * 2);
-    margin-bottom: var(--spacing-l);
+    &__container {
+      height: 100%;
+    }
+
+    &__text-content {
+      width: auto;
+      display: flex;
+      flex-direction: row;
+
+      & > * {
+        &:first-child {
+          display: flex;
+          flex-direction: column;
+          width: 100vw;
+          padding: 2vw;
+          justify-content: center;
+          text-align: center;
+
+          * {
+            @include ft-s(xlarge);
+          }
+        }
+      }
+    }
+
+    &__description {
+      & > *:not(img):not(.adoptions-group__items) {
+        padding: 8vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 8vw;
+        width: 100vw;
+        min-height: 100vh;
+
+        &:has(img) {
+          padding-top: 12vh;
+        }
+
+        p {
+          padding: 0 1.2vw;
+
+          * {
+            @include ft-s(20);
+          }
+        }
+      }
+
+      img {
+        width: 100vw;
+        height: auto;
+        left: 0;
+        bottom: 0;
+        transform: scale(1);
+      }
+
+      strong {
+        &:not(:has(em)) {
+          margin-top: 0.4vh;
+          margin-bottom: 0.4vh;
+        }
+      }
+
+      [data-index="1"] {
+        transform: translateY(7.2vh);
+      }
+    }
+
+    &__title {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &__items {
+      margin-left: 24vw;
+
+      & > *:not(:first-child) {
+        margin-right: 6vh;
+        margin-left: 6vh;
+      }
+    }
   }
 }
 </style>

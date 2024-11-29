@@ -22,12 +22,29 @@
           }
         },
         "description": {
-          "type": "StructuredText",
+          "type": "Group",
           "config": {
-            "label": "description",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,preformatted,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+            "label": "descriptionText",
+            "repeat": true,
+            "fields": {
+              "paragraph": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "paragraph",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,preformatted,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                }
+              }
+            }
+          }
+        },
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "image",
+            "constraint": {},
+            "thumbnails": []
           }
         },
         "catavatarplaceholder": {

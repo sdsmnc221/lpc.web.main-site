@@ -83,7 +83,6 @@ const onOpen = (opened: boolean) => {
       background-color: var(--black);
 
       span {
-        filter: blur(2.4px);
         transform: translateY(48%) scale(1.2);
       }
     }
@@ -99,10 +98,11 @@ const onOpen = (opened: boolean) => {
 
   &__photo {
     display: block;
-    aspect-ratio: 1/1;
+    aspect-ratio: 1;
     object-fit: cover;
     background-color: var(--gray);
     border-radius: 32px;
+    width: 100%;
   }
 
   &__name {
@@ -253,7 +253,7 @@ const onOpen = (opened: boolean) => {
 <style lang="scss">
 @container app (min-width: 700px) {
   .cat-item {
-    width: 32% !important;
+    width: 32%;
     // max-width: 220px;
 
     &__name {
@@ -262,14 +262,22 @@ const onOpen = (opened: boolean) => {
   }
 }
 
-@container app (max-width: 699px) {
+@media screen and (max-width: 699px),
+  screen and (min-width: 768px) and (max-width: 1200px) {
   .adoptions-group {
     .cat-item {
       width: 72vw;
 
+      &__name {
+        span {
+          font-size: calc((var(--base-ft-size) * 4));
+          line-height: calc((var(--base-ft-size) * 3));
+        }
+      }
+
       &__info {
         * {
-          @include ft-s(20);
+          font-size: calc((var(--base-ft-size) * 0.88));
         }
 
         flex-direction: column;
@@ -348,17 +356,6 @@ const onOpen = (opened: boolean) => {
       //   left: 10%;
       //   transform: translate(0, -50%);
       // }
-    }
-  }
-}
-
-@media screen and (max-width: 699px) {
-  .cat-item {
-    &__name {
-      span {
-        font-size: calc((var(--base-ft-size) * 4));
-        line-height: calc((var(--base-ft-size) * 3));
-      }
     }
   }
 }

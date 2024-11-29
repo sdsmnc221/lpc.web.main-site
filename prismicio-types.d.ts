@@ -937,6 +937,21 @@ export type AllDocumentTypes =
   | PopoverbannerDocument;
 
 /**
+ * Item in *AdoptionsGroup → Default → Primary → descriptionText*
+ */
+export interface AdoptionsGroupSliceDefaultPrimaryDescriptionItem {
+  /**
+   * paragraph field in *AdoptionsGroup → Default → Primary → descriptionText*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: adoptions_group.default.primary.description[].paragraph
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  paragraph: prismic.RichTextField;
+}
+
+/**
  * Item in *AdoptionsGroup → Default → Primary → catsGroup*
  */
 export interface AdoptionsGroupSliceDefaultPrimaryCatsgroupItem {
@@ -966,14 +981,26 @@ export interface AdoptionsGroupSliceDefaultPrimary {
   title: prismic.RichTextField;
 
   /**
-   * description field in *AdoptionsGroup → Default → Primary*
+   * descriptionText field in *AdoptionsGroup → Default → Primary*
    *
-   * - **Field Type**: Rich Text
+   * - **Field Type**: Group
    * - **Placeholder**: *None*
-   * - **API ID Path**: adoptions_group.default.primary.description
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   * - **API ID Path**: adoptions_group.default.primary.description[]
+   * - **Documentation**: https://prismic.io/docs/field#group
    */
-  description: prismic.RichTextField;
+  description: prismic.GroupField<
+    Simplify<AdoptionsGroupSliceDefaultPrimaryDescriptionItem>
+  >;
+
+  /**
+   * image field in *AdoptionsGroup → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: adoptions_group.default.primary.image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
 
   /**
    * CatAvatarPlaceholder field in *AdoptionsGroup → Default → Primary*
@@ -1965,6 +1992,7 @@ declare module "@prismicio/client" {
       PopoverbannerDocumentData,
       AllDocumentTypes,
       AdoptionsGroupSlice,
+      AdoptionsGroupSliceDefaultPrimaryDescriptionItem,
       AdoptionsGroupSliceDefaultPrimaryCatsgroupItem,
       AdoptionsGroupSliceDefaultPrimary,
       AdoptionsGroupSliceVariation,

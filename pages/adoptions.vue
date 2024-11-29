@@ -12,6 +12,7 @@
       v-for="(group, index) in adoptionsGroup"
       :key="`${group.id}-${index}`"
       :slice="group"
+      :index="index"
       @gsap-init-done="onGsapInitDone"
     ></adoptions-group>
   </Suspense>
@@ -75,26 +76,7 @@ const onGsapInitDone = () => {
 
   if (gsapPartialInitDone.value === adoptionsGroup.value?.length) {
     emits("gsap-init-done");
-    playFade();
   }
-};
-
-const playFade = () => {
-  const children = [...document.body.querySelectorAll(".adoptions-group > *")];
-
-  children.forEach((section) => {
-    gsap.from(section as any, {
-      y: 240,
-      opacity: 0,
-      backgroundColor: "transparent",
-      filter: "blur(16px)",
-      delay: 0.2,
-      scrollTrigger: {
-        trigger: section as any,
-        start: "top bottom-=120",
-      },
-    });
-  });
 };
 
 onMounted(() => {

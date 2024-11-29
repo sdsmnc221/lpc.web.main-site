@@ -78,7 +78,7 @@ const textBlocks = computed(() => primary.value?.textblocksgroup);
     }
   }
 
-  a {
+  a:not([href^="tel:"]) {
     display: inline-block;
     padding: 12px 24px;
     margin: var(--spacing-m) 0;
@@ -94,6 +94,11 @@ const textBlocks = computed(() => primary.value?.textblocksgroup);
 
     background-color: var(--black);
     color: var(--white);
+  }
+
+  a:is([href^="tel:"]) {
+    font-weight: bold;
+    text-decoration: underline;
   }
 }
 
