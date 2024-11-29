@@ -263,7 +263,7 @@ const onOpen = (opened: boolean) => {
 }
 
 @media screen and (max-width: 699px),
-  screen and (min-width: 768px) and (max-width: 1200px) {
+  screen and (min-width: 768px) and (max-width: 1200px) a {
   .adoptions-group {
     .cat-item {
       width: 72vw;
@@ -277,29 +277,7 @@ const onOpen = (opened: boolean) => {
 
       &__info {
         * {
-          @include ft-s(16);
-        }
-
-        flex-direction: column;
-        gap: var(--spacing-m);
-        bottom: 16%;
-
-        &:nth-of-type(n) {
-          transform: translateY(0);
-        }
-      }
-    }
-  }
-}
-
-@container app (max-width: 699px) {
-  .adoptions-group {
-    .cat-item {
-      width: 72vw;
-
-      &__info {
-        * {
-          @include ft-s(16);
+          font-size: calc((var(--base-ft-size) * 0.84));
         }
 
         flex-direction: column;
