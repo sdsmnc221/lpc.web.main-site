@@ -263,7 +263,7 @@ const onOpen = (opened: boolean) => {
 }
 
 @media screen and (max-width: 699px),
-  screen and (min-width: 768px) and (max-width: 1200px) a {
+  screen and (min-width: 768px) and (max-width: 1200px) {
   .adoptions-group {
     .cat-item {
       width: 72vw;
