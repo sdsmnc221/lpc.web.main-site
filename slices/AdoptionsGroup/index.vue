@@ -510,7 +510,7 @@ onUnmounted(() => {
       position: absolute;
       bottom: 8vh;
       left: 4vw;
-      transform: scale(1.4);
+      transform: scale(0.98);
       border-radius: 0;
       z-index: -1;
     }
@@ -796,7 +796,7 @@ onUnmounted(() => {
         height: auto;
         left: 0;
         bottom: 0;
-        transform: scale(0.84);
+        transform: scale(1);
       }
 
       strong {
