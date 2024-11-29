@@ -139,14 +139,16 @@ const commonOpen = (opened: boolean, catItem = null) => {
 };
 
 const formatCatItem = ({ cat, index }) => {
-  return {
-    ...cat.data,
-    index,
-    id: cat.id,
-    contactInfo: contactInfo.value,
-    adoptionRequirements: adoptionRequirements.value,
-    avatarPlaceholder: avatarPlaceholder.value,
-  };
+  return cat?.data
+    ? {
+        ...cat.data,
+        index,
+        id: cat.id,
+        contactInfo: contactInfo.value,
+        adoptionRequirements: adoptionRequirements.value,
+        avatarPlaceholder: avatarPlaceholder.value,
+      }
+    : {};
 };
 
 const onOpenItem = (details) => {
@@ -189,14 +191,16 @@ watch(
             (cat) => cat.id === newRoute.query.id
           );
 
-          const theCat = formatCatItem({
-            cat: itemsData.value[theCatIndex],
-            index: theCatIndex,
-          });
+          if (theCatIndex !== -1) {
+            const theCat = formatCatItem({
+              cat: itemsData.value[theCatIndex],
+              index: theCatIndex,
+            });
 
-          currentCatItem.value = theCat;
+            currentCatItem.value = theCat;
 
-          defaultOpen.value = true;
+            defaultOpen.value = true;
+          }
         } else {
           router.push({
             name: router.currentRoute.value.name,
@@ -452,6 +456,10 @@ onUnmounted(() => {
     }
   }
 
+  &__title {
+    text-transform: lowercase;
+  }
+
   &__text-content {
     display: flex;
     flex-direction: column;
@@ -608,6 +616,13 @@ onUnmounted(() => {
       [data-index="1"] {
         transform: translateY(7.2vh);
       }
+    }
+
+    &__title {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
     &__items {

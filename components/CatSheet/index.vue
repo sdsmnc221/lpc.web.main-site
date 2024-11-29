@@ -3,6 +3,7 @@
     <div
       v-if="catItem"
       class="cat-sheet__grid"
+      :class="{ '--svh': isAdressBarHidden }"
       :style="`--random-tint: ${tint};`"
     >
       <div class="cat-sheet__grid__div7">"></div>
@@ -108,6 +109,7 @@
 import { Badge } from "@/components/ui/badge";
 
 import type { CatInfo } from "~/interfaces/Cat";
+import { isMobile } from "~/lib/helpers";
 
 type CatSheetInfo = {
   open: boolean;
@@ -130,9 +132,37 @@ const hasInfo = computed(
     (props.catItem?.catagenumber && props.catItem?.catagetype)
 );
 
+const windowHeight = ref(0);
+
+/**
+ * Adress bar is hidden cases:
+ * - on page load, adress bar is show
+ * - on mounted, whether if is mobile and sheet is open
+ * - on resiize, whether if is mobile and newHeight (height minus adress bar) < oldHeight
+ */
+const isAdressBarHidden = ref(true);
+
 const closeSheet = () => {
   emits("update:open-sheet", { opened: false });
 };
+
+onMounted(() => {
+  nextTick(() => {
+    windowHeight.value = window.innerHeight;
+    isAdressBarHidden.value = isMobile() && props.open;
+
+    window.addEventListener("resize", () => {
+      windowHeight.value = window.innerHeight;
+    });
+  });
+});
+
+watch(
+  () => windowHeight.value,
+  (newHeight, oldHeight) => {
+    isAdressBarHidden.value = newHeight < oldHeight && isMobile();
+  }
+);
 </script>
 
 <style lang="scss" scoped>
@@ -274,7 +304,7 @@ const closeSheet = () => {
           display: flex;
           justify-content: flex-end;
           align-items: flex-end;
-          padding-left: var(--spacing-m);
+          padding-left: calc(var(--spacing-m) * 2);
           padding-bottom: var(--spacing-m);
           padding-top: var(--spacing-m);
           position: relative;
@@ -283,7 +313,7 @@ const closeSheet = () => {
             max-height: 20vh;
             overflow-y: scroll;
             text-align: right;
-            font-size: calc(var(--base-ft-size) * 1.2);
+            font-size: var(--base-ft-size);
             width: 100%;
           }
         }
@@ -401,6 +431,10 @@ const closeSheet = () => {
         grid-column-gap: 0px;
         grid-row-gap: 0px;
 
+        &.--svh {
+          height: 100svh;
+        }
+
         &__div1 {
           grid-area: 1 / 1 / 3 / 3;
           background-color: black;
@@ -442,6 +476,8 @@ const closeSheet = () => {
           gap: var(--spacing-s);
 
           .cat-sheet__details {
+            top: -6.4vh;
+
             &__info {
               @include ft-s(small);
               top: 28%;
@@ -469,16 +505,18 @@ const closeSheet = () => {
             }
 
             &__description {
+              padding-left: var(--spacing-m);
               margin-top: var(--spacing-l);
               padding-right: var(--spacing-s);
+              padding-bottom: 0;
 
               width: 56vw;
 
               & > div {
                 text-align: right;
-
+                overflow-y: visible;
                 height: 164px;
-                font-size: var(--base-ft-size);
+                font-size: calc(var(--base-ft-size) * 0.72);
               }
             }
           }
@@ -503,6 +541,7 @@ const closeSheet = () => {
               color: var(--black);
               width: auto;
               align-self: flex-end;
+              @include ft-s(small);
             }
           }
         }
@@ -525,10 +564,28 @@ const closeSheet = () => {
 
               &__content {
                 background-color: rgba(0, 0, 0, 0.64);
+                font-size: calc(var(--base-ft-size) * 0.72) !important;
+                line-height: 0.72rem;
               }
             }
           }
         }
+      }
+    }
+  }
+}
+
+@media screen and (max-height: 720px) {
+  body {
+    .cat-sheet {
+      &__grid {
+        &__div6 {
+          height: 28vh;
+        }
+      }
+
+      &__details {
+        top: -6.4svh;
       }
     }
   }
