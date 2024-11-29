@@ -583,7 +583,7 @@ onUnmounted(() => {
     }
 
     &__description {
-      & > * {
+      & > *:not(img):not(.adoptions-group__items) {
         padding: 8vw;
         display: flex;
         justify-content: center;
@@ -599,6 +599,7 @@ onUnmounted(() => {
 
         img {
           width: 100vw;
+          height: auto;
           left: 0;
           bottom: 0;
           transform: scale(1);
@@ -680,6 +681,95 @@ onUnmounted(() => {
         p * {
           @include ft-s(20);
         }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 999px) and (orientation: portrait) {
+  .adoptions-group {
+    &__container {
+      height: 100%;
+    }
+
+    &__text-content {
+      width: auto;
+      display: flex;
+      flex-direction: row;
+
+      & > * {
+        &:first-child {
+          display: flex;
+          flex-direction: column;
+          width: 100vw;
+          padding: 2vw;
+          justify-content: center;
+          text-align: center;
+
+          * {
+            @include ft-s(xlarge);
+          }
+        }
+      }
+    }
+
+    &__description {
+      & > *:not(img):not(.adoptions-group__items) {
+        padding: 8vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 8vw;
+        width: 100vw;
+        min-height: 100vh;
+
+        &:has(img) {
+          padding-top: 12vh;
+        }
+
+        p {
+          padding: 0 1.2vw;
+
+          * {
+            @include ft-s(20);
+          }
+        }
+      }
+
+      img {
+        width: 100vw;
+        height: auto;
+        left: 0;
+        bottom: 0;
+        transform: scale(1);
+      }
+
+      strong {
+        &:not(:has(em)) {
+          margin-top: 0.4vh;
+          margin-bottom: 0.4vh;
+        }
+      }
+
+      [data-index="1"] {
+        transform: translateY(7.2vh);
+      }
+    }
+
+    &__title {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &__items {
+      margin-left: 24vw;
+
+      & > *:not(:first-child) {
+        margin-right: 6vh;
+        margin-left: 6vh;
       }
     }
   }

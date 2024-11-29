@@ -253,11 +253,41 @@ const onOpen = (opened: boolean) => {
 <style lang="scss">
 @container app (min-width: 700px) {
   .cat-item {
-    width: 32% !important;
+    width: 32%;
     // max-width: 220px;
 
     &__name {
       min-width: 32%;
+    }
+  }
+}
+
+@media screen and (max-width: 699px),
+  screen and (min-width: 768px) and (max-width: 999px) and (orientation: portrait) {
+  .adoptions-group {
+    .cat-item {
+      width: 72vw;
+
+      &__name {
+        span {
+          font-size: calc((var(--base-ft-size) * 4));
+          line-height: calc((var(--base-ft-size) * 3));
+        }
+      }
+
+      &__info {
+        * {
+          @include ft-s(16);
+        }
+
+        flex-direction: column;
+        gap: var(--spacing-m);
+        bottom: 16%;
+
+        &:nth-of-type(n) {
+          transform: translateY(0);
+        }
+      }
     }
   }
 }
@@ -348,17 +378,6 @@ const onOpen = (opened: boolean) => {
       //   left: 10%;
       //   transform: translate(0, -50%);
       // }
-    }
-  }
-}
-
-@media screen and (max-width: 699px) {
-  .cat-item {
-    &__name {
-      span {
-        font-size: calc((var(--base-ft-size) * 4));
-        line-height: calc((var(--base-ft-size) * 3));
-      }
     }
   }
 }
