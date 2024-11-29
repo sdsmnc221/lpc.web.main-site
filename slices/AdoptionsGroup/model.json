@@ -21,7 +21,7 @@
             "multi": "paragraph,heading1,heading2,heading3,heading4,heading5,heading6,strong,em"
           }
         },
-        "descriptiontext": {
+        "description": {
           "type": "Group",
           "config": {
             "label": "descriptionText",
@@ -37,6 +37,14 @@
                 }
               }
             }
+          }
+        },
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "image",
+            "constraint": {},
+            "thumbnails": []
           }
         },
         "catavatarplaceholder": {

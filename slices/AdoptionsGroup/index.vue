@@ -24,6 +24,8 @@
             :data-index="index"
             :field="text.paragraph"
           />
+
+          <img v-if="image" :src="image.url" />
         </div>
       </div>
 
@@ -94,7 +96,10 @@ const contactInfo = computed(() => primary.value?.contactinfo);
 const adoptionRequirements = computed(
   () => primary.value?.adoptionrequirements
 );
-const description = computed(() => primary.value?.descriptiontext);
+const description = computed(() => primary.value?.description);
+
+const image = computed(() => primary.value?.image);
+console.log(primary.value);
 
 const { data: itemsData } = await useAsyncData(props.slice.id, async () => {
   const itemsId = primary.value?.catsgroup?.map((item) => item.catitem.id);
@@ -509,6 +514,27 @@ onUnmounted(() => {
       border-radius: 0;
       z-index: -1;
     }
+
+    p {
+      margin-top: var(--spacing-m);
+    }
+
+    strong,
+    em {
+      * {
+        font-weight: bold;
+      }
+    }
+
+    h4 {
+      margin-bottom: 2.4vh;
+
+      * {
+        font-weight: bold;
+        @include ft-s(medium);
+        line-height: 2rem;
+      }
+    }
   }
 
   li {
@@ -525,26 +551,6 @@ onUnmounted(() => {
         height: 2px;
         background: var(--gray);
       }
-    }
-  }
-
-  em,
-  strong {
-    font-weight: bold;
-    display: inline-block;
-  }
-
-  strong {
-    &:has(em) {
-      margin-bottom: 3.2vh;
-    }
-
-    &:not(:has(em)) {
-      margin-top: 1.6vh;
-    }
-
-    * {
-      font-weight: bold;
     }
   }
 }
@@ -591,13 +597,6 @@ onUnmounted(() => {
           padding-top: 12vh;
         }
 
-        em {
-          * {
-            font-weight: bold;
-            @include ft-s(medium);
-          }
-        }
-
         img {
           width: 100vw;
           left: 0;
@@ -608,8 +607,8 @@ onUnmounted(() => {
 
       strong {
         &:not(:has(em)) {
-          margin-top: 0.8vh;
-          margin-bottom: 0.8vh;
+          margin-top: 0.4vh;
+          margin-bottom: 0.4vh;
         }
       }
 
@@ -675,16 +674,11 @@ onUnmounted(() => {
         [data-index="5"] {
           --index_: calc((var(--index) +1) * 3.2 + var(--index));
         }
+      }
 
-        * {
-          @include ft-s(16);
-        }
-
-        em {
-          * {
-            font-weight: bold;
-            @include ft-s(medium);
-          }
+      &__text-content {
+        p * {
+          @include ft-s(20);
         }
       }
     }
