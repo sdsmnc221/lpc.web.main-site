@@ -508,7 +508,7 @@ onUnmounted(() => {
     img {
       display: inline-block;
       position: absolute;
-      bottom: 8vh;
+      bottom: 0;
       left: 4vw;
       transform: scale(0.98);
       border-radius: 0;
