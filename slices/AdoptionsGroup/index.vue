@@ -599,7 +599,6 @@ onUnmounted(() => {
       }
 
       img {
-        width: 72vw !important;
         height: auto !important;
         left: 0 !important;
         bottom: auto !important;
