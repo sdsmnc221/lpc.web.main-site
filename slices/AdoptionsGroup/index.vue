@@ -508,7 +508,7 @@ onUnmounted(() => {
     img {
       display: inline-block;
       position: absolute;
-      bottom: 0;
+      bottom: 8vh;
       left: 4vw;
       transform: scale(0.98);
       border-radius: 0;
@@ -559,6 +559,10 @@ onUnmounted(() => {
   .adoptions-group {
     &__container {
       height: 100%;
+    }
+
+    &__title {
+      transform: translate(-10vh);
     }
 
     &__text-content {
