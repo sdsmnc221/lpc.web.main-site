@@ -598,10 +598,11 @@ onUnmounted(() => {
         }
 
         img {
-          width: 100vw;
+          width: 72vw;
           height: auto;
           left: 0;
-          bottom: 0;
+          bottom: auto;
+          top: 10vh;
           transform: scale(1);
         }
       }
