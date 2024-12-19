@@ -136,7 +136,8 @@
             "Adoptable - Chat adulte",
             "Adoptable - Chat craintif",
             "Adoptable - Chaton",
-            "Adopté.e"
+            "Adopté.e",
+            "Adoptable - Chat ado"
           ],
           "default_value": "Adoptable - Chat adulte"
         }

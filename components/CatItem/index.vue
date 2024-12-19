@@ -149,7 +149,7 @@ const onOpen = (opened: boolean) => {
       position: relative;
 
       &:nth-of-type(n) {
-        transform: translateY(var(--spacing-m));
+        transform: translateY(var(--spacing-l)) translateX(var(--spacing-l));
       }
 
       &:nth-of-type(2n) {

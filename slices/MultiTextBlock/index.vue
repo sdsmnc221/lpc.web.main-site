@@ -82,7 +82,6 @@ const textBlocks = computed(() => primary.value?.textblocksgroup);
     display: inline-block;
     padding: 12px 24px;
     margin: var(--spacing-m) 0;
-
     letter-spacing: -0.2px;
 
     border: none;
@@ -94,6 +93,18 @@ const textBlocks = computed(() => primary.value?.textblocksgroup);
 
     background-color: var(--black);
     color: var(--white);
+  }
+
+  strong a {
+    background-color: transparent;
+    color: var(--black);
+    padding: 0;
+    margin: 0;
+
+    font-weight: bold;
+    text-decoration: underline;
+
+    @include ft-s(16);
   }
 }
 
