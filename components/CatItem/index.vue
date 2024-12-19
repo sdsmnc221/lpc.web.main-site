@@ -156,12 +156,11 @@ const onOpen = (opened: boolean) => {
       background-color: var(--white);
 
       &:nth-of-type(n) {
-        transform: translateY(var(--spacing-l))
-          translateX(calc(var(--spacing-l) * 2));
+        transform: translateY(var(--spacing-m));
       }
 
       &:nth-of-type(2n) {
-        transform: translateY(0);
+        transform: translateY(0) !important;
       }
 
       &::after {
@@ -374,6 +373,14 @@ const onOpen = (opened: boolean) => {
 
 @media screen and (min-width: 1000px) {
   .cat-item {
+    &__info {
+      & > * {
+        &:nth-of-type(n) {
+          transform: translateY(var(--spacing-l))
+            translateX(calc(var(--spacing-l) * 2)) !important;
+        }
+      }
+    }
     &__fiche {
       // &__avatar {
       //   top: 50% !important;
