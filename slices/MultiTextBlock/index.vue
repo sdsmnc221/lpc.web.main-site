@@ -82,7 +82,6 @@ const textBlocks = computed(() => primary.value?.textblocksgroup);
     display: inline-block;
     padding: 12px 24px;
     margin: var(--spacing-m) 0;
-
     letter-spacing: -0.2px;
 
     border: none;

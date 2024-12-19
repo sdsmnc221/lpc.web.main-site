@@ -19,7 +19,7 @@
 
       <div class="cat-sheet__grid__div2">
         <prismic-image
-          class="cat-sheet__avatar"
+          class="cat-sheet__avatar md:ml-4"
           :class="{ '--placeholder': !catHasAvatar }"
           :field="
             catHasAvatar
@@ -56,7 +56,7 @@
 
         <div
           v-if="catItem.catdescription"
-          class="cat-sheet__details__description"
+          class="cat-sheet__details__description md:mt-10"
         >
           <prismic-rich-text :field="catItem.catdescription" />
         </div>
@@ -278,9 +278,13 @@ watch(
           position: relative;
 
           span {
+            &:first-of-type {
+              display: block;
+            }
+
             @include ft-s(large);
             font-weight: bold;
-            display: block;
+            display: inline-block;
             line-height: 2.4rem;
 
             &:nth-child(2) {
@@ -297,6 +301,7 @@ watch(
           padding: 0 var(--spacing-s);
           background-color: black;
           z-index: 1;
+          @include ft-s(16);
         }
 
         &__description {

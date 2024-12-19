@@ -131,6 +131,7 @@ const onOpen = (opened: boolean) => {
     display: inline-block;
     padding: 0 var(--spacing-m);
     padding-bottom: 12vh;
+    transform: translateX(calc(var(--spacing-m) * -1));
     transition: all ease-in-out 0.64s;
 
     * {
@@ -155,7 +156,8 @@ const onOpen = (opened: boolean) => {
       background-color: var(--white);
 
       &:nth-of-type(n) {
-        transform: translateY(var(--spacing-m));
+        transform: translateY(var(--spacing-l))
+          translateX(calc(var(--spacing-l) * 2));
       }
 
       &:nth-of-type(2n) {
