@@ -685,6 +685,11 @@ onUnmounted(() => {
           @include ft-s(20);
         }
       }
+
+      img {
+        top: 0;
+        left: 45.5vw;
+      }
     }
   }
 }
@@ -802,7 +807,7 @@ onUnmounted(() => {
         width: 100vw;
         height: auto;
         left: 0;
-        bottom: 0;
+        top: 0;
         transform: scale(1);
       }
 
