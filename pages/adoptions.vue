@@ -103,7 +103,7 @@ const quickAccess = (section: string) => {
 
   if (window && node) {
     window.scroll({
-      top: node?.$el?.getBoundingClientRect()?.y - 120,
+      top: node?.$el?.getBoundingClientRect()?.y - 20,
       behavior: "smooth",
     });
   }

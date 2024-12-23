@@ -54,6 +54,8 @@ watch(
 
 <style lang="scss">
 #__nuxt {
+  overflow-x: hidden;
+
   &:has(.page-loader:not(.fade-out-fwd)) {
     width: 100dvw;
     height: 100svh;
