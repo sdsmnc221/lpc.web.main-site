@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/accordion";
 import { computed, ref } from "vue";
 import { type Link } from "~/interfaces/Navigation";
+import { useWindowScroll } from "@vueuse/core";
 
 type Props = {
   links: Link[] | undefined;
@@ -36,6 +37,8 @@ type Props = {
 const props = defineProps<Props>();
 
 const route = useRoute();
+
+const { y } = useWindowScroll();
 
 const currentPage = computed(() => {
   const { name: page } = route;
@@ -54,22 +57,18 @@ const currentPage = computed(() => {
 const node = ref(null);
 const hidden = ref(true);
 
-onMounted(() => {
-  nextTick(() => {
-    window.addEventListener("scroll", () => {
-      if (window.scrollY < window.innerHeight) {
-        hidden.value = true;
-      } else {
-        hidden.value = false;
-      }
-    });
-  });
-});
+watch(
+  () => y.value,
+  (oldY, newY) => {
+    hidden.value = oldY > newY || newY < window.innerHeight;
+  }
+);
 </script>
 
 <style lang="scss">
 .accordion-navigation {
-  position: sticky;
+  position: fixed;
+  width: 100vw;
   top: 0;
   z-index: 99;
   display: block;
