@@ -1,8 +1,5 @@
 <template>
-  <transition name="page" mode="out-in">
-    <page-loader v-if="loading"></page-loader>
-  </transition>
-  <NuxtLayout name="default">
+  <NuxtLayout name="default-temp">
     <div
       class="emoji-banner"
       :style="`--cell-size: ${cellSize}px; --gap:${GAP}px;`"
@@ -23,12 +20,13 @@
       ></prismic-rich-text>
     </div>
   </NuxtLayout>
+  <page-loader :show="loading" full-censored></page-loader>
 </template>
 
 <script setup lang="ts">
-import type { NuxtError } from "#app";
-
 import PageLoader from "@/components/PageLoader/index.vue";
+
+import type { NuxtError } from "#app";
 
 type ErrorCode = {
   errorcode: string;
@@ -37,8 +35,6 @@ type ErrorCode = {
 const props = defineProps({
   error: Object as () => NuxtError,
 });
-
-const loading = ref(true);
 
 const EMOJIS = ["🙀", "⚠️"];
 const CELLS_ROW_COUNT = 8;
@@ -73,11 +69,12 @@ const errorTitle = computed(() => {
 
 const errorBody = computed(() => errorPage.value?.data?.errorcontent);
 
+const route = useRoute();
+
+const loading = ref(true);
+
 onMounted(() => {
   console.log(props.error);
-  setTimeout(() => {
-    loading.value = false;
-  }, 1400);
 
   window.addEventListener("resize", () => {
     cellSize.value = window.innerWidth / CELLS_ROW_COUNT;
@@ -86,6 +83,14 @@ onMounted(() => {
   nextTick(() => {
     cellSize.value = window.innerWidth / CELLS_ROW_COUNT;
   });
+});
+
+onMounted(() => {
+  if (!route.path.includes("adoptions")) {
+    setTimeout(() => {
+      loading.value = false;
+    }, 1400);
+  }
 });
 </script>
 <style lang="scss">
@@ -106,6 +111,10 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .emoji-banner {
+  * {
+    transition: all 0.64s ease-in-out;
+  }
+
   padding: 0 !important;
 
   position: relative;
