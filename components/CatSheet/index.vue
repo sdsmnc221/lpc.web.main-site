@@ -32,7 +32,7 @@
       </div>
 
       <div class="cat-sheet__grid__div3" @click="closeSheet">
-        <div class="cat-sheet__trigger">- Fiche</div>
+        <div class="cat-sheet__trigger">Découvrez mes ami.e.s !</div>
       </div>
 
       <div class="cat-sheet__grid__div4 cat-sheet__details">
@@ -48,10 +48,10 @@
 
         <div class="cat-sheet__details__info" v-if="hasInfo">
           <p v-if="catItem.catagenumber && catItem.catagetype">
-            Âge : {{ catItem.catagenumber }} {{ catItem.catagetype }}
+            🎂 {{ catItem.catagenumber }} {{ catItem.catagetype }}
           </p>
-          <p v-if="catItem.catbirth">Né.e le : {{ catItem.catbirth }}</p>
-          <p v-if="catItem.zipcode">Zone : {{ catItem.zipcode }}</p>
+          <p v-if="catItem.catbirth">📅 {{ catItem.catbirth }}</p>
+          <p v-if="catItem.zipcode">📍 {{ catItem.zipcode }}</p>
         </div>
 
         <div

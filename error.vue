@@ -91,7 +91,7 @@ onMounted(() => {
 <style lang="scss">
 .app:has(.emoji-banner) {
   .emoji-banner {
-    // transform: translateX(-8vw);
+    transform: translateX(-8vw);
   }
 }
 

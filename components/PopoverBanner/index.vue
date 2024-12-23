@@ -1,5 +1,5 @@
 <template>
-  <Popover class="popover-banner">
+  <Popover v-if="displaytype === 'PopoverBanner'" class="popover-banner">
     <PopoverTrigger>
       <Badge class="popover-banner__cta">{{ ctalabel }} </Badge>
     </PopoverTrigger>
@@ -15,6 +15,26 @@
       />
     </PopoverContent>
   </Popover>
+
+  <Sheet v-else-if="displaytype === 'PopoverSheet'" class="popover-sheet">
+    <SheetTrigger
+      ><Badge class="popover-banner__cta">{{ ctalabel }} </Badge></SheetTrigger
+    >
+    <SheetContent class="popover-sheet__content md:w-1/3 sm:max-w-1/2">
+      <SheetHeader>
+        <SheetTitle class="popover-sheet__title text-3xl">{{
+          ctalabel
+        }}</SheetTitle>
+
+        <prismic-rich-text
+          class="popover-sheet__text albert-sans-regular w-fit leading-6"
+          :field="text"
+        />
+      </SheetHeader>
+    </SheetContent>
+  </Sheet>
+
+  <div v-else></div>
 </template>
 
 <script setup lang="ts">
@@ -23,12 +43,21 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
 
 type Prop = {
   banner?: any; // TODO: type Image
   ctalabel: string;
   text: any;
+  displaytype: string;
 };
 
 const props = defineProps<Prop>();
@@ -72,6 +101,76 @@ const props = defineProps<Prop>();
     em {
       margin: var(--spacing-s) 0;
       text-decoration: none;
+    }
+  }
+}
+
+.popover-sheet {
+  &__content,
+  &__text {
+    overflow-y: scroll;
+  }
+
+  &__title {
+    text-align: left;
+  }
+
+  &__text {
+    text-align: left;
+
+    h4 {
+      @include ft-s(24);
+      margin-bottom: var(--spacing-s);
+      margin-top: var(--spacing-m);
+      font-weight: bold;
+    }
+
+    h5,
+    h6 {
+      @include ft-s(20);
+      margin-bottom: var(--spacing-s);
+      margin-top: var(--spacing-s);
+      font-weight: bold;
+    }
+
+    h6 {
+      @include ft-s(16);
+    }
+
+    a {
+      text-decoration: underline;
+    }
+
+    p:has(em):has(strong) {
+      margin-top: var(--spacing-l);
+      margin-bottom: var(--spacing-s);
+      text-align: right;
+
+      * {
+        @extend .gloock-regular;
+      }
+
+      em {
+        display: block;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 699px) {
+  .popover {
+    &-banner,
+    &-sheet {
+      &__content {
+        z-index: 1000;
+      }
+    }
+  }
+  /* Mobile styles */
+  .popover-sheet {
+    &__content {
+      width: 84vw;
+      padding-right: var(--spacing-l);
     }
   }
 }

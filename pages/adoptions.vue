@@ -1,5 +1,6 @@
 <template>
   <hero-banner-with-text
+    ref="topRef"
     v-for="(hero, index) in heroBanners"
     :key="`hero-banner-with-text-adoptions-page-${index}`"
     :slice="hero"
@@ -12,13 +13,19 @@
       v-for="(group, index) in adoptionsGroup"
       :key="`${group.id}-${index}`"
       :slice="group"
+      :index="index"
       @gsap-init-done="onGsapInitDone"
     ></adoptions-group>
   </Suspense>
 
-  <multi-text-block :slice="faq"></multi-text-block>
+  <multi-text-block ref="faqRef" :slice="faq"></multi-text-block>
 
   <pop-out-text :slice="popOutText"></pop-out-text>
+
+  <ui-dock>
+    <Badge @click="quickAccess('faq')">Modalités d'adoption</Badge>
+    <Badge @click="quickAccess('top')">Haut de page</Badge>
+  </ui-dock>
 </template>
 
 <script setup lang="ts">
@@ -30,6 +37,8 @@ import HeroPhotoBackground from "@/slices/HeroPhotoBackground/index.vue";
 import AdoptionsGroup from "@/slices/AdoptionsGroup/index.vue";
 import MultiTextBlock from "@/slices/MultiTextBlock/index.vue";
 import PopOutText from "@/slices/PopOutText/index.vue";
+import UiDock from "~/components/UiDock/UiDock.vue";
+import Badge from "~/components/ui/badge/Badge.vue";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -75,26 +84,29 @@ const onGsapInitDone = () => {
 
   if (gsapPartialInitDone.value === adoptionsGroup.value?.length) {
     emits("gsap-init-done");
-    playFade();
   }
 };
 
-const playFade = () => {
-  const children = [...document.body.querySelectorAll(".adoptions-group > *")];
+const topRef = ref(null);
+const faqRef = ref(null);
+const quickAccess = (section: string) => {
+  let node;
+  switch (section) {
+    case "top":
+      node = topRef.value;
+      break;
+    case "faq":
+    default:
+      node = faqRef.value;
+      break;
+  }
 
-  children.forEach((section) => {
-    gsap.from(section as any, {
-      y: 240,
-      opacity: 0,
-      backgroundColor: "transparent",
-      filter: "blur(16px)",
-      delay: 0.2,
-      scrollTrigger: {
-        trigger: section as any,
-        start: "top bottom-=120",
-      },
+  if (window && node) {
+    window.scroll({
+      top: node?.$el?.getBoundingClientRect()?.y - 120,
+      behavior: "smooth",
     });
-  });
+  }
 };
 
 onMounted(() => {

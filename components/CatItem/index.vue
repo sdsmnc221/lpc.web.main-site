@@ -15,7 +15,8 @@
         </h4>
 
         <div class="cat-item__explore">
-          <span>+ Fiche</span>
+          <span>Découvrez</span>
+          <span>mon histoire.</span>
         </div>
 
         <div class="cat-item__info albert-sans-light size-regular">
@@ -71,8 +72,12 @@ const onOpen = (opened: boolean) => {
     transform: translateY(calc(var(--spacing-l) * -1));
   }
   .cat-item__explore {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     span {
-      display: inline-block;
+      display: block;
       position: relative;
       transition: all ease-in-out 0.64s;
     }
@@ -83,7 +88,6 @@ const onOpen = (opened: boolean) => {
       background-color: var(--black);
 
       span {
-        filter: blur(2.4px);
         transform: translateY(48%) scale(1.2);
       }
     }
@@ -99,10 +103,11 @@ const onOpen = (opened: boolean) => {
 
   &__photo {
     display: block;
-    aspect-ratio: 1/1;
+    aspect-ratio: 1;
     object-fit: cover;
     background-color: var(--gray);
     border-radius: 32px;
+    width: 100%;
   }
 
   &__name {
@@ -126,6 +131,7 @@ const onOpen = (opened: boolean) => {
     display: inline-block;
     padding: 0 var(--spacing-m);
     padding-bottom: 12vh;
+    transform: translateX(calc(var(--spacing-m) * -1));
     transition: all ease-in-out 0.64s;
 
     * {
@@ -147,13 +153,14 @@ const onOpen = (opened: boolean) => {
       display: block;
       margin-left: var(--spacing-m);
       position: relative;
+      background-color: var(--white);
 
       &:nth-of-type(n) {
         transform: translateY(var(--spacing-l)) translateX(var(--spacing-l));
       }
 
       &:nth-of-type(2n) {
-        transform: translateY(0);
+        transform: translateY(0) !important;
       }
 
       &::after {
@@ -253,7 +260,7 @@ const onOpen = (opened: boolean) => {
 <style lang="scss">
 @container app (min-width: 700px) {
   .cat-item {
-    width: 32% !important;
+    width: 32%;
     // max-width: 220px;
 
     &__name {
@@ -262,14 +269,26 @@ const onOpen = (opened: boolean) => {
   }
 }
 
-@container app (max-width: 699px) {
+@media screen and (max-width: 699px),
+  screen and (min-width: 768px) and (max-width: 1200px) {
   .adoptions-group {
     .cat-item {
       width: 72vw;
 
+      &__name {
+        span {
+          font-size: calc((var(--base-ft-size) * 4));
+          line-height: calc((var(--base-ft-size) * 3));
+        }
+      }
+
+      &__explore {
+        width: 44vw;
+      }
+
       &__info {
         * {
-          @include ft-s(20);
+          font-size: calc((var(--base-ft-size) * 0.88));
         }
 
         flex-direction: column;
@@ -352,19 +371,16 @@ const onOpen = (opened: boolean) => {
   }
 }
 
-@media screen and (max-width: 699px) {
-  .cat-item {
-    &__name {
-      span {
-        font-size: calc((var(--base-ft-size) * 4));
-        line-height: calc((var(--base-ft-size) * 3));
-      }
-    }
-  }
-}
-
 @media screen and (min-width: 1000px) {
   .cat-item {
+    &__info {
+      & > * {
+        &:nth-of-type(n) {
+          transform: translateY(var(--spacing-l))
+            translateX(calc(var(--spacing-l) * 2)) !important;
+        }
+      }
+    }
     &__fiche {
       // &__avatar {
       //   top: 50% !important;
