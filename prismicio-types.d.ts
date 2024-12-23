@@ -907,6 +907,18 @@ interface PopoverbannerDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   text: prismic.RichTextField;
+
+  /**
+   * displayType field in *PopoverBanner*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: PopoverBanner
+   * - **API ID Path**: popoverbanner.displaytype
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  displaytype: prismic.SelectField<"PopoverBanner" | "PopoverSheet", "filled">;
 }
 
 /**
