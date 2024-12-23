@@ -70,14 +70,15 @@ onMounted(() => {
 watch(
   () => y.value,
   (oldY, newY) => {
-    console.log(newY);
-    if (newY && oldY) {
-      thin.value = oldY < newY && newY > 240;
-      sticky.value = oldY < newY && newY > 240;
-      black.value = newY < 240 || (oldY < newY && newY > 240);
-    } else {
-      document.querySelector("main.app")?.classList.add("--gap");
-    }
+    nextTick(() => {
+      if (newY && oldY) {
+        thin.value = oldY < newY && newY > 240;
+        sticky.value = oldY < newY && newY > 240;
+        black.value = newY < 240 || (oldY < newY && newY > 240);
+      } else {
+        document.querySelector("main.app")?.classList.add("--gap");
+      }
+    });
   },
   { immediate: true, flush: "sync" }
 );
