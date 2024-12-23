@@ -56,6 +56,10 @@ watch(
 #__nuxt {
   overflow-x: hidden;
 
+  main {
+    transition: margin 0.64s ease-in-out;
+  }
+
   &:has(.page-loader:not(.fade-out-fwd)) {
     width: 100dvw;
     height: 100svh;
