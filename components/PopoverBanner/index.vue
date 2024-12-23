@@ -64,6 +64,12 @@ const props = defineProps<Prop>();
 </script>
 
 <style lang="scss">
+.popover {
+  &-banner,
+  &-sheet {
+    z-index: 1000;
+  }
+}
 .popover-banner {
   &__cta {
     font-weight: 400 !important;
@@ -154,6 +160,13 @@ const props = defineProps<Prop>();
         display: block;
       }
     }
+  }
+}
+
+@media screen and (max-width: 699px) {
+  /* Mobile styles */
+  .popover-sheet {
+    margin-right: var(--spacing-m);
   }
 }
 </style>
