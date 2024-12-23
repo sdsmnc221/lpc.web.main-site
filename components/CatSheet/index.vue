@@ -240,7 +240,7 @@ watch(
       justify-content: flex-start;
       align-items: center;
 
-      padding-left: var(--spacing-m);
+      padding-left: calc((var(--spacing-s)) * 1.5) !important;
 
       cursor: pointer;
 
