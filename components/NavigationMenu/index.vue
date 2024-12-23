@@ -70,10 +70,16 @@ onMounted(() => {
 watch(
   () => y.value,
   (oldY, newY) => {
-    thin.value = oldY < newY && newY > 240;
-    sticky.value = oldY < newY && newY > 240;
-    black.value = newY < 240 || (oldY < newY && newY > 240);
-  }
+    console.log(newY);
+    if (newY && oldY) {
+      thin.value = oldY < newY && newY > 240;
+      sticky.value = oldY < newY && newY > 240;
+      black.value = newY < 240 || (oldY < newY && newY > 240);
+    } else {
+      document.querySelector("main.app")?.classList.add("--gap");
+    }
+  },
+  { immediate: true, flush: "sync" }
 );
 </script>
 
@@ -82,6 +88,10 @@ watch(
   #__nuxt:has(.navigation-menu.--thin.--sticky) {
     main {
       margin-top: calc(var(--spacing-l) * 2);
+
+      &.--gap {
+        margin-top: 0;
+      }
     }
   }
 }
