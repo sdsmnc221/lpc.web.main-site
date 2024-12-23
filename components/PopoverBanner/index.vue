@@ -64,12 +64,6 @@ const props = defineProps<Prop>();
 </script>
 
 <style lang="scss">
-.popover {
-  &-banner,
-  &-sheet {
-    z-index: 1000;
-  }
-}
 .popover-banner {
   &__cta {
     font-weight: 400 !important;
@@ -164,9 +158,20 @@ const props = defineProps<Prop>();
 }
 
 @media screen and (max-width: 699px) {
+  .popover {
+    &-banner,
+    &-sheet {
+      &__content {
+        z-index: 1000;
+      }
+    }
+  }
   /* Mobile styles */
   .popover-sheet {
-    margin-right: var(--spacing-m);
+    &__content {
+      width: 84vw;
+      padding-right: var(--spacing-l);
+    }
   }
 }
 </style>
