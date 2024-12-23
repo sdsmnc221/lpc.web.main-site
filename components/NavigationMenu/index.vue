@@ -76,7 +76,9 @@ watch(
         sticky.value = oldY < newY && newY > 240;
         black.value = newY < 240 || (oldY < newY && newY > 240);
       } else {
-        document.querySelector("main.app")?.classList.add("--gap");
+        if (document && document.querySelector) {
+          document.querySelector("main.app")?.classList.add("--gap");
+        }
       }
     });
   },
