@@ -288,7 +288,7 @@ const onOpen = (opened: boolean) => {
 
       &__info {
         * {
-          font-size: calc((var(--base-ft-size) * 0.88));
+          font-size: 18px;
         }
 
         flex-direction: column;
