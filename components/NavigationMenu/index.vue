@@ -1,8 +1,8 @@
 <template>
   <nav
-    class="navigation-menu bg-black"
+    class="navigation-menu"
     ref="node"
-    :class="{ '--thin': thin }"
+    :class="{ '--thin': thin, '--sticky': sticky, 'bg-black': black }"
     v-if="links"
   >
     <NuxtLink
@@ -25,6 +25,7 @@
 <script setup lang="ts">
 import { type Link } from "~/interfaces/Navigation";
 import { ref } from "vue";
+import { useWindowScroll } from "@vueuse/core";
 
 type Props = {
   links: Link[] | undefined;
@@ -36,7 +37,13 @@ const route = useRoute();
 
 const thin = ref(false);
 
+const sticky = ref(false);
+
+const black = ref(true);
+
 const node = ref(null);
+
+const { y } = useWindowScroll();
 
 onMounted(() => {
   nextTick(() => {
@@ -48,7 +55,7 @@ onMounted(() => {
       }
     }
 
-    window.addEventListener("scroll", () => {
+    window.addEventListener("scroll", (e) => {
       if (window.innerWidth < 699 && node.value) {
         if (window.scrollY < window.innerHeight / 8) {
           node.value.style.zIndex = 0;
@@ -56,18 +63,42 @@ onMounted(() => {
           node.value.style.zIndex = -1;
         }
       }
-
-      if (window.scrollY < window.innerHeight) {
-        thin.value = false;
-      } else {
-        thin.value = true;
-      }
     });
   });
 });
+
+watch(
+  () => y.value,
+  (oldY, newY) => {
+    nextTick(() => {
+      if (newY && oldY) {
+        thin.value = oldY < newY && newY > 240;
+        sticky.value = oldY < newY && newY > 240;
+        black.value = newY < 240 || (oldY < newY && newY > 240);
+      } else {
+        if (document && document.querySelector) {
+          document.querySelector("main.app")?.classList.add("--gap");
+        }
+      }
+    });
+  },
+  { immediate: true, flush: "sync" }
+);
 </script>
 
 <style lang="scss">
+@media screen and (min-width: 1000px) {
+  #__nuxt:has(.navigation-menu.--thin.--sticky) {
+    main {
+      margin-top: calc(var(--spacing-l) * 2);
+
+      &.--gap {
+        margin-top: 0;
+      }
+    }
+  }
+}
+
 .navigation-menu {
   padding: 0 var(--spacing-m);
   padding-top: var(--spacing-s);
@@ -79,6 +110,13 @@ onMounted(() => {
   position: sticky;
   top: 0;
   z-index: 1;
+
+  transition: all 0.64s ease-in-out;
+
+  &.--sticky {
+    position: fixed;
+    width: 100vw;
+  }
 
   &.--thin {
     padding-top: var(--spacing-s);

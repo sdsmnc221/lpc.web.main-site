@@ -1,3 +1,5 @@
+@import "colors";
+
 * {
   /* Firefox */
   scrollbar-width: thin;
@@ -6,6 +8,7 @@
   /* Chrome, Edge, and Safari */
   &::-webkit-scrollbar {
     width: 8px;
+    height: 0;
   }
 
   &::-webkit-scrollbar-track {
@@ -22,5 +25,10 @@
   /* Optional: Hover state for the thumb */
   &::-webkit-scrollbar-thumb:hover {
     background-color: var(--black);
+  }
+
+  /* Hide horizontal scrollbar specifically */
+  &::-webkit-scrollbar-horizontal {
+    display: none;
   }
 }
