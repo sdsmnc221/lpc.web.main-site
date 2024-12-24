@@ -90,6 +90,8 @@ onMounted(() => {
     setTimeout(() => {
       loading.value = false;
     }, 1400);
+
+    console.log(errorBody.value);
   }
 });
 </script>
