@@ -18,6 +18,19 @@
         :field="errorBody"
         class="error-content__body"
       ></prismic-rich-text>
+
+      <div class="error-content__links mt-4">
+        <Badge class="px-5">
+          <NuxtLink
+            v-for="(link, index) in quickAccessLinks"
+            :key="`navigation-menu-link-${link.link?.id}-${index}`"
+            :to="`/${link.link?.uid}`"
+            class="text-lg albert-sans-bold"
+          >
+            {{ link.label }}
+          </NuxtLink>
+        </Badge>
+      </div>
     </div>
   </NuxtLayout>
   <page-loader :show="loading" full-censored></page-loader>
@@ -25,6 +38,7 @@
 
 <script setup lang="ts">
 import PageLoader from "@/components/PageLoader/index.vue";
+import Badge from "~/components/ui/badge/Badge.vue";
 
 import type { NuxtError } from "#app";
 
@@ -69,6 +83,10 @@ const errorTitle = computed(() => {
 
 const errorBody = computed(() => errorPage.value?.data?.errorcontent);
 
+const quickAccessLinks = computed(
+  () => errorPage.value?.data?.quickaccesslinks
+);
+
 const route = useRoute();
 
 const loading = ref(true);
@@ -91,7 +109,7 @@ onMounted(() => {
       loading.value = false;
     }, 1400);
 
-    console.log(errorBody.value);
+    console.log(quickAccessLinks.value);
   }
 });
 </script>

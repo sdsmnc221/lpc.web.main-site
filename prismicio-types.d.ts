@@ -234,6 +234,16 @@ export interface ErrorpageDocumentDataErrorslistItem {
  */
 export interface ErrorpageDocumentDataQuickaccesslinksItem {
   /**
+   * label field in *ErrorPage → quickaccesslinks*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: errorpage.quickaccesslinks[].label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  label: prismic.KeyTextField;
+
+  /**
    * link field in *ErrorPage → quickaccesslinks*
    *
    * - **Field Type**: Link

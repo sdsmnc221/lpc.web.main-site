@@ -51,6 +51,13 @@
           "label": "quickaccesslinks",
           "repeat": true,
           "fields": {
+            "label": {
+              "type": "Text",
+              "config": {
+                "label": "label",
+                "placeholder": ""
+              }
+            },
             "link": {
               "type": "Link",
               "config": {
