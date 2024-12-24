@@ -74,4 +74,10 @@ provide("distance", props.distance);
     cursor: pointer;
   }
 }
+
+@media screen and (max-width: 699px) {
+  .ui-dock {
+    transform: translateX(calc(var(--spacing-l) * -0.5));
+  }
+}
 </style>

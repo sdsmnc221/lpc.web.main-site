@@ -3,7 +3,7 @@
     ref="section"
     :data-slice-type="slice.slice_type"
     :data-slice-variation="slice.variation"
-    class="adoptions-group bg-white"
+    class="adoptions-group hide-scrollbar bg-white"
   >
     <div ref="scrollContainer" class="adoptions-group__container">
       <div ref="textContent" class="adoptions-group__text-content">
