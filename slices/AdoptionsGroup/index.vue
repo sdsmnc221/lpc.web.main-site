@@ -99,7 +99,6 @@ const adoptionRequirements = computed(
 const description = computed(() => primary.value?.description);
 
 const image = computed(() => primary.value?.image);
-console.log(primary.value);
 
 const { data: itemsData } = await useAsyncData(props.slice.id, async () => {
   const itemsId = primary.value?.catsgroup?.map((item) => item.catitem.id);

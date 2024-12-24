@@ -78,12 +78,21 @@ const updateCount = ref(0);
 
 const getPage = async () => {
   await useAsyncData("currentPage", async () => {
-    const { name: currentPageName } = route;
+    const { name: currentPageName, path: currentPagePath } = route;
 
-    const data =
-      currentPageName === "index"
-        ? await client.getSingle("homepage")
-        : await client.getByUID("navigationpage", currentPageName as string);
+    let data;
+
+    if (currentPageName) {
+      data =
+        currentPageName === "index"
+          ? await client.getSingle("homepage")
+          : await client.getByUID("navigationpage", currentPageName as string);
+    } else {
+      data = await client.getByUID(
+        "navigationpage",
+        (currentPagePath as string).replace("/", "")
+      );
+    }
 
     currentPage.value = data;
   });
@@ -145,8 +154,8 @@ const playFade = () => {
 };
 
 onMounted(() => {
-  playMagic();
-  playFade();
+  // playMagic();
+  // playFade();
 });
 
 onUpdated(() => {

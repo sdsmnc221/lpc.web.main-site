@@ -24,7 +24,7 @@
           <NuxtLink
             v-for="(link, index) in quickAccessLinks"
             :key="`navigation-menu-link-${link.link?.id}-${index}`"
-            :to="`/${link.link?.uid}`"
+            :to="`${link.link?.uid}`"
             class="text-lg albert-sans-bold"
           >
             {{ link.label }}
@@ -108,8 +108,6 @@ onMounted(() => {
     setTimeout(() => {
       loading.value = false;
     }, 1400);
-
-    console.log(quickAccessLinks.value);
   }
 });
 </script>
