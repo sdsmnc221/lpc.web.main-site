@@ -153,7 +153,7 @@ const onOpen = (opened: boolean) => {
       display: block;
       margin-left: var(--spacing-m);
       position: relative;
-      background-color: var(--white);
+      background-color: transparent;
 
       &:nth-of-type(n) {
         transform: translateY(var(--spacing-l)) translateX(var(--spacing-l));
