@@ -77,7 +77,9 @@ provide("distance", props.distance);
 
 @media screen and (max-width: 699px) {
   .ui-dock {
-    transform: translateX(calc(var(--spacing-l) * -0.5));
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 </style>
