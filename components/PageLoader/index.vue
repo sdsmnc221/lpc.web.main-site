@@ -1,15 +1,24 @@
 <!-- https://uiverse.io/alexruix/tame-fly-42 -->
 
 <template>
-  <div class="page-loader" :class="{ 'fade-out-fwd': !show }">
+  <div
+    class="page-loader"
+    :class="{ 'fade-out-fwd': !show, 'full-censored': fullCensored }"
+  >
     <div class="loader"></div>
   </div>
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{
-  show: boolean;
-}>();
+const props = withDefaults(
+  defineProps<{
+    show: boolean;
+    fullCensored?: boolean;
+  }>(),
+  {
+    fullCensored: false,
+  }
+);
 </script>
 
 <style lang="css">
@@ -30,6 +39,10 @@ const props = defineProps<{
 
 .page-loader:is(.fade-out-fwd) {
   pointer-events: none;
+}
+
+.page-loader:is(.full-censored) {
+  background-color: black;
 }
 
 /* HTML: <div class="loader"></div> */

@@ -10,8 +10,7 @@
     width: 8px;
     height: 0;
   }
-
-  &::-webkit-scrollbar-track {
+  P &::-webkit-scrollbar-track {
     background: transparent;
   }
 
@@ -29,6 +28,16 @@
 
   /* Hide horizontal scrollbar specifically */
   &::-webkit-scrollbar-horizontal {
+    display: none;
+  }
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+
+  /* Chrome, Edge, and Safari */
+  &::-webkit-scrollbar {
     display: none;
   }
 }

@@ -90,20 +90,23 @@ const onGsapInitDone = () => {
 const topRef = ref(null);
 const faqRef = ref(null);
 const quickAccess = (section: string) => {
-  let node;
-  switch (section) {
-    case "top":
-      node = topRef.value;
-      break;
-    case "faq":
-    default:
-      node = faqRef.value;
-      break;
-  }
+  let node, y;
 
-  if (window && node) {
+  if (window && document) {
+    switch (section) {
+      case "top":
+        node = topRef.value;
+        y = 0;
+        break;
+      case "faq":
+      default:
+        node = faqRef.value;
+        y = document.documentElement.getBoundingClientRect().height;
+        break;
+    }
+
     window.scroll({
-      top: node?.$el?.getBoundingClientRect()?.y - 20,
+      top: y,
       behavior: "smooth",
     });
   }
@@ -111,6 +114,10 @@ const quickAccess = (section: string) => {
 
 onMounted(() => {
   // playFade();
+});
+
+definePageMeta({
+  layout: "default-temp",
 });
 </script>
 
