@@ -77,6 +77,8 @@ import { isPC, randomHSLA } from "@/lib/helpers";
 
 const router = useRouter();
 
+const isMounted = ref(false);
+
 // The array passed to `getSliceComponentProps` is purely optional.
 // Consider it as a visual hint for you when templating your slice.
 const props = defineProps(
@@ -221,7 +223,6 @@ watch(
 );
 
 /** GSAP */
-const isMounted = ref(false);
 
 gsap.registerPlugin(ScrollTrigger);
 
