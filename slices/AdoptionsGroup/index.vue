@@ -170,13 +170,15 @@ const onOpenSheet = (details) => {
 watch(
   () => defaultOpen.value,
   () => {
-    setTimeout(() => {
-      if (defaultOpen.value) {
-        window.lenis?.stop();
-      } else {
-        window.lenis?.start();
-      }
-    }, 480);
+    if (isMounted.value && window?.lenis) {
+      setTimeout(() => {
+        if (defaultOpen.value) {
+          window.lenis?.stop();
+        } else {
+          window.lenis?.start();
+        }
+      }, 480);
+    }
   },
   { immediate: true }
 );
@@ -219,6 +221,8 @@ watch(
 );
 
 /** GSAP */
+const isMounted = ref(false);
+
 gsap.registerPlugin(ScrollTrigger);
 
 const emits = defineEmits(["gsap-init-done"]);
@@ -420,11 +424,14 @@ const cleanupScrollTrigger = () => {
 onMounted(() => {
   nextTick(() => {
     initHorizontalScroll();
+
+    isMounted.value = true;
   });
 });
 
 onUnmounted(() => {
   cleanupScrollTrigger();
+  isMounted.value = false;
 });
 </script>
 
