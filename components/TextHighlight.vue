@@ -1,5 +1,7 @@
 <template>
-  <span :class="cn('inline-block px-1 pb-1', props.class)"><slot /></span>
+  <span :class="cn('inline-block px-1 pb-1', props.class, 'gloock-regular')"
+    ><slot
+  /></span>
 </template>
 
 <script setup lang="ts">
@@ -47,8 +49,8 @@ span {
   background-size: 0% 100%;
   background-repeat: no-repeat;
   background-position: left center;
-  animation: background-expand v-bind(durationMs) ease-in-out v-bind(delayMs)
-      forwards,
+  animation:
+    background-expand v-bind(durationMs) ease-in-out v-bind(delayMs) forwards,
     text-color-change v-bind(durationMs) ease-in-out v-bind(delayMs) forwards;
 }
 </style>
