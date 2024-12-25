@@ -10,7 +10,6 @@ export default function useCat() {
   const commonOpen = (opened: boolean, catItem = null) => {
     defaultOpen.value = opened;
 
-    console.log(catItem);
     if (opened) {
       if (catItem) {
         currentCatItem.value = catItem;

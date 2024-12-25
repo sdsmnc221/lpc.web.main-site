@@ -32,6 +32,10 @@ watch(
   (newRoute) => {
     if (newRoute.includes("adoptions")) {
       loading.value = true;
+
+      setTimeout(() => {
+        loading.value = false;
+      }, 1400);
     }
   },
   { immediate: true }
