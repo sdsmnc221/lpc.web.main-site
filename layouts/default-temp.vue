@@ -154,6 +154,7 @@ const playFade = () => {
 };
 
 onMounted(() => {
+  getPage();
   playMagic();
   playFade();
 });

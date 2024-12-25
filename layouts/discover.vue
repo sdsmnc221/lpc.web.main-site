@@ -89,6 +89,10 @@ onMounted(() => {
   getPage();
 });
 
+onUpdated(() => {
+  getPage();
+});
+
 watch(
   [() => seo.value, () => currentPage.value],
   ([newSeo, newPageContent]) => {
