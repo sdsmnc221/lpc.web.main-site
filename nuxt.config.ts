@@ -30,6 +30,7 @@ export default defineNuxtConfig({
     "shadcn-nuxt",
     "@nuxtjs/leaflet",
     "@vueuse/nuxt",
+    "nuxt-gtag",
   ],
 
   prismic: {
@@ -47,5 +48,9 @@ export default defineNuxtConfig({
      * @default "./components/ui"
      */
     componentDir: "./components/ui",
+  },
+
+  gtag: {
+    id: process.env.GTAG_ID,
   },
 });
