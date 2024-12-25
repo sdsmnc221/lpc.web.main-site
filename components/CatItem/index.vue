@@ -55,7 +55,7 @@ const onOpen = (opened: boolean) => {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .cat-item {
   width: 40%;
   // margin: 0 var(--spacing-s);
@@ -75,6 +75,7 @@ const onOpen = (opened: boolean) => {
     display: flex;
     flex-direction: column;
     align-items: center;
+    transform: translate(-24px, 24%);
 
     span {
       display: block;
@@ -129,9 +130,8 @@ const onOpen = (opened: boolean) => {
     color: var(--white);
     background-color: var(--gray-dark);
     display: inline-block;
-    padding: 0 var(--spacing-m);
+    padding: var(--spacing-m);
     padding-bottom: 12vh;
-    transform: translateX(calc(var(--spacing-m) * -1));
     transition: all ease-in-out 0.64s;
 
     * {
@@ -154,14 +154,6 @@ const onOpen = (opened: boolean) => {
       margin-left: var(--spacing-m);
       position: relative;
       background-color: transparent;
-
-      &:nth-of-type(n) {
-        transform: translateY(var(--spacing-l)) translateX(var(--spacing-l));
-      }
-
-      &:nth-of-type(2n) {
-        transform: translateY(0) !important;
-      }
 
       &::after {
         content: "";
@@ -269,6 +261,44 @@ const onOpen = (opened: boolean) => {
   }
 }
 
+@media screen and (min-width: 768px) and (max-width: 1200px) {
+  .adoptions-group {
+    .cat-item {
+      &__info {
+        & > p {
+          &:nth-of-type(n) {
+            transform: translateY(calc(var(--spacing-l) * 1.6))
+              translateX(calc(var(--spacing-l) * 0.2)) !important;
+          }
+          &:nth-of-type(2n) {
+            transform: translateY(calc(var(--spacing-l) * 0.8))
+              translateX(calc(var(--spacing-l) * -0.8));
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 699px) {
+  .adoptions-group {
+    .cat-item {
+      &__info {
+        & > p {
+          &:nth-of-type(n) {
+            transform: translateY(calc(var(--spacing-l) * 1.6))
+              translateX(calc(var(--spacing-l) * 0.2)) !important;
+          }
+          &:nth-of-type(2n) {
+            transform: translateY(calc(var(--spacing-l) * 0.8))
+              translateX(calc(var(--spacing-l) * -0.8));
+          }
+        }
+      }
+    }
+  }
+}
+
 @media screen and (max-width: 699px),
   screen and (min-width: 768px) and (max-width: 1200px) {
   .adoptions-group {
@@ -284,33 +314,34 @@ const onOpen = (opened: boolean) => {
 
       &__explore {
         width: 44vw;
+
+        * {
+          font-size: 16px;
+        }
       }
 
       &__info {
         * {
-          font-size: 18px;
+          font-size: 16px;
         }
 
         flex-direction: column;
         gap: var(--spacing-m);
         bottom: 16%;
-
-        p {
-          &:nth-of-type(n) {
-            transform: translateY(0);
-          }
-          &:nth-of-type(2n) {
-            transform: translateY(var(--spacing-m));
-          }
-        }
       }
     }
   }
 }
 
 @container app (min-width: 1000px) {
-  .cat-item {
-    width: 25vw !important;
+  .adoptions-group {
+    .cat-item {
+      width: 25vw !important;
+
+      &__explore {
+        width: 50%;
+      }
+    }
   }
 }
 
@@ -377,34 +408,26 @@ const onOpen = (opened: boolean) => {
 }
 
 @media screen and (min-width: 1000px) {
-  .cat-item {
-    &__info {
-      & > * {
-        &:nth-of-type(n) {
-          transform: translateY(var(--spacing-l))
-            translateX(calc(var(--spacing-l) * 2)) !important;
+  .adoptions-group {
+    .cat-item {
+      &__info {
+        & > p {
+          &:nth-of-type(n) {
+            transform: translateY(calc(var(--spacing-l) * 0.4))
+              translateX(calc(var(--spacing-l) * 2.4));
+          }
+          &:nth-of-type(2n) {
+            transform: translateY(calc(var(--spacing-l) * 1.6))
+              translateX(calc(var(--spacing-l) * 0.2));
+          }
         }
       }
-    }
-    &__fiche {
-      // &__avatar {
-      //   top: 50% !important;
-      //   left: -2px !important;
-      //   transform: translateY(-50%) !important;
-      //   width: 32% !important;
-      //   height: 100% !important;
-      //   border-radius: 0 32px 32px 0 !important;
 
-      //   &.--placeholder {
-      //     object-fit: contain !important;
-      //   }
-      // }
-    }
-
-    &__name {
-      span {
-        font-size: calc((var(--base-ft-size) * 5));
-        line-height: calc((var(--base-ft-size) * 4));
+      &__name {
+        span {
+          font-size: calc((var(--base-ft-size) * 5));
+          line-height: calc((var(--base-ft-size) * 4));
+        }
       }
     }
   }
