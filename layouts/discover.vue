@@ -104,10 +104,14 @@ watch(
 </script>
 
 <style lang="scss">
-h1 {
-  margin: auto !important;
-}
-
 .discover {
+  h1 {
+    margin: auto !important;
+  }
+
+  img {
+    filter: none !important;
+    border-radius: 0;
+  }
 }
 </style>
