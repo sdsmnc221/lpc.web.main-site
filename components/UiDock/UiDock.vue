@@ -74,4 +74,12 @@ provide("distance", props.distance);
     cursor: pointer;
   }
 }
+
+@media screen and (max-width: 699px) {
+  .ui-dock {
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
 </style>

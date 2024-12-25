@@ -229,6 +229,31 @@ export interface ErrorpageDocumentDataErrorslistItem {
   errordisplaymessage: prismic.KeyTextField;
 }
 
+/**
+ * Item in *ErrorPage → quickaccesslinks*
+ */
+export interface ErrorpageDocumentDataQuickaccesslinksItem {
+  /**
+   * label field in *ErrorPage → quickaccesslinks*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: errorpage.quickaccesslinks[].label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  label: prismic.KeyTextField;
+
+  /**
+   * link field in *ErrorPage → quickaccesslinks*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: errorpage.quickaccesslinks[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField;
+}
+
 type ErrorpageDocumentDataSlicesSlice = never;
 
 /**
@@ -267,6 +292,19 @@ interface ErrorpageDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   errorheading: prismic.KeyTextField;
+
+  /**
+   * quickaccesslinks field in *ErrorPage*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: errorpage.quickaccesslinks[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  quickaccesslinks: prismic.GroupField<
+    Simplify<ErrorpageDocumentDataQuickaccesslinksItem>
+  >;
 
   /**
    * Slice Zone field in *ErrorPage*
@@ -1978,6 +2016,7 @@ declare module "@prismicio/client" {
       ErrorpageDocument,
       ErrorpageDocumentData,
       ErrorpageDocumentDataErrorslistItem,
+      ErrorpageDocumentDataQuickaccesslinksItem,
       ErrorpageDocumentDataSlicesSlice,
       FootermenuDocument,
       FootermenuDocumentData,

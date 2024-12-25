@@ -4,7 +4,7 @@
       <span
         v-for="(word, idx) in wordsArray"
         :key="word + idx"
-        class="inline-block"
+        class="inline-block gloock-regular text-base"
         :style="spanStyle"
       >
         {{ word }}&nbsp;
