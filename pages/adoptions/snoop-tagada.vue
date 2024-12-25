@@ -3,9 +3,7 @@
     <AuroraBackground></AuroraBackground>
   </div>
   <div class="adoptions snoop-tagada flex flex-col space-y-3 p-8">
-    <h1
-      class="font-mono text-lg md:mt-4 md:w-1/2 md:text-left text-center m-auto"
-    >
+    <h1 class="text-lg md:mt-4 md:w-1/2 md:text-left text-center m-auto">
       <img
         src="/snoop-tagada/cover.jpg"
         alt="Adoption de Snoop et Tagada"
@@ -25,7 +23,7 @@
     </h1>
 
     <div class="m-auto flex flex-col space-y-3 md:w-1/2 w-72">
-      <div class="flex md:flex-row flex-col font-mono">
+      <div class="flex md:flex-row flex-col">
         <div class="md:basis-1/2 basis-full md:mr-10">
           <h2 class="text-left text-base mt-4">
             <span class="font-bold">Snoop</span>
@@ -53,7 +51,7 @@
         </div>
 
         <div class="md:basis-1/2 basis-full">
-          <h2 class="text-left font-mono text-base mt-4">
+          <h2 class="text-left text-base mt-4">
             <span class="font-bold">Tagada</span>
           </h2>
           <p class="text-xs">4 ans, femelle, née 09.2020</p>
@@ -78,9 +76,9 @@
         </div>
       </div>
 
-      <div class="flex md:flex-row flex-col w-100 font-mono">
+      <div class="flex md:flex-row flex-col w-100">
         <div class="md:basis-1/2 basis-full md:mr-10">
-          <div class="font-mono">
+          <div class="">
             <h2 class="text-left text-base mt-10 mb-2">
               <span class="font-bold">Leur histoire d'amour fraternel :</span>
             </h2>
@@ -104,7 +102,7 @@
             </p>
           </div>
 
-          <div class="font-mono">
+          <div class="">
             <h2 class="text-left text-base mt-10 mb-2">
               <span class="font-bold">Ce qu'ils aiment :</span>
             </h2>
@@ -144,7 +142,7 @@
       </div>
 
       <div
-        class="flex md:flex-row flex-col w-100 font-mono text-xs md:flex-wrap flex-nowrap"
+        class="flex md:flex-row flex-col w-100 text-xs md:flex-wrap flex-nowrap"
       >
         <h2 class="basis-full text-left text-base mt-10">
           <span class="font-bold"
@@ -262,8 +260,8 @@
         </div>
       </div>
 
-      <div class="flex md:flex-row flex-col w-100 font-mono">
-        <div class="md:basis-1/2 basis-full font-mono md:mr-10 flex flex-col">
+      <div class="flex md:flex-row flex-col w-100">
+        <div class="md:basis-1/2 basis-full md:mr-10 flex flex-col">
           <h3 class="font-bold mt-10 mb-2">
             Témoignages de Marie <br />(notre comportementaliste) :
           </h3>
@@ -297,7 +295,7 @@
         </div>
 
         <div
-          class="md:basis-1/2 basis-full flex flex-col justify-between font-mono md:ml-10"
+          class="md:basis-1/2 basis-full flex flex-col justify-between md:ml-10"
         >
           <div class="flex flex-col aligns-center items-center mb-4 mt-10">
             <h2 class="text-left text-base">
@@ -342,7 +340,7 @@
         </div>
       </div>
 
-      <div class="flex flex-col w-100 font-mono">
+      <div class="flex flex-col w-100">
         <h3 class="font-bold mt-10 mb-2">Un mot du cœur :</h3>
 
         <p class="text-xs">
@@ -419,6 +417,10 @@ onUnmounted(() => {
     observer.disconnect();
   }
 });
+
+definePageMeta({
+  layout: "discover",
+});
 </script>
 
 <style lang="scss" scoped>
@@ -449,6 +451,6 @@ onUnmounted(() => {
     object-fit: cover;
   }
 }
-.adoptions.snoop-tagada {
+.snoop-tagada {
 }
 </style>
