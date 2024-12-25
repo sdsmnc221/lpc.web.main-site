@@ -29,6 +29,7 @@ export default defineNuxtConfig({
     "@nuxtjs/tailwindcss",
     "shadcn-nuxt",
     "@nuxtjs/leaflet",
+    "@vueuse/nuxt",
   ],
 
   prismic: {

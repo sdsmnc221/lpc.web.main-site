@@ -141,7 +141,7 @@ const onOpen = (opened: boolean) => {
   }
 
   &__info {
-    text-align: left;
+    text-align: center;
     margin-top: calc(var(--spacing-s) * -1);
     padding: calc(var(--spacing-s) * 0.5);
     position: absolute;
@@ -156,7 +156,7 @@ const onOpen = (opened: boolean) => {
       background-color: var(--white);
 
       &:nth-of-type(n) {
-        transform: translateY(var(--spacing-m));
+        transform: translateY(var(--spacing-l)) translateX(var(--spacing-l));
       }
 
       &:nth-of-type(2n) {
@@ -295,8 +295,13 @@ const onOpen = (opened: boolean) => {
         gap: var(--spacing-m);
         bottom: 16%;
 
-        &:nth-of-type(n) {
-          transform: translateY(0);
+        p {
+          &:nth-of-type(n) {
+            transform: translateY(0);
+          }
+          &:nth-of-type(2n) {
+            transform: translateY(var(--spacing-m));
+          }
         }
       }
     }
