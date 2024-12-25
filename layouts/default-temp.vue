@@ -154,8 +154,8 @@ const playFade = () => {
 };
 
 onMounted(() => {
-  // playMagic();
-  // playFade();
+  playMagic();
+  playFade();
 });
 
 onUpdated(() => {
