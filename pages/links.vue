@@ -41,20 +41,20 @@
       </div>
 
       <!-- Right side content -->
-      <div class="w-3/5 flex flex-col items-center justify-center bg-gray-300">
-        <h1 class="meow-script-regular text-center px-2">
+      <div
+        class="w-3/5 flex flex-col items-center justify-center bg-gray-300 relative"
+      >
+        <h1 class="meow-script-regular text-center md:text-lg px-2">
           {{ pageTitle }}
         </h1>
 
-        <div class="bg-white mx-auto my-0 w-11/12 p-2">
-          <div
-            class="albert-sans-regular text-xs text-center text-gray-700 p-2"
-          >
+        <div class="bg-white mx-auto my-0 w-11/12 md:w-1/2 p-2">
+          <div class="albert-sans-regular text-center text-gray-700 p-2">
             <prismic-rich-text :field="pageDescription"></prismic-rich-text>
           </div>
 
           <!-- Navigation Links -->
-          <nav class="w-full space-y-4">
+          <nav class="w-full md:w-3/4 md:m-auto space-y-4 pb-1 md:pb-4">
             <NuxtLink
               v-for="link in links"
               :key="link.linklabel"
@@ -64,12 +64,17 @@
                   : link.linksrc.url
               "
               :target="link.linksrc.target ?? '_self'"
-              class="block w-full p-2 text-xs bg-gray-200 hover:bg-gray-300 transition-colors duration-300 text-center font-serif italic text-gray-800"
+              class="block w-full p-2 md:p-4 text-xs bg-gray-200 hover:bg-gray-300 transition-colors duration-300 text-center font-serif italic text-gray-800"
             >
               {{ link.linklabel }}
             </NuxtLink>
           </nav>
         </div>
+
+        <img
+          :src="logo"
+          class="logo block md:h-[100px] md:absolute md:bottom-1"
+        />
       </div>
     </div>
   </div>
@@ -91,6 +96,8 @@ const links = computed(() => linkstree.value?.data.linkstree);
 const photoGrids = computed(() =>
   linkstree.value?.data.photosgrid5.map((photo) => photo.img.url)
 );
+
+const logo = computed(() => linkstree.value?.data.logo.url);
 
 definePageMeta({
   layout: "default-temp",
@@ -123,6 +130,29 @@ definePageMeta({
 
     img {
       border-radius: 0;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .app.--links {
+    .links {
+      p {
+        @include ft-s(16);
+      }
+
+      h1 {
+        @include ft-s(xlarge);
+        transform: translateY(0);
+      }
+
+      nav a {
+        @include ft-s(16);
+      }
+
+      .logo {
+        transform: translateY(5px);
+      }
     }
   }
 }
