@@ -20,13 +20,12 @@
       ></prismic-rich-text>
 
       <div class="error-content__links mt-4">
-        <Badge class="px-5">
-          <NuxtLink
-            v-for="(link, index) in quickAccessLinks"
-            :key="`navigation-menu-link-${link.link?.id}-${index}`"
-            :to="`${link.link?.uid}`"
-            class="text-lg albert-sans-bold"
-          >
+        <Badge
+          class="px-5 mr-4 mb-4"
+          v-for="(link, index) in quickAccessLinks"
+          :key="`navigation-menu-link-${link.link?.id}-${index}`"
+        >
+          <NuxtLink :to="`${link.link?.uid}`" class="text-lg albert-sans-bold">
             {{ link.label }}
           </NuxtLink>
         </Badge>
