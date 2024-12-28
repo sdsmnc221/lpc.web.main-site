@@ -204,6 +204,82 @@ export type CatficheDocument<Lang extends string = string> =
     Lang
   >;
 
+type EmbedpageDocumentDataSlicesSlice = never;
+
+/**
+ * Content for EmbedPage documents
+ */
+interface EmbedpageDocumentData {
+  /**
+   * embedContent field in *EmbedPage*
+   *
+   * - **Field Type**: Embed
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embedpage.embedcontent
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#embed
+   */
+  embedcontent: prismic.EmbedField;
+
+  /**
+   * Slice Zone field in *EmbedPage*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embedpage.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<EmbedpageDocumentDataSlicesSlice> /**
+   * Meta Title field in *EmbedPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: embedpage.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *EmbedPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: embedpage.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *EmbedPage*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embedpage.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * EmbedPage document from Prismic
+ *
+ * - **API ID**: `embedpage`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type EmbedpageDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<EmbedpageDocumentData>,
+    "embedpage",
+    Lang
+  >;
+
 /**
  * Item in *ErrorPage → errorsList*
  */
@@ -977,6 +1053,7 @@ export type PopoverbannerDocument<Lang extends string = string> =
 
 export type AllDocumentTypes =
   | CatficheDocument
+  | EmbedpageDocument
   | ErrorpageDocument
   | FootermenuDocument
   | HomepageDocument
@@ -2013,6 +2090,9 @@ declare module "@prismicio/client" {
     export type {
       CatficheDocument,
       CatficheDocumentData,
+      EmbedpageDocument,
+      EmbedpageDocumentData,
+      EmbedpageDocumentDataSlicesSlice,
       ErrorpageDocument,
       ErrorpageDocumentData,
       ErrorpageDocumentDataErrorslistItem,
