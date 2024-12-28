@@ -104,7 +104,7 @@ onMounted(() => {
   *:not(text) {
     line-height: 1.2em;
     text-align: center;
-    // @include ft-s(medium);;
+
     font-size: calc((var(--base-ft-size) * 2.4));
   }
 
@@ -144,7 +144,6 @@ onMounted(() => {
 @container app (min-width: 700px) {
   .pop-out-text {
     *:not(text) {
-      // @include ft-s(large);
       font-size: calc((var(--base-ft-size) * 4));
     }
 
@@ -167,7 +166,6 @@ onMounted(() => {
 @container app (min-width: 1000px) {
   .pop-out-text {
     *:not(text) {
-      // @include ft-s(xxlarge);
       font-size: calc((var(--base-ft-size) * 5));
     }
   }
@@ -178,7 +176,6 @@ onMounted(() => {
     padding: 7.2vw 3.6vw !important;
 
     *:not(text) {
-      // @include ft-s(xxlarge);
       font-size: calc((var(--base-ft-size) * 7));
     }
 

@@ -86,7 +86,12 @@ const getPage = async () => {
       data =
         currentPageName === "index"
           ? await client.getSingle("homepage")
-          : await client.getByUID("navigationpage", currentPageName as string);
+          : currentPageName === "links"
+            ? await client.getByUID("linkstreepage", currentPageName as string)
+            : await client.getByUID(
+                "navigationpage",
+                currentPageName as string
+              );
     } else {
       data = await client.getByUID(
         "navigationpage",
@@ -130,7 +135,11 @@ const playMagic = () => {
 };
 
 const playFade = () => {
-  if (updateCount.value === 0) {
+  console.log(["links", "adoptions"].includes(route.path));
+  if (
+    updateCount.value === 0 &&
+    ["links", "adoptions"].every((path) => !route.path.includes(path))
+  ) {
     const children = [
       ...document.body.querySelectorAll(".app > *:not(.emoji-banner) > *"),
     ];

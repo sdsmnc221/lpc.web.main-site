@@ -60,6 +60,12 @@ module.exports = {
       aspectRatio: {
         "4/3": "4 / 3",
       },
+      gridTemplateColumns: {
+        3: "repeat(3, minmax(0, 1fr))",
+      },
+      gridTemplateRows: {
+        3: "repeat(3, minmax(0, 1fr))",
+      },
       keyframes: {
         "accordion-down": {
           from: { height: 0 },

@@ -2,6 +2,7 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Gloock&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&family=Gloock&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Meow+Script&display=swap");
 
 @mixin baseTypography() {
   @extend .albert-sans-regular;
@@ -50,6 +51,12 @@
 
 // Typographies
 // @include typography($class-name: 'heading-1', $font-size: 24px, $font-weight: 700, $line-height: 26px);
+
+.meow-script-regular {
+  font-family: "Meow Script", serif;
+  font-weight: 400;
+  font-style: normal;
+}
 
 .gloock-regular {
   font-family: "Gloock", serif;
