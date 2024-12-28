@@ -71,7 +71,7 @@
           </nav>
         </div>
 
-        <img :src="logo" class="logo block md:h-[100px] md:absolute bottom-1" />
+        <img :src="logo" class="logo block md:h-[100px] absolute bottom-1" />
       </div>
     </div>
   </div>
