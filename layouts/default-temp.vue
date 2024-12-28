@@ -86,7 +86,12 @@ const getPage = async () => {
       data =
         currentPageName === "index"
           ? await client.getSingle("homepage")
-          : await client.getByUID("navigationpage", currentPageName as string);
+          : currentPageName === "links"
+            ? await client.getByUID("linkstreepage", currentPageName as string)
+            : await client.getByUID(
+                "navigationpage",
+                currentPageName as string
+              );
     } else {
       data = await client.getByUID(
         "navigationpage",

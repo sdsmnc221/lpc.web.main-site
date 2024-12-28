@@ -7,35 +7,35 @@
           <img
             class="object-cover object-left inline-block w-full h-full"
             alt=""
-            src="/links/cell-1.jpg"
+            :src="photoGrids[0]"
           />
         </div>
         <div class="col-start-1 row-start-3">
           <img
             class="object-cover object-center inline-block w-full h-full"
             alt=""
-            src="/links/cell-2.jpg"
+            :src="photoGrids[1]"
           />
         </div>
         <div class="col-span-2 col-start-2 row-start-1">
           <img
             class="object-cover object-right-top inline-block w-full h-full"
             alt=""
-            src="/links/cell-3.jpg"
+            :src="photoGrids[2]"
           />
         </div>
         <div class="row-span-2 col-start-2 row-start-2">
           <img
             class="object-cover object-center inline-block w-full h-full"
             alt=""
-            src="/links/cell-4.jpg"
+            :src="photoGrids[3]"
           />
         </div>
         <div class="row-span-2 col-start-3 row-start-2">
           <img
-            class="object-cover object-center inline-block w-full h-full"
+            class="object-cover inline-block w-full h-full"
             alt=""
-            src="/links/cell-5.jpg"
+            :src="photoGrids[4]"
           />
         </div>
       </div>
@@ -43,31 +43,31 @@
       <!-- Right side content -->
       <div class="w-3/5 flex flex-col items-center justify-center bg-gray-300">
         <h1 class="meow-script-regular text-center px-2">
-          Les Petits Clochards
+          {{ pageTitle }}
         </h1>
 
         <div class="bg-white mx-auto my-0 w-11/12 p-2">
-          <p class="albert-sans-regular text-xs text-center text-gray-700 p-2">
-            L'association, créée en 2004 et basée dans le 91, Ile-de-France,
-            œuvre pour la protection des chats abandonnés errants.
-          </p>
-
-          <p
-            class="albert-sans-bold text-xs text-center text-gray-600 p-2 mb-4"
+          <div
+            class="albert-sans-regular text-xs text-center text-gray-700 p-2"
           >
-            Découvrez notre passion et nos efforts.
-          </p>
+            <prismic-rich-text :field="pageDescription"></prismic-rich-text>
+          </div>
 
           <!-- Navigation Links -->
           <nav class="w-full space-y-4">
-            <a
+            <NuxtLink
               v-for="link in links"
-              :key="link.text"
-              :href="link.url"
+              :key="link.linklabel"
+              :href="
+                link.linksrc.link_type !== 'Web'
+                  ? `/${link.linksrc.uid}`
+                  : link.linksrc.url
+              "
+              :target="link.linksrc.target ?? '_self'"
               class="block w-full p-2 text-xs bg-gray-200 hover:bg-gray-300 transition-colors duration-300 text-center font-serif italic text-gray-800"
             >
-              {{ link.text }}
-            </a>
+              {{ link.linklabel }}
+            </NuxtLink>
           </nav>
         </div>
       </div>
@@ -76,19 +76,21 @@
 </template>
 
 <script setup>
-import { CatIcon } from "lucide-vue-next";
+const { client } = usePrismic();
 
-const links = [
-  { text: "SITE WEB", url: "#" },
-  { text: "FACEBOOK", url: "#" },
-  { text: "HELLO ASSO", url: "#" },
-  { text: "ADOPTEZ", url: "#" },
-  { text: "ACCUEILLEZ", url: "#" },
-  { text: "NOS CHAT'DULTES", url: "#" },
-  { text: "NOS CHATS CRAINTIFS", url: "#" },
-  { text: "FAITES UN DON", url: "#" },
-  { text: "DEVENEZ ADHERENT.E", url: "#" },
-];
+const { data: linkstree } = await useAsyncData("linkstree", () =>
+  client.getByUID("linkstreepage", "links")
+);
+
+const pageTitle = computed(() => linkstree.value?.data.pagetitle);
+
+const pageDescription = computed(() => linkstree.value?.data.pagedescription);
+
+const links = computed(() => linkstree.value?.data.linkstree);
+
+const photoGrids = computed(() =>
+  linkstree.value?.data.photosgrid5.map((photo) => photo.img.url)
+);
 
 definePageMeta({
   layout: "default-temp",
@@ -104,6 +106,7 @@ definePageMeta({
 
     p {
       font-size: 0.72rem;
+      margin-bottom: var(--spacing-s);
     }
 
     h1 {
@@ -115,6 +118,7 @@ definePageMeta({
       @extend .gloock-regular;
       letter-spacing: 1px;
       font-size: 0.64rem;
+      text-transform: uppercase;
     }
 
     img {

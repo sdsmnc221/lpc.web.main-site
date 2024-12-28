@@ -681,6 +681,170 @@ export type ImageplaceholderDocument<Lang extends string = string> =
     Lang
   >;
 
+/**
+ * Item in *LinkstreePage → photosGrid5*
+ */
+export interface LinkstreepageDocumentDataPhotosgrid5Item {
+  /**
+   * img field in *LinkstreePage → photosGrid5*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: linkstreepage.photosgrid5[].img
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  img: prismic.ImageField<never>;
+}
+
+/**
+ * Item in *LinkstreePage → linkstree*
+ */
+export interface LinkstreepageDocumentDataLinkstreeItem {
+  /**
+   * linkLabel field in *LinkstreePage → linkstree*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: linkstreepage.linkstree[].linklabel
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  linklabel: prismic.KeyTextField;
+
+  /**
+   * linkSrc field in *LinkstreePage → linkstree*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: linkstreepage.linkstree[].linksrc
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  linksrc: prismic.LinkField;
+}
+
+type LinkstreepageDocumentDataSlicesSlice = never;
+
+/**
+ * Content for LinkstreePage documents
+ */
+interface LinkstreepageDocumentData {
+  /**
+   * logo field in *LinkstreePage*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: linkstreepage.logo
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  logo: prismic.ImageField<never>;
+
+  /**
+   * photosGrid5 field in *LinkstreePage*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: linkstreepage.photosgrid5[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  photosgrid5: prismic.GroupField<
+    Simplify<LinkstreepageDocumentDataPhotosgrid5Item>
+  >;
+
+  /**
+   * linkstree field in *LinkstreePage*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: linkstreepage.linkstree[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  linkstree: prismic.GroupField<
+    Simplify<LinkstreepageDocumentDataLinkstreeItem>
+  >;
+
+  /**
+   * pageTitle field in *LinkstreePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: linkstreepage.pagetitle
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  pagetitle: prismic.KeyTextField;
+
+  /**
+   * pageDescription field in *LinkstreePage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: linkstreepage.pagedescription
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  pagedescription: prismic.RichTextField;
+
+  /**
+   * Slice Zone field in *LinkstreePage*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: linkstreepage.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<LinkstreepageDocumentDataSlicesSlice> /**
+   * Meta Title field in *LinkstreePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: linkstreepage.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *LinkstreePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: linkstreepage.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *LinkstreePage*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: linkstreepage.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * LinkstreePage document from Prismic
+ *
+ * - **API ID**: `linkstreepage`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type LinkstreepageDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<LinkstreepageDocumentData>,
+    "linkstreepage",
+    Lang
+  >;
+
 type MultiphotosblockDocumentDataSlicesSlice = PhotoWithTextBlockSlice;
 
 /**
@@ -1058,6 +1222,7 @@ export type AllDocumentTypes =
   | FootermenuDocument
   | HomepageDocument
   | ImageplaceholderDocument
+  | LinkstreepageDocument
   | MultiphotosblockDocument
   | NavigationmenuDocument
   | NavigationpageDocument
@@ -2107,6 +2272,11 @@ declare module "@prismicio/client" {
       HomepageDocumentDataSlicesSlice,
       ImageplaceholderDocument,
       ImageplaceholderDocumentData,
+      LinkstreepageDocument,
+      LinkstreepageDocumentData,
+      LinkstreepageDocumentDataPhotosgrid5Item,
+      LinkstreepageDocumentDataLinkstreeItem,
+      LinkstreepageDocumentDataSlicesSlice,
       MultiphotosblockDocument,
       MultiphotosblockDocumentData,
       MultiphotosblockDocumentDataSlicesSlice,
