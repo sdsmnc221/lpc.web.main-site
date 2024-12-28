@@ -131,6 +131,7 @@ definePageMeta({
 
     .logo {
       transform: translateY(5px);
+      pointer-events: none;
     }
   }
 }
