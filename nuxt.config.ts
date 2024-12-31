@@ -6,6 +6,10 @@ export default defineNuxtConfig({
     // layoutTransition: { name: "page", mode: "out-in" },
   },
 
+  experimental: {
+    asyncContext: true,
+  },
+
   runtimeConfig: {
     public: {
       SPECIAL_ADOPTIONS_GROUP: process.env.SPECIAL_ADOPTIONS_GROUP,
