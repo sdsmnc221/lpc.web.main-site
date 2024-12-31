@@ -80,8 +80,10 @@
 <script setup>
 const { client } = usePrismic();
 
+const route = useRoute();
+
 const { data: linkstree } = await useAsyncData("linkstree", () =>
-  client.getByUID("linkstreepage", "links")
+  client.getByUID("linkstreepage", route.params.id)
 );
 
 const { data: assets } = await useAsyncData("assets", async () => {
@@ -107,10 +109,14 @@ const logo = computed(() => assets.value?.logo.url);
 definePageMeta({
   layout: "linkstree",
 });
+
+onMounted(() => {
+  console.log(route);
+});
 </script>
 
 <style lang="scss">
-.app.--links {
+.app:has(.links) {
   padding: 0;
 
   .links {
@@ -145,7 +151,7 @@ definePageMeta({
 }
 
 @media screen and (min-width: 768px) {
-  .app.--links {
+  .app:has(.links) {
     .links {
       p {
         @include ft-s(16);
