@@ -32,56 +32,5 @@ definePageMeta({
 </script>
 
 <style lang="scss">
-.app:has(.links) {
-  padding: 0;
-
-  .links {
-    padding: 0;
-
-    p {
-      font-size: 0.72rem;
-      margin-bottom: var(--spacing-s);
-    }
-
-    h1 {
-      font-size: 1.4rem;
-      transform: translateY(8px);
-    }
-
-    nav a {
-      @extend .gloock-regular;
-      letter-spacing: 1px;
-      font-size: 0.64rem;
-      text-transform: uppercase;
-    }
-
-    img {
-      border-radius: 0;
-    }
-
-    .logo {
-      transform: translateY(5px);
-      pointer-events: none;
-    }
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .app:has(.links) {
-    .links {
-      p {
-        @include ft-s(16);
-      }
-
-      h1 {
-        @include ft-s(xlarge);
-        transform: translateY(0);
-      }
-
-      nav a {
-        @include ft-s(16);
-      }
-    }
-  }
-}
+@import "~/styles/linkstree";
 </style>
