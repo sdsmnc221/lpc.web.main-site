@@ -3,10 +3,11 @@
     <img :alt="cats" class="md:p-0 p-2 mt-4" :src="banner" />
 
     <div class="flex flex-col aligns-center items-center mb-4 mt-10">
-      <h2 class="text-left text-base">
-        <span class="font-bold"
-          >Adoption {{ foster ? "ou Accueil" : "" }} :</span
-        >
+      <h2
+        class="font-bold text-center inline-block mb-4 text-base leading-tight"
+      >
+        Pour Les Rencontrer, <br />
+        et Écrire avec Eux Leur Histoire :
       </h2>
 
       <div class="text-xs mt-2">
