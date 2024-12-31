@@ -3,77 +3,47 @@
     <AuroraBackground></AuroraBackground>
   </div>
   <div class="adoptions snoop-tagada flex flex-col space-y-3 p-8">
-    <h1 class="text-lg md:mt-4 md:w-1/2 md:text-left text-center m-auto">
-      <img
-        src="/snoop-tagada/cover.jpg"
-        alt="Adoption de Snoop et Tagada"
-        class="w-[720px] md:w-[640px] rounded-xl"
-      />
-      <span class="font-semibold text-2xl"> Snoop & Tagada :</span>
-      <br />
-      <span class="font-normal"> Notre duo en </span>
-      <span class="font-bold">
-        <TextHighlight
-          :delay="320"
-          text-end-color="hsl(var(--accent))"
-          class="rounded-lg bg-gradient-to-r from-yellow-500 to-slate-500"
-          >Or Noir.</TextHighlight
-        ></span
-      >
-    </h1>
+    <adoption-hero
+      banner="/snoop-tagada/cover.jpg"
+      title="Snoop & Tagada"
+      subtitle="Notre duo en "
+      highlight="Or Noir."
+    ></adoption-hero>
 
     <div class="m-auto flex flex-col space-y-3 md:w-1/2 w-72">
       <div class="flex md:flex-row flex-col">
-        <div class="md:basis-1/2 basis-full md:mr-10">
-          <h2 class="text-left text-base mt-4">
-            <span class="font-bold">Snoop</span>
-          </h2>
-          <p class="text-xs">4 ans, mâle, né 09.2020</p>
-          <div class="h-px bg-slate-400 mb-4"></div>
-          <p class="text-xs min-h-24 flex flex-col items-start justify-center">
-            <span class="inline-block">- Castré, identifié.</span>
-            <span class="inline-block"
-              >- <span class="font-semibold">Peureux</span> mais
-              <span class="font-semibold">se laisse parfois caresser</span> en
-              lui tendant la main pour qu’il s’y frotte avec sa joue, surtout au
-              moment de la pâtée et des friandises.</span
-            >
-            <span class="inline-block"
-              >- <span class="font-semibold">Très joueur.</span></span
-            >
-          </p>
-          <div class="h-px bg-slate-400 mt-4 mb-2"></div>
-          <p class="text-xs">
-            <span class="font-bold"
-              >Ce serait bien qu’il reste avec sa sœur Tagada.</span
-            >
-          </p>
-        </div>
-
-        <div class="md:basis-1/2 basis-full">
-          <h2 class="text-left text-base mt-4">
-            <span class="font-bold">Tagada</span>
-          </h2>
-          <p class="text-xs">4 ans, femelle, née 09.2020</p>
-          <div class="h-px bg-slate-400 mb-4"></div>
-          <p class="text-xs min-h-24 flex flex-col items-start justify-center">
-            <span class="inline-block">- Stérélisée, identifiée.</span>
-            <br />
-            <span class="inline-block"
-              >- <span class="font-semibold">Peureuse</span>, très
-              <span class="font-semibold">joueuse</span> et
-              <span class="font-semibold">gourmande</span>.</span
-            >
-            <br />
-            <span class="inline-block">- Souvent avec son frère Snoop.</span>
-          </p>
-          <div class="h-px bg-slate-400 mt-4 mb-2"></div>
-          <p class="text-xs">
-            <span class="font-bold"
-              >Il serait donc préférable qu’elle reste avec lui.</span
-            >
-          </p>
-        </div>
+        <cat-details
+          name="Snoop"
+          age-sex-dob="4 ans, mâle, né 09.2020"
+          is-sterilised
+          is-male
+          highlight-trait="Ce serait bien qu’il reste avec sa sœur Tagada."
+        >
+          <span class="inline-block"
+            >- <span class="font-semibold">Peureux</span> mais
+            <span class="font-semibold">se laisse parfois caresser</span> en lui
+            tendant la main pour qu’il s’y frotte avec sa joue, surtout au
+            moment de la pâtée et des friandises.</span
+          >
+          <span class="inline-block"
+            >- <span class="font-semibold">Très joueur.</span></span
+          >
+        </cat-details>
+        <cat-details
+          name="Tagada"
+          age-sex-dob="4 ans, femelle, née 09.2020"
+          is-sterilised
+          highlight-trait="Il serait donc préférable qu’elle reste avec lui."
+        >
+          <br />
+          <span class="inline-block"
+            >- <span class="font-semibold">Peureuse</span>, très
+            <span class="font-semibold">joueuse</span> et
+            <span class="font-semibold">gourmande</span>.</span
+          >
+          <br />
+          <span class="inline-block">- Souvent avec son frère Snoop.</span>
+        </cat-details>
       </div>
 
       <div class="flex md:flex-row flex-col w-100">
@@ -294,50 +264,11 @@
           </div>
         </div>
 
-        <div
-          class="md:basis-1/2 basis-full flex flex-col justify-between md:ml-10"
-        >
-          <div class="flex flex-col aligns-center items-center mb-4 mt-10">
-            <h2 class="text-left text-base">
-              <span class="font-bold">Adoption ou Accueil :</span>
-            </h2>
-
-            <div class="text-xs mt-2">
-              <a
-                href="https://lespetitsclochards.fillout.com/pre-adoption"
-                target="_blank"
-              >
-                <Badge>Formulaire d'adoption</Badge>
-              </a>
-            </div>
-
-            <div class="text-xs mt-2">
-              <a
-                href="https://lespetitsclochards.fillout.com/chatmille-accueil"
-                target="_blank"
-              >
-                <Badge>Formulaire d'accueil</Badge>
-              </a>
-            </div>
-
-            <div class="text-xs mt-2">
-              <a href="tel:+33642804318" target="_blank">
-                <Badge>06 42 80 43 18 (Mme Bonniot)</Badge>
-              </a>
-            </div>
-
-            <div class="text-xs mt-2">
-              <a href="mailto:lespetitsclochards91@gmail.com" target="_blank">
-                <Badge>lespetitsclochards91@gmail.com</Badge>
-              </a>
-            </div>
-          </div>
-          <img
-            alt="Snoop et Tagada"
-            class="md:p-8 p-2 mt-4"
-            src="/snoop-tagada/1.jpg"
-          />
-        </div>
+        <adoption-ctas
+          cats="Snoop et Tagada"
+          banner="/snoop-tagada/1.jpg"
+          foster
+        ></adoption-ctas>
       </div>
 
       <div class="flex flex-col w-100">
@@ -382,6 +313,10 @@ import AuroraBackground from "@/components/AuroraBackground.vue";
 import TextGenerateEffect from "@/components/TextGenerateEffect.vue";
 import TextHighlight from "@/components/TextHighlight.vue";
 import { Badge } from "@/components/ui/badge";
+
+import AdoptionHero from "~/components/UiAdoptions/AdoptionHero.vue";
+import CatDetails from "~/components/UiAdoptions/CatDetails.vue";
+import AdoptionCtas from "~/components/UiAdoptions/AdoptionCtas.vue";
 
 import { ref, onMounted, onUnmounted } from "vue";
 
