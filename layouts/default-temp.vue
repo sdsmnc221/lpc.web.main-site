@@ -136,10 +136,7 @@ const playMagic = () => {
 
 const playFade = () => {
   console.log(["links", "adoptions"].includes(route.path));
-  if (
-    updateCount.value === 0 &&
-    ["links", "adoptions"].every((path) => !route.path.includes(path))
-  ) {
+  if (updateCount.value === 0) {
     const children = [
       ...document.body.querySelectorAll(".app > *:not(.emoji-banner) > *"),
     ];
