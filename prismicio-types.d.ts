@@ -682,21 +682,6 @@ export type ImageplaceholderDocument<Lang extends string = string> =
   >;
 
 /**
- * Item in *LinkstreePage → photosGrid5*
- */
-export interface LinkstreepageDocumentDataPhotosgrid5Item {
-  /**
-   * img field in *LinkstreePage → photosGrid5*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: linkstreepage.photosgrid5[].img
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  img: prismic.ImageField<never>;
-}
-
-/**
  * Item in *LinkstreePage → linkstree*
  */
 export interface LinkstreepageDocumentDataLinkstreeItem {
@@ -727,30 +712,6 @@ type LinkstreepageDocumentDataSlicesSlice = never;
  * Content for LinkstreePage documents
  */
 interface LinkstreepageDocumentData {
-  /**
-   * logo field in *LinkstreePage*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: linkstreepage.logo
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  logo: prismic.ImageField<never>;
-
-  /**
-   * photosGrid5 field in *LinkstreePage*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: linkstreepage.photosgrid5[]
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  photosgrid5: prismic.GroupField<
-    Simplify<LinkstreepageDocumentDataPhotosgrid5Item>
-  >;
-
   /**
    * linkstree field in *LinkstreePage*
    *
@@ -1052,6 +1013,21 @@ export interface PagelayoutDocumentDataPopoverbannersItem {
 type PagelayoutDocumentDataSlicesSlice = never;
 
 /**
+ * Item in *PageLayout → photosGrid5*
+ */
+export interface PagelayoutDocumentDataPhotosgrid5Item {
+  /**
+   * img field in *PageLayout → photosGrid5*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: pagelayout.photosgrid5[].img
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  img: prismic.ImageField<never>;
+}
+
+/**
  * Content for PageLayout documents
  */
 interface PagelayoutDocumentData {
@@ -1130,7 +1106,29 @@ interface PagelayoutDocumentData {
    * - **Tab**: SEO & Metadata
    * - **Documentation**: https://prismic.io/docs/field#image
    */
-  meta_image: prismic.ImageField<never>;
+  meta_image: prismic.ImageField<never> /**
+   * logo field in *PageLayout*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: pagelayout.logo
+   * - **Tab**: Linkstree
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */;
+  logo: prismic.ImageField<never>;
+
+  /**
+   * photosGrid5 field in *PageLayout*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: pagelayout.photosgrid5[]
+   * - **Tab**: Linkstree
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  photosgrid5: prismic.GroupField<
+    Simplify<PagelayoutDocumentDataPhotosgrid5Item>
+  >;
 }
 
 /**
@@ -2274,7 +2272,6 @@ declare module "@prismicio/client" {
       ImageplaceholderDocumentData,
       LinkstreepageDocument,
       LinkstreepageDocumentData,
-      LinkstreepageDocumentDataPhotosgrid5Item,
       LinkstreepageDocumentDataLinkstreeItem,
       LinkstreepageDocumentDataSlicesSlice,
       MultiphotosblockDocument,
@@ -2290,6 +2287,7 @@ declare module "@prismicio/client" {
       PagelayoutDocumentData,
       PagelayoutDocumentDataPopoverbannersItem,
       PagelayoutDocumentDataSlicesSlice,
+      PagelayoutDocumentDataPhotosgrid5Item,
       PopoverbannerDocument,
       PopoverbannerDocumentData,
       AllDocumentTypes,

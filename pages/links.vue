@@ -84,6 +84,14 @@ const { data: linkstree } = await useAsyncData("linkstree", () =>
   client.getByUID("linkstreepage", "links")
 );
 
+const { data: assets } = await useAsyncData("assets", async () => {
+  const { data: defaultLayout } = await client.getByUID(
+    "pagelayout",
+    "linkstree-layout"
+  );
+
+  return defaultLayout;
+});
 const pageTitle = computed(() => linkstree.value?.data.pagetitle);
 
 const pageDescription = computed(() => linkstree.value?.data.pagedescription);
@@ -91,13 +99,13 @@ const pageDescription = computed(() => linkstree.value?.data.pagedescription);
 const links = computed(() => linkstree.value?.data.linkstree);
 
 const photoGrids = computed(() =>
-  linkstree.value?.data.photosgrid5.map((photo) => photo.img.url)
+  assets.value?.photosgrid5.map((photo) => photo.img.url)
 );
 
-const logo = computed(() => linkstree.value?.data.logo.url);
+const logo = computed(() => assets.value?.logo.url);
 
 definePageMeta({
-  layout: "default-temp",
+  layout: "linkstree",
 });
 </script>
 

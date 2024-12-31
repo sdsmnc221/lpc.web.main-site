@@ -79,6 +79,33 @@
         },
         "type": "Image"
       }
+    },
+    "Linkstree": {
+      "logo": {
+        "type": "Image",
+        "config": {
+          "label": "logo",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "photosgrid5": {
+        "type": "Group",
+        "config": {
+          "label": "photosGrid5",
+          "repeat": true,
+          "fields": {
+            "img": {
+              "type": "Image",
+              "config": {
+                "label": "img",
+                "constraint": {},
+                "thumbnails": []
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
