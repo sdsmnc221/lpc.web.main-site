@@ -28,6 +28,7 @@
     .logo {
       transform: translateY(5px);
       pointer-events: none;
+      opacity: 0;
     }
   }
 }
@@ -46,6 +47,10 @@
 
       nav a {
         @include ft-s(16);
+      }
+
+      .logo {
+        opacity: 1;
       }
     }
   }

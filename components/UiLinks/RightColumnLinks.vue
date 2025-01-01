@@ -18,7 +18,7 @@
           :key="link.linklabel"
           :href="
             link.linksrc.link_type !== 'Web'
-              ? `/${link.linksrc.uid}`
+              ? `/${link.linksrc.uid.toString().replace('-', '/')}`
               : link.linksrc.url
           "
           :target="link.linksrc.target ?? '_self'"
