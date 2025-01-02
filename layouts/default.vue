@@ -101,6 +101,9 @@ const seo = computed(() => ({
   description:
     currentPage.value?.data?.meta_description ??
     defaultLayout.value?.data.meta_description,
+  image:
+    currentPage.value?.data?.meta_image?.url ??
+    defaultLayout.value?.data?.meta_image?.url,
 }));
 
 const playMagic = () => {
@@ -169,6 +172,8 @@ watch(
       ogTitle: newSeo.title,
       description: newSeo.description,
       ogDescription: newSeo.description,
+      ogImage: newSeo.image,
+      twitterImage: newSeo.image,
     });
   },
   { immediate: true }
