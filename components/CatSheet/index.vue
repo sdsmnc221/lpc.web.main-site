@@ -87,14 +87,25 @@
       <div class="cat-sheet__grid__div6 cat-sheet__footnote">
         <div class="cat-sheet__footnote__section">
           <p class="cat-sheet__footnote__heading">Contact</p>
-          <prismic-rich-text
-            :field="catItem.contactInfo"
-            class="cat-sheet__footnote__content"
-          />
+          <div class="flex flex-row justify-end">
+            <div class="text-xs mt-2 mr-2">
+              <a href="tel:+33642804318" target="_blank">
+                <Badge>06 42 80 43 18 (Mme Bonniot)</Badge>
+              </a>
+            </div>
+
+            <div class="text-xs mt-2">
+              <a
+                href="https://lespetitsclochards.fillout.com/pre-adoption"
+                target="_blank"
+              >
+                <Badge>Formulaire d'adoption</Badge>
+              </a>
+            </div>
+          </div>
         </div>
 
-        <div class="cat-sheet__footnote__section">
-          <p class="cat-sheet__footnote__heading">Contrat d'adoption</p>
+        <div class="cat-sheet__footnote__section text-xs mt-4">
           <prismic-rich-text
             :field="catItem.adoptionRequirements"
             class="cat-sheet__footnote__content"
