@@ -142,7 +142,9 @@ const playFade = () => {
   console.log(["links", "adoptions"].includes(route.path));
   if (updateCount.value === 0) {
     const children = [
-      ...document.body.querySelectorAll(".app > *:not(.emoji-banner) > *"),
+      ...document.body.querySelectorAll(
+        ".app > *:not(.emoji-banner):not(.ui-dock) > *"
+      ),
     ];
 
     children.forEach((section) => {
