@@ -222,6 +222,22 @@ watch(
   { immediate: true, deep: true }
 );
 
+watch(
+  () => currentCatItem.value,
+  () => {
+    if (currentCatItem.value) {
+      useHead({
+        titleTemplate: `%s - Adopter ${currentCatItem.value.catname}`,
+      });
+    } else {
+      useHead({
+        titleTemplate: `%s`,
+      });
+    }
+  },
+  { immediate: true, deep: true }
+);
+
 /** GSAP */
 
 gsap.registerPlugin(ScrollTrigger);
