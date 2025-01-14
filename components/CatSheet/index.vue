@@ -84,13 +84,17 @@
         </p>
       </div>
 
-      <div class="cat-sheet__grid__div6 cat-sheet__footnote">
+      <div
+        class="cat-sheet__grid__div6 cat-sheet__footnote flex flex-col justify-around"
+      >
         <div class="cat-sheet__footnote__section">
           <p class="cat-sheet__footnote__heading">Contact</p>
-          <div class="flex flex-row justify-end">
-            <div class="text-xs mt-2 mr-2">
+          <div
+            class="cat-sheet__footnote__content flex flex-col md:flex-row justify-end"
+          >
+            <div class="text-xs mt-2 md:mr-2">
               <a href="tel:+33642804318" target="_blank">
-                <Badge>06 42 80 43 18 (Mme Bonniot)</Badge>
+                <Badge class="badge">06 42 80 43 18 (Mme Bonniot)</Badge>
               </a>
             </div>
 
@@ -99,7 +103,7 @@
                 href="https://lespetitsclochards.fillout.com/pre-adoption"
                 target="_blank"
               >
-                <Badge>Formulaire d'adoption</Badge>
+                <Badge class="badge">Formulaire d'adoption</Badge>
               </a>
             </div>
           </div>
@@ -578,10 +582,19 @@ watch(
                 line-height: 0.98rem;
               }
 
-              &__content {
+              &__content:not(:has(.badge)) {
                 background-color: rgba(0, 0, 0, 0.64);
                 font-size: calc(var(--base-ft-size) * 0.72) !important;
                 line-height: 0.72rem;
+              }
+
+              &__content {
+                gap: 8px;
+
+                * {
+                  font-size: 8px;
+                  margin-top: 0;
+                }
               }
             }
           }
