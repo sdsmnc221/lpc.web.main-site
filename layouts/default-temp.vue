@@ -103,16 +103,17 @@ const getPage = async () => {
   });
 };
 
-const seo = computed(() => ({
-  title:
-    currentPage.value?.data?.meta_title ?? defaultLayout.value?.data.meta_title,
-  description:
-    currentPage.value?.data?.meta_description ??
-    defaultLayout.value?.data.meta_description,
-  image:
-    currentPage.value?.data?.meta_image?.url ??
-    defaultLayout.value?.data?.meta_image?.url,
-}));
+const seo = ref({
+  title: currentPage.value?.data?.meta_title
+    ? currentPage.value.data.meta_title
+    : defaultLayout.value?.data.meta_title,
+  description: currentPage.value?.data?.meta_description
+    ? currentPage.value.data.meta_description
+    : defaultLayout.value?.data.meta_description,
+  image: currentPage.value?.data?.meta_image?.url
+    ? currentPage.value.data.meta_image.url
+    : defaultLayout.value?.data.meta_image.url,
+});
 
 const playMagic = () => {
   const lenis = new Lenis({
@@ -175,18 +176,36 @@ onUpdated(() => {
 });
 
 watch(
+  () => currentPage.value,
+  () => {
+    seo.value = {
+      title: currentPage.value?.data?.meta_title
+        ? currentPage.value.data.meta_title
+        : defaultLayout.value?.data.meta_title,
+      description: currentPage.value?.data?.meta_description
+        ? currentPage.value.data.meta_description
+        : defaultLayout.value?.data.meta_description,
+      image: currentPage.value?.data?.meta_image?.url
+        ? currentPage.value.data.meta_image.url
+        : defaultLayout.value?.data.meta_image.url,
+    };
+  },
+  { deep: true, immediate: true }
+);
+
+watch(
   () => seo.value,
-  (newSeo) => {
+  () => {
     useSeoMeta({
-      title: newSeo.title,
-      ogTitle: newSeo.title,
-      description: newSeo.description,
-      ogDescription: newSeo.description,
-      ogImage: newSeo.image,
-      twitterImage: newSeo.image,
+      title: seo.value.title,
+      ogTitle: seo.value.title,
+      description: seo.value.description,
+      ogDescription: seo.value.description,
+      ogImage: seo.value.image,
+      twitterImage: seo.value.image,
     });
   },
-  { immediate: true }
+  { immediate: true, deep: true }
 );
 
 watch(

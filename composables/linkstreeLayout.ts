@@ -27,11 +27,29 @@ export default async function useLinkstreeLayout(uid?: string) {
 
   const logo = computed(() => assets.value?.logo.url);
 
+  const meta = ref({
+    title: assets.value?.meta_title,
+    description: assets.value?.meta_description,
+    image: assets.value?.meta_image.url,
+  });
+
+  watch(
+    () => assets.value,
+    () => {
+      meta.value = {
+        title: assets.value?.meta_title,
+        description: assets.value?.meta_description,
+        image: assets.value?.meta_image.url,
+      };
+    }
+  );
+
   return {
     logo,
     photoGrids,
     links,
     pageTitle,
     pageDescription,
+    meta,
   };
 }
