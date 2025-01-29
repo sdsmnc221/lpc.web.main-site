@@ -3,25 +3,30 @@
     <AuroraBackground></AuroraBackground>
   </div>
   <div class="adoptions snoop-tagada flex flex-col space-y-3 p-8">
-    <h1 class="text-lg md:mt-4 md:w-1/2 md:text-left text-center m-auto">
+    <h1 class="text-lg md:mt-4 md:w-1/2 text-left m-auto">
       <img
         src="/snoop-tagada/cover-tagada.jpg"
         alt="Adoption de Snoop et Tagada"
         class="w-[720px] md:w-[640px] rounded-xl"
       />
-      <span class="font-semibold text-2xl">
+      <span class="font-semibold text-lg md:text-2xl">
         Tagada
-        <span class="text-stone-400"
-          >, et il était une fois, Snoop :</span
+        <span
+          class="text-stone-400 tracking-tight text-sm md:text-2xl md:tracking-normal"
+          >, et il était une fois, Snoop.</span
         ></span
       >
       <br />
-      <span class="font-normal"> L'histoire en Tagada, d'un duo en </span>
+      <span
+        class="font-normal text-sm md:text-2xl tracking-tight md:tracking-normal"
+      >
+        L'histoire en Tagada, d'un duo en
+      </span>
       <span class="font-bold">
         <TextHighlight
           :delay="320"
           text-end-color="hsl(var(--accent))"
-          class="rounded-lg bg-gradient-to-r from-yellow-500 to-slate-500"
+          class="rounded-lg bg-gradient-to-r text-xs md:text-lg from-yellow-500 to-slate-500"
           >Or Noir.</TextHighlight
         ></span
       >
