@@ -5,13 +5,15 @@
   <div class="adoptions snoop-tagada flex flex-col space-y-3 p-8">
     <h1 class="text-lg md:mt-4 md:w-1/2 md:text-left text-center m-auto">
       <img
-        src="/snoop-tagada/cover.jpg"
+        src="/snoop-tagada/cover-tagada.jpg"
         alt="Adoption de Snoop et Tagada"
         class="w-[720px] md:w-[640px] rounded-xl"
       />
-      <span class="font-semibold text-2xl"> Snoop & Tagada :</span>
+      <span class="font-semibold text-2xl">
+        Tagada, et il était une fois, Snoop :</span
+      >
       <br />
-      <span class="font-normal"> Notre duo en </span>
+      <span class="font-normal"> L'histoire en Tagada, d'un duo en </span>
       <span class="font-bold">
         <TextHighlight
           :delay="320"
@@ -26,35 +28,9 @@
       <div class="flex md:flex-row flex-col">
         <div class="md:basis-1/2 basis-full md:mr-10">
           <h2 class="text-left text-base mt-4">
-            <span class="font-bold">Snoop</span>
-          </h2>
-          <p class="text-xs">4 ans, mâle, né 09.2020</p>
-          <div class="h-px bg-slate-400 mb-4"></div>
-          <p class="text-xs min-h-24 flex flex-col items-start justify-center">
-            <span class="inline-block">- Castré, identifié.</span>
-            <span class="inline-block"
-              >- <span class="font-semibold">Peureux</span> mais
-              <span class="font-semibold">se laisse parfois caresser</span> en
-              lui tendant la main pour qu’il s’y frotte avec sa joue, surtout au
-              moment de la pâtée et des friandises.</span
-            >
-            <span class="inline-block"
-              >- <span class="font-semibold">Très joueur.</span></span
-            >
-          </p>
-          <div class="h-px bg-slate-400 mt-4 mb-2"></div>
-          <p class="text-xs">
-            <span class="font-bold"
-              >Ce serait bien qu’il reste avec sa sœur Tagada.</span
-            >
-          </p>
-        </div>
-
-        <div class="md:basis-1/2 basis-full">
-          <h2 class="text-left text-base mt-4">
             <span class="font-bold">Tagada</span>
           </h2>
-          <p class="text-xs">4 ans, femelle, née 09.2020</p>
+          <p class="text-xs">À l'aube de ans, femelle, née 09.2020</p>
           <div class="h-px bg-slate-400 mb-4"></div>
           <p class="text-xs min-h-24 flex flex-col items-start justify-center">
             <span class="inline-block">- Stérélisée, identifiée.</span>
@@ -70,8 +46,39 @@
           <div class="h-px bg-slate-400 mt-4 mb-2"></div>
           <p class="text-xs">
             <span class="font-bold"
-              >Il serait donc préférable qu’elle reste avec lui.</span
+              >Elle a appris à faire confiance avec son frère Snoop, et même
+              après son décès, elle continue son chemin avec courage.</span
             >
+          </p>
+        </div>
+
+        <div class="md:basis-1/2 basis-full">
+          <h2 class="text-left text-base mt-4">
+            <span class="font-bold">Snoop</span>
+          </h2>
+          <p class="text-xs">À l'aube de ans, mâle (09.2020 - 19.01.2025)</p>
+          <div class="h-px bg-slate-400 mb-4"></div>
+          <p class="text-xs min-h-24 flex flex-col items-start justify-center">
+            <span class="inline-block">- Castré, identifié.</span>
+            <span class="inline-block"
+              >- <span class="font-semibold">Peureux</span> mais
+              <span class="font-semibold">se laissait parfois caresser</span> en
+              lui tendant la main pour qu’il s’y frottait avec sa joue, surtout
+              au moment de la pâtée et des friandises.</span
+            >
+            <span class="inline-block"
+              >- <span class="font-semibold">Très joueur.</span></span
+            >
+            <span class="inline-block"
+              >- <span class="font-semibold">Nous a quittés</span> le 19 janvier
+              2025, laissant un grand vide au foyer et dans le cœur de sa sœur
+              Tagada</span
+            >
+          </p>
+          <div class="h-px bg-slate-400 mt-4 mb-2"></div>
+          <p class="text-xs">
+            Ça aurait été bien qu’il puisse se faire adopter ensemble, avec sa
+            sœur Tagada.
           </p>
         </div>
       </div>
@@ -83,60 +90,46 @@
               <span class="font-bold">Leur histoire d'amour fraternel :</span>
             </h2>
             <p class="text-xs">
-              Ces deux âmes complices partagent non seulement leur pelage
-              d'ébène, mais aussi une histoire touchante.
+              Tagada partageait avec son frère Snoop non seulement un pelage
+              d'ébène, mais aussi un parcours touchant.
               <span class="font-bold"
                 >Après 6 mois de vie sauvage, ils ont appris ensemble à faire
                 confiance aux humains.
               </span>
-              Aujourd'hui,
+              Aujourd'hui, bien que Snoop nois ait quittés, Tagada
               <span class="font-bold">
                 <TextHighlight
                   :delay="640"
                   class="rounded-lg bg-gradient-to-r from-pink-200 to-orange-100"
-                  >leur lien est précieux</TextHighlight
+                  >continue son chemin de socialisation,</TextHighlight
                 ></span
               >
-              - Tagada trouve son assurance auprès de son frère, tandis que
-              Snoop veille tendrement sur sa sœur.
+              portant en elle la force de leur lien fraternel - Tagada trouve
+              son assurance auprès de son frère, tandis que Snoop veille
+              tendrement sur sa sœur.
             </p>
           </div>
 
           <div class="">
             <h2 class="text-left text-base mt-10 mb-2">
-              <span class="font-bold">Ce qu'ils aiment :</span>
+              <span class="font-bold">Ce qu'elle aime :</span>
             </h2>
-            <p class="text-xs">- Les friandises (le chemin vers leur cœur !)</p>
-            <p class="text-xs">- Les jeux (ils sont actifs et participatifs)</p>
-            <p class="text-xs">
-              - Leur zone de confort respective (leur royaume !) :
-            </p>
+            <p class="text-xs">- Les friandises (le chemin vers son cœur !)</p>
+            <p class="text-xs">- Les jeux (elle est active et participative)</p>
+            <p class="text-xs">- Sa zone de confort (son royaume !) :</p>
             <p class="text-xs mt-2 mb-4 p-2 border">
-              Snoop s'est créé son petit coin de paradis dans son dodo douillet
-              favori, tandis que Tagada, déjà copine avec les caisses de
-              transport, facilite grandement les déplacements comme par exemple
-              le départ du foyer d’accueil pour l’arrivée à son foyer à vie. Ces
-              petits détails, qui peuvent sembler anodins, sont en réalité de
-              grandes victoires pour des chats anciennement craintifs !
-            </p>
-
-            <p class="text-xs">
-              - Et surtout...
-              <span class="font-bold underline decoration-wavy">
-                <TextHighlight
-                  :delay="640"
-                  class="rounded-lg bg-gradient-to-r from-pink-200 to-orange-100"
-                  >être ensemble</TextHighlight
-                ></span
-              >
-              !
+              Elle est déjà copine avec les caisses de transport, ce qui
+              facilitera grandement les déplacements comme par exemple le départ
+              du foyer d’accueil pour l’arrivée à son foyer à vie. Ces petits
+              détails, qui peuvent sembler anodins, sont en réalité de grandes
+              victoires pour des chats anciennement craintifs !
             </p>
           </div>
         </div>
         <div class="basis-1/2 md:p-8 p-2 mt-4">
           <img
             alt="Snoop et Tagada, avec ce qu'ils aiment"
-            src="/snoop-tagada/7.jpg"
+            src="/snoop-tagada/7half.jpg"
           />
         </div>
       </div>
@@ -146,19 +139,18 @@
       >
         <h2 class="basis-full text-left text-base mt-10">
           <span class="font-bold"
-            >"Mais pourquoi adopter des chats
+            >"Mais pourquoi adopter un chat
             <TextHighlight
               :delay="640"
               class="rounded-lg bg-gradient-to-r from-yellow-200 to-slate-200"
-              >adultes</TextHighlight
+              >adulte</TextHighlight
             >
             ?"
           </span>
         </h2>
 
         <p class="basis-full mb-2">
-          Laissez-nous vous raconter pourquoi Snoop et Tagada sont des trésors
-          uniques :
+          Laissez-nous vous raconter pourquoi Tagada est un trésor unique :
         </p>
 
         <div class="basis-full flex md:flex-row flex-col">
@@ -173,18 +165,15 @@
           <div class="basis-1/2 p-4 flex flex-col justify-between">
             <p class="flex flex-col my-2">
               <span class="inline-block font-bold">L'âge de la sagesse :</span>
-              <span class="inline-block mx-2">
-                - Ils ont déjà leurs repères (arbre à chat pour Snoop, caisse de
-                transport pour Tagada)
-              </span>
+              <span class="inline-block mx-2"> - Elle a déjà ses repères </span>
               <span class="inline-bloc mx-2">
-                - Plus de surprises de caractère : vous savez déjà qui ils sont
+                - Plus de surprises de caractère : vous savez déjà qui elle est
               </span>
               <span class="inline-block mx-2">
                 - Fini les belles bêtises de chatons !
               </span>
               <span class="inline-block mx-2">
-                - La maturité leur a appris la patience
+                - La maturité lui a appris la patience
               </span>
             </p>
 
@@ -196,53 +185,54 @@
                 - Chaque progrès est une victoire émouvante
               </span>
               <span class="inline-bloc mx-2">
-                - Leur confiance, une fois gagnée, est inestimable
+                - Sa confiance, une fois gagnée, est inestimable
               </span>
               <span class="inline-block mx-2">
-                - Leur gratitude se manifeste de façon unique
+                - Sa gratitude se manifeste de façon unique
               </span>
               <span class="inline-block mx-2">
-                - Leur amour, plus discret, n'en est que plus précieux
+                - Son amour, plus discret, n'en est que plus précieux
               </span>
             </p>
 
             <p class="flex flex-col my-2">
-              <span class="inline-block font-bold"
-                >Leur santé suivie avec soin :</span
+              <span class="inline-block font-bold">
+                <TextHighlight
+                  :delay="640"
+                  class="rounded-lg bg-gradient-to-r from-yellow-200 to-slate-200"
+                  >Sa santé, suivie avec soin :</TextHighlight
+                ></span
               >
               <span class="inline-block mx-2">
-                - Déjà identifiés et stérilisés
+                - Déjà identifiée et stérilisée
               </span>
               <span class="inline-block mx-2">
-                - Régulièrement déparasités et vermifugés
+                - Régulièrement déparasitée et vermifugée
               </span>
               <span class="inline-block mx-2">
-                - En bonne santé et propres
+                - En bonne santé et propre
               </span>
-              <span class="inline-block mx-2">
-                - Vaccination à prévoir, avec notre aide*
+
+              <span class="mt-2">
+                Aux Petits Clochards, l'adoption responsable commence par nous :
+                nous garantissons la santé et le bien-être de chaque chat, de
+                son arrivée au foyer jusqu'à son départ vers sa famille pour la
+                vie. Chaque adoption est précédée d'examens vétérinaires
+                complets, et nous accompagnons ce processus :
+                <span class="inline-block mx-2 mt-2">
+                  - Vaccination à prévoir, avec notre aide*
+                </span>
+                <span class="inline-block mx-2">
+                  - Bilan de santé complet avant adoption
+                </span>
+                <span class="inline-block mx-2">
+                  - Conseils et suivi post-adoption
+                </span>
               </span>
+
               <span class="inline-block mx-2 mt-4" style="font-size: 0.64rem">
                 (*)Remboursement des soins de base à l'adoption.<br />
                 L'association vous accompagne pour la vaccination.
-              </span>
-            </p>
-
-            <p class="flex flex-col my-2">
-              <span class="inline-block font-bold"
-                >Le plus beau des cadeaux :</span
-              >
-              <span class="inline-block mx-2">
-                - La fierté de voir leur évolution
-              </span>
-              <span class="inline-block mx-2">
-                - La joie de gagner leur confiance
-              </span>
-              <span class="inline-block mx-2">
-                - Un lien unique qui se construit jour après jour
-              </span>
-              <span class="inline-block mx-2">
-                - La satisfaction d'offrir une vraie seconde chance
               </span>
             </p>
           </div>
@@ -255,7 +245,7 @@
           <TextGenerateEffect
             v-if="isVisible"
             :duration="1.2"
-            words="Adopter Snoop et Tagada, c'est choisir une aventure différente, peut-être plus lente, mais tellement enrichissante : telle que l'avait choisie l'adoptante de Rufus - ancien pensionnaire du foyer d'accueil (cf. vidéo ci-dessus). Ces chats, qui ont connu la vie sauvage et celle en foyer d'accueil, savent mieux que quiconque la valeur d'un foyer aimant. Leur amour, une fois gagné, est un cadeau d'une pureté incomparable."
+            words="Adopter Tagada, c'est choisir une aventure différente, peut-être plus lente, mais tellement enrichissante : telle que l'avait choisie l'adoptante de Rufus - ancien pensionnaire du foyer d'accueil (cf. vidéo ci-dessus). Avec Snoop, ils avaient connu la vie sauvage et maintenant même après son départ, elle connait parfaitement aussi la vie en foyer d'accueil. Elle sait mieux que quiconque la valeur d'un foyer aimant. Son amour, une fois gagné, est un cadeau d'une pureté incomparable."
           ></TextGenerateEffect>
         </div>
       </div>
@@ -267,12 +257,6 @@
           </h3>
 
           <p class="font-serif border p-2 m-auto mt-4 basis-full text-xs">
-            “Il [Snoop] est arrivé sauvage, je ne pouvais pas le toucher, je ne
-            pouvais pas le caresser. Mais là après des années, je peux la
-            caresser, il vient réclamer la caresse avant chaque repas.”⁣
-          </p>
-
-          <p class="font-serif border p-2 m-auto mt-4 basis-full text-xs">
             “Tagada est plus timide que son frère Snoop, mais est prête pour
             un.e adoptant.e patient.e. Et puis comme c'est une grande joueuse,
             elle pourrait se détendre beaucoup plus, et plus rapidement si on
@@ -280,7 +264,10 @@
           </p>
 
           <div class="basis-1/2">
-            <h3 class="font-bold mt-10 mb-2">Le voyage de Snoop :</h3>
+            <h3 class="font-bold mt-10 mb-2">
+              Il était une fois, le voyage de Snoop, qui est devenu maintenant
+              celui de Tagada :
+            </h3>
             <iframe
               src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2FlesPetitsClochards%2Fvideos%2F528407173307717%2F&show_text=false&width=476&t=0"
               class="w-100 h-[320px] m-auto my-6"
@@ -344,33 +331,28 @@
         <h3 class="font-bold mt-10 mb-2">Un mot du cœur :</h3>
 
         <p class="text-xs">
-          Aujourd'hui, Snoop et Tagada ne sont plus des chats sauvages, mais
-          simplement des chats timides qui ont besoin de vous. Ces deux âmes
-          sensibles cherchent maintenant des familles d'accueil ou un foyer
-          aimant, où ils pourront tout le temps partager l'environnement de
-          leurs adoptants(es), essentiels à leur socialisation. ⁣ ⠀⁣
+          Aujourd'hui, Tagada n'est plus une chatte sauvage, mais une âme
+          sensible qui a traversé bien des épreuves. Elle a appris à faire
+          confiance avec son frère Snoop, et même après son départ, elle
+          continue son chemin avec courage. Cette résilience témoigne de la
+          force extraordinaire qui se cache derrière sa timidité.
         </p>
 
         <p class="text-xs mt-4">
-          En devenant famille pour les chats comme Snoop et Tagada, vous leur
-          offrez une chance dont ils vous resont grandement reconnaissants toute
-          leur vie. Certes, cela demande de la patience et de la persévérance,
-          mais quelle plus belle récompense que de gagner leur confiance, jour
-          après jour ?⁣
+          Elle cherche maintenant une famille d'accueil ou un foyer aimant, où
+          elle pourra continuer à s'épanouir dans l'environnement de ses
+          adoptant(e)s, essentiel à sa socialisation. Son histoire avec Snoop
+          nous a appris que même les chats les plus craintifs peuvent s'ouvrir à
+          l'amour avec de la patience et de la douceur.
         </p>
 
-        <p
-          class="text-xs mt-2 text-right underline decoration-wavy pr-4 font-semibold"
-        >
-          <a
-            href="https://www.facebook.com/photo.php?fbid=573438812019333&set=pb.100080596572190.-2207520000&type=3"
-            target="_blank"
-            ><TextHighlight
-              :delay="640"
-              class="rounded-lg bg-gradient-to-r from-pink-200 to-orange-100"
-              >[Tout lire]</TextHighlight
-            ></a
-          >
+        <p class="text-xs mt-4">
+          En devenant famille pour Tagada, vous n'adoptez pas seulement une
+          chatte - vous devenez gardien d'une histoire, celle d'un duo en or
+          noir dont l'un brille maintenant ailleurs. Certes, cela demande de la
+          patience et de la persévérance, mais quelle plus belle récompense que
+          de voir cette petite âme s'épanouir, jour après jour, portant en elle
+          un peu de la lumière de son frère ?
         </p>
       </div>
     </div>
