@@ -10,7 +10,10 @@
         class="w-[720px] md:w-[640px] rounded-xl"
       />
       <span class="font-semibold text-2xl">
-        Tagada, et il était une fois, Snoop :</span
+        Tagada
+        <span class="text-stone-400"
+          >, et il était une fois, Snoop :</span
+        ></span
       >
       <br />
       <span class="font-normal"> L'histoire en Tagada, d'un duo en </span>
