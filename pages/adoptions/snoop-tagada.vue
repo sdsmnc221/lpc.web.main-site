@@ -49,7 +49,10 @@
               <span class="font-semibold">gourmande</span>.</span
             >
             <br />
-            <span class="inline-block">- Souvent avec son frère Snoop.</span>
+            <span class="inline-block"
+              >- Avant son départ, elle était souvent avec son frère
+              Snoop.</span
+            >
           </p>
           <div class="h-px bg-slate-400 mt-4 mb-2"></div>
           <p class="text-xs">
@@ -104,7 +107,7 @@
                 >Après 6 mois de vie sauvage, ils ont appris ensemble à faire
                 confiance aux humains.
               </span>
-              Aujourd'hui, bien que Snoop nois ait quittés, Tagada
+              Aujourd'hui, bien que Snoop nous ait quittés, Tagada
               <span class="font-bold">
                 <TextHighlight
                   :delay="640"
