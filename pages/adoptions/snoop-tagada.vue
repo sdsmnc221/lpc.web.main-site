@@ -7,7 +7,7 @@
       <img
         src="/snoop-tagada/cover-tagada.jpg"
         alt="Adoption de Snoop et Tagada"
-        class="w-[720px] md:w-[640px] rounded-xl"
+        class="w-[720px] md:w-[640px] rounded-xl mb-4"
       />
       <span class="font-semibold text-lg md:text-2xl">
         Tagada
@@ -60,7 +60,7 @@
           </p>
         </div>
 
-        <div class="md:basis-1/2 basis-full">
+        <div class="md:basis-1/2 basis-full text-stone-400">
           <h2 class="text-left text-base mt-4">
             <span class="font-bold">Snoop</span>
           </h2>
@@ -95,7 +95,7 @@
         <div class="md:basis-1/2 basis-full md:mr-10">
           <div class="">
             <h2 class="text-left text-base mt-10 mb-2">
-              <span class="font-bold">Leur histoire d'amour fraternel :</span>
+              <span class="font-bold">Une histoire d'amour fraternel :</span>
             </h2>
             <p class="text-xs">
               Tagada partageait avec son frère Snoop non seulement un pelage
@@ -330,7 +330,7 @@
           <img
             alt="Snoop et Tagada"
             class="md:p-8 p-2 mt-4"
-            src="/snoop-tagada/1.jpg"
+            src="/snoop-tagada/1half.jpg"
           />
         </div>
       </div>
