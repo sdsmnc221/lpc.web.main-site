@@ -112,9 +112,7 @@
                   >continue son chemin de socialisation,</TextHighlight
                 ></span
               >
-              portant en elle la force de leur lien fraternel - Tagada trouve
-              son assurance auprès de son frère, tandis que Snoop veille
-              tendrement sur sa sœur.
+              portant en elle la force de leur lien fraternel.
             </p>
           </div>
 
