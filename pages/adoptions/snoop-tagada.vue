@@ -107,7 +107,7 @@
                 >Après 6 mois de vie sauvage, ils ont appris ensemble à faire
                 confiance aux humains.
               </span>
-              Aujourd'hui, bien que Snoop nous ait quittés, Tagada
+              Aujourd'hui, bien que Snoop nous ait quitté, Tagada
               <span class="font-bold">
                 <TextHighlight
                   :delay="640"
