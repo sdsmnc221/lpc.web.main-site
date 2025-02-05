@@ -406,8 +406,8 @@ const initHorizontalScroll = () => {
         pinnedContainer: section.value,
         anticipatePin: 1,
         invalidateOnRefresh: true,
-        ...(isPC() ? { pinType: "transform" } : {}),
-        // pinType: "transform", //debug
+        // ...(isPC() ? { pinType: "transform" } : {}),
+        pinType: "transform", //debug
         // markers: true, // debug
         onUpdate: (self) => {
           // Ensure we're not exceeding the bounds of the animation
