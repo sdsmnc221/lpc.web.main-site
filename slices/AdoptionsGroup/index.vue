@@ -73,7 +73,7 @@ const { client } = usePrismic();
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { isPC, randomHSLA } from "@/lib/helpers";
+import { isPC, isIOS, randomHSLA } from "@/lib/helpers";
 
 const router = useRouter();
 
@@ -401,12 +401,12 @@ const initHorizontalScroll = () => {
         trigger: section.value,
         start: "top top",
         end: `+=${containerWidth + windowWidth + windowWidth / 4}`,
-        scrub: 0.72,
+        scrub: 0.5,
         pin: true,
         pinnedContainer: section.value,
-        // anticipatePin: 1,
-        invalidateOnRefresh: true,
-        ...(isPC() ? { pinType: "transform" } : { pinType: "fixed" }),
+        anticipatePin: 1,
+        invalidateOnRefresh: false,
+        // ...(isPC() ? { pinType: "transform" } : { pinType: "fixed" }),
         pinType: "transform",
 
         // markers: true, // debug
@@ -441,7 +441,9 @@ const cleanupScrollTrigger = () => {
 
 onMounted(() => {
   nextTick(() => {
-    ScrollTrigger.normalizeScroll(true);
+    if (isIOS()) {
+      ScrollTrigger.normalizeScroll(true);
+    }
     initHorizontalScroll();
 
     isMounted.value = true;
