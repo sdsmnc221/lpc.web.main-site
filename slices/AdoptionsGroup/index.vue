@@ -73,7 +73,7 @@ const { client } = usePrismic();
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { isPC, isIOS, randomHSLA } from "@/lib/helpers";
+import { isPC, isIOS, randomHSLA, isSafari } from "@/lib/helpers";
 
 const router = useRouter();
 
@@ -406,8 +406,7 @@ const initHorizontalScroll = () => {
         pinnedContainer: section.value,
         anticipatePin: 1,
         invalidateOnRefresh: false,
-        // ...(isPC() ? { pinType: "transform" } : { pinType: "fixed" }),
-        pinType: "transform",
+        ...(isPC() || isSafari() ? { pinType: "transform" } : {}),
 
         // markers: true, // debug
         onUpdate: (self) => {
