@@ -107,6 +107,9 @@ watch(
   flex-direction: row;
   flex-wrap: wrap;
 
+  align-items: center;
+  justify-content: center;
+
   position: sticky;
   top: 0;
   z-index: 1;

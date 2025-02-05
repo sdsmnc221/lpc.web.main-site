@@ -1,6 +1,8 @@
+export const ALLOWED_PAGES = ["", "/", "adoptions", "links"];
+
 export default defineNuxtRouteMiddleware((to) => {
   // Allow access to /adoptions
-  if (to.path.includes("/adoptions") || to.path.includes("/links")) {
+  if (ALLOWED_PAGES.some((slug) => to.path.includes(slug))) {
     return;
   }
 

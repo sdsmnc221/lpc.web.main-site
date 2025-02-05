@@ -21,6 +21,8 @@ import RightColumnLinks from "~/components/UiLinks/RightColumnLinks.vue";
 
 import useLinkstreeLayout from "../../composables/linkstreeLayout";
 
+const emits = defineEmits(["animation-init-done"]);
+
 const { logo, photoGrids, pageTitle, pageDescription, links, meta } =
   await useLinkstreeLayout();
 
@@ -42,8 +44,21 @@ watch(
   },
   { immediate: true, deep: true }
 );
+
+onMounted(() => {
+  nextTick(() => emits("animation-init-done"));
+});
 </script>
 
 <style lang="scss">
 @import "~/styles/linkstree";
+
+#__nuxt:has(.links) {
+  .navigation-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+  }
+}
 </style>
