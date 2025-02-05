@@ -32,6 +32,7 @@
       </div>
     </div>
   </NuxtLayout>
+  <page-loader :show="loading" full-censored></page-loader>
 </template>
 
 <script setup lang="ts">

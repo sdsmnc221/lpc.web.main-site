@@ -94,11 +94,13 @@ provide("distance", props.distance);
   height: 100dvh;
 
   transition: top 0.64s ease-in-out;
+  pointer-events: none;
 }
 
 .ui-dock {
   position: absolute;
 
+  pointer-events: all;
   bottom: var(--spacing-l);
   right: var(--spacing-l);
   padding: 0 var(--spacing-m) !important;

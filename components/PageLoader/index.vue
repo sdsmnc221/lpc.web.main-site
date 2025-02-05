@@ -37,9 +37,9 @@ const props = withDefaults(
   z-index: 999;
 }
 
-.page-loader:is(.fade-out-fwd) {
+/* .page-loader:is(.fade-out-fwd) {
   pointer-events: none;
-}
+} */
 
 .page-loader:is(.full-censored) {
   background-color: black;
