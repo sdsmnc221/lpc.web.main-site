@@ -157,6 +157,8 @@ watch(
 @container nuxt (min-width: 700px) {
   .navigation-menu {
     flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
 
     a {
       width: 25%;
