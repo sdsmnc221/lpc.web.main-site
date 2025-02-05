@@ -41,6 +41,15 @@ const isIOS = () => {
   );
 };
 
+const isSafari = () => {
+  const userAgent = window.navigator.userAgent.toLowerCase();
+  return (
+    userAgent.includes("safari") &&
+    !userAgent.includes("chrome") &&
+    !userAgent.includes("android")
+  );
+};
+
 function randomHSLA() {
   const h = Math.floor(Math.random() * 360);
   const s = Math.floor(Math.random() * 100);
@@ -49,4 +58,4 @@ function randomHSLA() {
   return `hsla(${h}, ${s}%, ${l}%, ${a})`;
 }
 
-export { isMobile, isGalaxyS, isPC, isIOS, randomHSLA };
+export { isMobile, isGalaxyS, isPC, isIOS, isSafari, randomHSLA };
