@@ -300,7 +300,7 @@ const playScroll = (TL, containerWidth, windowWidth) => {
               trigger: groupTitle.value.$el,
               start: "top top",
               end: `top+=${(index + 3) * 64}px top`,
-              scrub: true,
+              scrub: 0.5,
             },
           }
         );
@@ -375,7 +375,7 @@ const playScroll = (TL, containerWidth, windowWidth) => {
           trigger: child,
           start: `top top`,
           end: `top+=${containerWidth * (itemIndex + 1) * 0.72}px top`,
-          scrub: 0.2,
+          scrub: 0.5,
           containerAnimation: TL,
         },
       });
