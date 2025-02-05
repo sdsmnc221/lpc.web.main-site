@@ -8,15 +8,15 @@
 
   <hero-photo-background :slice="adoptionsHeadline"></hero-photo-background>
 
-  <Suspense>
-    <adoptions-group
-      v-for="(group, index) in adoptionsGroup"
-      :key="`${group.id}-${index}`"
-      :slice="group"
-      :index="index"
-      @gsap-init-done="onGsapInitDone"
-    ></adoptions-group>
-  </Suspense>
+  <!-- <Suspense> -->
+  <adoptions-group
+    v-for="(group, index) in adoptionsGroup"
+    :key="`${group.id}-${index}`"
+    :slice="group"
+    :index="index"
+    @gsap-init-done="onGsapInitDone"
+  ></adoptions-group>
+  <!-- </Suspense> -->
 
   <multi-text-block ref="faqRef" :slice="faq"></multi-text-block>
 

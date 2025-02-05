@@ -1,5 +1,5 @@
 <template>
-  <page-loader :show="loading"></page-loader>
+  <!-- <page-loader :show="loading" v-if="loading"></page-loader> -->
 
   <NuxtLayout>
     <NuxtPage @gsap-init-done="onGsapInitDone" />

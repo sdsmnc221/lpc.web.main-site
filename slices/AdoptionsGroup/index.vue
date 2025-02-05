@@ -404,10 +404,11 @@ const initHorizontalScroll = () => {
         scrub: 0.72,
         pin: true,
         pinnedContainer: section.value,
-        anticipatePin: 1,
+        // anticipatePin: 1,
         invalidateOnRefresh: true,
-        // ...(isPC() ? { pinType: "transform" } : {}),
-        pinType: "transform", //debug
+        ...(isPC() ? { pinType: "transform" } : { pinType: "fixed" }),
+        pinType: "transform",
+
         // markers: true, // debug
         onUpdate: (self) => {
           // Ensure we're not exceeding the bounds of the animation
@@ -440,6 +441,7 @@ const cleanupScrollTrigger = () => {
 
 onMounted(() => {
   nextTick(() => {
+    ScrollTrigger.normalizeScroll(true);
     initHorizontalScroll();
 
     isMounted.value = true;
