@@ -33,7 +33,6 @@ watch(
   [() => route.path, () => gsapLoaded.value],
   ([newRoute, newGsapLoaded]) => {
     if (ALLOWED_PAGES.some((slug) => newRoute.includes(slug))) {
-      console.log("hi", newGsapLoaded);
       gsapLoaded.value = newGsapLoaded;
     }
   },

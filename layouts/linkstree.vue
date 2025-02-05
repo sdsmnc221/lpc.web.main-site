@@ -1,5 +1,9 @@
 <template>
   <div>
+    <accordion-navigation :links="links"></accordion-navigation>
+
+    <navigation-menu :links="links"></navigation-menu>
+
     <main class="app" :class="`--${route.name as string}`">
       <slot />
     </main>
@@ -67,6 +71,11 @@ const { data: footer } = await useAsyncData("footer", () =>
   client.getSingle("footermenu")
 );
 
+const { data: navigation } = await useAsyncData("navigation", () =>
+  client.getSingle("navigationmenu")
+);
+const links = computed(() => navigation.value?.data.navigationlink);
+
 const currentPage = ref({ data: {} });
 
 const getPage = async () => {
@@ -105,7 +114,6 @@ const playMagic = () => {
     lenis.raf(time);
     requestAnimationFrame(raf);
   };
-
   gsap.ticker.add((time) => {
     lenis.raf(time * 1000);
   });

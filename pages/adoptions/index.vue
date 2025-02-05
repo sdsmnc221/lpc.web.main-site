@@ -115,10 +115,6 @@ const quickAccess = (section: string) => {
 onMounted(() => {
   // playFade();
 });
-
-definePageMeta({
-  layout: "default-temp",
-});
 </script>
 
 <style lang="scss">
