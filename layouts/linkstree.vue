@@ -1,5 +1,9 @@
 <template>
   <div>
+    <accordion-navigation :links="links"></accordion-navigation>
+
+    <navigation-menu :links="links"></navigation-menu>
+
     <main class="app" :class="`--${route.name as string}`">
       <slot />
     </main>
@@ -67,6 +71,11 @@ const { data: footer } = await useAsyncData("footer", () =>
   client.getSingle("footermenu")
 );
 
+const { data: navigation } = await useAsyncData("navigation", () =>
+  client.getSingle("navigationmenu")
+);
+const links = computed(() => navigation.value?.data.navigationlink);
+
 const currentPage = ref({ data: {} });
 
 const getPage = async () => {
@@ -105,7 +114,6 @@ const playMagic = () => {
     lenis.raf(time);
     requestAnimationFrame(raf);
   };
-
   gsap.ticker.add((time) => {
     lenis.raf(time * 1000);
   });
@@ -149,13 +157,11 @@ watch(
     padding-top: 0;
 
     h1 {
-      // @include ft-s(xlarge);
       font-size: calc((var(--base-ft-size) * 4));
     }
 
     h2,
     h3 {
-      // @include ft-s(large);
       font-size: calc((var(--base-ft-size) * 3));
     }
   }
@@ -166,13 +172,11 @@ watch(
     padding: var(--spacing-m);
 
     h1 {
-      // @include ft-s(large);
       font-size: calc((var(--base-ft-size) * 3));
     }
 
     h2,
     h3 {
-      // @include ft-s(medium);
       font-size: calc((var(--base-ft-size) * 2));
     }
   }
@@ -191,13 +195,11 @@ watch(
     padding-top: 0;
 
     h1 {
-      // @include ft-s(xxlarge);
       font-size: calc((var(--base-ft-size) * 5));
     }
 
     h2,
     h3 {
-      // @include ft-s(xlarge);
       font-size: calc((var(--base-ft-size) * 4));
     }
   }

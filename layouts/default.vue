@@ -183,10 +183,9 @@ watch(
   () => route.name,
   (newRoute, oldRoute) => {
     if (newRoute !== oldRoute) {
-      updateCount.value = 0;
+      playFade();
     }
-  },
-  { immediate: true }
+  }
 );
 </script>
 

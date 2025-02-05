@@ -21,6 +21,8 @@ import HeroBannerWithText from "@/slices/HeroBannerWithText/index.vue";
 import PhotoWithTextBlock from "@/slices/PhotoWithTextBlock/index.vue";
 import PopOutText from "@/slices/PopOutText/index.vue";
 
+const emits = defineEmits(["animation-init-done"]);
+
 const { client } = usePrismic();
 
 const { data: home } = await useAsyncData("home", () =>
@@ -44,6 +46,10 @@ const homeHeadlines = computed(
 const popOutText = computed(() =>
   home.value?.data?.slices.find((s) => s.slice_type === "pop_out_text")
 );
+
+onMounted(() => {
+  nextTick(() => emits("animation-init-done"));
+});
 </script>
 
 <style lang="scss">

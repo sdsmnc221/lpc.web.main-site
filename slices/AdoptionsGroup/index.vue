@@ -242,7 +242,7 @@ watch(
 
 gsap.registerPlugin(ScrollTrigger);
 
-const emits = defineEmits(["gsap-init-done"]);
+const emits = defineEmits(["animation-init-done"]);
 
 const scrollContainer = ref(null);
 const section = ref(null);
@@ -430,7 +430,7 @@ const initHorizontalScroll = () => {
 
     playScroll(TL, containerWidth, windowWidth);
 
-    emits("gsap-init-done");
+    emits("animation-init-done");
   }
 };
 
