@@ -21,7 +21,7 @@ import HeroBannerWithText from "@/slices/HeroBannerWithText/index.vue";
 import PhotoWithTextBlock from "@/slices/PhotoWithTextBlock/index.vue";
 import PopOutText from "@/slices/PopOutText/index.vue";
 
-const emits = defineEmits(["gsap-init-done"]);
+const emits = defineEmits(["animation-init-done"]);
 
 const { client } = usePrismic();
 
@@ -48,7 +48,7 @@ const popOutText = computed(() =>
 );
 
 onMounted(() => {
-  nextTick(() => emits("gsap-init-done"));
+  nextTick(() => emits("animation-init-done"));
 });
 </script>
 

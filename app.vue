@@ -2,13 +2,15 @@
   <page-loader :show="!loaded"></page-loader>
 
   <NuxtLayout>
-    <NuxtPage @gsap-init-done="onGsapInitDone" />
+    <NuxtPage @animation-init-done="onGsapInitDone" />
   </NuxtLayout>
 </template>
 
 <script setup lang="ts">
 import PageLoader from "@/components/PageLoader/index.vue";
 import { isMobile, isSafari } from "./lib/helpers";
+
+import { ALLOWED_PAGES } from "./middleware/wip.global";
 
 const route = useRoute();
 
@@ -30,7 +32,8 @@ const onGsapInitDone = () => {
 watch(
   [() => route.path, () => gsapLoaded.value],
   ([newRoute, newGsapLoaded]) => {
-    if (newRoute.includes("adoptions")) {
+    if (ALLOWED_PAGES.some((slug) => newRoute.includes(slug))) {
+      console.log("hi", newGsapLoaded);
       gsapLoaded.value = newGsapLoaded;
     }
   },

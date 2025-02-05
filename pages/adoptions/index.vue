@@ -14,7 +14,7 @@
     :key="`${group.id}-${index}`"
     :slice="group"
     :index="index"
-    @gsap-init-done="onGsapInitDone"
+    @animation-init-done="onGsapInitDone"
   ></adoptions-group>
   <!-- </Suspense> -->
 
@@ -77,13 +77,13 @@ const popOutText = computed(() =>
   adoptions.value?.data?.slices.find((s) => s?.slice_type === "pop_out_text")
 );
 
-const emits = defineEmits(["gsap-init-done"]);
+const emits = defineEmits(["animation-init-done"]);
 const gsapPartialInitDone = ref(0);
 const onGsapInitDone = () => {
   gsapPartialInitDone.value += 1;
 
   if (gsapPartialInitDone.value === adoptionsGroup.value?.length) {
-    emits("gsap-init-done");
+    emits("animation-init-done");
   }
 };
 
