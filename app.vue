@@ -1,5 +1,5 @@
 <template>
-  <page-loader :show="loading"></page-loader>
+  <page-loader :show="!loaded"></page-loader>
 
   <NuxtLayout>
     <NuxtPage @gsap-init-done="onGsapInitDone" />
@@ -8,37 +8,40 @@
 
 <script setup lang="ts">
 import PageLoader from "@/components/PageLoader/index.vue";
+import { isMobile, isSafari } from "./lib/helpers";
 
 const route = useRoute();
 
-const loading = ref(true);
+const gsapLoaded = ref(false);
+
+const loaded = computed(() => {
+  return gsapLoaded.value;
+});
 
 const onGsapInitDone = () => {
-  setTimeout(() => {
-    loading.value = false;
-  }, 1400);
+  setTimeout(
+    () => {
+      gsapLoaded.value = true;
+    },
+    isMobile() && isSafari() ? 2200 : 1400
+  );
 };
 
-onMounted(() => {
-  if (!route.path.includes("adoptions")) {
-    setTimeout(() => {
-      loading.value = false;
-    }, 1400);
-  }
-});
+watch(
+  [() => route.path, () => gsapLoaded.value],
+  ([newRoute, newGsapLoaded]) => {
+    if (newRoute.includes("adoptions")) {
+      gsapLoaded.value = newGsapLoaded;
+    }
+  },
+  { immediate: true, flush: "sync" }
+);
 
 watch(
   () => route.path,
-  (newRoute) => {
-    if (newRoute.includes("adoptions")) {
-      loading.value = true;
-
-      setTimeout(() => {
-        loading.value = false;
-      }, 1400);
-    }
-  },
-  { immediate: true }
+  () => {
+    gsapLoaded.value = false;
+  }
 );
 </script>
 

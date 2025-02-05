@@ -33,6 +33,23 @@ function isPC() {
   return notMobile && notTablet;
 }
 
+const isIOS = () => {
+  const userAgent = window.navigator.userAgent.toLowerCase();
+  return (
+    /iphone|ipad|ipod/.test(userAgent) ||
+    (userAgent.includes("mac") && "ontouchend" in document)
+  );
+};
+
+const isSafari = () => {
+  const userAgent = window.navigator.userAgent.toLowerCase();
+  return (
+    userAgent.includes("safari") &&
+    !userAgent.includes("chrome") &&
+    !userAgent.includes("android")
+  );
+};
+
 function randomHSLA() {
   const h = Math.floor(Math.random() * 360);
   const s = Math.floor(Math.random() * 100);
@@ -41,4 +58,4 @@ function randomHSLA() {
   return `hsla(${h}, ${s}%, ${l}%, ${a})`;
 }
 
-export { isMobile, isGalaxyS, isPC, randomHSLA };
+export { isMobile, isGalaxyS, isPC, isIOS, isSafari, randomHSLA };
