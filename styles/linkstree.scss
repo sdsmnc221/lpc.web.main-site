@@ -37,7 +37,8 @@
   .app:has(.links) {
     .links {
       p {
-        @include ft-s(16);
+        @include ft-s(regular);
+        line-height: var(--base-ft-size);
       }
 
       h1 {

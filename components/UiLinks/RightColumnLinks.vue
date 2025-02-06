@@ -8,7 +8,10 @@
 
     <div class="bg-white mx-auto my-0 w-11/12 md:w-1/2 p-2">
       <div class="albert-sans-regular text-center text-gray-700 p-2">
-        <prismic-rich-text :field="pageDescription"></prismic-rich-text>
+        <prismic-rich-text
+          class="page-description"
+          :field="pageDescription"
+        ></prismic-rich-text>
       </div>
 
       <!-- Navigation Links -->

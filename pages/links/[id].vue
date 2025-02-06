@@ -21,6 +21,8 @@ import RightColumnLinks from "~/components/UiLinks/RightColumnLinks.vue";
 
 import useLinkstreeLayout from "../../composables/linkstreeLayout";
 
+const emits = ["animation-init-done"];
+
 const route = useRoute();
 
 const { logo, photoGrids, pageTitle, pageDescription, links } =
@@ -28,6 +30,10 @@ const { logo, photoGrids, pageTitle, pageDescription, links } =
 
 definePageMeta({
   layout: "linkstree",
+});
+
+onMounted(() => {
+  nextTick(() => emits("animation-init-done"));
 });
 </script>
 

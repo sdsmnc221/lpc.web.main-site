@@ -198,13 +198,11 @@ watch(
     padding-top: 0;
 
     h1 {
-      // @include ft-s(xlarge);
       font-size: calc((var(--base-ft-size) * 4));
     }
 
     h2,
     h3 {
-      // @include ft-s(large);
       font-size: calc((var(--base-ft-size) * 3));
     }
   }
@@ -215,13 +213,11 @@ watch(
     padding: var(--spacing-m);
 
     h1 {
-      // @include ft-s(large);
       font-size: calc((var(--base-ft-size) * 3));
     }
 
     h2,
     h3 {
-      // @include ft-s(medium);
       font-size: calc((var(--base-ft-size) * 2));
     }
   }
@@ -240,13 +236,11 @@ watch(
     padding-top: 0;
 
     h1 {
-      // @include ft-s(xxlarge);
       font-size: calc((var(--base-ft-size) * 5));
     }
 
     h2,
     h3 {
-      // @include ft-s(xlarge);
       font-size: calc((var(--base-ft-size) * 4));
     }
   }
