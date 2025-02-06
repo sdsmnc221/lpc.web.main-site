@@ -436,23 +436,23 @@ const cleanupScrollTrigger = () => {
 };
 
 const configScrollTriggerSafari = () => {
-  if (isIOS()) {
-    ScrollTrigger.normalizeScroll(true);
+  // if (isIOS()) {
+  ScrollTrigger.normalizeScroll(true);
 
-    ScrollTrigger.config({ ignoreMobileResize: true });
+  ScrollTrigger.config({ ignoreMobileResize: true });
 
-    ScrollTrigger.observe({
-      target: section.value, // can be any element (selector text is fine)
-      type: "pointer,touch", // comma-delimited list of what to listen for ("wheel,touch,scroll,pointer")
-      // onUp: () => previous(),
-      // onDown: () => next(),
+  ScrollTrigger.observe({
+    target: section.value, // can be any element (selector text is fine)
+    type: "pointer,touch", // comma-delimited list of what to listen for ("wheel,touch,scroll,pointer")
+    // onUp: () => previous(),
+    // onDown: () => next(),
 
-      onDrag: (self) => {
-        console.warn(self.deltaX);
-        gsap.to(window, { scrollTo: { y: `+=${self.deltaX * 10}` } });
-      },
-    });
-  }
+    onDrag: (self) => {
+      console.warn(self.deltaX);
+      gsap.to(window, { scrollTo: { y: `+=${self.deltaX * 10}` } });
+    },
+  });
+  // }
 };
 
 onMounted(() => {
