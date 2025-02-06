@@ -376,6 +376,8 @@ import { Badge } from "@/components/ui/badge";
 
 import { ref, onMounted, onUnmounted } from "vue";
 
+const emits = defineEmits(["animation-init-done"]);
+
 const textRef = ref(null);
 const isVisible = ref(false);
 
@@ -401,6 +403,8 @@ onMounted(() => {
   if (textRef.value) {
     observer.observe(textRef.value);
   }
+
+  nextTick(() => emits("animation-init-done"));
 });
 
 onUnmounted(() => {
