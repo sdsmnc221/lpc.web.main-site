@@ -442,6 +442,7 @@ onMounted(() => {
   nextTick(() => {
     if (isIOS()) {
       ScrollTrigger.normalizeScroll(true);
+      ScrollTrigger.config({ ignoreMobileResize: true });
     }
     initHorizontalScroll();
 
