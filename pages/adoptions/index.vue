@@ -6,17 +6,19 @@
     :slice="hero"
   ></hero-banner-with-text>
 
-  <hero-photo-background :slice="adoptionsHeadline"></hero-photo-background>
+  <Suspense>
+    <hero-photo-background :slice="adoptionsHeadline"></hero-photo-background>
+  </Suspense>
 
-  <!-- <Suspense> -->
-  <adoptions-group
-    v-for="(group, index) in adoptionsGroup"
-    :key="`${group.id}-${index}`"
-    :slice="group"
-    :index="index"
-    @animation-init-done="onGsapInitDone"
-  ></adoptions-group>
-  <!-- </Suspense> -->
+  <Suspense>
+    <adoptions-group
+      v-for="(group, index) in adoptionsGroup"
+      :key="`${group.id}-${index}`"
+      :slice="group"
+      :index="index"
+      @animation-init-done="onGsapInitDone"
+    ></adoptions-group>
+  </Suspense>
 
   <multi-text-block ref="faqRef" :slice="faq"></multi-text-block>
 

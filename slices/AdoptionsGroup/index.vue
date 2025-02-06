@@ -74,7 +74,6 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { isPC, isIOS, randomHSLA, isSafari } from "@/lib/helpers";
-import { Scroll } from "lucide-vue-next";
 
 const router = useRouter();
 
@@ -429,8 +428,6 @@ const initHorizontalScroll = () => {
     playScroll(TL, containerWidth, windowWidth);
 
     emits("animation-init-done");
-
-    ScrollTrigger.refresh();
   }
 };
 
@@ -439,7 +436,7 @@ const cleanupScrollTrigger = () => {
 };
 
 const configScrollTriggerSafari = () => {
-  if (isIOS() || isSafari()) {
+  if (isSafari()) {
     ScrollTrigger.normalizeScroll({
       allowNestedScroll: true,
       lockAxis: true,
