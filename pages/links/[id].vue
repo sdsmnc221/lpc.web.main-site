@@ -21,7 +21,7 @@ import RightColumnLinks from "~/components/UiLinks/RightColumnLinks.vue";
 
 import useLinkstreeLayout from "../../composables/linkstreeLayout";
 
-const emits = ["animation-init-done"];
+const emits = defineEmits(["animation-init-done"]);
 
 const route = useRoute();
 
