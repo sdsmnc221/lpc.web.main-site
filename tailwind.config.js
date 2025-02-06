@@ -7,6 +7,8 @@ module.exports = {
   safelist: ["dark"],
   prefix: "",
 
+  content: ["./pages/**/*.{html,js}", "./components/**/*.{html,js}"],
+
   theme: {
     container: {
       center: true,

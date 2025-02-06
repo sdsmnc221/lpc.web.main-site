@@ -125,7 +125,7 @@ const playMagic = () => {
   lenis.on("scroll", ScrollTrigger.update);
 
   const raf = (time) => {
-    lenis.raf(time);
+    lenis.raf(time * 0.0001);
     requestAnimationFrame(raf);
   };
 

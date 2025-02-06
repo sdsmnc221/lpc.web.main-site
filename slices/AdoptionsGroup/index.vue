@@ -74,6 +74,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { isPC, isIOS, randomHSLA, isSafari } from "@/lib/helpers";
+import { Scroll } from "lucide-vue-next";
 
 const router = useRouter();
 
@@ -296,7 +297,7 @@ const playScroll = (TL, containerWidth, windowWidth) => {
             ease: "power4.inOut",
             delay: 0.1 + index * 0.2,
             scrollTrigger: {
-              containerAnimation: TL,
+              // containerAnimation: TL,
               trigger: groupTitle.value.$el,
               start: "top top",
               end: `top+=${(index + 3) * 64}px top`,
@@ -334,15 +335,10 @@ const playScroll = (TL, containerWidth, windowWidth) => {
             stagger: 0.16 * index,
             duration: 2,
             scrollTrigger: {
-              containerAnimation: TL,
+              // containerAnimation: TL,
               trigger: groupDescription.value.parentNode,
               start: "top top",
               scrub: 0.5,
-              pin: true,
-              pinnedContainer: section.value,
-              anticipatePin: 1,
-              invalidateOnRefresh: true,
-              ...(isPC() || isSafari() ? { pinType: "transform" } : {}),
             },
             ease: "power4",
           }
@@ -382,13 +378,6 @@ const playScroll = (TL, containerWidth, windowWidth) => {
           start: `top top`,
           end: `top+=${containerWidth * (itemIndex + 1) * 0.72}px top`,
           scrub: 0.5,
-          containerAnimation: TL,
-
-          pin: true,
-          pinnedContainer: section.value,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-          ...(isPC() || isSafari() ? { pinType: "transform" } : {}),
         },
       });
     });
@@ -409,6 +398,7 @@ const initHorizontalScroll = () => {
     // Main horizontal scroll animation
 
     const TL = gsap.timeline({
+      onUpdate: ScrollTrigger.update,
       scrollTrigger: {
         trigger: section.value,
         start: "top top",
@@ -416,15 +406,12 @@ const initHorizontalScroll = () => {
         scrub: 0.5,
         pin: true,
         pinnedContainer: section.value,
+
         anticipatePin: 1,
         invalidateOnRefresh: true,
         ...(isPC() || isSafari() ? { pinType: "transform" } : {}),
+
         // markers: true, // debug
-        onUpdate: (self) => {
-          // Ensure we're not exceeding the bounds of the animation
-          if (self.progress < 0) self.progress = 0;
-          if (self.progress > 1) self.progress = 1;
-        },
       },
     });
 
@@ -442,35 +429,44 @@ const initHorizontalScroll = () => {
     playScroll(TL, containerWidth, windowWidth);
 
     emits("animation-init-done");
+
+    ScrollTrigger.refresh();
   }
 };
 
 const cleanupScrollTrigger = () => {
-  // ScrollTrigger.getAll().forEach((st) => st.kill());
+  ScrollTrigger.getAll().forEach((st) => st.kill());
+};
+
+const configScrollTriggerSafari = () => {
+  if (isIOS() || isSafari()) {
+    ScrollTrigger.normalizeScroll({
+      allowNestedScroll: true,
+      lockAxis: true,
+      momentum: (self) => Math.min(3, self.velocityY / 10), // dynamically control the duration of the momentum when flick-scrolling
+      type: "touch,wheel,pointer", // now the page will be drag-scrollable on desktop because "pointer" is in the list
+    });
+
+    ScrollTrigger.config({ ignoreMobileResize: true });
+
+    // ScrollTrigger.observe({
+    //   target: section.value, // can be any element (selector text is fine)
+    //   type: "pointer,touch", // comma-delimited list of what to listen for ("wheel,touch,scroll,pointer")
+    //   // onUp: () => previous(),
+    //   // onDown: () => next(),
+
+    //   onDrag: (self) => {
+    //     console.warn(self.deltaX);
+    //     gsap.to(window, { scrollTo: { y: `+=${self.deltaX * 10}` } });
+    //   },
+    // });
+  }
 };
 
 onMounted(() => {
   nextTick(() => {
-    if (isIOS() || isSafari()) {
-      ScrollTrigger.normalizeScroll({
-        allowNestedScroll: true,
-        lockAxis: false,
-        momentum: (self) => Math.min(3, self.velocityY / 1000), // dynamically control the duration of the momentum when flick-scrolling
-        type: "touch,wheel,pointer", // now the page will be drag-scrollable on desktop because "pointer" is in the list
-      });
-      ScrollTrigger.config({ ignoreMobileResize: true });
-      ScrollTrigger.observe({
-        target: section.value, // can be any element (selector text is fine)
-        type: "pointer,touch", // comma-delimited list of what to listen for ("wheel,touch,scroll,pointer")
-        // onUp: () => previous(),
-        // onDown: () => next(),
+    configScrollTriggerSafari();
 
-        onDrag: (self) => {
-          console.warn(self.deltaX);
-          gsap.to(window, { scrollTo: { y: `+=${self.deltaX * 10}` } });
-        },
-      });
-    }
     initHorizontalScroll();
 
     isMounted.value = true;
