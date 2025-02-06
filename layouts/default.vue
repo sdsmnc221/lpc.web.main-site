@@ -156,6 +156,12 @@ const playFade = () => {
 onMounted(() => {
   playMagic();
   playFade();
+
+  nextTick(() => {
+    [...document.querySelectorAll(".adoptions-group")].forEach((group) =>
+      group.addEventListener("scroll", ScrollTrigger.update)
+    );
+  });
 });
 
 onUpdated(() => {

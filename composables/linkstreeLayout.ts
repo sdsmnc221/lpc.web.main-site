@@ -10,7 +10,7 @@ export default async function useLinkstreeLayout(uid?: string) {
   const { data: assets } = await useAsyncData("assets", async () => {
     const { data: defaultLayout } = await client.getByUID(
       "pagelayout",
-      "linkstree-layout"
+      linkstree.value?.data?.layout?.uid ?? "linkstree-layout"
     );
 
     return defaultLayout;
@@ -25,7 +25,11 @@ export default async function useLinkstreeLayout(uid?: string) {
     assets.value?.photosgrid5.map((photo) => photo.img.url)
   );
 
-  const logo = computed(() => assets.value?.logo.url);
+  const showlogo = computed(() => linkstree.value?.data.showlogo);
+
+  const logo = computed(() =>
+    showlogo.value === true ? assets.value?.logo.url : ""
+  );
 
   const meta = ref({
     title: assets.value?.meta_title,

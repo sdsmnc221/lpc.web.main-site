@@ -337,6 +337,12 @@ const playScroll = (TL, containerWidth, windowWidth) => {
               containerAnimation: TL,
               trigger: groupDescription.value.parentNode,
               start: "top top",
+              scrub: 0.5,
+              pin: true,
+              pinnedContainer: section.value,
+              anticipatePin: 1,
+              invalidateOnRefresh: true,
+              ...(isPC() || isSafari() ? { pinType: "transform" } : {}),
             },
             ease: "power4",
           }
@@ -377,6 +383,12 @@ const playScroll = (TL, containerWidth, windowWidth) => {
           end: `top+=${containerWidth * (itemIndex + 1) * 0.72}px top`,
           scrub: 0.5,
           containerAnimation: TL,
+
+          pin: true,
+          pinnedContainer: section.value,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          ...(isPC() || isSafari() ? { pinType: "transform" } : {}),
         },
       });
     });
@@ -405,9 +417,8 @@ const initHorizontalScroll = () => {
         pin: true,
         pinnedContainer: section.value,
         anticipatePin: 1,
-        invalidateOnRefresh: false,
+        invalidateOnRefresh: true,
         ...(isPC() || isSafari() ? { pinType: "transform" } : {}),
-
         // markers: true, // debug
         onUpdate: (self) => {
           // Ensure we're not exceeding the bounds of the animation
@@ -440,9 +451,25 @@ const cleanupScrollTrigger = () => {
 
 onMounted(() => {
   nextTick(() => {
-    if (isIOS()) {
-      ScrollTrigger.normalizeScroll(true);
+    if (isIOS() || isSafari()) {
+      ScrollTrigger.normalizeScroll({
+        allowNestedScroll: true,
+        lockAxis: false,
+        momentum: (self) => Math.min(3, self.velocityY / 1000), // dynamically control the duration of the momentum when flick-scrolling
+        type: "touch,wheel,pointer", // now the page will be drag-scrollable on desktop because "pointer" is in the list
+      });
       ScrollTrigger.config({ ignoreMobileResize: true });
+      ScrollTrigger.observe({
+        target: section.value, // can be any element (selector text is fine)
+        type: "pointer,touch", // comma-delimited list of what to listen for ("wheel,touch,scroll,pointer")
+        // onUp: () => previous(),
+        // onDown: () => next(),
+
+        onDrag: (self) => {
+          console.warn(self.deltaX);
+          gsap.to(window, { scrollTo: { y: `+=${self.deltaX * 10}` } });
+        },
+      });
     }
     initHorizontalScroll();
 

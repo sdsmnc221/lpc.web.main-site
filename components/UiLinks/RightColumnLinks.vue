@@ -32,7 +32,11 @@
       </nav>
     </div>
 
-    <img :src="logo" class="logo block md:h-[100px] absolute bottom-1" />
+    <img
+      v-if="logo.length"
+      :src="logo"
+      class="logo block md:h-[100px] absolute bottom-1"
+    />
   </div>
 </template>
 

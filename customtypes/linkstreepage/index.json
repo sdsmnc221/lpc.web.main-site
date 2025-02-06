@@ -53,6 +53,23 @@
           "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
         }
       },
+      "showlogo": {
+        "type": "Boolean",
+        "config": {
+          "label": "showLogo",
+          "placeholder_false": "false",
+          "placeholder_true": "true",
+          "default_value": true
+        }
+      },
+      "layout": {
+        "type": "Link",
+        "config": {
+          "label": "layout",
+          "select": "document",
+          "customtypes": ["pagelayout"]
+        }
+      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",

@@ -748,6 +748,29 @@ interface LinkstreepageDocumentData {
   pagedescription: prismic.RichTextField;
 
   /**
+   * showLogo field in *LinkstreePage*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: linkstreepage.showlogo
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  showlogo: prismic.BooleanField;
+
+  /**
+   * layout field in *LinkstreePage*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: linkstreepage.layout
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  layout: prismic.ContentRelationshipField<"pagelayout">;
+
+  /**
    * Slice Zone field in *LinkstreePage*
    *
    * - **Field Type**: Slice Zone
