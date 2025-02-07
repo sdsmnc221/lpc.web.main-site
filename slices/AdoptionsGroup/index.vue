@@ -9,9 +9,13 @@
       <div ref="textContent" class="adoptions-group__text-content">
         <prismic-rich-text
           ref="groupTitle"
-          class="adoptions-group__title"
+          class="adoptions-group__title mt-4"
           :field="title"
         />
+
+        <safari-scroll-indicator
+          v-if="isDoScrollDisabled"
+        ></safari-scroll-indicator>
 
         <div
           class="adoptions-group__description"
@@ -67,6 +71,7 @@ import type { CatInfo } from "~/interfaces/Cat";
 
 import CatItem from "@/components/CatItem/index.vue";
 import CatSheet from "@/components/CatSheet/index.vue";
+import SafariScrollIndicator from "@/components/SafariScrollIndicator/index.vue";
 
 const { client } = usePrismic();
 
@@ -123,6 +128,8 @@ const currentCatItem = ref<CatInfo | null>(null);
 
 const defaultOpen = ref(false);
 const randomTint = ref(randomHSLA());
+
+const isDoScrollDisabled = ref(false);
 
 const commonOpen = (opened: boolean, catItem = null) => {
   defaultOpen.value = opened;
@@ -384,6 +391,8 @@ const playScroll = (TL, containerWidth, windowWidth) => {
 };
 
 const initHorizontalScroll = () => {
+  // configScrollTriggerSafari();
+
   const container = scrollContainer.value;
 
   if (container) {
@@ -457,9 +466,12 @@ const configScrollTriggerSafari = () => {
 
 onMounted(() => {
   nextTick(() => {
-    configScrollTriggerSafari();
-
-    initHorizontalScroll();
+    if (!isSafari()) {
+      initHorizontalScroll();
+    } else {
+      isDoScrollDisabled.value = true;
+      emits("animation-init-done");
+    }
 
     isMounted.value = true;
   });
