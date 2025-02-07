@@ -1,4 +1,4 @@
-<style scoped>
+<style lang="scss" scoped>
 .cta {
   position: absolute;
   margin: auto;
@@ -9,6 +9,13 @@
   cursor: pointer;
   left: 12vw;
   top: 28vh;
+
+  @media screen and (max-width: 768px) {
+    top: unset;
+    bottom: 32px;
+    left: 50vw;
+    transform: translateX(-50%);
+  }
 }
 
 .cta:before {
@@ -31,6 +38,10 @@
   font-weight: 700;
   letter-spacing: 0.05em;
   color: #234567;
+
+  @media screen and (max-width: 768px) {
+    font-size: var(--base-ft-size);
+  }
 }
 
 .cta svg {
