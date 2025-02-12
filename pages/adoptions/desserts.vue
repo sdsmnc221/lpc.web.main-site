@@ -420,7 +420,7 @@
                 - Ils ont déjà leurs repères
               </span>
               <span class="inline-bloc mx-2">
-                - Plus de surprises de caractère : vous savez déjà qui ils sont
+                - Plus de surprises de caractère - vous savez déjà qui ils sont
               </span>
               <span class="inline-block mx-2">
                 - Fini les belles bêtises de chatons !
@@ -582,7 +582,7 @@
 
       <div class="flex md:flex-row flex-col w-100">
         <div
-          class="md:basis-1/2 basis-full flex flex-col justify-center md:ml-10 mr-5"
+          class="md:basis-1/2 basis-full flex flex-col justify-center md:ml-10 md:mr-5"
         >
           <h3 class="font-bold text-xl mt-10 mb-2 text-center">
             Un mot du cœur :
@@ -784,8 +784,9 @@ definePageMeta({
 
   .adopt-reasons {
     @media screen and (max-width: 320px) {
-      transform: translateX(5vw);
-      width: 80vw;
+      transform: translateX(-5vw);
+      padding: 0 24px;
+      width: 100vw;
     }
   }
 
