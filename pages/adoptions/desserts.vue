@@ -551,7 +551,7 @@
             concrètement.
 
             <div
-              class="flex flex-col justify-start text-left items-start pl-10 mt-4 text-xs md:text-sm mb-4"
+              class="flex flex-col justify-start text-left items-start pl-10 md:left-[36px] relative mt-4 text-xs md:text-sm mb-4"
             >
               <p class="mt2">✨ Photos et nouvelles régulières</p>
               <p class="mt2">
@@ -569,7 +569,7 @@
       </div>
 
       <div class="flex justify-center w-100 text-center">
-        <p class="mt-5 font-serif w-[80%]">
+        <p class="my-20 font-serif w-[80%]">
           <span class="font-bold"
             >Ensemble, nous écrivons une nouvelle page de leur histoire.</span
           >
@@ -580,7 +580,7 @@
         </p>
       </div>
 
-      <div class="flex md:flex-row flex-col w-100">
+      <div class="flex md:flex-row flex-col w-100" ref="textRef2">
         <div
           class="md:basis-1/2 basis-full flex flex-col justify-center md:ml-10 md:mr-5"
         >
@@ -608,7 +608,7 @@
 
             <p class="text-base font-serif font-bold text-center mt-4">
               <TextGenerateEffect
-                v-if="isVisible"
+                v-if="isVisible2"
                 :duration="1.2"
                 words="Cette Saint-Valentin, ou au cours de ce doux quotidien, choisiriez-vous devenir leur valentin - valentine ?"
               ></TextGenerateEffect>
@@ -678,7 +678,9 @@ import { ref, onMounted, onUnmounted } from "vue";
 const emits = defineEmits(["animation-init-done"]);
 
 const textRef = ref(null);
+const textRef2 = ref(null);
 const isVisible = ref(false);
+const isVisible2 = ref(false);
 
 const observerCallback = (entries) => {
   entries.forEach((entry) => {
@@ -690,7 +692,17 @@ const observerCallback = (entries) => {
   });
 };
 
-let observer;
+const observerCallback2 = (entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      isVisible2.value = true;
+      // Optional: Disconnect observer after first appearance
+      // observer.disconnect();
+    }
+  });
+};
+
+let observer, observer2;
 
 onMounted(() => {
   observer = new IntersectionObserver(observerCallback, {
@@ -701,6 +713,16 @@ onMounted(() => {
 
   if (textRef.value) {
     observer.observe(textRef.value);
+  }
+
+  observer2 = new IntersectionObserver(observerCallback2, {
+    // Adjust these options as needed
+    threshold: 0.1, // Triggers when 10% of the element is visible
+    rootMargin: "50px", // Adds 50px margin to trigger slightly before the element is in view
+  });
+
+  if (textRef2.value) {
+    observer2.observe(textRef2.value);
   }
 
   nextTick(() => emits("animation-init-done"));
@@ -771,7 +793,7 @@ definePageMeta({
 
     .title {
       position: absolute;
-      bottom: 12vh;
+      bottom: 7.2vh;
       right: 0;
       transform: rotate(-2.4deg);
 
