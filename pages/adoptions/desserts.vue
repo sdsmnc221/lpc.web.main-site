@@ -383,9 +383,9 @@
       </div>
 
       <div
-        class="flex md:flex-row flex-col xs:w-[80vw] relative sm:left-[-16px] md:left-[0px] md:w-100 text-xs md:flex-wrap flex-nowrap"
+        class="flex md:flex-row flex-col w-[80vw] relative left-[-16px] md:left-[-12vw] text-xs md:flex-wrap flex-nowrap"
       >
-        <h2 class="basis-full text-left text-xl mt-10 md:mt-20">
+        <h2 class="basis-full text-center text-xl mt-10 md:mt-20 relative">
           <span class="font-bold"
             >"Mais pourquoi adopter un chat
             <span class="text-orange-700">
@@ -399,7 +399,7 @@
           </span>
         </h2>
 
-        <p class="basis-full mb-2">
+        <p class="basis-full mb-2 relative text-center">
           Laissez-nous vous raconter pourquoi chacun de notre Bande de Desserts
           est un trésor unique :
         </p>
@@ -551,20 +551,18 @@
             concrètement.
 
             <div
-              class="flex flex-col justify-left pl-10 mt-4 text-sm leading-none mb-4"
+              class="flex flex-col justify-start text-left items-start pl-10 mt-4 text-xs md:text-sm mb-4"
             >
-              <span class="block mt-2">✨ Photos et nouvelles régulières</span>
-              <span class="block mt-2"
-                >✨ Updates sur leur évolution en socialisation et/ou en accueil
-                / adoption</span
-              >
-              <span class="block mt-2"
-                >✨ Lien priviligié avec le foyer d'accueil des chats craintifs
-                à Sainte-Geneviève-des-Bois (91)</span
-              >
-              <span class="block mt-2"
-                >✨ Pâtée gourmande spéciale Saint Valentin
-              </span>
+              <p class="mt2">✨ Photos et nouvelles régulières</p>
+              <p class="mt2">
+                ✨ Updates sur leur évolution en socialisation et/ou en accueil
+                / adoption
+              </p>
+              <p class="mt2">
+                ✨ Lien priviligié avec le foyer d'accueil des chats craintifs à
+                Sainte-Geneviève-des-Bois (91)
+              </p>
+              <p class="mt2">✨ Pâtée gourmande spéciale Saint Valentin</p>
             </div>
           </div>
         </div>
@@ -586,7 +584,9 @@
         <div
           class="md:basis-1/2 basis-full flex flex-col justify-center md:ml-10 mr-5"
         >
-          <h3 class="font-bold text-xl mt-10 mb-2">Un mot du cœur :</h3>
+          <h3 class="font-bold text-xl mt-10 mb-2 text-center">
+            Un mot du cœur :
+          </h3>
 
           <div class="mt-5 basis-full flex flex-col justify-around text-center">
             <p class="text-sm font-serif">
@@ -771,7 +771,7 @@ definePageMeta({
 
     .title {
       position: absolute;
-      bottom: 7.2vh;
+      bottom: 12vh;
       right: 0;
       transform: rotate(-2.4deg);
 
@@ -789,6 +789,8 @@ definePageMeta({
     object-fit: cover;
 
     &.banner {
+      transform: scale(1.2) translateY(24px);
+
       @media screen and (max-width: 480px) {
         width: 100vw;
         transform: scale(1.4) translateY(24px);
