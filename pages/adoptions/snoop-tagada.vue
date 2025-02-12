@@ -38,7 +38,7 @@
           <h2 class="text-left text-base mt-4">
             <span class="font-bold">Tagada</span>
           </h2>
-          <p class="text-xs">À l'aube de ans, femelle, née 09.2020</p>
+          <p class="text-xs">À l'aube de 5 ans, femelle, née 09.2020</p>
           <div class="h-px bg-slate-400 mb-4"></div>
           <p class="text-xs min-h-24 flex flex-col items-start justify-center">
             <span class="inline-block">- Stérélisée, identifiée.</span>
@@ -67,7 +67,7 @@
           <h2 class="text-left text-base mt-4">
             <span class="font-bold">Snoop</span>
           </h2>
-          <p class="text-xs">À l'aube de ans, mâle (09.2020 - 19.01.2025)</p>
+          <p class="text-xs">À l'aube de 5 ans, mâle (09.2020 - 19.01.2025)</p>
           <div class="h-px bg-slate-400 mb-4"></div>
           <p class="text-xs min-h-24 flex flex-col items-start justify-center">
             <span class="inline-block">- Castré, identifié.</span>
@@ -223,10 +223,10 @@
               </span>
 
               <span class="mt-2">
-                Aux Petits Clochards, l'adoption responsable commence par nous :
-                nous garantissons la santé et le bien-être de chaque chat, de
-                son arrivée au foyer jusqu'à son départ vers sa famille pour la
-                vie. Chaque adoption est précédée d'examens vétérinaires
+                Chez Les Petits Clochards, l'adoption responsable commence par
+                nous : nous garantissons la santé et le bien-être de chaque
+                chat, de son arrivée au foyer jusqu'à son départ vers sa famille
+                pour la vie. Chaque adoption est précédée d'examens vétérinaires
                 complets, et nous accompagnons ce processus :
                 <span class="inline-block mx-2 mt-2">
                   - Vaccination à prévoir, avec notre aide*
