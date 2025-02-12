@@ -383,7 +383,7 @@
       </div>
 
       <div
-        class="flex md:flex-row flex-col w-[80vw] relative left-[-16px] md:left-[-12vw] text-xs md:flex-wrap flex-nowrap"
+        class="adopt-reasons flex md:flex-row flex-col w-[80vw] relative left-[-16px] md:left-[-12vw] text-xs md:flex-wrap flex-nowrap"
       >
         <h2 class="basis-full text-center text-xl mt-10 md:mt-20 relative">
           <span class="font-bold"
@@ -779,6 +779,13 @@ definePageMeta({
         bottom: -16px;
         transform: rotate(2.4deg);
       }
+    }
+  }
+
+  .adopt-reasons {
+    @media screen and (max-width: 320px) {
+      transform: translateX(5vw);
+      width: 80vw;
     }
   }
 
