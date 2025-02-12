@@ -784,7 +784,7 @@ definePageMeta({
 
   .adopt-reasons {
     @media screen and (max-width: 320px) {
-      transform: translateX(-5vw);
+      transform: translateX(3.2vw);
       padding: 0 24px;
       width: 100vw;
     }
