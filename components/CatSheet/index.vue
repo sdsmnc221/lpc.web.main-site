@@ -331,7 +331,7 @@ watch(
 
           & > div {
             max-height: 20vh;
-            overflow-y: scroll;
+            overflow-y: visible;
             text-align: right;
             font-size: var(--base-ft-size);
             width: 100%;
@@ -494,6 +494,7 @@ watch(
         &__div4 {
           grid-area: 2 / 3 / 3 / 4;
           gap: var(--spacing-s);
+          top: -10vh;
 
           .cat-sheet__details {
             top: -6.4vh;
