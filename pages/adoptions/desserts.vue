@@ -9,10 +9,10 @@
       <img
         src="/desserts/banner.png"
         alt="Adoption de Nougat, Praline et Melba"
-        class="w-[720px] md:w-[200px] rounded-xl mb-4"
+        class="banner md:w-[200px] rounded-xl mb-10 md:mb-4"
       />
       <div class="title">
-        <span class="text-lg md:text-2xl">
+        <span class="text-base md:text-2xl">
           <span class="font-normal uppercase">Spéciale Saint-Valentin : </span>
         </span>
         <br />
@@ -21,7 +21,7 @@
           <TextHighlight
             :delay="320"
             text-end-color="hsl(var(--accent))"
-            class="rounded-lg bg-gradient-to-r text-xs md:text-7xl from-rose-500 to-yellow-900"
+            class="rounded-lg bg-gradient-to-r text-2xl md:text-7xl from-rose-500 to-yellow-900"
             >Trio de Desserts</TextHighlight
           ></span
         >
@@ -131,7 +131,7 @@
             </p>
           </div>
         </div>
-        <div class="basis-1/2 md:p-4 p-2 relative top-[32px]">
+        <div class="basis-1/2 ml-5 relative scale-125 top-[32px]">
           <img
             alt="Portrait de Nougat, Praline et Melba"
             src="/desserts/portrait.png"
@@ -145,13 +145,13 @@
         </h2>
 
         <div
-          class="flex md:flex-row flex-col items-center w-[90vw] relative left-[-20vw]"
+          class="flex md:flex-row flex-col items-center md:w-[90vw] relative md:left-[-20vw]"
         >
-          <div class="md:basis-1/3 basis-full md:mr-10">
+          <div class="md:basis-1/3 basis-full mb-10 md:mr-10 z-30 relative">
             <ClientOnly>
               <CardContainer>
                 <CardBody
-                  class="group/card relative size-auto rounded-xl border border-black/[0.1] bg-rose-50 p-6 w-full"
+                  class="group/card relative size-auto rounded-xl border border-black/[0.1] bg-rose-50 p-6 w-[80vw] md:w-full"
                 >
                   <CardItem
                     :translate-z="50"
@@ -171,7 +171,7 @@
                     :translate-z="20"
                     :translate-x="-40"
                     as="p"
-                    class="rounded-xl my-5 bg-neutral-50 text-rose-800 font-serif px-4 py-2 text-sm w-80"
+                    class="rounded-xl my-5 bg-neutral-50 text-rose-800 font-serif px-4 py-2 text-sm w-full md:w-80"
                   >
                     Notre Nougatan est un chat plein de contrastes touchants.
                     <span class="font-bold font-serif"
@@ -224,11 +224,11 @@
             </ClientOnly>
           </div>
 
-          <div class="md:basis-1/3 basis-full md:mr-10">
+          <div class="md:basis-1/3 basis-full mb-10 md:mr-10 z-20 relative">
             <ClientOnly>
               <CardContainer>
                 <CardBody
-                  class="group/card relative size-auto rounded-xl border border-black/[0.1] bg-rose-50 p-6 w-full"
+                  class="group/card relative size-auto rounded-xl border border-black/[0.1] bg-rose-50 p-6 w-[80vw] md:w-full"
                 >
                   <CardItem
                     :translate-z="50"
@@ -248,7 +248,7 @@
                     :translate-z="20"
                     :translate-x="-40"
                     as="p"
-                    class="rounded-xl my-5 bg-neutral-50 text-rose-800 font-serif px-4 py-2 text-sm w-80"
+                    class="rounded-xl my-5 bg-neutral-50 text-rose-800 font-serif px-4 py-2 text-sm w-full md:w-80"
                   >
                     <span class="font-bold font-serif"
                       >Cette fine enquêtrice ne peut résister à un mystère
@@ -297,11 +297,11 @@
             </ClientOnly>
           </div>
 
-          <div class="md:basis-1/3 basis-full md:mr-10">
+          <div class="md:basis-1/3 basis-full mb-10 md:mr-10 z-10 relative">
             <ClientOnly>
               <CardContainer>
                 <CardBody
-                  class="group/card relative size-auto rounded-xl border border-black/[0.1] bg-rose-50 p-6 w-full"
+                  class="group/card relative size-auto rounded-xl border border-black/[0.1] bg-rose-50 p-6 w-[80vw] md:w-full"
                 >
                   <CardItem
                     :translate-z="50"
@@ -321,7 +321,7 @@
                     :translate-z="20"
                     :translate-x="-40"
                     as="p"
-                    class="rounded-xl my-5 bg-neutral-50 text-rose-800 font-serif px-4 py-2 text-sm w-80"
+                    class="rounded-xl my-5 bg-neutral-50 text-rose-800 font-serif px-4 py-2 text-sm w-full md:w-80"
                   >
                     Comme son dessert homonyme, Melba est un délicieux mélange
                     de saveurs :
@@ -383,22 +383,25 @@
       </div>
 
       <div
-        class="flex md:flex-row flex-col w-100 text-xs md:flex-wrap flex-nowrap"
+        class="flex md:flex-row flex-col xs:w-[80vw] relative sm:left-[-16px] md:left-[0px] md:w-100 text-xs md:flex-wrap flex-nowrap"
       >
-        <h2 class="basis-full text-left text-base mt-10">
+        <h2 class="basis-full text-left text-xl mt-10 md:mt-20">
           <span class="font-bold"
             >"Mais pourquoi adopter un chat
-            <TextHighlight
-              :delay="640"
-              class="rounded-lg bg-gradient-to-r from-yellow-200 to-slate-200"
-              >adulte</TextHighlight
-            >
+            <span class="text-orange-700">
+              <TextHighlight
+                :delay="640"
+                class="rounded-lg bg-gradient-to-r from-yellow-200 to-rose-300"
+                >adulte, craintif</TextHighlight
+              >
+            </span>
             ?"
           </span>
         </h2>
 
         <p class="basis-full mb-2">
-          Laissez-nous vous raconter pourquoi Tagada est un trésor unique :
+          Laissez-nous vous raconter pourquoi chacun de notre Bande de Desserts
+          est un trésor unique :
         </p>
 
         <div class="basis-full flex md:flex-row flex-col">
@@ -413,15 +416,17 @@
           <div class="basis-1/2 p-4 flex flex-col justify-between">
             <p class="flex flex-col my-2">
               <span class="inline-block font-bold">L'âge de la sagesse :</span>
-              <span class="inline-block mx-2"> - Elle a déjà ses repères </span>
+              <span class="inline-block mx-2">
+                - Ils ont déjà leurs repères
+              </span>
               <span class="inline-bloc mx-2">
-                - Plus de surprises de caractère : vous savez déjà qui elle est
+                - Plus de surprises de caractère : vous savez déjà qui ils sont
               </span>
               <span class="inline-block mx-2">
                 - Fini les belles bêtises de chatons !
               </span>
               <span class="inline-block mx-2">
-                - La maturité lui a appris la patience
+                - La maturité leur a appris la patience
               </span>
             </p>
 
@@ -433,39 +438,39 @@
                 - Chaque progrès est une victoire émouvante
               </span>
               <span class="inline-bloc mx-2">
-                - Sa confiance, une fois gagnée, est inestimable
+                - Leur confiance, une fois gagnée, est inestimable
               </span>
               <span class="inline-block mx-2">
-                - Sa gratitude se manifeste de façon unique
+                - Leur gratitude se manifeste de façon unique
               </span>
               <span class="inline-block mx-2">
-                - Son amour, plus discret, n'en est que plus précieux
+                - SLeur amour, plus discret, n'en est que plus précieux
               </span>
             </p>
 
             <p class="flex flex-col my-2">
-              <span class="inline-block font-bold">
+              <span class="inline-block font-bold text-orange-700">
                 <TextHighlight
                   :delay="640"
-                  class="rounded-lg bg-gradient-to-r from-yellow-200 to-slate-200"
-                  >Sa santé, suivie avec soin :</TextHighlight
+                  class="rounded-lg bg-gradient-to-r from-yellow-200 to-rose-300"
+                  >Leur santé, suivie avec soin :</TextHighlight
                 ></span
               >
               <span class="inline-block mx-2">
-                - Déjà identifiée et stérilisée
+                - Déjà identifiés et stérilisées (castré pour Nougat)
               </span>
               <span class="inline-block mx-2">
-                - Régulièrement déparasitée et vermifugée
+                - Régulièrement déparasités et vermifugés
               </span>
               <span class="inline-block mx-2">
                 - En bonne santé et propre
               </span>
 
               <span class="mt-2">
-                Aux Petits Clochards, l'adoption responsable commence par nous :
-                nous garantissons la santé et le bien-être de chaque chat, de
-                son arrivée au foyer jusqu'à son départ vers sa famille pour la
-                vie. Chaque adoption est précédée d'examens vétérinaires
+                Chez Les Petits Clochards, l'adoption responsable commence par
+                nous : nous garantissons la santé et le bien-être de chaque
+                chat, de son arrivée au foyer jusqu'à son départ vers sa famille
+                pour la vie. Chaque adoption est précédée d'examens vétérinaires
                 complets, et nous accompagnons ce processus :
                 <span class="inline-block mx-2 mt-2">
                   - Vaccination à prévoir, avec notre aide*
@@ -493,47 +498,128 @@
           <TextGenerateEffect
             v-if="isVisible"
             :duration="1.2"
-            words="Adopter Tagada, c'est choisir une aventure différente, peut-être plus lente, mais tellement enrichissante : telle que l'avait choisie l'adoptante de Rufus - ancien pensionnaire du foyer d'accueil (cf. vidéo ci-dessus). Avec Snoop, ils avaient connu la vie sauvage et maintenant même après son départ, elle connait parfaitement aussi la vie en foyer d'accueil. Elle sait mieux que quiconque la valeur d'un foyer aimant. Son amour, une fois gagné, est un cadeau d'une pureté incomparable."
+            words="Adopter l'un de nos desserts, c'est choisir une aventure différente, peut-être plus lente, mais infiniment enrichissante : telle que l'avait choisie l'adoptante de Rufus - ancien pensionnaire du foyer d'accueil (cf. vidéo ci-dessus). Comme lui, comme tous nos minous craintifs, notre trio a connu la vie sauvage avant de découvrir la douceur du foyer d'accueil. Ils savent mieux que quiconque la valeur d'un foyer aimant, et leur amour, une fois gagné, est comme la dégustation d'un dessert rare et précieux - une expérience d'une pureté incomparable."
           ></TextGenerateEffect>
         </div>
       </div>
-
       <div class="flex md:flex-row flex-col w-100">
         <div class="md:basis-1/2 basis-full md:mr-10 flex flex-col">
-          <h3 class="font-bold mt-10 mb-2">
-            Témoignages de Marie <br />(notre comportementaliste) :
-          </h3>
+          <h2 class="font-normal text-xl mt-10 mb-2">
+            Programme <span class="font-bold">Chat'Parrainage</span>
+          </h2>
 
-          <p class="font-serif border p-2 m-auto mt-4 basis-full text-xs">
-            “Tagada est plus timide que son frère Snoop, mais est prête pour
-            un.e adoptant.e patient.e. Et puis comme c'est une grande joueuse,
-            elle pourrait se détendre beaucoup plus, et plus rapidement si on
-            prend le temps de jouer avec elle.”⁣
-          </p>
-
-          <div class="basis-1/2">
-            <h3 class="font-bold mt-10 mb-2">
-              Il était une fois, le voyage de Snoop, qui est devenu maintenant
-              celui de Tagada :
-            </h3>
-            <iframe
-              src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2FlesPetitsClochards%2Fvideos%2F528407173307717%2F&show_text=false&width=476&t=0"
-              class="w-100 h-[320px] m-auto my-6"
-              style="border: none; overflow: hidden"
-              scrolling="no"
-              frameborder="0"
-              allowfullscreen="true"
-              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-              allowFullScreen="true"
-            ></iframe>
-          </div>
+          <img
+            alt="Réalité du Foyer d"
+            class="mt-4"
+            src="/desserts/chat-p.jpg"
+          />
         </div>
 
+        <div class="md:basis-1/2 basis-full md:mr-5 mt-12 flex flex-col">
+          <h3 class="font-normal text-base text-center mt-10 mb-2 leading-none">
+            <span class="font-bold">Soutenons notre trio</span>,<br />
+            et les humains derrière eux !
+          </h3>
+
+          <div class="flex flex-col justofy-center items-center">
+            <div class="text-sm mt-2">
+              <a
+                href="https://www.helloasso.com/associations/les-petits-clochards"
+                target="_blank"
+              >
+                <Badge>Campagne Parrainage sur HelloAsso</Badge>
+              </a>
+            </div>
+
+            <div class="text-sm mt-2">
+              <a
+                href="https://www.teaming.net/lespetitsclochards"
+                target="_blank"
+              >
+                <Badge>Campagne Teaming (1€/mois)</Badge>
+              </a>
+            </div>
+          </div>
+
+          <h3 class="font-normal text-base text-center mt-10 mb-2 leading-none">
+            Notre engagement <br /><span class="font-bold">envers vous :</span>
+          </h3>
+
+          <div class="text-sm mt-2 text-center">
+            En devenant parrain/marraine, vous entrez dans notre famille
+            élargie, et nous tenons à vous dire ce que cela signifie
+            concrètement.
+
+            <div
+              class="flex flex-col justify-left pl-10 mt-4 text-sm leading-none mb-4"
+            >
+              <span class="block mt-2">✨ Photos et nouvelles régulières</span>
+              <span class="block mt-2"
+                >✨ Updates sur leur évolution en socialisation et/ou en accueil
+                / adoption</span
+              >
+              <span class="block mt-2"
+                >✨ Lien priviligié avec le foyer d'accueil des chats craintifs
+                à Sainte-Geneviève-des-Bois (91)</span
+              >
+              <span class="block mt-2"
+                >✨ Pâtée gourmande spéciale Saint Valentin
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-center w-100 text-center">
+        <p class="mt-5 font-serif w-[80%]">
+          <span class="font-bold"
+            >Ensemble, nous écrivons une nouvelle page de leur histoire.</span
+          >
+          <br />
+          Votre soutien nous permet de continuer notre mission auprès de ces
+          chats qui ont tant à donner, même si leur chemin demande parfois plus
+          de temps et de patience.
+        </p>
+      </div>
+
+      <div class="flex md:flex-row flex-col w-100">
+        <div
+          class="md:basis-1/2 basis-full flex flex-col justify-center md:ml-10 mr-5"
+        >
+          <h3 class="font-bold text-xl mt-10 mb-2">Un mot du cœur :</h3>
+
+          <div class="mt-5 basis-full flex flex-col justify-around text-center">
+            <p class="text-sm font-serif">
+              Par leur âge, leur timidité, leurs traumatismes, ils ne sont pas
+              les plus démonstratifs. Pourtant, chacun possède une beauté
+              unique, tant dans leur apparence que dans leur personnalité :
+              Nougatan, une confiserie mélancoliquement garnie de noix de joie,
+              Praline, une friandise coquine fourrée de curiosité, et Melba, une
+              glace de présence timide et délicate, nappée d’observation vanille
+            </p>
+
+            <p class="text-sm font-serif mt-4">
+              Devenir leur famille, parrain, marraine, c'est choisir de
+              comprendre que parfois, les plus beaux cadeaux sont ceux qui
+              prennent du temps à se dévoiler. Comme des desserts qui révèlent
+              leurs saveurs doucement, nos trois compagnons n'attendent que la
+              bonne personne pour partager leur délicieuse affection.
+            </p>
+
+            <p class="text-base font-serif font-bold text-center mt-4">
+              <TextGenerateEffect
+                v-if="isVisible"
+                :duration="1.2"
+                words="Cette Saint-Valentin, ou au cours de ce doux quotidien, choisiriez-vous devenir leur valentin - valentine ?"
+              ></TextGenerateEffect>
+            </p>
+          </div>
+        </div>
         <div
           class="md:basis-1/2 basis-full flex flex-col justify-between md:ml-10"
         >
           <div class="flex flex-col aligns-center items-center mb-4 mt-10">
-            <h2 class="text-left text-base">
+            <h2 class="text-left text-xl">
               <span class="font-bold">Adoption ou Accueil :</span>
             </h2>
 
@@ -568,40 +654,11 @@
             </div>
           </div>
           <img
-            alt="Snoop et Tagada"
-            class="md:p-8 p-2 mt-4"
-            src="/snoop-tagada/1half.jpg"
+            alt="Notre Bande de Desserts"
+            class="mt-4"
+            src="/desserts/main-tendue.jpg"
           />
         </div>
-      </div>
-
-      <div class="flex flex-col w-100">
-        <h3 class="font-bold mt-10 mb-2">Un mot du cœur :</h3>
-
-        <p class="text-xs">
-          Aujourd'hui, Tagada n'est plus une chatte sauvage, mais une âme
-          sensible qui a traversé bien des épreuves. Elle a appris à faire
-          confiance avec son frère Snoop, et même après son départ, elle
-          continue son chemin avec courage. Cette résilience témoigne de la
-          force extraordinaire qui se cache derrière sa timidité.
-        </p>
-
-        <p class="text-xs mt-4">
-          Elle cherche maintenant une famille d'accueil ou un foyer aimant, où
-          elle pourra continuer à s'épanouir dans l'environnement de ses
-          adoptant(e)s, essentiel à sa socialisation. Son histoire avec Snoop
-          nous a appris que même les chats les plus craintifs peuvent s'ouvrir à
-          l'amour avec de la patience et de la douceur.
-        </p>
-
-        <p class="text-xs mt-4">
-          En devenant famille pour Tagada, vous n'adoptez pas seulement une
-          chatte - vous devenez gardien d'une histoire, celle d'un duo en or
-          noir dont l'un brille maintenant ailleurs. Certes, cela demande de la
-          patience et de la persévérance, mais quelle plus belle récompense que
-          de voir cette petite âme s'épanouir, jour après jour, portant en elle
-          un peu de la lumière de son frère ?
-        </p>
       </div>
     </div>
   </div>
@@ -687,6 +744,12 @@ definePageMeta({
   }
 }
 
+#__nuxt:has(.desserts) {
+  footer {
+    filter: invert(1);
+  }
+}
+
 .adoptions.desserts {
   width: 100%;
   height: auto;
@@ -694,18 +757,28 @@ definePageMeta({
   overflow-y: scroll;
   overflow-x: hidden;
 
-  @media screen and (max-width: 320px) {
+  @media screen and (max-width: 480px) {
     margin-bottom: 0;
   }
 
   h1 {
     position: relative;
+    height: 100dvh;
+
+    @media screen and (max-width: 480px) {
+      height: unset;
+    }
 
     .title {
       position: absolute;
       bottom: 7.2vh;
       right: 0;
       transform: rotate(-2.4deg);
+
+      @media screen and (max-width: 480px) {
+        bottom: -16px;
+        transform: rotate(2.4deg);
+      }
     }
   }
 
@@ -715,12 +788,26 @@ definePageMeta({
     height: auto;
     object-fit: cover;
 
+    &.banner {
+      @media screen and (max-width: 480px) {
+        width: 100vw;
+        transform: scale(1.4) translateY(24px);
+      }
+    }
+
     &.img-heart {
       position: absolute;
       bottom: -160px;
       right: -160px;
       height: 480px;
       width: auto;
+
+      @media screen and (max-width: 480px) {
+        height: 320px;
+        width: auto;
+        bottom: -100px;
+        right: -80px;
+      }
     }
   }
 }

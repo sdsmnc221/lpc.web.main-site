@@ -223,10 +223,10 @@
               </span>
 
               <span class="mt-2">
-                Aux Petits Clochards, l'adoption responsable commence par nous :
-                nous garantissons la santé et le bien-être de chaque chat, de
-                son arrivée au foyer jusqu'à son départ vers sa famille pour la
-                vie. Chaque adoption est précédée d'examens vétérinaires
+                Chez Les Petits Clochards, l'adoption responsable commence par
+                nous : nous garantissons la santé et le bien-être de chaque
+                chat, de son arrivée au foyer jusqu'à son départ vers sa famille
+                pour la vie. Chaque adoption est précédée d'examens vétérinaires
                 complets, et nous accompagnons ce processus :
                 <span class="inline-block mx-2 mt-2">
                   - Vaccination à prévoir, avec notre aide*
