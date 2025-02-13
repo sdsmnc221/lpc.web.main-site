@@ -131,7 +131,7 @@ const playFade = () => {
       delay: 0.2,
       scrollTrigger: {
         trigger: section as any,
-        start: "top bottom-=48px",
+        start: "top bottom",
       },
     });
   });

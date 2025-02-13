@@ -580,10 +580,7 @@
         </p>
       </div>
 
-      <div
-        class="flex md:flex-row max-[1024px]:flex-col flex-col w-100"
-        ref="textRef2"
-      >
+      <div class="flex md:flex-row flex-col w-100" ref="textRef2">
         <div
           class="md:basis-1/2 basis-full flex flex-col justify-center md:ml-10 md:mr-5"
         >
@@ -850,6 +847,10 @@ definePageMeta({
       width: 120%;
       position: relative;
       left: -20%;
+
+      @media screen and (max-width: 480px) {
+        left: -10%;
+      }
     }
   }
 }
