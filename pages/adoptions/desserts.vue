@@ -509,8 +509,8 @@
           </h2>
 
           <img
-            alt="Réalité du Foyer d"
-            class="mt-4"
+            alt="Réalité du Foyer d'accueil"
+            class="mt-4 chat-p"
             src="/desserts/chat-p.jpg"
           />
         </div>
@@ -551,7 +551,7 @@
             concrètement.
 
             <div
-              class="flex flex-col justify-start text-left items-start pl-10 md:left-[36px] relative mt-4 text-xs md:text-sm mb-4"
+              class="flex flex-col justify-start text-left items-start pl-10 mt-4 text-xs md:text-sm mb-4"
             >
               <p class="mt2">✨ Photos et nouvelles régulières</p>
               <p class="mt2">
@@ -569,7 +569,7 @@
       </div>
 
       <div class="flex justify-center w-100 text-center">
-        <p class="my-20 font-serif w-[80%]">
+        <p class="my-20 font-serif w-[84%]">
           <span class="font-bold"
             >Ensemble, nous écrivons une nouvelle page de leur histoire.</span
           >
@@ -580,7 +580,10 @@
         </p>
       </div>
 
-      <div class="flex md:flex-row flex-col w-100" ref="textRef2">
+      <div
+        class="flex md:flex-row max-[1024px]:flex-col flex-col w-100"
+        ref="textRef2"
+      >
         <div
           class="md:basis-1/2 basis-full flex flex-col justify-center md:ml-10 md:mr-5"
         >
@@ -840,6 +843,13 @@ definePageMeta({
         bottom: -100px;
         right: -80px;
       }
+    }
+
+    &.chat-p {
+      max-width: unset;
+      width: 120%;
+      position: relative;
+      left: -20%;
     }
   }
 }

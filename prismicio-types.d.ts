@@ -183,7 +183,8 @@ interface CatficheDocumentData {
     | "Adoptable - Chat craintif"
     | "Adoptable - Chaton"
     | "Adopté.e"
-    | "Adoptable - Chat ado",
+    | "Adoptable - Chat ado"
+    | "Réservé.e",
     "filled"
   >;
 }
