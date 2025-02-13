@@ -853,5 +853,29 @@ definePageMeta({
       }
     }
   }
+
+  @media screen and (max-width: 768px) and (max-height: 1024px),
+    screen and (max-width: 1024px) and (max-height: 768px) {
+    h1 {
+      img.banner {
+        top: 20vh;
+        position: relative;
+        transform: scale(2.4);
+      }
+
+      .title {
+        .bg-gradient-to-r {
+          width: 320px;
+          text-align: center;
+        }
+      }
+    }
+    .flex.md\:flex\-row.flex\-col {
+      flex-direction: column;
+    }
+    img.chat-p {
+      left: 0;
+    }
+  }
 }
 </style>
