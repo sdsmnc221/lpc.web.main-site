@@ -17,10 +17,17 @@
 </template>
 
 <script setup lang="ts">
-import { computed, watch } from "vue";
+import { computed, watch, nextTick } from "vue";
+import Lenis from "lenis";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import FooterMenu from "@/components/FooterMenu/index.vue";
 import PopoverBanner from "@/components/PopoverBanner/index.vue";
+
+import "lenis/dist/lenis.css";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const route = useRoute();
 
@@ -85,12 +92,64 @@ const seo = computed(() => ({
     defaultLayout.value?.data.meta_description,
 }));
 
+const playMagic = () => {
+  const lenis = new Lenis({
+    // wrapper: document.body.querySelector("#__nuxt") as HTMLElement,
+  });
+
+  window.lenis = lenis;
+
+  lenis.on("scroll", ScrollTrigger.update);
+
+  const raf = (time) => {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  };
+
+  gsap.ticker.add((time) => {
+    lenis.raf(time * 1000);
+  });
+
+  gsap.ticker.lagSmoothing(0);
+
+  requestAnimationFrame(raf);
+};
+
+const playFade = () => {
+  const children = [
+    ...document.body.querySelectorAll(".adoptions > * > *:not(.title) > *"),
+  ];
+
+  children.forEach((section, index) => {
+    gsap.from(section as any, {
+      y: 320,
+      opacity: 0,
+      backgroundColor: "transparent",
+      rotateX: 72 * Math.random() * (index % 2 === 0 ? 1 : -1),
+      rotateZ: Math.random() * 32 * (index % 2 === 0 ? -1 : 1),
+      filter: "blur(1rem)",
+      delay: 0.2,
+      scrollTrigger: {
+        trigger: section as any,
+        start: "top bottom-=48px",
+      },
+    });
+  });
+};
+
 onMounted(() => {
+  playMagic();
   getPage();
+  nextTick(() => {
+    playFade();
+  });
 });
 
 onUpdated(() => {
   getPage();
+  nextTick(() => {
+    playFade();
+  });
 });
 
 watch(
