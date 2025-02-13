@@ -854,8 +854,8 @@ definePageMeta({
     }
   }
 
-  @media screen and (max-width: 768px) and (min-width: 325px) and (max-height: 1024px),
-    screen and (max-width: 1024px) and (min-width: 325px) and (max-height: 768px) {
+  @media screen and (max-width: 768px) and (min-width: 480px) and (max-height: 1024px),
+    screen and (max-width: 1024px) and (min-width: 480px) and (max-height: 768px) {
     h1 {
       img.banner {
         top: 20vh;
