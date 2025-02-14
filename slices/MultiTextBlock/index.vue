@@ -50,12 +50,22 @@ const textBlocks = computed(() => primary.value?.textblocksgroup);
 
 <style lang="scss">
 .multi-text-block {
+  &:not(:has(.multi-text-block__block)) {
+    margin: 0;
+    padding: 0;
+
+    .multi-text-block__title {
+      margin: 0;
+      padding: 0;
+    }
+  }
+
   &__title {
     margin-bottom: var(--spacing-m);
   }
 
   & > div:not(:first-child) {
-    margin-top: var(--spacing-l) !important;
+    margin-top: var(--spacing-m) !important;
   }
 
   &__block {

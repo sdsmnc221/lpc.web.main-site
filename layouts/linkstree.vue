@@ -143,7 +143,7 @@ watch(
 @import "../styles/index.scss";
 
 @container nuxt (min-width: 701px) {
-  .app {
+  .app:has(.links) {
     padding: var(--spacing-l);
     padding-top: 0;
 
@@ -159,7 +159,7 @@ watch(
 }
 
 @container nuxt (max-width: 699px) {
-  .app {
+  .app:has(.links) {
     padding: var(--spacing-m);
 
     h1 {
@@ -174,14 +174,14 @@ watch(
 }
 
 @container nuxt (min-width: 1000px) {
-  .app {
+  .app:has(.links) {
     padding: var(--spacing-l) 12vw;
     padding-top: 0;
   }
 }
 
 @container nuxt (min-width: 1200px) {
-  .app {
+  .app:has(.links) {
     padding: var(--spacing-l) 8vw;
     padding-top: 0;
 

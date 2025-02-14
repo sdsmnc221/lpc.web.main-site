@@ -7,7 +7,11 @@ module.exports = {
   safelist: ["dark"],
   prefix: "",
 
-  content: ["./pages/**/*.{html,js}", "./components/**/*.{html,js}"],
+  content: [
+    "./pages/**/*.{html,js,vue}",
+    "./components/**/*.{html,js.,vue}",
+    "./slices/**/*.{html,js,vue}",
+  ],
 
   theme: {
     container: {

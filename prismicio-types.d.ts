@@ -924,6 +924,7 @@ export type NavigationmenuDocument<Lang extends string = string> =
   >;
 
 type NavigationpageDocumentDataSlicesSlice =
+  | ExpandableGallerySlice
   | HeadlinePillSlice
   | IndicatorWithTextSlice
   | MapWithTextBlockSlice
@@ -1388,6 +1389,98 @@ type AdoptionsGroupSliceVariation = AdoptionsGroupSliceDefault;
 export type AdoptionsGroupSlice = prismic.SharedSlice<
   "adoptions_group",
   AdoptionsGroupSliceVariation
+>;
+
+/**
+ * Item in *ExpandableGallery → Default → Primary → images*
+ */
+export interface ExpandableGallerySliceDefaultPrimaryImagesItem {
+  /**
+   * image field in *ExpandableGallery → Default → Primary → images*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: expandable_gallery.default.primary.images[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * hoverImage field in *ExpandableGallery → Default → Primary → images*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: expandable_gallery.default.primary.images[].hoverimage
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  hoverimage: prismic.ImageField<never>;
+}
+
+/**
+ * Primary content in *ExpandableGallery → Default → Primary*
+ */
+export interface ExpandableGallerySliceDefaultPrimary {
+  /**
+   * title field in *ExpandableGallery → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: expandable_gallery.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * description field in *ExpandableGallery → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: expandable_gallery.default.primary.description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * images field in *ExpandableGallery → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: expandable_gallery.default.primary.images[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  images: prismic.GroupField<
+    Simplify<ExpandableGallerySliceDefaultPrimaryImagesItem>
+  >;
+}
+
+/**
+ * Default variation for ExpandableGallery Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ExpandableGallerySliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ExpandableGallerySliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ExpandableGallery*
+ */
+type ExpandableGallerySliceVariation = ExpandableGallerySliceDefault;
+
+/**
+ * ExpandableGallery Shared Slice
+ *
+ * - **API ID**: `expandable_gallery`
+ * - **Description**: ExpandableGallery
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ExpandableGallerySlice = prismic.SharedSlice<
+  "expandable_gallery",
+  ExpandableGallerySliceVariation
 >;
 
 /**
@@ -2171,17 +2264,6 @@ export interface PopOutTextSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   text: prismic.RichTextField;
-
-  /**
-   * fitText field in *PopOutText → Default → Primary*
-   *
-   * - **Field Type**: Boolean
-   * - **Placeholder**: *None*
-   * - **Default Value**: false
-   * - **API ID Path**: pop_out_text.default.primary.fittext
-   * - **Documentation**: https://prismic.io/docs/field#boolean
-   */
-  fittext: prismic.BooleanField;
 }
 
 /**
@@ -2321,6 +2403,11 @@ declare module "@prismicio/client" {
       AdoptionsGroupSliceDefaultPrimary,
       AdoptionsGroupSliceVariation,
       AdoptionsGroupSliceDefault,
+      ExpandableGallerySlice,
+      ExpandableGallerySliceDefaultPrimaryImagesItem,
+      ExpandableGallerySliceDefaultPrimary,
+      ExpandableGallerySliceVariation,
+      ExpandableGallerySliceDefault,
       HeadlinePillSlice,
       HeadlinePillSliceDefaultPrimary,
       HeadlinePillSliceVariation,

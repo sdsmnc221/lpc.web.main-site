@@ -33,6 +33,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "expandable_gallery": {
+              "type": "SharedSlice"
+            },
             "headline_pill": {
               "type": "SharedSlice"
             },
