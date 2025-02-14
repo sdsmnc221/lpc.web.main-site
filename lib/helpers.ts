@@ -92,4 +92,21 @@ const toPascalCase = (str: string) => {
     .join("");
 };
 
-export { isMobile, isGalaxyS, isPC, isIOS, isSafari, randomHSLA, toPascalCase };
+const chunkArray = (arr: any[], size: number) => {
+  if (size <= 0) throw new Error("Chunk size must be a positive integer");
+  return arr.reduce((acc, _, i) => {
+    if (i % size === 0) acc.push(arr.slice(i, i + size));
+    return acc;
+  }, []);
+};
+
+export {
+  isMobile,
+  isGalaxyS,
+  isPC,
+  isIOS,
+  isSafari,
+  randomHSLA,
+  toPascalCase,
+  chunkArray,
+};

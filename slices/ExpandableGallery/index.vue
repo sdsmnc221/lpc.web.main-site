@@ -15,28 +15,31 @@
     />
 
     <div
-      :class="
-        cn(
-          'expandable-gallery__images flex flex-col md:flex-row  md:h-96 h-svh w-full gap-2'
-        )
-      "
+      v-if="chunks.length"
+      class="expandable-gallery__images flex flex-col gap-2"
     >
       <div
-        v-for="(image, index) in images"
-        :key="`expandable-gallery-${title}-${index}`"
-        class="relative flex h-full flex-1 cursor-pointer overflow-hidden aspect-square rounded-xl transition-all duration-500 ease-in-out hover:rounded-none md:hover:flex-[3] hover:flex-none hover:justify-center md:hover:h-full hover:h-auto hover:w-[100%]"
+        v-for="(chonk, indexChonk) in chunks"
+        :key="`expandable-gallery-${title}-chonk-${index}`"
+        :class="cn('flex flex-col md:flex-row  md:h-96 h-svh w-full gap-2 ')"
       >
-        <img
-          class="relative h-full w-full md:w-auto object-cover rounded-none pointer-events-none"
-          :src="image.src"
-          :alt="image.alt"
-        />
+        <div
+          v-for="(image, index) in chonk"
+          :key="`expandable-gallery-${title}-${indexChonk}-${index}`"
+          class="relative flex h-full flex-1 cursor-pointer overflow-hidden aspect-square rounded-xl transition-all duration-500 ease-in-out hover:rounded-none md:hover:flex-[3] hover:flex-none hover:justify-center md:hover:h-full hover:h-auto hover:w-[100%]"
+        >
+          <img
+            class="relative h-full w-full md:w-auto object-cover rounded-none pointer-events-none"
+            :src="image.src"
+            :alt="image.alt"
+          />
 
-        <img
-          class="absolute h-full w-full md:w-auto object-cover rounded-none"
-          :src="image.srcAlternative"
-          :alt="image.alt"
-        />
+          <img
+            class="absolute h-full w-full md:w-auto object-cover rounded-none"
+            :src="image.srcAlternative"
+            :alt="image.alt"
+          />
+        </div>
       </div>
     </div>
   </section>
@@ -45,6 +48,7 @@
 <script setup lang="ts">
 import { type Content } from "@prismicio/client";
 import { cn } from "~/lib/utils";
+import { chunkArray, isMobile } from "~/lib/helpers";
 
 // The array passed to `getSliceComponentProps` is purely optional.
 // Consider it as a visual hint for you when templating your slice.
@@ -60,16 +64,22 @@ const primary = computed(() => props.slice.primary);
 const title = computed(() => primary.value?.title);
 const description = computed(() => primary.value?.description);
 const images = computed(() => {
-  return primary.value?.images.map((element) => ({
-    src: element.image.url,
-    alt: element.image.alt,
-    srcAlternative: element.hoverimage.url,
-  }));
+  return (
+    primary.value?.images?.map((element) => ({
+      src: element.image.url,
+      alt: element.image.alt,
+      srcAlternative: element.hoverimage.url,
+    })) ?? []
+  );
 });
+
+const chunks = computed(() => chunkArray(images.value, 7));
 </script>
 
 <style lang="scss">
 .expandable-gallery {
+  margin-bottom: var(--spacing-l) !important;
+
   &:not(:has(.expandable-gallery__block)) {
     margin: 0;
     padding: 0;
@@ -86,16 +96,12 @@ const images = computed(() => {
       @include ft-s(large);
       @extend .gloock-regular;
     }
-
-    @media screen and (max-width: 480px) {
-      //
-    }
   }
 
   &__images {
     margin-top: var(--spacing-l);
 
-    div {
+    div div {
       img:last-child {
         position: absolute;
         top: 0;
@@ -129,6 +135,10 @@ const images = computed(() => {
     p * {
       @include ft-s(20);
       line-height: 24px;
+
+      @media screen and (max-width: 480px) {
+        @include ft-s(16);
+      }
     }
   }
 
