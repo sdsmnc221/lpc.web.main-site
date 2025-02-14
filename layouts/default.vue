@@ -207,9 +207,12 @@ watch(
       font-size: calc((var(--base-ft-size) * 4));
     }
 
-    h2,
-    h3 {
+    h2 {
       font-size: calc((var(--base-ft-size) * 3));
+    }
+
+    h3 {
+      font-size: calc((var(--base-ft-size) * 2));
     }
   }
 }
@@ -222,9 +225,12 @@ watch(
       font-size: calc((var(--base-ft-size) * 3));
     }
 
-    h2,
-    h3 {
+    h2 {
       font-size: calc((var(--base-ft-size) * 2));
+    }
+
+    h3 {
+      font-size: calc((var(--base-ft-size) * 1.2));
     }
   }
 }
@@ -245,9 +251,12 @@ watch(
       font-size: calc((var(--base-ft-size) * 5));
     }
 
-    h2,
-    h3 {
+    h2 {
       font-size: calc((var(--base-ft-size) * 4));
+    }
+
+    h3 {
+      font-size: calc((var(--base-ft-size) * 2));
     }
   }
 }

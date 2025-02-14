@@ -1,4 +1,11 @@
-export const ALLOWED_PAGES = ["", "/", "adoptions", "links"];
+export const ALLOWED_PAGES = [
+  "",
+  "/",
+  "adoptions",
+  "links",
+  "chat-p",
+  "contact",
+];
 
 export default defineNuxtRouteMiddleware((to) => {
   // Allow access to /adoptions
