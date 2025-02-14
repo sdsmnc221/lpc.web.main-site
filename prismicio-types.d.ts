@@ -2264,17 +2264,6 @@ export interface PopOutTextSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   text: prismic.RichTextField;
-
-  /**
-   * fitText field in *PopOutText → Default → Primary*
-   *
-   * - **Field Type**: Boolean
-   * - **Placeholder**: *None*
-   * - **Default Value**: false
-   * - **API ID Path**: pop_out_text.default.primary.fittext
-   * - **Documentation**: https://prismic.io/docs/field#boolean
-   */
-  fittext: prismic.BooleanField;
 }
 
 /**
