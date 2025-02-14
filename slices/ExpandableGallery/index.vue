@@ -33,7 +33,7 @@
         />
 
         <img
-          class="absolute h-full w-full md:w-auto object-cover rounded-none pointer-events-none"
+          class="absolute h-full w-full md:w-auto object-cover rounded-none"
           :src="image.srcAlternative"
           :alt="image.alt"
         />
