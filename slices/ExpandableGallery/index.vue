@@ -136,7 +136,7 @@ const chunks = computed(() => chunkArray(images.value, 7));
       @include ft-s(20);
       line-height: 24px;
 
-      @media screen and (max-width: 480px) {
+      @media screen and (max-width: 768px) {
         @include ft-s(16);
       }
     }
