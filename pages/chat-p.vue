@@ -11,6 +11,7 @@
 import HeroPhotoBackground from "@/slices/HeroPhotoBackground/index.vue";
 import HeroBannerWithText from "@/slices/HeroBannerWithText/index.vue";
 import MultiTextBlock from "@/slices/MultiTextBlock/index.vue";
+import ExpandableGallery from "@/slices/ExpandableGallery/index.vue";
 import PopOutText from "@/slices/PopOutText/index.vue";
 
 import { toPascalCase } from "@/lib/helpers";
@@ -38,6 +39,8 @@ const getComponent = (compName: string) => {
       return HeroBannerWithText;
     case "MultiTextBlock":
       return MultiTextBlock;
+    case "ExpandableGallery":
+      return ExpandableGallery;
     case "PopOutText":
       return PopOutText;
     default:

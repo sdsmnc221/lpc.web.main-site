@@ -7,6 +7,9 @@ export const components = defineSliceZoneComponents({
   adoptions_group: defineAsyncComponent(
     () => import("./AdoptionsGroup/index.vue"),
   ),
+  expandable_gallery: defineAsyncComponent(
+    () => import("./ExpandableGallery/index.vue"),
+  ),
   headline_pill: defineAsyncComponent(() => import("./HeadlinePill/index.vue")),
   hero_banner_with_text: defineAsyncComponent(
     () => import("./HeroBannerWithText/index.vue"),
