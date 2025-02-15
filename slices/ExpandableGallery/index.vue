@@ -26,7 +26,7 @@
         <div
           v-for="(image, index) in chonk"
           :key="`expandable-gallery-${title}-${indexChonk}-${index}`"
-          class="relative flex h-full flex-1 cursor-pointer overflow-hidden aspect-square rounded-xl transition-opacity transition-[flex] duration-500 ease-in-out hover:rounded-none md:hover:flex-[4] hover:flex-none hover:justify-center md:hover:h-full hover:h-auto hover:w-[100%]"
+          class="relative flex h-full flex-1 cursor-pointer overflow-hidden aspect-square rounded-xl transition-[flex] duration-500 ease-in-out hover:rounded-none md:hover:flex-[4] hover:flex-none hover:justify-center md:hover:h-full hover:h-auto hover:w-[100%]"
         >
           <img
             class="relative h-full w-full md:w-auto object-cover rounded-none pointer-events-none"
@@ -35,7 +35,7 @@
           />
 
           <img
-            class="absolute h-full w-full md:w-auto object-cover rounded-none"
+            class="absolute h-full w-full md:w-auto object-cover rounded-none transition-all"
             :src="image.srcAlternative"
             :alt="image.alt"
           />
@@ -110,7 +110,6 @@ const chunks = computed(() => chunkArray(images.value, 7));
         height: 100%;
         transform: translateX(-50%);
         opacity: 0;
-        transition: opacity ease-in-out 0.72s;
       }
 
       &:hover {
