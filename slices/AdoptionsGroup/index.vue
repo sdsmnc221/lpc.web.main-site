@@ -283,53 +283,35 @@ const playScroll = (TL, containerWidth, windowWidth) => {
 
       const words = [...groupTitle.value.$el.querySelectorAll(".word")];
 
-      if (!isMobile()) {
-        words.forEach((word, index) => {
-          titleTL.fromTo(
-            word,
-            {
-              y: index * -24,
-              x: index * (windowWidth / 4) * (index % 2 === 0) ? 1 : -1,
-              filter: "blur(4px)",
-              opacity: 0,
-              color: "var(--gray)",
-              willChange: "transform, filter, opacity, color",
+      words.forEach((word, index) => {
+        titleTL.fromTo(
+          word,
+          {
+            y: index * -24,
+            x: index * (windowWidth / 4) * (index % 2 === 0) ? 1 : -1,
+            filter: "blur(4px)",
+            opacity: 0,
+            color: "var(--gray)",
+            willChange: "transform, filter, opacity, color",
+          },
+          {
+            y: 0,
+            x: 0,
+            filter: "blur(0)",
+            opacity: 1,
+            color: "var(--black)",
+            ease: "power4.inOut",
+            delay: 0.1 + index * 0.2,
+            scrollTrigger: {
+              // containerAnimation: TL,
+              trigger: groupTitle.value.$el,
+              start: "top top",
+              end: `top+=${(index + 3) * 64}px top`,
+              scrub: 0.5,
             },
-            {
-              y: 0,
-              x: 0,
-              filter: "blur(0)",
-              opacity: 1,
-              color: "var(--black)",
-              ease: "power4.inOut",
-              delay: 0.1 + index * 0.2,
-              scrollTrigger: {
-                // containerAnimation: TL,
-                trigger: groupTitle.value.$el,
-                start: "top top",
-                end: `top+=${(index + 3) * 64}px top`,
-                scrub: 0.5,
-              },
-            }
-          );
-        });
-      } else {
-        words.forEach((word, index) => {
-          titleTL.to(
-            word,
-
-            {
-              y: 0,
-              x: 0,
-              filter: "blur(0)",
-              opacity: 1,
-              color: "var(--black)",
-              ease: "power4.inOut",
-              delay: 0.1 + index * 0.2,
-            }
-          );
-        });
-      }
+          }
+        );
+      });
 
       TL.add(titleTL, 0);
     }, 2400);
@@ -343,54 +325,31 @@ const playScroll = (TL, containerWidth, windowWidth) => {
       // Create a separate timeline for spans animation
       const spansTL = gsap.timeline({});
       // Add span animations to the spans timeline
-      if (!isMobile()) {
-        spans.forEach((span, index) => {
-          spansTL.fromTo(
-            span,
-            {
-              y: index * 8,
-              // x: index * (windowWidth / 4) * (index % 2 === 0) ? 1 : -1,
-              opacity: 0,
-              willChange: "transform, filter, opacity",
+      spans.forEach((span, index) => {
+        spansTL.fromTo(
+          span,
+          {
+            y: index * 8,
+            // x: index * (windowWidth / 4) * (index % 2 === 0) ? 1 : -1,
+            opacity: 0,
+            willChange: "transform, filter, opacity",
+          },
+          {
+            y: 0,
+            x: 0,
+            opacity: 1,
+            stagger: 0.16 * index,
+            duration: 2,
+            scrollTrigger: {
+              // containerAnimation: TL,
+              trigger: groupDescription.value.parentNode,
+              start: "top top",
+              scrub: 0.5,
             },
-            {
-              y: 0,
-              x: 0,
-              opacity: 1,
-              stagger: 0.16 * index,
-              duration: 2,
-              scrollTrigger: {
-                // containerAnimation: TL,
-                trigger: groupDescription.value.parentNode,
-                start: "top top",
-                scrub: 0.5,
-              },
-              ease: "power4",
-            }
-          );
-        });
-      } else {
-        spans.forEach((span, index) => {
-          spansTL.to(
-            span,
-
-            {
-              y: 0,
-              x: 0,
-              opacity: 1,
-              stagger: 0.16 * index,
-              duration: 2,
-              scrollTrigger: {
-                // containerAnimation: TL,
-                trigger: groupDescription.value.parentNode,
-                start: "top top",
-                scrub: 0.5,
-              },
-              ease: "power4",
-            }
-          );
-        });
-      }
+            ease: "power4",
+          }
+        );
+      });
 
       // Link the spans timeline to the main timeline's pause point
       TL.add(spansTL, 0);
@@ -507,7 +466,7 @@ const configScrollTriggerSafari = () => {
 
 onMounted(() => {
   nextTick(() => {
-    if (!isSafari()) {
+    if (!isMobile() && !isSafari()) {
       initHorizontalScroll();
     } else {
       isDoScrollDisabled.value = true;
