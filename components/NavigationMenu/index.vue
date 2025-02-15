@@ -46,16 +46,16 @@ const { y } = useWindowScroll();
 onMounted(() => {
   nextTick(() => {
     if (window.scrollY <= window.innerHeight / 8) {
-      node.value.classList.add("--at-top");
+      node.value?.classList?.add("--at-top");
     } else {
-      node.value.classList.remove("--at-top");
+      node.value?.classList?.remove("--at-top");
     }
 
     window.addEventListener("scroll", (e) => {
       if (window.scrollY <= window.innerHeight / 8) {
-        node.value.classList.add("--at-top");
+        node.value?.classList?.add("--at-top");
       } else {
-        node.value.classList.remove("--at-top");
+        node.value?.classList?.remove("--at-top");
       }
     });
   });
