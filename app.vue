@@ -73,6 +73,14 @@ watch(
     width: 100dvw;
     height: 100svh;
     overflow: hidden;
+
+    .app {
+      height: 100dvh;
+      overflow-y: hidden;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
   }
 }
 </style>

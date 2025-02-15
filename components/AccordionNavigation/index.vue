@@ -72,6 +72,7 @@ watch(
   top: 0;
   z-index: 99;
   display: block;
+  transition: all ease-in-out 0.64s;
 
   background-color: var(--black);
 
@@ -80,7 +81,9 @@ watch(
   }
 
   &.--hidden {
-    display: none;
+    opacity: 0;
+    pointer-events: none;
+    top: -20vh;
   }
 
   & > div {

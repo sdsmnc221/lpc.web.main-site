@@ -1,8 +1,8 @@
 <template>
   <nav
-    class="navigation-menu"
+    class="navigation-menu transition-all"
     ref="node"
-    :class="{ '--thin': thin, '--sticky': sticky, 'bg-black': black }"
+    :class="{ '--thin': thin, 'bg-black': black }"
     v-if="links"
   >
     <NuxtLink
@@ -37,8 +37,6 @@ const route = useRoute();
 
 const thin = ref(false);
 
-const sticky = ref(false);
-
 const black = ref(true);
 
 const node = ref(null);
@@ -47,21 +45,17 @@ const { y } = useWindowScroll();
 
 onMounted(() => {
   nextTick(() => {
-    if (window.innerWidth < 699 && node.value) {
-      if (window.scrollY < window.innerHeight / 8) {
-        node.value.style.zIndex = 0;
-      } else {
-        node.value.style.zIndex = -1;
-      }
+    if (window.scrollY <= window.innerHeight / 8) {
+      node.value.classList.add("--at-top");
+    } else {
+      node.value.classList.remove("--at-top");
     }
 
     window.addEventListener("scroll", (e) => {
-      if (window.innerWidth < 699 && node.value) {
-        if (window.scrollY < window.innerHeight / 8) {
-          node.value.style.zIndex = 0;
-        } else {
-          node.value.style.zIndex = -1;
-        }
+      if (window.scrollY <= window.innerHeight / 8) {
+        node.value.classList.add("--at-top");
+      } else {
+        node.value.classList.remove("--at-top");
       }
     });
   });
@@ -73,12 +67,10 @@ watch(
     nextTick(() => {
       if (newY && oldY) {
         thin.value = oldY < newY && newY > 240;
-        sticky.value = oldY < newY && newY > 240;
+
         black.value = newY < 240 || (oldY < newY && newY > 240);
       } else {
-        if (document && document.querySelector) {
-          document.querySelector("main.app")?.classList.add("--gap");
-        }
+        return;
       }
     });
   },
@@ -88,13 +80,9 @@ watch(
 
 <style lang="scss">
 @media screen and (min-width: 1000px) {
-  #__nuxt:has(.navigation-menu.--thin.--sticky) {
+  #__nuxt:has(.navigation-menu.--thin) {
     main {
-      margin-top: calc(var(--spacing-l) * 2);
-
-      &.--gap {
-        margin-top: 0;
-      }
+      transition: margin-top ease-in-out 0.64s;
     }
   }
 }
@@ -106,19 +94,25 @@ watch(
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  width: 100vw;
 
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 1;
+  z-index: 10;
 
   transition: all 0.64s ease-in-out;
 
-  &.--sticky {
+  &.--at-top {
     position: fixed;
-    width: 100vw;
+    z-index: 10;
+  }
+
+  &:not(.--at-top) {
+    top: -20vh;
   }
 
   &.--thin {
+    top: 0;
     padding-top: var(--spacing-s);
     padding-bottom: 0;
     align-items: center;
@@ -150,7 +144,10 @@ watch(
 
 @container nuxt (max-width: 699px) {
   .navigation-menu {
-    z-index: -1;
+    &:not(.--at-top) {
+      top: -20vh;
+      z-index: -1;
+    }
   }
 }
 
