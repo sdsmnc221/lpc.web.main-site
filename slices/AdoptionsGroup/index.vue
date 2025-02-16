@@ -659,7 +659,7 @@ onUnmounted(() => {
       img {
         height: auto !important;
         left: 0 !important;
-        bottom: 7.2vh;
+        bottom: 4.8vh;
         transform: scale(0.64) !important;
       }
 
