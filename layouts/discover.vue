@@ -94,7 +94,7 @@ const seo = computed(() => ({
 
 const playMagic = () => {
   const lenis = new Lenis({
-    // wrapper: document.body.querySelector("#__nuxt") as HTMLElement,
+    wrapper: document.body.querySelector("#__nuxt") as HTMLElement,
   });
 
   window.lenis = lenis;
