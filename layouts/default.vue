@@ -22,19 +22,18 @@
 
 <script setup lang="ts">
 import { computed, watch } from "vue";
-import Lenis from "lenis";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import useSmoothScroll from "@/composables/useSmoothScroll";
 
 import AccordionNavigation from "@/components/AccordionNavigation/index.vue";
 import NavigationMenu from "@/components/NavigationMenu/index.vue";
 import FooterMenu from "@/components/FooterMenu/index.vue";
 import PopoverBanner from "@/components/PopoverBanner/index.vue";
 
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 import "splitting/dist/splitting.css";
 import "splitting/dist/splitting-cells.css";
-
-import "lenis/dist/lenis.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -106,28 +105,7 @@ const seo = computed(() => ({
     defaultLayout.value?.data?.meta_image?.url,
 }));
 
-const playMagic = () => {
-  const lenis = new Lenis({
-    wrapper: document.body.querySelector("#__nuxt") as HTMLElement,
-  });
-
-  window.lenis = lenis;
-
-  lenis.on("scroll", ScrollTrigger.update);
-
-  const raf = (time) => {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  };
-
-  gsap.ticker.add((time) => {
-    lenis.raf(time * 1000);
-  });
-
-  gsap.ticker.lagSmoothing(0);
-
-  requestAnimationFrame(raf);
-};
+useSmoothScroll();
 
 const playFade = () => {
   if (updateCount.value === 0) {
@@ -154,7 +132,6 @@ const playFade = () => {
 };
 
 onMounted(() => {
-  playMagic();
   playFade();
 
   // nextTick(() => {

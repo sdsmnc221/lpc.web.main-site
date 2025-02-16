@@ -76,6 +76,7 @@ const onUpdateOpen = (openState) => {
   if (openState) {
     window.lenis?.stop();
   } else {
+    console.log(window.lenis);
     window.lenis?.start();
   }
 };

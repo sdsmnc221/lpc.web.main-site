@@ -18,17 +18,16 @@
 
 <script setup lang="ts">
 import { computed, watch } from "vue";
-import Lenis from "lenis";
+
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import useSmoothScroll from "~/composables/useSmoothScroll";
 
 import FooterMenu from "@/components/FooterMenu/index.vue";
 import PopoverBanner from "@/components/PopoverBanner/index.vue";
 
 import "splitting/dist/splitting.css";
 import "splitting/dist/splitting-cells.css";
-
-import "lenis/dist/lenis.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -115,28 +114,7 @@ const seo = ref({
     : defaultLayout.value?.data.meta_image.url,
 });
 
-const playMagic = () => {
-  const lenis = new Lenis({
-    wrapper: document.body.querySelector("#__nuxt") as HTMLElement,
-  });
-
-  window.lenis = lenis;
-
-  lenis.on("scroll", ScrollTrigger.update);
-
-  const raf = (time) => {
-    lenis.raf(time * 0.0001);
-    requestAnimationFrame(raf);
-  };
-
-  gsap.ticker.add((time) => {
-    lenis.raf(time * 1000);
-  });
-
-  gsap.ticker.lagSmoothing(0);
-
-  requestAnimationFrame(raf);
-};
+useSmoothScroll();
 
 const playFade = () => {
   console.log(["links", "adoptions"].includes(route.path));
@@ -167,7 +145,7 @@ const playFade = () => {
 
 onMounted(() => {
   getPage();
-  playMagic();
+
   playFade();
 });
 
