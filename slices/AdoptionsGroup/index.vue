@@ -660,7 +660,7 @@ onUnmounted(() => {
         height: auto !important;
         left: 0 !important;
         bottom: 7.2vh;
-        transform: scale(1) !important;
+        transform: scale(0.64) !important;
       }
 
       strong {
