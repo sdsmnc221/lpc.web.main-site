@@ -51,7 +51,7 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-@import "~/styles/linkstree";
+@import "@/styles/linkstree";
 
 #__nuxt:has(.links) {
   .navigation-menu {

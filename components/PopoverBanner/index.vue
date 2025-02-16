@@ -1,38 +1,48 @@
 <template>
-  <Popover v-if="displaytype === 'PopoverBanner'" class="popover-banner">
-    <PopoverTrigger>
-      <Badge class="popover-banner__cta">{{ ctalabel }} </Badge>
-    </PopoverTrigger>
-    <PopoverContent class="popover-banner__content">
-      <prismic-image
-        v-if="banner && banner?.url"
-        class="popover-banner__image"
-        :field="banner"
-      />
-      <prismic-rich-text
-        class="popover-banner__text size-16 albert-sans-light"
-        :field="text"
-      />
-    </PopoverContent>
-  </Popover>
+  <div class="popover-banner" v-if="displaytype === 'PopoverBanner'">
+    <Popover @update:open="(evt) => onUpdateOpen(evt)">
+      <PopoverTrigger>
+        <Badge class="popover-banner__cta">{{ ctalabel }} </Badge>
+      </PopoverTrigger>
+      <PopoverContent class="popover-banner__content overflow-y-scroll">
+        <div>
+          <prismic-image
+            v-if="banner && banner?.url"
+            class="popover-banner__image"
+            :field="banner"
+          />
+          <prismic-rich-text
+            class="popover-banner__text size-16 albert-sans-light"
+            :field="text"
+          />
+        </div>
+      </PopoverContent>
+    </Popover>
+  </div>
 
-  <Sheet v-else-if="displaytype === 'PopoverSheet'" class="popover-sheet">
-    <SheetTrigger
-      ><Badge class="popover-banner__cta">{{ ctalabel }} </Badge></SheetTrigger
-    >
-    <SheetContent class="popover-sheet__content md:w-1/3 sm:max-w-1/2">
-      <SheetHeader>
-        <SheetTitle class="popover-sheet__title text-3xl">{{
-          ctalabel
-        }}</SheetTitle>
+  <div v-else-if="displaytype === 'PopoverSheet'" class="popover-sheet">
+    <Sheet @update:open="(evt) => onUpdateOpen(evt)">
+      <SheetTrigger
+        ><Badge class="popover-banner__cta"
+          >{{ ctalabel }}
+        </Badge></SheetTrigger
+      >
+      <SheetContent
+        class="popover-sheet__content md:w-1/3 sm:max-w-1/2 overflow-y-scroll"
+      >
+        <SheetHeader>
+          <SheetTitle class="popover-sheet__title text-3xl">{{
+            ctalabel
+          }}</SheetTitle>
 
-        <prismic-rich-text
-          class="popover-sheet__text albert-sans-regular w-fit leading-6"
-          :field="text"
-        />
-      </SheetHeader>
-    </SheetContent>
-  </Sheet>
+          <prismic-rich-text
+            class="popover-sheet__text albert-sans-regular w-fit leading-6"
+            :field="text"
+          />
+        </SheetHeader>
+      </SheetContent>
+    </Sheet>
+  </div>
 
   <div v-else></div>
 </template>
@@ -61,6 +71,15 @@ type Prop = {
 };
 
 const props = defineProps<Prop>();
+
+const onUpdateOpen = (openState) => {
+  if (openState) {
+    window.lenis?.stop();
+  } else {
+    console.log(window.lenis);
+    window.lenis?.start();
+  }
+};
 </script>
 
 <style lang="scss">
@@ -77,7 +96,6 @@ const props = defineProps<Prop>();
 
   &__content {
     max-height: 72vh;
-    overflow-y: scroll;
   }
 
   &__text {
@@ -106,11 +124,6 @@ const props = defineProps<Prop>();
 }
 
 .popover-sheet {
-  &__content,
-  &__text {
-    overflow-y: scroll;
-  }
-
   &__title {
     text-align: left;
   }

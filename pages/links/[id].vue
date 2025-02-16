@@ -38,5 +38,5 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-@import "~/styles/linkstree";
+@import "@/styles/linkstree";
 </style>
