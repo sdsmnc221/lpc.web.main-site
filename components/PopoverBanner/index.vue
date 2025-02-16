@@ -4,15 +4,15 @@
       <PopoverTrigger>
         <Badge class="popover-banner__cta">{{ ctalabel }} </Badge>
       </PopoverTrigger>
-      <PopoverContent class="popover-banner__content">
-        <div class="overflow-y-scroll">
+      <PopoverContent class="popover-banner__content overflow-y-scroll">
+        <div>
           <prismic-image
             v-if="banner && banner?.url"
             class="popover-banner__image"
             :field="banner"
           />
           <prismic-rich-text
-            class="popover-banner__text size-16 albert-sans-light max-h-72"
+            class="popover-banner__text size-16 albert-sans-light"
             :field="text"
           />
         </div>
@@ -35,12 +35,10 @@
             ctalabel
           }}</SheetTitle>
 
-          <div class="overflow-y-scroll">
-            <prismic-rich-text
-              class="popover-sheet__text albert-sans-regular w-fit leading-6"
-              :field="text"
-            />
-          </div>
+          <prismic-rich-text
+            class="popover-sheet__text albert-sans-regular w-fit leading-6"
+            :field="text"
+          />
         </SheetHeader>
       </SheetContent>
     </Sheet>
@@ -84,12 +82,6 @@ const onUpdateOpen = (openState) => {
 </script>
 
 <style lang="scss">
-body:has(div[data-state="open"]) {
-  #__nuxt {
-    filter: blur(4px);
-  }
-}
-
 .popover-banner {
   &__cta {
     font-weight: 400 !important;
