@@ -1,40 +1,46 @@
 <template>
   <div class="popover-banner" v-if="displaytype === 'PopoverBanner'">
-    <Popover>
+    <Popover @update:open="(evt) => onUpdateOpen(evt)">
       <PopoverTrigger>
         <Badge class="popover-banner__cta">{{ ctalabel }} </Badge>
       </PopoverTrigger>
       <PopoverContent class="popover-banner__content">
-        <prismic-image
-          v-if="banner && banner?.url"
-          class="popover-banner__image"
-          :field="banner"
-        />
-        <prismic-rich-text
-          class="popover-banner__text size-16 albert-sans-light"
-          :field="text"
-        />
+        <div class="overflow-y-scroll">
+          <prismic-image
+            v-if="banner && banner?.url"
+            class="popover-banner__image"
+            :field="banner"
+          />
+          <prismic-rich-text
+            class="popover-banner__text size-16 albert-sans-light max-h-72"
+            :field="text"
+          />
+        </div>
       </PopoverContent>
     </Popover>
   </div>
 
   <div v-else-if="displaytype === 'PopoverSheet'" class="popover-sheet">
-    <Sheet>
+    <Sheet @update:open="(evt) => onUpdateOpen(evt)">
       <SheetTrigger
         ><Badge class="popover-banner__cta"
           >{{ ctalabel }}
         </Badge></SheetTrigger
       >
-      <SheetContent class="popover-sheet__content md:w-1/3 sm:max-w-1/2">
+      <SheetContent
+        class="popover-sheet__content md:w-1/3 sm:max-w-1/2 overflow-y-scroll"
+      >
         <SheetHeader>
           <SheetTitle class="popover-sheet__title text-3xl">{{
             ctalabel
           }}</SheetTitle>
 
-          <prismic-rich-text
-            class="popover-sheet__text albert-sans-regular w-fit leading-6"
-            :field="text"
-          />
+          <div class="overflow-y-scroll">
+            <prismic-rich-text
+              class="popover-sheet__text albert-sans-regular w-fit leading-6"
+              :field="text"
+            />
+          </div>
         </SheetHeader>
       </SheetContent>
     </Sheet>
@@ -67,9 +73,23 @@ type Prop = {
 };
 
 const props = defineProps<Prop>();
+
+const onUpdateOpen = (openState) => {
+  if (openState) {
+    window.lenis?.stop();
+  } else {
+    window.lenis?.start();
+  }
+};
 </script>
 
 <style lang="scss">
+body:has(div[data-state="open"]) {
+  #__nuxt {
+    filter: blur(4px);
+  }
+}
+
 .popover-banner {
   &__cta {
     font-weight: 400 !important;
@@ -83,7 +103,6 @@ const props = defineProps<Prop>();
 
   &__content {
     max-height: 72vh;
-    overflow-y: scroll;
   }
 
   &__text {
@@ -112,11 +131,6 @@ const props = defineProps<Prop>();
 }
 
 .popover-sheet {
-  &__content,
-  &__text {
-    overflow-y: scroll;
-  }
-
   &__title {
     text-align: left;
   }
