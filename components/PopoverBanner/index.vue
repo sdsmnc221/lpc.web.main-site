@@ -1,38 +1,44 @@
 <template>
-  <Popover v-if="displaytype === 'PopoverBanner'" class="popover-banner">
-    <PopoverTrigger>
-      <Badge class="popover-banner__cta">{{ ctalabel }} </Badge>
-    </PopoverTrigger>
-    <PopoverContent class="popover-banner__content">
-      <prismic-image
-        v-if="banner && banner?.url"
-        class="popover-banner__image"
-        :field="banner"
-      />
-      <prismic-rich-text
-        class="popover-banner__text size-16 albert-sans-light"
-        :field="text"
-      />
-    </PopoverContent>
-  </Popover>
-
-  <Sheet v-else-if="displaytype === 'PopoverSheet'" class="popover-sheet">
-    <SheetTrigger
-      ><Badge class="popover-banner__cta">{{ ctalabel }} </Badge></SheetTrigger
-    >
-    <SheetContent class="popover-sheet__content md:w-1/3 sm:max-w-1/2">
-      <SheetHeader>
-        <SheetTitle class="popover-sheet__title text-3xl">{{
-          ctalabel
-        }}</SheetTitle>
-
+  <div class="popover-banner" v-if="displaytype === 'PopoverBanner'">
+    <Popover>
+      <PopoverTrigger>
+        <Badge class="popover-banner__cta">{{ ctalabel }} </Badge>
+      </PopoverTrigger>
+      <PopoverContent class="popover-banner__content">
+        <prismic-image
+          v-if="banner && banner?.url"
+          class="popover-banner__image"
+          :field="banner"
+        />
         <prismic-rich-text
-          class="popover-sheet__text albert-sans-regular w-fit leading-6"
+          class="popover-banner__text size-16 albert-sans-light"
           :field="text"
         />
-      </SheetHeader>
-    </SheetContent>
-  </Sheet>
+      </PopoverContent>
+    </Popover>
+  </div>
+
+  <div v-else-if="displaytype === 'PopoverSheet'" class="popover-sheet">
+    <Sheet>
+      <SheetTrigger
+        ><Badge class="popover-banner__cta"
+          >{{ ctalabel }}
+        </Badge></SheetTrigger
+      >
+      <SheetContent class="popover-sheet__content md:w-1/3 sm:max-w-1/2">
+        <SheetHeader>
+          <SheetTitle class="popover-sheet__title text-3xl">{{
+            ctalabel
+          }}</SheetTitle>
+
+          <prismic-rich-text
+            class="popover-sheet__text albert-sans-regular w-fit leading-6"
+            :field="text"
+          />
+        </SheetHeader>
+      </SheetContent>
+    </Sheet>
+  </div>
 
   <div v-else></div>
 </template>
