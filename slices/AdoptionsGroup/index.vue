@@ -583,11 +583,9 @@ onUnmounted(() => {
     h4 {
       margin-bottom: 2.4vh;
 
-      * {
-        font-weight: bold;
-        @include ft-s(medium);
-        line-height: 2rem;
-      }
+      font-weight: bold;
+      @include ft-s(medium);
+      line-height: 2rem;
     }
   }
 
