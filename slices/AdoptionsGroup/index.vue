@@ -731,16 +731,13 @@ onUnmounted(() => {
         [data-index] {
           width: 100vw;
           margin-bottom: calc(var(--spacing-l) * 2 * var(--index_, 2));
+          padding-bottom: 10vh;
         }
 
         [data-index="1"],
         [data-index="3"],
         [data-index="5"] {
           --index_: calc((var(--index) +1) * 2.4 + var(--index));
-        }
-
-        & > * {
-          padding-bottom: 4vh;
         }
       }
 
