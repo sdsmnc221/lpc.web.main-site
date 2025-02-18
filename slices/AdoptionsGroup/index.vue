@@ -784,7 +784,7 @@ onUnmounted(() => {
         padding-bottom: 10vh;
 
         & > * {
-          width: 40vw !important;
+          width: 42vw !important;
           transform: translateY(-3.6vh);
         }
 
