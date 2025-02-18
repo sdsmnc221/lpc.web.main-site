@@ -607,6 +607,12 @@ onUnmounted(() => {
       }
     }
   }
+
+  a {
+    * {
+      text-decoration: underline;
+    }
+  }
 }
 
 @container app (max-width: 699px) {
