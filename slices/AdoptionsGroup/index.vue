@@ -781,10 +781,11 @@ onUnmounted(() => {
       &__description {
         padding-left: 0;
         padding-right: 0;
-        padding-bottom: 8vh;
+        padding-bottom: 10vh;
 
         & > * {
           width: 40vw !important;
+          transform: translateY(-3.6vh);
         }
 
         [data-index] {
