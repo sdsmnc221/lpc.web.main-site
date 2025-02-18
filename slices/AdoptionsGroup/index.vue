@@ -738,6 +738,10 @@ onUnmounted(() => {
         [data-index="5"] {
           --index_: calc((var(--index) +1) * 2.4 + var(--index));
         }
+
+        & > * {
+          padding-bottom: 4vh;
+        }
       }
 
       &__text-content {
@@ -781,11 +785,10 @@ onUnmounted(() => {
       &__description {
         padding-left: 0;
         padding-right: 0;
-        padding-bottom: 10vh;
+        padding-bottom: 8vh;
 
         & > * {
-          width: 42vw !important;
-          transform: translateY(-3.6vh);
+          width: 40vw !important;
         }
 
         [data-index] {
