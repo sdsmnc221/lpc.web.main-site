@@ -586,6 +586,12 @@ onUnmounted(() => {
       font-weight: bold;
       @include ft-s(medium);
       line-height: 2rem;
+
+      * {
+        font-weight: bold;
+        @include ft-s(medium);
+        line-height: 2rem;
+      }
     }
   }
 
