@@ -1,14 +1,17 @@
 <template>
-  <div class="cat-item">
+  <div class="cat-item" ref="catItem">
     <Sheet>
       <SheetTrigger @click="onOpen(true)">
-        <prismic-image
-          class="cat-item__photo"
-          :field="catHasAvatar ? catphoto : avatarPlaceholder"
-        />
+        <div class="cat-item-img-wrap">
+          <prismic-image
+            class="cat-item__photo cat-item-img"
+            :field="catHasAvatar ? catphoto : avatarPlaceholder"
+          />
+        </div>
 
-        <h4 class="cat-item__name">
+        <h4 class="cat-item__name cat-item-title oh">
           <span
+            class="oh__inner"
             :class="`${index % 2 === 0 ? 'gloock-regular' : 'albert-sans-bold'}`"
             >{{ catname }}</span
           >
@@ -43,16 +46,29 @@
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 
 import type { CatInfo } from "~/interfaces/Cat";
+import { ContentItem } from "../CatSheetV2/ContentItem";
 
 const props = defineProps<CatInfo>();
 
 const emits = defineEmits(["update:open-item"]);
 
+const catItem = ref<HTMLDivElement | null>(null);
+const contentItem = ref<ContentItem | null>(null);
+
 const catHasAvatar = computed(() => props.catphoto.hasOwnProperty("url"));
 
 const onOpen = (opened: boolean) => {
-  emits("update:open-item", { opened });
+  emits("update:open-item", { opened, contentItem: contentItem.value });
 };
+
+watch(
+  () => catItem.value,
+  (value) => {
+    if (value !== null) {
+      contentItem.value = new ContentItem(value);
+    }
+  }
+);
 </script>
 
 <style lang="scss">
@@ -71,6 +87,17 @@ const onOpen = (opened: boolean) => {
   &:nth-of-type(2n) {
     transform: translateY(calc(var(--spacing-l) * -1));
   }
+
+  .oh {
+    // position: relative;
+    // overflow: hidden;
+  }
+
+  .oh__inner {
+    will-change: transform;
+    // display: inline-block;
+  }
+
   .cat-item__explore {
     display: flex;
     flex-direction: column;

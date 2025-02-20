@@ -36,6 +36,7 @@
       <div class="adoptions-group__items" v-if="itemsData?.length">
         <cat-item
           v-for="(cat, index) in itemsData"
+          ref="itemsDataDom"
           :key="`adoptions-group-cat-${cat.id}`"
           v-bind="cat.data"
           :contact-info="contactInfo"
@@ -44,10 +45,13 @@
           :id="cat.id"
           :index="index"
           @update:open-item="
-            ({ opened }) =>
+            ({ opened, contentItem }) =>
               onOpenItem({
                 opened,
                 catItem: formatCatItem({ cat, index }),
+                contentItem,
+                itemIndex: index,
+                groupIndex,
               })
           "
         ></cat-item>
@@ -56,9 +60,11 @@
 
     <Teleport to="body">
       <cat-sheet
+        ref="catSheet"
         :open="defaultOpen"
         :cat-item="currentCatItem"
         :tint="randomTint"
+        :group-index="groupIndex"
         @update:open-sheet="({ opened }) => onOpenSheet({ opened })"
       ></cat-sheet>
     </Teleport>
@@ -66,11 +72,12 @@
 </template>
 
 <script setup lang="ts">
+import { useTemplateRef } from "vue";
 import { type Content } from "@prismicio/client";
 import type { CatInfo } from "~/interfaces/Cat";
 
 import CatItem from "@/components/CatItem/index.vue";
-import CatSheet from "@/components/CatSheet/index.vue";
+import CatSheet from "@/components/CatSheetV2/index.vue";
 import SafariScrollIndicator from "@/components/SafariScrollIndicator/index.vue";
 
 const { client } = usePrismic();
@@ -126,10 +133,15 @@ const avatarPlaceholder = computed(
 
 const currentCatItem = ref<CatInfo | null>(null);
 
+const catContentItems = useTemplateRef("itemsDataDom");
+const catSheet = ref(null);
+
 const defaultOpen = ref(false);
 const randomTint = ref(randomHSLA());
 
 const isDoScrollDisabled = ref(false);
+
+const groupIndex = computed(() => props.index);
 
 const commonOpen = (opened: boolean, catItem = null) => {
   defaultOpen.value = opened;
@@ -165,9 +177,15 @@ const formatCatItem = ({ cat, index }) => {
 };
 
 const onOpenItem = (details) => {
-  const { opened, catItem } = details;
+  const { opened, catItem, contentItem, itemIndex, groupIndex } = details;
 
   commonOpen(opened, catItem);
+
+  if (opened) {
+    setTimeout(() => {
+      catSheet.value.onOpenSheet(contentItem, itemIndex, groupIndex);
+    }, 480);
+  }
 };
 
 const onOpenSheet = (details) => {
