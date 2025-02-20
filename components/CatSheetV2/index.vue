@@ -3,21 +3,41 @@
     <Teleport to="body">
       <div
         :class="`fixed w-[100vw] h-[100svh] top-0 left-0 cat-sheet-for-group-${groupIndex} cat-sheet__overlay ${isAdressBarHidden ? '--svh' : ''}`"
-        :style="`--random-tint: ${tint};`"
+        :style="`--random-tint: ${tint.hsla};`"
       ></div>
     </Teleport>
 
     <div
       class="preview__item w-[100vw] h-[100dvh]"
-      :style="`--random-tint: ${tint};`"
+      :style="`--random-tint: ${tint.hsl};`"
     >
       <div class="preview__item-img-outer"></div>
       <h2 class="preview__item-title oh" v-if="catItem">
-        <span class="oh__inner">{{ catItem.catname }}</span>
+        <span
+          class="oh__inner"
+          :class="`${catItem.index % 2 === 0 ? 'gloock-regular' : 'albert-sans-bold'}`"
+          >{{ catItem.catname }}</span
+        >
       </h2>
-      <h3 class="preview__item-subtitle oh">
-        <span class="oh__inner">Full Heart</span>
-      </h3>
+      <div class="preview__item-subtitle oh text-center" v-if="catItem">
+        <span
+          class="oh__inner text-4xl"
+          :class="`${catItem.index % 2 === 0 ? 'gloock-regular' : 'albert-sans-bold'}`"
+          >{{ catItem.catname }}</span
+        >
+
+        <p
+          v-if="catItem && catItem.adoptionstatus"
+          class="preview__item-status"
+        >
+          <span
+            :class="`${catItem.index % 2 !== 0 ? 'gloock-regular' : 'albert-sans-bold'}`"
+            >{{ catItem.adoptionstatus }}
+          </span>
+          <span v-if="catItem.catsexe"> {{ catItem.catsexe }}</span>
+        </p>
+      </div>
+
       <span class="preview__item-meta oh"
         ><span class="oh__inner">2007</span></span
       >
@@ -30,14 +50,41 @@
           known to be the wisest woman in europe.
         </p>
       </div>
-      <div class="preview__item-box preview__item-box--right">
-        <h3 class="preview__item-box-title oh">
-          <span class="oh__inner">Location</span>
-        </h3>
-        <p class="preview__item-box-desc">
-          Winter kept us warm, covering earth in forgetful snow, feeding a
-          little life with dried tubers.
-        </p>
+      <div class="preview__item-box preview__item-box--right pr-2">
+        <div class="flex justify-between items-end mb-4">
+          <div class="preview__item-info oh" v-if="catItem && hasInfo">
+            <p v-if="catItem.catagenumber && catItem.catagetype">
+              🎂 {{ catItem.catagenumber }} {{ catItem.catagetype }}
+            </p>
+            <p v-if="catItem.catbirth">📅 {{ catItem.catbirth }}</p>
+            <p v-else-if="catItem.catbirthyear">
+              📅 {{ catItem.catbirthyear }}
+            </p>
+            <p v-if="catItem.zipcode">📍 {{ catItem.zipcode }}</p>
+          </div>
+
+          <div
+            class="preview__item-box preview__item-badges flex flex-col gap-2"
+            v-if="catItem"
+          >
+            <Badge class="max-w-[120px] md:max-w-max text-center">{{
+              catItem.catidentification
+            }}</Badge>
+            <Badge>
+              Vaccination : {{ catItem.catvaccination ? "✅" : "❌" }}
+            </Badge>
+            <Badge>
+              Stérilisation : {{ catItem.catsterilization ? "✅" : "❌" }}
+            </Badge>
+          </div>
+        </div>
+
+        <prismic-rich-text
+          v-if="catItem && catItem.catdescription"
+          class="preview__item-box-desc z-10"
+          :class="`${catItem.index % 2 === 0 ? 'gloock-regular' : 'albert-sans-bold'}`"
+          :field="catItem.catdescription"
+        />
       </div>
     </div>
   </div>
@@ -57,7 +104,10 @@ import type { ContentItem } from "./ContentItem";
 type CatSheetInfo = {
   open: boolean;
   catItem: CatInfo | null;
-  tint: string;
+  tint: {
+    hsla: string;
+    hsl: string;
+  };
   groupIndex: number;
 };
 
@@ -360,16 +410,22 @@ body {
     grid-template-rows: 1fr auto auto auto;
     grid-template-areas:
       "title title title"
+      "box-left ... box-right"
       "box-left subtitle box-right"
-      "box-left meta box-right"
-      "box-left ... box-right";
+      "box-left subtitle box-right";
+
+    &-title,
+    &-subtitle,
+    &-status,
+    &-info {
+      color: var(--random-tint);
+    }
 
     &-title {
-      align-self: center;
+      align-self: self-start;
       justify-self: center;
       grid-area: title;
       font-size: clamp(3rem, 24vw, 17rem);
-      font-family: kudryashev-d-excontrast-sans, sans-serif;
       font-weight: 300;
       margin: 0;
       line-height: 1;
@@ -377,7 +433,33 @@ body {
       padding-top: 1vw;
 
       mix-blend-mode: difference;
-      color: var(--random-tint);
+    }
+
+    &-subtitle {
+      justify-self: center;
+      position: relative;
+      grid-area: subtitle;
+      font-weight: 300;
+      margin: 0;
+    }
+
+    &-box {
+      &-desc {
+        padding: var(--spacing-s);
+        background-color: color-mix(
+          in srgb,
+          var(--random-tint) 36%,
+          transparent
+        );
+      }
+
+      &--right {
+        grid-area: box-right;
+      }
+
+      &--left {
+        grid-area: box-left;
+      }
     }
   }
 }
