@@ -57,7 +57,7 @@ function randomHSLA() {
   const a = (Math.random() * 0.48).toFixed(2);
   return {
     hsla: `hsla(${h}, ${s}%, ${l}%, ${a})`,
-    hsl: `hsl(${h}, ${s}%, ${l}%)`,
+    hsl: `hsla(${h}, ${s}%, ${l}%, ${1})`,
   };
 }
 

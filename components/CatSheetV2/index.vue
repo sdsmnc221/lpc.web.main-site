@@ -11,14 +11,25 @@
       class="preview__item w-[100vw] h-[100dvh]"
       :style="`--random-tint: ${tint.hsl};`"
     >
-      <div class="preview__item-img-outer"></div>
+      <div class="preview__item-img-outer">
+        <div
+          class="preview__item-close absolute z-10 bottom-0 bg-black p-6 pointer-events-auto"
+          @click="closeSheet"
+        >
+          <div>
+            <div class="cat-sheet__trigger">Découvrez mes ami.e.s !</div>
+          </div>
+        </div>
+      </div>
+
       <h2 class="preview__item-title oh" v-if="catItem">
         <span
           class="oh__inner"
-          :class="`${catItem.index % 2 === 0 ? 'gloock-regular' : 'albert-sans-bold'}`"
+          :class="`${catItem.index % 2 === 0 ? 'gloock-regular' : 'albert-sans-bold'} ${catItem.catname.length >= 14 ? 'text-8xl' : ''}`"
           >{{ catItem.catname }}</span
         >
       </h2>
+
       <div class="preview__item-subtitle oh text-center" v-if="catItem">
         <span
           class="oh__inner text-4xl"
@@ -36,23 +47,52 @@
           </span>
           <span v-if="catItem.catsexe"> {{ catItem.catsexe }}</span>
         </p>
+
+        <span class="preview__item-meta text-sm bg-black oh" v-if="catItem"
+          ><span class="oh__inner">
+            Fiche publiée le {{ catItem.createddate }}</span
+          ></span
+        >
       </div>
 
-      <span class="preview__item-meta oh"
-        ><span class="oh__inner">2007</span></span
+      <div
+        class="preview__item-box preview__item-box--left self-end pl-2"
+        v-if="catItem"
       >
-      <div class="preview__item-box preview__item-box--left">
-        <h3 class="preview__item-box-title oh">
-          <span class="oh__inner">Setting</span>
+        <h3
+          class="preview__item-box-title text-xl ml-2 oh"
+          :class="`${catItem.index % 2 === 0 ? 'gloock-regular' : 'albert-sans-bold'}`"
+        >
+          <span class="oh__inner">Contact</span>
         </h3>
-        <p class="preview__item-box-desc">
-          Madame sosostris, famous clairvoyante, had a bad cold, nevertheless is
-          known to be the wisest woman in europe.
-        </p>
+        <div
+          class="preview__item-contact preview__item-box-desc w-4/5 flex flex-col justify-end"
+        >
+          <div class="text-xs mt-2 md:mr-2">
+            <a href="tel:+33642804318" target="_blank">
+              <Badge class="badge">06 42 80 43 18 (Mme Bonniot)</Badge>
+            </a>
+          </div>
+
+          <div class="text-xs mt-2">
+            <a
+              href="https://lespetitsclochards.fillout.com/pre-adoption"
+              target="_blank"
+            >
+              <Badge class="badge">Formulaire d'adoption</Badge>
+            </a>
+          </div>
+
+          <prismic-rich-text
+            :field="catItem.adoptionRequirements"
+            class="text-sm pl-2 mt-4 leading-tight"
+          />
+        </div>
       </div>
-      <div class="preview__item-box preview__item-box--right pr-2">
-        <div class="flex justify-between items-end mb-4">
-          <div class="preview__item-info oh" v-if="catItem && hasInfo">
+
+      <div class="preview__item-box preview__item-box--right">
+        <div class="flex justify-between items-end mb-4 pr-2">
+          <div class="preview__item-info o pl-2" v-if="catItem && hasInfo">
             <p v-if="catItem.catagenumber && catItem.catagetype">
               🎂 {{ catItem.catagenumber }} {{ catItem.catagetype }}
             </p>
@@ -64,27 +104,30 @@
           </div>
 
           <div
-            class="preview__item-box preview__item-badges flex flex-col gap-2"
+            class="preview__item-box preview__item-badges flex flex-col items-center gap-2"
             v-if="catItem"
           >
-            <Badge class="max-w-[120px] md:max-w-max text-center">{{
+            <Badge class="max-w-[120px] md:max-w-fit text-center">{{
               catItem.catidentification
             }}</Badge>
-            <Badge>
+            <Badge class="md:max-w-fit">
               Vaccination : {{ catItem.catvaccination ? "✅" : "❌" }}
             </Badge>
-            <Badge>
+            <Badge class="md:max-w-fit">
               Stérilisation : {{ catItem.catsterilization ? "✅" : "❌" }}
             </Badge>
           </div>
         </div>
 
-        <prismic-rich-text
+        <div
           v-if="catItem && catItem.catdescription"
-          class="preview__item-box-desc z-10"
           :class="`${catItem.index % 2 === 0 ? 'gloock-regular' : 'albert-sans-bold'}`"
-          :field="catItem.catdescription"
-        />
+        >
+          <prismic-rich-text
+            class="preview__item-box-desc ml-2 text-center"
+            :field="catItem.catdescription"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -357,6 +400,14 @@ body {
     pointer-events: none;
   }
 
+  &__trigger {
+    color: var(--white);
+    display: inline-block;
+
+    @include ft-s(24);
+    text-transform: uppercase;
+  }
+
   &__overlay {
     --random-tint: var(--white);
 
@@ -410,14 +461,25 @@ body {
     grid-template-rows: 1fr auto auto auto;
     grid-template-areas:
       "title title title"
-      "box-left ... box-right"
+      "... ... ..."
       "box-left subtitle box-right"
-      "box-left subtitle box-right";
+      "box-left ... box-right";
+
+    &-close {
+      &:hover {
+        & > * {
+          filter: blur(2.4px);
+          transform: scale(1.2);
+        }
+      }
+    }
 
     &-title,
     &-subtitle,
+    &-meta,
     &-status,
-    &-info {
+    &-info,
+    &-box-title {
       color: var(--random-tint);
     }
 
@@ -446,11 +508,7 @@ body {
     &-box {
       &-desc {
         padding: var(--spacing-s);
-        background-color: color-mix(
-          in srgb,
-          var(--random-tint) 36%,
-          transparent
-        );
+        background-color: var(--random-tint);
       }
 
       &--right {
