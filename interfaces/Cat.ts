@@ -8,7 +8,8 @@ export type CatInfo = {
   catphoto2: Image;
   catname: string;
   catsexe?: string;
-  catbirth: string;
+  catbirth?: string;
+  catbirthyear?: string;
   catagenumber?: number;
   catagetype?: string;
   catdescription?: any;

@@ -97,6 +97,17 @@ interface CatficheDocumentData {
   catbirth: prismic.DateField;
 
   /**
+   * catBirthYear field in *CatFiche*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: catfiche.catbirthyear
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  catbirthyear: prismic.KeyTextField;
+
+  /**
    * catDescription field in *CatFiche*
    *
    * - **Field Type**: Rich Text
@@ -118,7 +129,9 @@ interface CatficheDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#select
    */
   catidentification: prismic.SelectField<
-    "Identifié.e par tatouage" | "Identifié.e par puce" | "Non identifiée.",
+    | "Identifié.e par tatouage"
+    | "Identifié.e par puce"
+    | "Sera identifié.e avant l'adoption.",
     "filled"
   >;
 

@@ -72,6 +72,13 @@
           "placeholder": ""
         }
       },
+      "catbirthyear": {
+        "type": "Text",
+        "config": {
+          "label": "catBirthYear",
+          "placeholder": ""
+        }
+      },
       "catdescription": {
         "type": "StructuredText",
         "config": {
@@ -89,7 +96,7 @@
           "options": [
             "Identifié.e par tatouage",
             "Identifié.e par puce",
-            "Non identifiée."
+            "Sera identifié.e avant l'adoption."
           ],
           "default_value": "Identifié.e par tatouage"
         }

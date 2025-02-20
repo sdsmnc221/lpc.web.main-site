@@ -51,18 +51,21 @@
             🎂 {{ catItem.catagenumber }} {{ catItem.catagetype }}
           </p>
           <p v-if="catItem.catbirth">📅 {{ catItem.catbirth }}</p>
+          <p v-else-if="catItem.catbirthyear">📅 {{ catItem.catbirthyear }}</p>
           <p v-if="catItem.zipcode">📍 {{ catItem.zipcode }}</p>
         </div>
 
         <div
           v-if="catItem.catdescription"
-          class="cat-sheet__details__description md:mt-10"
+          class="cat-sheet__details__description"
         >
           <prismic-rich-text :field="catItem.catdescription" />
         </div>
 
         <div class="cat-sheet__details__badges">
-          <Badge>{{ catItem.catidentification }}</Badge>
+          <Badge class="max-w-[120px] text-center">{{
+            catItem.catidentification
+          }}</Badge>
           <Badge>
             Vaccination : {{ catItem.catvaccination ? "✅" : "❌" }}
           </Badge>
@@ -73,19 +76,21 @@
       </div>
 
       <div class="cat-sheet__grid__div5">
-        <h2 class="cat-sheet__title">
+        <h2 class="cat-sheet__title absolute top-[18px] md:relative">
           <span
             :class="`${catItem.index % 2 === 0 ? 'gloock-regular' : 'albert-sans-bold'}`"
             >{{ catItem.catname }}</span
           >
         </h2>
-        <p class="cat-sheet__publication">
+        <p
+          class="cat-sheet__publication absolute top-0 md:relative md:top-[7.2vh]"
+        >
           Fiche publiée le {{ catItem.createddate }}
         </p>
       </div>
 
       <div
-        class="cat-sheet__grid__div6 cat-sheet__footnote flex flex-col justify-around"
+        class="cat-sheet__grid__div6 cat-sheet__footnote flex flex-col justify-around self-end md:self-start"
       >
         <div class="cat-sheet__footnote__section">
           <p class="cat-sheet__footnote__heading">Contact</p>
@@ -109,7 +114,9 @@
           </div>
         </div>
 
-        <div class="cat-sheet__footnote__section text-xs mt-4">
+        <div
+          class="cat-sheet__footnote__section text-xs mt-4 md:w-1/2 self-end w-full"
+        >
           <prismic-rich-text
             :field="catItem.adoptionRequirements"
             class="cat-sheet__footnote__content"
@@ -285,6 +292,18 @@ watch(
       color: var(--white);
 
       .cat-sheet__details {
+        &__status {
+          transform: translateY(18px);
+        }
+
+        &__info {
+          position: fixed !important;
+          left: 24px !important;
+          right: auto !important;
+          top: 32% !important;
+          background-color: black;
+        }
+
         &__status,
         &__info {
           width: 100%;
@@ -300,7 +319,7 @@ watch(
             @include ft-s(large);
             font-weight: bold;
             display: inline-block;
-            line-height: 2.4rem;
+            line-height: 0;
 
             &:nth-child(2) {
               font-weight: normal;
@@ -314,7 +333,7 @@ watch(
           right: 0;
           top: 24%;
           padding: 0 var(--spacing-s);
-          background-color: black;
+
           z-index: 1;
           @include ft-s(16);
         }
@@ -322,8 +341,8 @@ watch(
         &__description {
           flex: 2;
           display: flex;
-          justify-content: flex-end;
-          align-items: flex-end;
+          justify-content: flex-start;
+          align-items: flex-start;
           padding-left: calc(var(--spacing-m) * 2);
           padding-bottom: var(--spacing-m);
           padding-top: var(--spacing-m);
@@ -365,9 +384,9 @@ watch(
           width: 100%;
           color: var(--white);
           text-transform: uppercase;
-          padding: 0 var(--spacing-m);
+          padding: 0 var(--spacing-l);
+          padding-right: var(--spacing-s);
           text-align: left;
-          position: relative;
 
           span {
             font-size: calc((var(--base-ft-size) * 6));
@@ -376,12 +395,12 @@ watch(
         }
 
         &__publication {
-          align-self: flex-start;
+          align-self: flex-end;
           padding: 0 var(--spacing-m);
           margin-top: var(--spacing-s);
           color: var(--gray);
           background-color: var(--white);
-          @include ft-s(medium);
+          @include ft-s(16);
           font-style: italic;
           text-align: left;
         }
@@ -507,7 +526,7 @@ watch(
             &__status {
               margin-top: var(--spacing-s);
               & > *:first-child {
-                @include ft-s(medium);
+                @include ft-s(16);
               }
 
               & > *:not(:first-child) {
@@ -527,9 +546,10 @@ watch(
 
             &__description {
               padding-left: var(--spacing-m);
-              margin-top: var(--spacing-l);
+              margin-top: 0;
               padding-right: var(--spacing-s);
               padding-bottom: 0;
+              padding-top: var(--spacing-s);
 
               width: 56vw;
 
@@ -550,6 +570,7 @@ watch(
           .cat-sheet {
             &__title {
               padding-top: var(--spacing-m);
+
               text-align: right;
 
               span {
@@ -569,7 +590,8 @@ watch(
 
         &__div6 {
           grid-area: 3 / 3 / 4 / 4;
-          padding: var(--spacing-s);
+          padding: var(--spacing-m);
+
           align-content: flex-end;
 
           .cat-sheet {
@@ -597,6 +619,31 @@ watch(
                   margin-top: 0;
                 }
               }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  body {
+    .cat-sheet {
+      &__grid {
+        &__div4 {
+          .cat-sheet__details {
+            &__status {
+              line-height: calc(var(--base-ft-size) * 6);
+            }
+
+            &__info {
+              position: relative !important;
+              left: unset !important;
+              right: auto !important;
+              top: unset !important;
+              width: auto !important;
+              background-color: transparent !important;
             }
           }
         }
