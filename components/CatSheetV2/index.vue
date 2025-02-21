@@ -13,7 +13,7 @@
     >
       <div class="preview__item-img-outer">
         <div
-          class="preview__item-close absolute z-10 bottom-0 bg-black p-6 pointer-events-auto"
+          class="preview__item-close w-full md:w-auto absolute z-10 bottom-0 bg-black p-6 pointer-events-auto"
           @click="closeSheet"
         >
           <div>
@@ -69,7 +69,7 @@
           <span class="oh__inner">Contact</span>
         </h3>
         <div
-          class="preview__item-contact preview__item-box-desc w-4/5 flex flex-col justify-end"
+          class="preview__item-contact preview__item-box-desc w-full md:w-4/5 flex flex-col justify-end"
         >
           <div class="text-xs mt-2 md:mr-2">
             <a href="tel:+33642804318" target="_blank">
@@ -88,7 +88,7 @@
 
           <prismic-rich-text
             :field="catItem.adoptionRequirements"
-            class="text-sm pl-2 mt-4 leading-tight"
+            class="text-xs md:text-sm pl-2 mt-4 leading-tight"
           />
         </div>
       </div>
@@ -130,7 +130,7 @@
           :class="`${catItem.index % 2 === 0 ? 'gloock-regular' : 'albert-sans-bold'}`"
         >
           <prismic-rich-text
-            class="preview__item-box-desc ml-2 text-center"
+            class="preview__item-box-desc md:ml-2 text-center text-xs md:text-base"
             :field="catItem.catdescription"
           />
         </div>
@@ -346,9 +346,8 @@ body {
       position: relative;
 
       will-change: transform;
-
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: center;
       width: 100vw;
       height: 100svh;
@@ -357,8 +356,8 @@ body {
       left: 0;
 
       img {
-        width: auto;
-        height: 72vh;
+        width: 100vh;
+        height: auto;
         aspect-ratio: auto;
         opacity: 0.64;
         cursor: pointer;
@@ -381,6 +380,30 @@ body {
         img {
           filter: none;
           border-radius: 0;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 53em) {
+  body {
+    overflow: hidden;
+
+    .cat-sheet {
+      .cat-item-img-wrap {
+        align-items: center;
+      }
+
+      .preview,
+      .--current .content {
+        &__item {
+          &-img-outer {
+            img {
+              width: auto;
+              height: 72vh;
+            }
+          }
         }
       }
     }
@@ -472,14 +495,16 @@ body {
 
   .preview__item {
     display: grid;
-    padding-top: 0;
-    grid-template-columns: 30% 1fr 30%;
-    grid-template-rows: 1fr auto auto auto;
+    grid-template-columns: 100%;
+    grid-template-rows: auto auto auto auto 1fr;
     grid-template-areas:
-      "title title title"
-      "... ... ..."
-      "box-left subtitle box-right"
-      "box-left ... box-right";
+      "subtitle"
+      "..."
+      "box-left"
+      "..."
+      "box-right";
+    align-items: end;
+    padding-top: 1rem;
 
     &--current {
       opacity: 1;
@@ -518,6 +543,10 @@ body {
       mix-blend-mode: difference;
     }
 
+    &-title {
+      display: none;
+    }
+
     &-subtitle {
       justify-self: center;
       position: relative;
@@ -538,6 +567,7 @@ body {
 
       &--right {
         grid-area: box-right;
+        transform: translateY(-12vh);
       }
 
       &--left {
@@ -547,211 +577,25 @@ body {
   }
 }
 
-@media screen and (max-width: 699px) {
-  body {
-    .cat-sheet {
-      z-index: 999;
+@media screen and (min-width: 53em) {
+  .cat-sheet {
+    .preview__item {
+      grid-template-columns: 30% 1fr 30%;
+      grid-template-rows: 1fr auto auto auto;
+      grid-template-areas:
+        "title title title"
+        "... ... ..."
+        "box-left subtitle box-right"
+        "box-left ... box-right";
 
-      .cat-sheet__overlay {
-        display: grid;
-        grid-template-columns: 0.5fr repeat(2, 1fr);
-        grid-template-rows: repeat(3, 1fr);
-        grid-column-gap: 0px;
-        grid-row-gap: 0px;
+      padding-top: 0;
 
-        &.--svh {
-          height: 100svh;
-        }
-
-        &__div1 {
-          grid-area: 1 / 1 / 3 / 3;
-          background-color: black;
-
-          .cat-sheet {
-            &__avatar {
-              height: 100%;
-              width: auto;
-            }
-          }
-        }
-
-        &__div2 {
-          grid-area: 3 / 3 / 4 / 4;
-
-          img.cat-sheet__avatar {
-            bottom: 0;
-            height: 100%;
-            width: 100%;
-            object-fit: cover !important;
-          }
-        }
-
-        &__div3 {
-          grid-area: 3 / 1 / 4 / 3;
-
-          justify-content: center;
-          padding: 0;
-
-          .cat-sheet__trigger {
-            position: relative;
-            z-index: 2;
-            @include ft-s(20);
-          }
-        }
-
-        &__div4 {
-          grid-area: 2 / 3 / 3 / 4;
-          gap: var(--spacing-s);
-          top: -10vh;
-
-          .cat-sheet__details {
-            top: -6.4vh;
-
-            &__info {
-              @include ft-s(small);
-              top: 28%;
-            }
-
-            &__status {
-              margin-top: var(--spacing-s);
-              & > *:first-child {
-                @include ft-s(16);
-              }
-
-              & > *:not(:first-child) {
-                line-height: 0.8rem;
-                @include ft-s(small);
-              }
-            }
-
-            &__badges {
-              padding: var(--spacing-s);
-              align-self: center;
-              position: fixed;
-              bottom: 32vh;
-              left: 0;
-              margin-bottom: var(--spacing-s);
-            }
-
-            &__description {
-              padding-left: var(--spacing-m);
-              margin-top: 0;
-              padding-right: var(--spacing-s);
-              padding-bottom: 0;
-              padding-top: var(--spacing-s);
-
-              width: 56vw;
-
-              & > div {
-                text-align: right;
-                overflow-y: visible;
-                height: 164px;
-                font-size: calc(var(--base-ft-size) * 0.72);
-              }
-            }
-          }
-        }
-
-        &__div5 {
-          grid-area: 1 / 2 / 2 / 4;
-          align-items: flex-end;
-
-          .cat-sheet {
-            &__title {
-              padding-top: var(--spacing-m);
-
-              text-align: right;
-
-              span {
-                font-size: calc((var(--base-ft-size) * 3));
-                line-height: calc((var(--base-ft-size) * 3));
-              }
-            }
-
-            &__publication {
-              color: var(--black);
-              width: auto;
-              align-self: flex-end;
-              @include ft-s(small);
-            }
-          }
-        }
-
-        &__div6 {
-          grid-area: 3 / 3 / 4 / 4;
-          padding: var(--spacing-m);
-
-          align-content: flex-end;
-
-          .cat-sheet {
-            &__footnote {
-              justify-content: flex-end;
-              flex-direction: column;
-              display: flex;
-
-              &__section {
-                @include ft-s(small);
-                line-height: 0.98rem;
-              }
-
-              &__content:not(:has(.badge)) {
-                background-color: rgba(0, 0, 0, 0.64);
-                font-size: calc(var(--base-ft-size) * 0.72) !important;
-                line-height: 0.72rem;
-              }
-
-              &__content {
-                gap: 8px;
-
-                * {
-                  font-size: 8px;
-                  margin-top: 0;
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-@media screen and (min-width: 1000px) {
-  body {
-    .cat-sheet {
-      &__overlay {
-        &__div4 {
-          .cat-sheet__details {
-            &__status {
-              line-height: calc(var(--base-ft-size) * 6);
-            }
-
-            &__info {
-              position: relative !important;
-              left: unset !important;
-              right: auto !important;
-              top: unset !important;
-              width: auto !important;
-              background-color: transparent !important;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-@media screen and (max-height: 720px) {
-  body {
-    .cat-sheet {
-      &__overlay {
-        &__div6 {
-          height: 28vh;
-        }
+      &-title {
+        display: block;
       }
 
-      &__details {
-        top: -6.4svh;
+      &-box--right {
+        transform: translateY(0);
       }
     }
   }
