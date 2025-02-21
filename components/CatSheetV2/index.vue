@@ -46,7 +46,7 @@
             class="oh__inner"
             >{{ catItem.adoptionstatus }}
           </span>
-          <span v-if="catItem.catsexe" class="oh__innner">
+          <span v-if="catItem.catsexe" class="oh__inner">
             {{ catItem.catsexe }}</span
           >
         </p>
@@ -215,6 +215,7 @@ const onOpenSheet = (
 
         previewItem.value?.updateSlideTexts();
         previewItem.value?.updateBoxDesc();
+        previewItem.value?.updateTextElements();
 
         // bodyEl.classList.add('preview-open');
         // gsap.set(contentItem.DOM.el, {zIndex: 10});
@@ -285,25 +286,27 @@ const onOpenSheet = (
     }, "content");
 
   setTimeout(() => {
-    tl.to(
-      previewItem.value.DOM.slideTexts,
-      {
-        duration: 1.1,
-        ease: "expo",
-        yPercent: 0,
-      },
-      ">"
-    ).to(
-      previewItem.value.DOM.descriptions,
-      {
-        duration: 1.1,
-        ease: "expo",
-        opacity: 1,
-        yPercent: 0,
-        stagger: 0.2,
-      },
-      ">"
-    );
+    tl.to(previewItem.value?.DOM.textElements, { opacity: 1 }, ">")
+      .to(
+        previewItem.value.DOM.slideTexts,
+        {
+          duration: 1.1,
+          ease: "expo",
+          yPercent: 0,
+        },
+        ">"
+      )
+      .to(
+        previewItem.value.DOM.descriptions,
+        {
+          duration: 1.1,
+          ease: "expo",
+          opacity: 1,
+          yPercent: 0,
+          stagger: 0.2,
+        },
+        ">"
+      );
   }, 480);
 };
 
@@ -406,11 +409,6 @@ body {
   &.--hidden {
     display: none;
     pointer-events: none;
-
-    .oh,
-    .preview__item-box-desc {
-      opacity: 0;
-    }
   }
 
   &__trigger {
@@ -465,6 +463,11 @@ body {
   .oh__inner {
     will-change: transform;
     display: inline-block;
+  }
+
+  .oh,
+  .preview__item-box-desc {
+    opacity: 0;
   }
 
   .preview__item {

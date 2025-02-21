@@ -20,6 +20,8 @@ export class PreviewItem {
     title: null,
     // right and left text boxes (.preview__item-box)
     boxes: null,
+    // textElements
+    textElements: null,
   };
 
   /**
@@ -37,6 +39,10 @@ export class PreviewItem {
     );
     this.DOM.title = this.DOM.el.querySelector(".preview__item-title");
     this.DOM.boxes = this.DOM.el.querySelectorAll(".preview__item-box");
+    this.DOM.textElements = [
+      ...this.DOM.el.querySelectorAll(".oh"),
+      ...this.DOM.el.querySelectorAll(".preview__item-box-desc"),
+    ];
   }
 
   updateSlideTexts() {
@@ -47,5 +53,12 @@ export class PreviewItem {
     this.DOM.descriptions = this.DOM.el.querySelectorAll(
       ".preview__item-box-desc"
     );
+  }
+
+  updateTextElements() {
+    this.DOM.textElements = [
+      ...this.DOM.el.querySelectorAll(".oh"),
+      ...this.DOM.el.querySelectorAll(".preview__item-box-desc"),
+    ];
   }
 }
