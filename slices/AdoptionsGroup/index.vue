@@ -44,6 +44,7 @@
           :avatar-placeholder="avatarPlaceholder"
           :id="cat.id"
           :index="index"
+          :default-open="defaultOpen && currentCatItem?.index === index"
           @update:open-item="
             ({ opened, contentItem }) =>
               onOpenItem({

@@ -165,10 +165,6 @@ const inPreview: Ref<boolean> = ref(false);
 const catSheet = ref<HTMLDivElement | null>(null);
 
 const previewItem = ref<PreviewItem | null>(null);
-const contentOverlay = ref<HTMLDivElement | null>(null);
-
-const catItemIndex = ref(null);
-const groupItemsIndex = ref(null);
 
 const catHasAvatar = computed(() =>
   props.catItem?.catphoto?.hasOwnProperty("url")
@@ -195,10 +191,11 @@ const closeSheet = () => {
   emits("update:open-sheet", { opened: false });
 };
 
-const onOpenSheet = (contentItem: ContentItem, current: number, groupIndex) => {
-  catItemIndex.value = current;
-  groupItemsIndex.value = groupIndex;
-
+const onOpenSheet = (
+  contentItem: ContentItem,
+  current: number,
+  groupIndex: number
+) => {
   const contentOverlay = `.cat-sheet-for-group-${groupIndex}.cat-sheet__overlay`;
 
   gsap
@@ -301,19 +298,8 @@ onMounted(() => {
   nextTick(() => {
     windowHeight.value = window.innerHeight;
     isAdressBarHidden.value = isMobile() && props.open;
-
-    window.addEventListener("resize", () => {
-      windowHeight.value = window.innerHeight;
-    });
   });
 });
-
-watch(
-  () => windowHeight.value,
-  (newHeight, oldHeight) => {
-    isAdressBarHidden.value = newHeight < oldHeight && isMobile();
-  }
-);
 
 watch(
   () => catSheet.value,
@@ -390,7 +376,7 @@ body {
     transition: all ease-in-out 0.64s;
   }
 
-  z-index: 9;
+  z-index: 10;
 
   display: block;
   pointer-events: all;
@@ -416,7 +402,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: 9;
     opacity: 0;
 
     width: 100vw;

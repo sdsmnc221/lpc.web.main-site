@@ -48,7 +48,7 @@ import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import type { CatInfo } from "~/interfaces/Cat";
 import { ContentItem } from "../CatSheetV2/ContentItem";
 
-const props = defineProps<CatInfo>();
+const props = defineProps<CatInfo & { defaultOpen: boolean }>();
 
 const emits = defineEmits(["update:open-item"]);
 
@@ -66,6 +66,15 @@ watch(
   (value) => {
     if (value !== null) {
       contentItem.value = new ContentItem(value);
+    }
+  }
+);
+
+watch(
+  () => props.defaultOpen,
+  (value) => {
+    if (value) {
+      onOpen(value);
     }
   }
 );
