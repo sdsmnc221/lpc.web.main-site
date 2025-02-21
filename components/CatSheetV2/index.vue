@@ -150,7 +150,7 @@ import { Flip } from "gsap/Flip";
 import type { CatInfo } from "~/interfaces/Cat";
 import { isMobile } from "~/lib/helpers";
 import { PreviewItem } from "./PreviewItem";
-import type { ContentItem } from "./ContentItem";
+import { ContentItem } from "./ContentItem";
 
 type CatSheetInfo = {
   open: boolean;
@@ -173,6 +173,7 @@ const inPreview: Ref<boolean> = ref(false);
 const catSheet = ref<HTMLDivElement | null>(null);
 
 const previewItem = ref<PreviewItem | null>(null);
+const contentItem = ref<ContentItem | null>(null);
 
 const catHasAvatar = computed(() =>
   props.catItem?.catphoto?.hasOwnProperty("url")
@@ -196,15 +197,109 @@ const windowHeight = ref(0);
 const isAdressBarHidden = ref(true);
 
 const closeSheet = () => {
+  if (isAnimating.value) return;
+
+  const contentOverlay = `.cat-sheet-for-group-${props.groupIndex}.cat-sheet__overlay`;
+  isAnimating.value = true;
+
+  console.log(contentItem.value);
+
+  gsap
+    .timeline({
+      defaults: {
+        duration: 0.8,
+        ease: "power4.inOut",
+      },
+      onStart: () => {
+        isAnimating.value = true;
+      },
+      onComplete: () => {
+        previewItem.value.DOM.el.classList.remove("preview__item--current");
+
+        gsap.set(contentItem.value.DOM.el, { zIndex: 1 });
+
+        inPreview.value = false;
+        isAnimating.value = false;
+      },
+    })
+    .addLabel("start", 0)
+    .addLabel("content", "start+=0.7")
+    .to(
+      previewItem.value.DOM.descriptions,
+      {
+        ease: "power2",
+        opacity: 0,
+      },
+      "start"
+    )
+    .to(
+      previewItem.value.DOM.descriptions,
+      {
+        yPercent: 15,
+      },
+      "start"
+    )
+    .to(
+      previewItem.value.DOM.slideTexts,
+      {
+        yPercent: 100,
+      },
+      "start"
+    )
+    .add(() => {
+      const flipstate = Flip.getState(contentItem.value.DOM.imgWrap);
+      contentItem.value.DOM.el.insertBefore(
+        contentItem.value.DOM.imgWrap,
+        contentItem.value.DOM.el.children[1]
+      );
+      Flip.from(flipstate, {
+        duration: 0.8,
+        ease: "power4.inOut",
+        absolute: true,
+      });
+    }, "start")
+    .to(
+      contentOverlay,
+      {
+        scaleX: contentItem.value.DOM.el.offsetWidth / window.innerWidth,
+        x: contentItem.value.DOM.el.offsetLeft,
+      },
+      "start"
+    )
+    .to(
+      contentOverlay,
+      {
+        scaleY: 0,
+      },
+      "start+=0.6"
+    )
+    .to(
+      contentItem.value.DOM.titleInner,
+      {
+        yPercent: 0,
+      },
+      "start+=0.6"
+    )
+    .to(
+      contentItem.value.DOM.caption,
+      {
+        yPercent: 0,
+        opacity: 1,
+      },
+      "start+=0.6"
+    );
+
   emits("update:open-sheet", { opened: false });
 };
 
 const onOpenSheet = (
-  contentItem: ContentItem,
+  contentItemEl: ContentItem,
   current: number,
   groupIndex: number
 ) => {
   const contentOverlay = `.cat-sheet-for-group-${groupIndex}.cat-sheet__overlay`;
+
+  contentItem.value = contentItemEl;
 
   const tl = gsap
     .timeline({
@@ -220,13 +315,13 @@ const onOpenSheet = (
         previewItem.value?.updateTextElements();
 
         // bodyEl.classList.add('preview-open');
-        // gsap.set(contentItem.DOM.el, {zIndex: 10});
+        // gsap.set(contentItem.value.DOM.el, {zIndex: 10});
 
         gsap.set(contentOverlay, {
           transformOrigin: current % 2 ? "0% 100%" : "0% 0%",
-          scaleX: contentItem.DOM.el.offsetWidth / window.innerWidth,
+          scaleX: contentItem.value.DOM.el.offsetWidth / window.innerWidth,
           scaleY: 0,
-          x: contentItem.DOM.el.offsetLeft,
+          x: contentItem.value.DOM.el.offsetLeft,
           opacity: 0,
         });
 
@@ -243,14 +338,14 @@ const onOpenSheet = (
     .addLabel("start", 0)
     .addLabel("content", "start+=0.6")
     .to(
-      contentItem.DOM.titleInner,
+      contentItem.value.DOM.titleInner,
       {
         yPercent: current % 2 ? -100 : 100,
       },
       "start"
     )
     .to(
-      contentItem.DOM.caption,
+      contentItem.value.DOM.caption,
       {
         yPercent: current % 2 ? -10 : 10,
         opacity: 0,
@@ -266,7 +361,7 @@ const onOpenSheet = (
       },
       "start"
     )
-    .to(contentItem.DOM.exploreCTA, { opacity: 0 }, "start")
+
     .to(
       contentOverlay,
       {
@@ -278,8 +373,8 @@ const onOpenSheet = (
       "start+=0.2"
     )
     .add(() => {
-      const flipstate = Flip.getState(contentItem.DOM.imgWrap);
-      previewItem.value.DOM.imgOuter.appendChild(contentItem.DOM.imgWrap);
+      const flipstate = Flip.getState(contentItem.value.DOM.imgWrap);
+      previewItem.value.DOM.imgOuter.appendChild(contentItem.value.DOM.imgWrap);
       Flip.from(flipstate, {
         duration: 0.8,
         ease: "power4.inOut",
@@ -432,7 +527,8 @@ body {
   pointer-events: all;
 
   &.--hidden {
-    display: none;
+    opacity: 0;
+    z-index: -99;
     pointer-events: none;
   }
 
