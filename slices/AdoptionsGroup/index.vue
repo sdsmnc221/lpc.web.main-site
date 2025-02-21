@@ -185,7 +185,7 @@ const onOpenItem = (details) => {
   if (opened) {
     setTimeout(() => {
       catSheet.value.onOpenSheet(contentItem, itemIndex, groupIndex);
-    }, 480);
+    }, 32);
   }
 };
 

@@ -38,4 +38,14 @@ export class PreviewItem {
     this.DOM.title = this.DOM.el.querySelector(".preview__item-title");
     this.DOM.boxes = this.DOM.el.querySelectorAll(".preview__item-box");
   }
+
+  updateSlideTexts() {
+    this.DOM.slideTexts = this.DOM.el.querySelectorAll(".oh__inner");
+  }
+
+  updateBoxDesc() {
+    this.DOM.descriptions = this.DOM.el.querySelectorAll(
+      ".preview__item-box-desc"
+    );
+  }
 }

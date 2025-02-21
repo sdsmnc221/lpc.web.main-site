@@ -39,24 +39,27 @@
 
         <p
           v-if="catItem && catItem.adoptionstatus"
-          class="preview__item-status"
+          class="preview__item-status oh"
         >
           <span
             :class="`${catItem.index % 2 !== 0 ? 'gloock-regular' : 'albert-sans-bold'}`"
+            class="oh__inner"
             >{{ catItem.adoptionstatus }}
           </span>
-          <span v-if="catItem.catsexe"> {{ catItem.catsexe }}</span>
+          <span v-if="catItem.catsexe" class="oh__innner">
+            {{ catItem.catsexe }}</span
+          >
         </p>
 
-        <span class="preview__item-meta text-sm bg-black oh" v-if="catItem"
-          ><span class="oh__inner">
+        <span class="preview__item-meta text-sm oh" v-if="catItem"
+          ><span class="oh__inner bg-black">
             Fiche publiée le {{ catItem.createddate }}</span
           ></span
         >
       </div>
 
       <div
-        class="preview__item-box preview__item-box--left self-end pl-2"
+        class="preview__item-box preview__item-box--left self-end"
         v-if="catItem"
       >
         <h3
@@ -91,8 +94,11 @@
       </div>
 
       <div class="preview__item-box preview__item-box--right">
-        <div class="flex justify-between items-end mb-4 pr-2">
-          <div class="preview__item-info o pl-2" v-if="catItem && hasInfo">
+        <div class="flex justify-between items-end mb-4 pr-2 oh">
+          <div
+            class="preview__item-info o pl-2 oh__inner"
+            v-if="catItem && hasInfo"
+          >
             <p v-if="catItem.catagenumber && catItem.catagetype">
               🎂 {{ catItem.catagenumber }} {{ catItem.catagetype }}
             </p>
@@ -104,7 +110,7 @@
           </div>
 
           <div
-            class="preview__item-box preview__item-badges flex flex-col items-center gap-2"
+            class="preview__item-box preview__item-badges flex flex-col items-center gap-2 preview__item-box-desc"
             v-if="catItem"
           >
             <Badge class="max-w-[120px] md:max-w-fit text-center">{{
@@ -198,7 +204,7 @@ const onOpenSheet = (
 ) => {
   const contentOverlay = `.cat-sheet-for-group-${groupIndex}.cat-sheet__overlay`;
 
-  gsap
+  const tl = gsap
     .timeline({
       defaults: {
         duration: 0.8,
@@ -206,6 +212,10 @@ const onOpenSheet = (
       },
       onStart: () => {
         inPreview.value = true;
+
+        previewItem.value?.updateSlideTexts();
+        previewItem.value?.updateBoxDesc();
+
         // bodyEl.classList.add('preview-open');
         // gsap.set(contentItem.DOM.el, {zIndex: 10});
 
@@ -219,11 +229,9 @@ const onOpenSheet = (
 
         gsap.set(previewItem.value.DOM.slideTexts, { yPercent: 100 });
         gsap.set(previewItem.value.DOM.descriptions, {
-          xPercent: (pos) => (pos ? -5 : 5),
+          yPercent: (pos) => 100 * (pos + 1),
           opacity: 0,
         });
-
-        // gsap.set(backCtrl, { x: "+=15%", opacity: 0 });
 
         previewItem.value.DOM.el.classList.add("preview__item--current");
       },
@@ -251,6 +259,7 @@ const onOpenSheet = (
       {
         scaleY: 1,
         opacity: 0.32,
+        zIndex: 11,
       },
       "start"
     )
@@ -261,8 +270,9 @@ const onOpenSheet = (
         scaleX: 1,
         x: 0,
         opacity: 1,
+        duration: 1.6,
       },
-      "content"
+      "start+=0.2"
     )
     .add(() => {
       const flipstate = Flip.getState(contentItem.DOM.imgWrap);
@@ -272,26 +282,29 @@ const onOpenSheet = (
         ease: "power4.inOut",
         absolute: true,
       });
-    }, "content")
-    .to(
+    }, "content");
+
+  setTimeout(() => {
+    tl.to(
       previewItem.value.DOM.slideTexts,
       {
         duration: 1.1,
         ease: "expo",
         yPercent: 0,
       },
-      "content+=0.3"
-    )
-    .to(
+      ">"
+    ).to(
       previewItem.value.DOM.descriptions,
       {
         duration: 1.1,
         ease: "expo",
         opacity: 1,
-        xPercent: 0,
+        yPercent: 0,
+        stagger: 0.2,
       },
-      "content+=0.3"
+      ">"
     );
+  }, 480);
 };
 
 onMounted(() => {
@@ -308,6 +321,15 @@ watch(
       previewItem.value = new PreviewItem(catSheet.value);
     }
   }
+);
+
+watch(
+  [() => props.open, () => isAnimating.value, () => catSheet.value],
+  ([propsOpen, refAnimating]) => {
+    if (!propsOpen && !refAnimating) {
+    }
+  },
+  { immediate: true }
 );
 
 defineExpose({ onOpenSheet });
@@ -376,7 +398,7 @@ body {
     transition: all ease-in-out 0.64s;
   }
 
-  z-index: 10;
+  z-index: 12;
 
   display: block;
   pointer-events: all;
@@ -384,6 +406,11 @@ body {
   &.--hidden {
     display: none;
     pointer-events: none;
+
+    .oh,
+    .preview__item-box-desc {
+      opacity: 0;
+    }
   }
 
   &__trigger {
@@ -402,7 +429,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 9;
+    z-index: 0;
     opacity: 0;
 
     width: 100vw;
@@ -451,6 +478,11 @@ body {
       "box-left subtitle box-right"
       "box-left ... box-right";
 
+    &--current {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
     &-close {
       &:hover {
         & > * {
@@ -495,6 +527,10 @@ body {
       &-desc {
         padding: var(--spacing-s);
         background-color: var(--random-tint);
+
+        &.preview__item-badges {
+          background-color: transparent;
+        }
       }
 
       &--right {
