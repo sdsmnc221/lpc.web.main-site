@@ -13,11 +13,13 @@
     >
       <div class="preview__item-img-outer">
         <div
-          class="preview__item-close w-full md:w-auto absolute z-10 bottom-0 bg-black p-6 pointer-events-auto"
+          class="preview__item-close w-full md:w-auto absolute z-10 bottom-0 bg-black p-6 pointer-events-auto flex justify-center"
           @click="closeSheet"
         >
           <div>
-            <div class="cat-sheet__trigger">Découvrez mes ami.e.s !</div>
+            <div class="cat-sheet__trigger text-lg md:text-[24px]">
+              Découvrez mes ami.e.s !
+            </div>
           </div>
         </div>
       </div>
@@ -437,8 +439,6 @@ body {
   &__trigger {
     color: var(--white);
     display: inline-block;
-
-    @include ft-s(24);
     text-transform: uppercase;
   }
 

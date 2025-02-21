@@ -70,7 +70,7 @@ watch(
   position: fixed;
   width: 100vw;
   top: 0;
-  z-index: 99;
+  z-index: 9;
   display: block;
   transition: all ease-in-out 0.64s;
 
