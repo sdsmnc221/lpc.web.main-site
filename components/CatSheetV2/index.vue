@@ -27,7 +27,7 @@
       <h2 class="preview__item-title oh" v-if="catItem">
         <span
           class="oh__inner"
-          :class="`${catItem.index % 2 === 0 ? 'gloock-regular' : 'albert-sans-bold'} ${catItem.catname.length >= 14 ? 'text-8xl' : ''}`"
+          :class="`${catItem.index % 2 === 0 ? 'gloock-regular' : 'albert-sans-bold'} ${catItem.catname.length >= 10 ? 'text-8xl' : ''}`"
           >{{ catItem.catname }}</span
         >
       </h2>
@@ -202,8 +202,6 @@ const closeSheet = () => {
   const contentOverlay = `.cat-sheet-for-group-${props.groupIndex}.cat-sheet__overlay`;
   isAnimating.value = true;
 
-  console.log(contentItem.value);
-
   gsap
     .timeline({
       defaults: {
@@ -279,14 +277,6 @@ const closeSheet = () => {
         yPercent: 0,
       },
       "start+=0.6"
-    )
-    .to(
-      contentItem.value.DOM.caption,
-      {
-        yPercent: 0,
-        opacity: 1,
-      },
-      "start+=0.6"
     );
 
   emits("update:open-sheet", { opened: false });
@@ -317,6 +307,7 @@ const onOpenSheet = (
         // bodyEl.classList.add('preview-open');
         // gsap.set(contentItem.value.DOM.el, {zIndex: 10});
 
+        gsap.set(previewItem.value?.DOM.close, { yPercent: 120, opacity: 0 });
         gsap.set(contentOverlay, {
           transformOrigin: current % 2 ? "0% 100%" : "0% 0%",
           scaleX: contentItem.value.DOM.el.offsetWidth / window.innerWidth,
@@ -341,14 +332,6 @@ const onOpenSheet = (
       contentItem.value.DOM.titleInner,
       {
         yPercent: current % 2 ? -100 : 100,
-      },
-      "start"
-    )
-    .to(
-      contentItem.value.DOM.caption,
-      {
-        yPercent: current % 2 ? -10 : 10,
-        opacity: 0,
       },
       "start"
     )
@@ -401,6 +384,21 @@ const onOpenSheet = (
           opacity: 1,
           yPercent: 0,
           stagger: 0.2,
+        },
+        ">"
+      )
+      .to(
+        previewItem.value?.DOM.imgOuter,
+        { opacity: 1, duration: 0.64, ease: "expo" },
+        ">-=0.6"
+      )
+      .to(
+        previewItem.value?.DOM.close,
+        {
+          duration: 1.1,
+          ease: "expo",
+          opacity: 1,
+          yPercent: 0,
         },
         ">"
       );
@@ -608,6 +606,8 @@ body {
     }
 
     &-close {
+      opacity: 0;
+
       &:hover {
         & > * {
           filter: blur(2.4px);

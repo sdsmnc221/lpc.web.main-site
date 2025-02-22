@@ -1,3 +1,5 @@
+import { NodeBuilderFlags } from "typescript";
+
 /**
  * Class representing a preview item element (.preview__item)
  */
@@ -22,6 +24,8 @@ export class PreviewItem {
     boxes: null,
     // textElements
     textElements: null,
+    // close
+    close: NodeBuilderFlags,
   };
 
   /**
@@ -43,6 +47,7 @@ export class PreviewItem {
       ...this.DOM.el.querySelectorAll(".oh"),
       ...this.DOM.el.querySelectorAll(".preview__item-box-desc"),
     ];
+    this.DOM.close = this.DOM.el.querySelector(".preview__item-close");
   }
 
   updateSlideTexts() {
