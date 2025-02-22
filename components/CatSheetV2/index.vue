@@ -415,12 +415,6 @@ watch(
   }
 );
 
-watch(
-  () => props.catItem,
-  () => {
-    console.log(props.catItem);
-  }
-);
 defineExpose({ onOpenSheet });
 </script>
 
