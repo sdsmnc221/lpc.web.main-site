@@ -71,7 +71,7 @@ watch(
 
   &:has(.page-loader:not(.fade-out-fwd)) {
     width: 100dvw;
-    height: 100svh;
+    height: 100dvh;
     overflow: hidden;
 
     .app {

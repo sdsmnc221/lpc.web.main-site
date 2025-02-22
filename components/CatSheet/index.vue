@@ -3,7 +3,7 @@
     <div
       v-if="catItem"
       class="cat-sheet__grid"
-      :class="{ '--svh': isAdressBarHidden }"
+      :class="{ '--dvh': isAdressBarHidden }"
       :style="`--random-tint: ${tint};`"
     >
       <div class="cat-sheet__grid__div7">"></div>
@@ -470,8 +470,8 @@ watch(
         grid-column-gap: 0px;
         grid-row-gap: 0px;
 
-        &.--svh {
-          height: 100svh;
+        &.--dvh {
+          height: 100dvh;
         }
 
         &__div1 {
@@ -662,7 +662,7 @@ watch(
       }
 
       &__details {
-        top: -6.4svh;
+        top: -6.4dvh;
       }
     }
   }

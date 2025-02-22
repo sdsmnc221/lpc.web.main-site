@@ -6,7 +6,7 @@
   >
     <Teleport to="body">
       <div
-        :class="`fixed w-[100vw] h-[100svh] top-0 left-0 cat-sheet-for-group-${groupIndex} cat-sheet__overlay ${isAdressBarHidden ? '--svh' : ''}`"
+        :class="`fixed w-[100vw] h-[100dvh] top-0 left-0 cat-sheet-for-group-${groupIndex} cat-sheet__overlay ${isAdressBarHidden ? '--dvh' : ''}`"
         :style="`--random-tint: ${tint.hsla};`"
       ></div>
     </Teleport>
@@ -435,7 +435,7 @@ body {
       align-items: flex-end;
       justify-content: center;
       width: 100vw;
-      height: 100svh;
+      height: 100dvh;
       position: absolute;
       top: 0;
       left: 0;
