@@ -115,10 +115,7 @@ watch(
       font-size: clamp(3rem, 24vw, 17rem);
       font-weight: 300;
       margin: 0;
-      line-height: 1;
       will-change: transform;
-      padding-top: 1vw;
-
       mix-blend-mode: difference;
     }
   }
