@@ -250,6 +250,7 @@ const closeSheet = () => {
       },
       "start"
     )
+    .to(previewItem.value?.DOM.textElements, { opacity: 0 }, ">")
     .add(() => {
       const flipstate = Flip.getState(contentItem.value.DOM.imgWrap);
       contentItem.value.DOM.button.insertBefore(
@@ -278,7 +279,8 @@ const closeSheet = () => {
         opacity: 0,
       },
       "content+=0.9"
-    );
+    )
+    .to(previewItem.value.DOM.close, { opacity: 0 }, "start");
 };
 
 const onOpenSheet = (
@@ -367,7 +369,7 @@ const onOpenSheet = (
           ease: "expo",
           yPercent: 0,
         },
-        ">"
+        ">-=0.2"
       )
       .to(
         previewItem.value.DOM.descriptions,
@@ -377,7 +379,7 @@ const onOpenSheet = (
           opacity: 1,
           yPercent: 0,
         },
-        ">"
+        ">-=0.2"
       )
       .to(
         previewItem.value?.DOM.imgOuter,
