@@ -262,7 +262,7 @@ const closeSheet = () => {
         ease: "power4.inOut",
         absolute: true,
       });
-    }, "start+=0.2")
+    }, "content")
     .to(
       contentOverlay,
       {
