@@ -21,7 +21,7 @@
       <div
         v-for="(chonk, indexChonk) in chunks"
         :key="`expandable-gallery-${title}-chonk-${index}`"
-        :class="cn('flex flex-col md:flex-row  md:h-96 h-svh w-full gap-2 ')"
+        :class="cn('flex flex-col md:flex-row  md:h-96 h-dvh w-full gap-2 ')"
       >
         <div
           v-for="(image, index) in chonk"
