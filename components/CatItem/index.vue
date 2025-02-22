@@ -13,7 +13,7 @@
         </div>
 
         <h4
-          class="cat-item__name cat-item-title oh"
+          class="cat-item__name cat-item-title oh leading-[0.64]"
           :class="`${catname.length >= 10 ? 'text-8xl' : ''}`"
         >
           <span
