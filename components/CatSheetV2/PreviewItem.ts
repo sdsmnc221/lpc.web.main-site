@@ -1,5 +1,3 @@
-import { NodeBuilderFlags } from "typescript";
-
 /**
  * Class representing a preview item element (.preview__item)
  */
@@ -25,7 +23,7 @@ export class PreviewItem {
     // textElements
     textElements: null,
     // close
-    close: NodeBuilderFlags,
+    close: null,
   };
 
   /**

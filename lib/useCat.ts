@@ -24,7 +24,9 @@ export default function useCat() {
         name: router.currentRoute.value.name,
       });
 
-      currentCatItem.value = null;
+      setTimeout(() => {
+        currentCatItem.value = null;
+      }, 1200);
     }
   };
 

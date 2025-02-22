@@ -1,5 +1,9 @@
 <template>
-  <div class="cat-sheet" ref="catSheet" :class="{ '--hidden': !open }">
+  <div
+    class="cat-sheet"
+    ref="catSheet"
+    :class="{ '--hidden': !open && !isAnimating }"
+  >
     <Teleport to="body">
       <div
         :class="`fixed w-[100vw] h-[100svh] top-0 left-0 cat-sheet-for-group-${groupIndex} cat-sheet__overlay ${isAdressBarHidden ? '--svh' : ''}`"
@@ -97,10 +101,7 @@
 
       <div class="preview__item-box preview__item-box--right">
         <div class="flex justify-between items-end mb-4 pr-2 oh">
-          <div
-            class="preview__item-info o pl-2 oh__inner"
-            v-if="catItem && hasInfo"
-          >
+          <div class="preview__item-info o pl-2 oh__inner" v-if="catItem">
             <p v-if="catItem.catagenumber && catItem.catagetype">
               🎂 {{ catItem.catagenumber }} {{ catItem.catagetype }}
             </p>
@@ -202,6 +203,10 @@ const closeSheet = () => {
   const contentOverlay = `.cat-sheet-for-group-${props.groupIndex}.cat-sheet__overlay`;
   isAnimating.value = true;
 
+  previewItem.value.updateSlideTexts();
+  previewItem.value.updateBoxDesc();
+  previewItem.value.updateTextElements();
+
   gsap
     .timeline({
       defaults: {
@@ -218,6 +223,7 @@ const closeSheet = () => {
 
         inPreview.value = false;
         isAnimating.value = false;
+        emits("update:open-sheet", { opened: false });
       },
     })
     .addLabel("start", 0)
@@ -246,40 +252,33 @@ const closeSheet = () => {
     )
     .add(() => {
       const flipstate = Flip.getState(contentItem.value.DOM.imgWrap);
-      contentItem.value.DOM.el.insertBefore(
+      contentItem.value.DOM.button.insertBefore(
         contentItem.value.DOM.imgWrap,
-        contentItem.value.DOM.el.children[1]
+        contentItem.value.DOM.button.children[1]
       );
       Flip.from(flipstate, {
         duration: 0.8,
         ease: "power4.inOut",
         absolute: true,
       });
-    }, "start")
+    }, "start+=0.2")
     .to(
       contentOverlay,
       {
         scaleX: contentItem.value.DOM.el.offsetWidth / window.innerWidth,
         x: contentItem.value.DOM.el.offsetLeft,
+        opacity: 0.48,
       },
-      "start"
+      "content+=0.1"
     )
     .to(
       contentOverlay,
       {
         scaleY: 0,
+        opacity: 0,
       },
-      "start+=0.6"
-    )
-    .to(
-      contentItem.value.DOM.titleInner,
-      {
-        yPercent: 0,
-      },
-      "start+=0.6"
+      "content+=0.9"
     );
-
-  emits("update:open-sheet", { opened: false });
 };
 
 const onOpenSheet = (
@@ -300,9 +299,9 @@ const onOpenSheet = (
       onStart: () => {
         inPreview.value = true;
 
-        previewItem.value?.updateSlideTexts();
-        previewItem.value?.updateBoxDesc();
-        previewItem.value?.updateTextElements();
+        previewItem.value.updateSlideTexts();
+        previewItem.value.updateBoxDesc();
+        previewItem.value.updateTextElements();
 
         // bodyEl.classList.add('preview-open');
         // gsap.set(contentItem.value.DOM.el, {zIndex: 10});
@@ -316,6 +315,7 @@ const onOpenSheet = (
           opacity: 0,
         });
 
+        gsap.set(previewItem.value.DOM.textElements, { opacity: 0 });
         gsap.set(previewItem.value.DOM.slideTexts, { yPercent: 100 });
         gsap.set(previewItem.value.DOM.descriptions, {
           yPercent: (pos) => 100 * (pos + 1),
@@ -328,13 +328,6 @@ const onOpenSheet = (
     })
     .addLabel("start", 0)
     .addLabel("content", "start+=0.6")
-    .to(
-      contentItem.value.DOM.titleInner,
-      {
-        yPercent: current % 2 ? -100 : 100,
-      },
-      "start"
-    )
     .to(
       contentOverlay,
       {
@@ -383,7 +376,6 @@ const onOpenSheet = (
           ease: "expo",
           opacity: 1,
           yPercent: 0,
-          stagger: 0.2,
         },
         ">"
       )
@@ -400,7 +392,7 @@ const onOpenSheet = (
           opacity: 1,
           yPercent: 0,
         },
-        ">"
+        ">-=0.7"
       );
   }, 480);
 };
@@ -422,14 +414,11 @@ watch(
 );
 
 watch(
-  [() => props.open, () => isAnimating.value, () => catSheet.value],
-  ([propsOpen, refAnimating]) => {
-    if (!propsOpen && !refAnimating) {
-    }
-  },
-  { immediate: true }
+  () => props.catItem,
+  () => {
+    console.log(props.catItem);
+  }
 );
-
 defineExpose({ onOpenSheet });
 </script>
 

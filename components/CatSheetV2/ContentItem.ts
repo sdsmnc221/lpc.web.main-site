@@ -12,6 +12,8 @@ export class ContentItem {
   DOM = {
     // main element (.cat-item)
     el: null,
+    // trigger btn (.cat-item btn)
+    button: null,
     // title (.cat-item-title)
     title: null,
     // title inner (.cat-item-title > .oh__inner)
@@ -29,6 +31,7 @@ export class ContentItem {
   constructor(DOM_el) {
     this.previewItem = null;
     this.DOM.el = DOM_el;
+    this.DOM.button = this.DOM.el.querySelector("button");
     this.DOM.title = this.DOM.el.querySelector(".cat-item-title");
     this.DOM.titleInner = this.DOM.title.querySelector(".oh__inner");
     this.DOM.imgWrap = this.DOM.el.querySelector(".cat-item-img-wrap");
