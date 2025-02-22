@@ -45,6 +45,7 @@
           :id="cat.id"
           :index="index"
           :default-open="defaultOpen && currentCatItem?.index === index"
+          :tint="randomTint"
           @update:open-item="
             ({ opened, contentItem }) =>
               onOpenItem({

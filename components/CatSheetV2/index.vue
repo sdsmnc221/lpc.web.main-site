@@ -262,6 +262,8 @@ const closeSheet = () => {
         ease: "power4.inOut",
         absolute: true,
       });
+
+      contentItem.value?.DOM.title.classList.remove("--previewing");
     }, "content")
     .to(
       contentOverlay,
@@ -330,6 +332,9 @@ const onOpenSheet = (
     })
     .addLabel("start", 0)
     .addLabel("content", "start+=0.6")
+    .add(() => {
+      contentItem.value.DOM.title.classList.add("--previewing");
+    })
     .to(
       contentOverlay,
       {

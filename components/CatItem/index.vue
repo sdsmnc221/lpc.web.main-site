@@ -1,7 +1,10 @@
 <template>
   <div class="cat-item" ref="catItem">
     <Sheet>
-      <SheetTrigger @click="onOpen(true)">
+      <SheetTrigger
+        @click="onOpen(true)"
+        :style="`--random-tint: ${tint.hsl};`"
+      >
         <div class="cat-item-img-wrap">
           <prismic-image
             class="cat-item__photo cat-item-img"
@@ -9,7 +12,10 @@
           />
         </div>
 
-        <h4 class="cat-item__name cat-item-title oh">
+        <h4
+          class="cat-item__name cat-item-title oh"
+          :class="`${catname.length >= 10 ? 'text-8xl' : ''}`"
+        >
           <span
             class="oh__inner"
             :class="`${index % 2 === 0 ? 'gloock-regular' : 'albert-sans-bold'}`"
@@ -48,7 +54,9 @@ import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import type { CatInfo } from "~/interfaces/Cat";
 import { ContentItem } from "../CatSheetV2/ContentItem";
 
-const props = defineProps<CatInfo & { defaultOpen: boolean }>();
+const props = defineProps<
+  CatInfo & { defaultOpen: boolean; tint: { hsla: string; hsl: string } }
+>();
 
 const emits = defineEmits(["update:open-item"]);
 
@@ -97,14 +105,22 @@ watch(
     transform: translateY(calc(var(--spacing-l) * -1));
   }
 
-  .oh {
-    // position: relative;
-    // overflow: hidden;
-  }
+  &-title {
+    transition: all ease 1.2s;
+    z-index: 10;
 
-  .oh__inner {
-    will-change: transform;
-    // display: inline-block;
+    &.--previewing {
+      color: var(--random-tint);
+      display: block;
+      font-size: clamp(3rem, 24vw, 17rem);
+      font-weight: 300;
+      margin: 0;
+      line-height: 1;
+      will-change: transform;
+      padding-top: 1vw;
+
+      mix-blend-mode: difference;
+    }
   }
 
   .cat-item__explore {
@@ -149,7 +165,7 @@ watch(
 
   &__name {
     text-align: left;
-    text-transform: uppercase;
+    text-transform: capitalize;
     position: relative;
     margin-top: var(--spacing-m);
     min-width: 64%;
