@@ -24,10 +24,10 @@
 
   <pop-out-text :slice="popOutText"></pop-out-text>
 
-  <!-- <ui-dock>
+  <ui-dock>
     <Badge @click="quickAccess('faq')">Modalités d'adoption</Badge>
     <Badge @click="quickAccess('top')">Haut de page</Badge>
-  </ui-dock> -->
+  </ui-dock>
 </template>
 
 <script setup lang="ts">
