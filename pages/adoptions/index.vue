@@ -20,7 +20,7 @@
     ></adoptions-group>
   </Suspense>
 
-  <multi-text-block ref="faqRef" :slice="faq"></multi-text-block>
+  <multi-text-block ref="faqRef" :slice="faq" class="faq"></multi-text-block>
 
   <pop-out-text :slice="popOutText"></pop-out-text>
 
@@ -33,6 +33,7 @@
 <script setup lang="ts">
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 import HeroBannerWithText from "@/slices/HeroBannerWithText/index.vue";
 import HeroPhotoBackground from "@/slices/HeroPhotoBackground/index.vue";
@@ -43,6 +44,7 @@ import UiDock from "~/components/UiDock/UiDock.vue";
 import Badge from "~/components/ui/badge/Badge.vue";
 
 gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollToPlugin);
 
 const { client } = usePrismic();
 
@@ -94,24 +96,28 @@ const faqRef = ref(null);
 const quickAccess = (section: string) => {
   let node, y;
 
-  if (window && document) {
-    switch (section) {
-      case "top":
-        node = topRef.value;
-        y = 0;
-        break;
-      case "faq":
-      default:
-        node = faqRef.value;
-        y = document.documentElement.getBoundingClientRect().height;
-        break;
+  nextTick(() => {
+    if (window && document) {
+      console.log(section);
+      switch (section) {
+        case "top":
+          y = 0;
+          gsap.to(window, { duration: 1.6, scrollTo: y });
+          break;
+        case "faq":
+          gsap.to(window, {
+            duration: 2.4,
+            scrollTo: {
+              y: ".faq",
+              offsetY: 64,
+            },
+          });
+          break;
+        default:
+          break;
+      }
     }
-
-    window.scroll({
-      top: y,
-      behavior: "smooth",
-    });
-  }
+  });
 };
 
 onMounted(() => {
