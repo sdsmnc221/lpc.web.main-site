@@ -727,6 +727,11 @@ onUnmounted(() => {
     .adoptions-group {
       margin-top: calc(var(--spacing-l) * 2);
       margin-bottom: var(--spacing-l);
+      overflow-x: hidden;
+
+      @supports (-webkit-hyphens: none) and (-moz-hyphens: none) {
+        overflow-x: scroll;
+      }
 
       &__title {
         position: absolute;
