@@ -24,7 +24,9 @@ export default function useCat() {
         name: router.currentRoute.value.name,
       });
 
-      currentCatItem.value = null;
+      setTimeout(() => {
+        currentCatItem.value = null;
+      }, 1200);
     }
   };
 
@@ -42,21 +44,6 @@ export default function useCat() {
     { immediate: true, deep: true }
   );
 
-  watch(
-    () => defaultOpen.value,
-    () => {
-      console.log(defaultOpen.value);
-    },
-    { immediate: true }
-  );
-
-  watch(
-    () => currentCatItem.value,
-    () => {
-      console.log(currentCatItem.value);
-    },
-    { immediate: true }
-  );
   return {
     currentCatItem,
     defaultOpen,

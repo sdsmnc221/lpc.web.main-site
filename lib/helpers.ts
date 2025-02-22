@@ -55,7 +55,17 @@ function randomHSLA() {
   const s = Math.floor(Math.random() * 100);
   const l = Math.floor(Math.random() * 100);
   const a = (Math.random() * 0.48).toFixed(2);
-  return `hsla(${h}, ${s}%, ${l}%, ${a})`;
+
+  // Helper function to check if color is dark
+  const isDark = (l: number) => l < 50;
+
+  // If dark, invert the lightness (100 - l)
+  const finalL = isDark(l) ? 100 - l : l;
+
+  return {
+    hsla: `hsla(${h}, ${s}%, ${l}%, ${a})`,
+    hsl: `hsla(${h}, ${s}%, ${finalL}%, ${0.72})`,
+  };
 }
 
 const toPascalCase = (str: string) => {

@@ -36,6 +36,7 @@
       <div class="adoptions-group__items" v-if="itemsData?.length">
         <cat-item
           v-for="(cat, index) in itemsData"
+          ref="itemsDataDom"
           :key="`adoptions-group-cat-${cat.id}`"
           v-bind="cat.data"
           :contact-info="contactInfo"
@@ -43,11 +44,16 @@
           :avatar-placeholder="avatarPlaceholder"
           :id="cat.id"
           :index="index"
+          :default-open="defaultOpen && currentCatItem?.index === index"
+          :tint="randomTint"
           @update:open-item="
-            ({ opened }) =>
+            ({ opened, contentItem }) =>
               onOpenItem({
                 opened,
                 catItem: formatCatItem({ cat, index }),
+                contentItem,
+                itemIndex: index,
+                groupIndex,
               })
           "
         ></cat-item>
@@ -56,9 +62,11 @@
 
     <Teleport to="body">
       <cat-sheet
+        ref="catSheet"
         :open="defaultOpen"
         :cat-item="currentCatItem"
         :tint="randomTint"
+        :group-index="groupIndex"
         @update:open-sheet="({ opened }) => onOpenSheet({ opened })"
       ></cat-sheet>
     </Teleport>
@@ -66,11 +74,12 @@
 </template>
 
 <script setup lang="ts">
+import { useTemplateRef } from "vue";
 import { type Content } from "@prismicio/client";
 import type { CatInfo } from "~/interfaces/Cat";
 
 import CatItem from "@/components/CatItem/index.vue";
-import CatSheet from "@/components/CatSheet/index.vue";
+import CatSheet from "@/components/CatSheetV2/index.vue";
 import SafariScrollIndicator from "@/components/SafariScrollIndicator/index.vue";
 
 const { client } = usePrismic();
@@ -126,10 +135,15 @@ const avatarPlaceholder = computed(
 
 const currentCatItem = ref<CatInfo | null>(null);
 
+const catContentItems = useTemplateRef("itemsDataDom");
+const catSheet = ref(null);
+
 const defaultOpen = ref(false);
 const randomTint = ref(randomHSLA());
 
 const isDoScrollDisabled = ref(false);
+
+const groupIndex = computed(() => props.index);
 
 const commonOpen = (opened: boolean, catItem = null) => {
   defaultOpen.value = opened;
@@ -165,9 +179,15 @@ const formatCatItem = ({ cat, index }) => {
 };
 
 const onOpenItem = (details) => {
-  const { opened, catItem } = details;
+  const { opened, catItem, contentItem, itemIndex, groupIndex } = details;
 
   commonOpen(opened, catItem);
+
+  if (opened) {
+    setTimeout(() => {
+      catSheet.value.onOpenSheet(contentItem, itemIndex, groupIndex);
+    }, 32);
+  }
 };
 
 const onOpenSheet = (details) => {
@@ -470,6 +490,11 @@ onMounted(() => {
       initHorizontalScroll();
     } else {
       isDoScrollDisabled.value = true;
+
+      if (section.value) {
+        section.value.style.overflowX = "scroll";
+      }
+
       emits("animation-init-done");
     }
 
@@ -708,6 +733,7 @@ onUnmounted(() => {
     .adoptions-group {
       margin-top: calc(var(--spacing-l) * 2);
       margin-bottom: var(--spacing-l);
+      overflow-x: hidden;
 
       &__title {
         position: absolute;
