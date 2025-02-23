@@ -149,6 +149,15 @@
           ],
           "default_value": "Adoptable - Chat adulte"
         }
+      },
+      "isfosterpossible": {
+        "type": "Boolean",
+        "config": {
+          "label": "isFosterPossible",
+          "default_value": false,
+          "placeholder_true": "true",
+          "placeholder_false": "false"
+        }
       }
     }
   }

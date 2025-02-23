@@ -22,4 +22,5 @@ export type CatInfo = {
   contactInfo?: any;
   adoptionRequirements?: any;
   avatarPlaceholder?: Image;
+  isfosterpossible?: boolean;
 };

@@ -94,8 +94,21 @@
 
           <prismic-rich-text
             :field="catItem.adoptionRequirements"
-            class="text-xs md:text-sm pl-2 mt-4 leading-tight"
+            class="text-xs md:text-sm pl-2 mt-1 leading-tight"
           />
+
+          <div class="text-xs mt-4" v-if="catItem.isfosterpossible">
+            <a
+              href="https://lespetitsclochards.fillout.com/chatmille-accueil"
+              target="_blank"
+            >
+              <Badge class="badge">Formulaire d'accueil</Badge>
+            </a>
+
+            <p class="text-xs md:text-sm mt-1 leading-tight pl-2">
+              Ce chat cherche aussi un accueil temporaire.
+            </p>
+          </div>
         </div>
       </div>
 
@@ -175,10 +188,6 @@ const catSheet = ref<HTMLDivElement | null>(null);
 
 const previewItem = ref<PreviewItem | null>(null);
 const contentItem = ref<ContentItem | null>(null);
-
-const catHasAvatar = computed(() =>
-  props.catItem?.catphoto?.hasOwnProperty("url")
-);
 
 const hasInfo = computed(
   () =>

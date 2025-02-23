@@ -200,6 +200,18 @@ interface CatficheDocumentData {
     | "Réservé.e",
     "filled"
   >;
+
+  /**
+   * isFosterPossible field in *CatFiche*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: catfiche.isfosterpossible
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  isfosterpossible: prismic.BooleanField;
 }
 
 /**

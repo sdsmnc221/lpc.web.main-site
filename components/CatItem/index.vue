@@ -8,7 +8,7 @@
         <div class="cat-item-img-wrap">
           <prismic-image
             class="cat-item__photo cat-item-img"
-            :field="catHasAvatar ? catphoto : avatarPlaceholder"
+            :field="catHasAvatar"
           />
         </div>
 
@@ -63,7 +63,13 @@ const emits = defineEmits(["update:open-item"]);
 const catItem = ref<HTMLDivElement | null>(null);
 const contentItem = ref<ContentItem | null>(null);
 
-const catHasAvatar = computed(() => props.catphoto.hasOwnProperty("url"));
+const catHasAvatar = computed(() =>
+  props.catphoto2.hasOwnProperty("url")
+    ? props.catphoto2
+    : props.catphoto.hasOwnProperty("url")
+      ? props.catphoto
+      : props.avatarPlaceholder
+);
 
 const onOpen = (opened: boolean) => {
   emits("update:open-item", { opened, contentItem: contentItem.value });
