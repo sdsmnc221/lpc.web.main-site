@@ -14,7 +14,7 @@
     </h3>
 
     <prismic-rich-text
-      class="photo-with-text-block__description albert-sans-regular"
+      class="photo-with-text-block__description albert-sans-regular text-base leading-tight"
       :field="description"
     />
   </section>
@@ -61,14 +61,52 @@ const description = computed(() => primary.value?.description);
     min-height: var(--h);
     object-fit: cover;
   }
+  .photo-with-text-block__description {
+    & > p {
+      margin-top: 13px;
+    }
+  }
 
   h3 {
     @include ft-s(medium);
   }
 
-  &__description * {
-    line-height: 1.5em;
-    @include ft-s(16);
+  a:not(:has(strong)) {
+    position: relative;
+    font-weight: bold;
+
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--gray-dark);
+    }
+  }
+
+  a:not([href^="tel:"]):has(strong) {
+    display: inline-block;
+    padding: 12px 24px;
+    margin: var(--spacing-m) 0;
+    letter-spacing: -0.2px;
+
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 32px;
+
+    @include ft-s(regular);
+
+    background-color: var(--black);
+    color: var(--white);
+  }
+
+  a:is([href^="tel:"]):not(:has(strong)) {
+    font-weight: bold;
+    text-decoration: underline;
   }
 }
 
@@ -95,10 +133,6 @@ const description = computed(() => primary.value?.description);
         --w: 310px !important;
         --h: 310px !important;
       }
-    }
-
-    &__description * {
-      @include ft-s(20);
     }
   }
 }

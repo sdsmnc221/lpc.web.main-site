@@ -146,6 +146,7 @@ const buttons = computed(() => primary.value?.buttonsgroups);
     .hero-banner-with-text__heading *,
     .hero-banner-with-text__description * {
       @extend .cl-black;
+      @extend .a-button;
     }
 
     &::after {

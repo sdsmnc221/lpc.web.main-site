@@ -1,0 +1,29 @@
+.a-button {
+  a:not([href^="tel:"]):has(strong) {
+    display: inline-block;
+    padding: 12px 24px;
+    margin: var(--spacing-m) 0;
+    letter-spacing: -0.2px;
+
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 32px;
+
+    @include ft-s(regular);
+
+    background-color: var(--black);
+    color: var(--white);
+  }
+
+  a:is([href^="tel:"]):not(:has(strong)) {
+    font-weight: bold;
+    text-decoration: underline;
+  }
+
+  a {
+    * {
+      color: var(--white) !important;
+    }
+  }
+}
