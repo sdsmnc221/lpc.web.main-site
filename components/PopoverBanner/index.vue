@@ -1,53 +1,57 @@
 <template>
-  <div class="popover-banner" v-if="displaytype === 'PopoverBanner'">
-    <Popover @update:open="(evt) => onUpdateOpen(evt)">
-      <PopoverTrigger>
-        <Badge class="popover-banner__cta">{{ ctalabel }} </Badge>
-      </PopoverTrigger>
-      <PopoverContent class="popover-banner__content overflow-y-scroll">
-        <div>
-          <prismic-image
-            v-if="banner && banner?.url"
-            class="popover-banner__image"
-            :field="banner"
-          />
+  <aside>
+    <div class="popover-banner" v-if="displaytype === 'PopoverBanner'">
+      <Popover @update:open="(evt) => onUpdateOpen(evt)">
+        <PopoverTrigger>
+          <Badge class="popover-banner__cta">{{ ctalabel }} </Badge>
+        </PopoverTrigger>
+        <PopoverContent class="popover-banner__content overflow-y-scroll">
+          <div>
+            <prismic-image
+              v-if="banner && banner?.url"
+              class="popover-banner__image"
+              :field="banner"
+            />
+            <prismic-rich-text
+              class="popover-banner__text size-16 albert-sans-light"
+              :field="text"
+            />
+          </div>
+        </PopoverContent>
+      </Popover>
+    </div>
+
+    <div v-else-if="displaytype === 'PopoverSheet'" class="popover-sheet">
+      <Sheet @update:open="(evt) => onUpdateOpen(evt)">
+        <SheetTrigger
+          ><Badge class="popover-banner__cta"
+            >{{ ctalabel }}
+          </Badge></SheetTrigger
+        >
+        <SheetContent
+          class="popover-sheet__content md:w-1/3 sm:max-w-1/2 overflow-y-scroll"
+        >
+          <SheetHeader>
+            <SheetTitle class="popover-sheet__title text-3xl">{{
+              ctalabel
+            }}</SheetTitle>
+          </SheetHeader>
+
           <prismic-rich-text
-            class="popover-banner__text size-16 albert-sans-light"
+            class="popover-sheet__text albert-sans-regular w-fit leading-6"
             :field="text"
           />
-        </div>
-      </PopoverContent>
-    </Popover>
-  </div>
+        </SheetContent>
+      </Sheet>
+    </div>
 
-  <div v-else-if="displaytype === 'PopoverSheet'" class="popover-sheet">
-    <Sheet @update:open="(evt) => onUpdateOpen(evt)">
-      <SheetTrigger
-        ><Badge class="popover-banner__cta"
-          >{{ ctalabel }}
-        </Badge></SheetTrigger
-      >
-      <SheetContent
-        class="popover-sheet__content md:w-1/3 sm:max-w-1/2 overflow-y-scroll"
-      >
-        <SheetHeader>
-          <SheetTitle class="popover-sheet__title text-3xl">{{
-            ctalabel
-          }}</SheetTitle>
-        </SheetHeader>
-
-        <prismic-rich-text
-          class="popover-sheet__text albert-sans-regular w-fit leading-6"
-          :field="text"
-        />
-      </SheetContent>
-    </Sheet>
-  </div>
-
-  <div v-else></div>
+    <div v-else></div>
+  </aside>
 </template>
 
 <script setup lang="ts">
+import Lenis from "lenis";
+import "lenis/dist/lenis.css";
 import {
   Popover,
   PopoverContent,
@@ -62,6 +66,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
+import useSmoothScroll from "@/composables/useSmoothScroll";
 
 type Prop = {
   banner?: any; // TODO: type Image
@@ -72,14 +77,12 @@ type Prop = {
 
 const props = defineProps<Prop>();
 
-const node = ref(null);
-
 const onUpdateOpen = (openState) => {
   if (openState) {
-    window.lenis?.stop();
+    window.lenis?.destroy();
+    window.lenis = null;
   } else {
     console.log(window.lenis);
-    window.lenis?.start();
   }
 };
 

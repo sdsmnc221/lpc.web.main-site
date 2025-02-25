@@ -11,18 +11,18 @@ export default function useSmoothScroll() {
 
   const playMagic = () => {
     const lenis = new Lenis({
-      content: document.body.querySelector("#__nuxt") as HTMLElement,
-      wrapper: document.body,
+      // content: document.body.querySelector(".superapp") as HTMLElement,
+      // wrapper: document.body.querySelector(".superapp"),
     });
 
     window.lenis = lenis;
 
     lenis.on("scroll", ScrollTrigger.update);
 
-    const raf = (time) => {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    };
+    // const raf = (time) => {
+    //   lenis.raf(time);
+    //   requestAnimationFrame(raf);
+    // };
 
     gsap.ticker.add((time) => {
       lenis.raf(time * 1000);
@@ -30,7 +30,7 @@ export default function useSmoothScroll() {
 
     gsap.ticker.lagSmoothing(0);
 
-    requestAnimationFrame(raf);
+    // requestAnimationFrame(raf);
   };
 
   onMounted(() => {

@@ -21,12 +21,13 @@ const loaded = computed(() => {
 });
 
 const onGsapInitDone = () => {
-  setTimeout(
-    () => {
-      gsapLoaded.value = true;
-    },
-    isMobile() && isSafari() ? 2200 : 1400
-  );
+  gsapLoaded.value = true;
+  // setTimeout(
+  //   () => {
+  //     gsapLoaded.value = true;
+  //   },
+  //   isMobile() && isSafari() ? 2200 : 1400
+  // );
 };
 
 watch(

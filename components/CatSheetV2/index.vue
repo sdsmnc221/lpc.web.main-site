@@ -482,7 +482,9 @@ body {
 
 @media screen and (min-width: 53em) {
   body {
-    overflow: hidden;
+    &:has(.cat-sheet) {
+      overflow: hidden;
+    }
 
     .cat-sheet {
       .cat-item-img-wrap {

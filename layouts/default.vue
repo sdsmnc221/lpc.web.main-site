@@ -1,22 +1,24 @@
 <template>
-  <div>
-    <accordion-navigation :links="links"></accordion-navigation>
+  <div class="superapp">
+    <div>
+      <accordion-navigation :links="links"></accordion-navigation>
 
-    <navigation-menu :links="links"></navigation-menu>
+      <navigation-menu :links="links"></navigation-menu>
 
-    <main class="app" :class="`--${route.name as string}`">
-      <slot />
-    </main>
+      <main class="app" :class="`--${route.name as string}`">
+        <slot />
+      </main>
 
-    <footer-menu v-if="footer && footer.data" v-bind="footer.data">
-      <template v-if="popoverBanners?.length" #popover-banner>
-        <popover-banner
-          v-for="banner in popoverBanners"
-          :key="`footer-banner-${banner.id}`"
-          v-bind="banner.data"
-        ></popover-banner>
-      </template>
-    </footer-menu>
+      <footer-menu v-if="footer && footer.data" v-bind="footer.data">
+        <template v-if="popoverBanners?.length" #popover-banner>
+          <popover-banner
+            v-for="banner in popoverBanners"
+            :key="`footer-banner-${banner.id}`"
+            v-bind="banner.data"
+          ></popover-banner>
+        </template>
+      </footer-menu>
+    </div>
   </div>
 </template>
 
