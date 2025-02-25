@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="ui-dock__container"
-    :style="`top: ${isNaN(windowScrollY) ? 0 : windowScrollY + 'px'};`"
-  >
+  <div class="ui-dock__container" :style="`top: ${windowScrollY}px;`">
     <div
       ref="dockRef"
       class="ui-dock"
@@ -56,7 +53,7 @@ const dockClass = computed(() => ({
 
 const scrollHeight = ref<number>(0);
 const innerHeight = ref<number>(0);
-const windowScrollY = ref<number>(NaN);
+const windowScrollY = ref<number>(0);
 
 onMounted(() => {
   nextTick(() => {
@@ -64,7 +61,7 @@ onMounted(() => {
     innerHeight.value = window.innerHeight;
 
     window.addEventListener("scroll", (e) => {
-      if (isSafari() && !isMobile) {
+      if (isSafari()) {
         setInterval(() => {
           windowScrollY.value = window.scrollY;
         }, 4800);
@@ -94,7 +91,7 @@ provide("distance", props.distance);
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100dvh;
+  height: 100svh;
 
   transition: top 0.64s ease-in-out;
   pointer-events: none;
