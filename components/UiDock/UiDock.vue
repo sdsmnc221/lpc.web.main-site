@@ -21,7 +21,7 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import { cn } from "~/lib/utils";
-import { isSafari } from "~/lib/helpers";
+import { isSafari, isMobile } from "~/lib/helpers";
 
 const props = defineProps({
   class: {
@@ -61,7 +61,7 @@ onMounted(() => {
     innerHeight.value = window.innerHeight;
 
     window.addEventListener("scroll", (e) => {
-      if (isSafari()) {
+      if (isSafari() && !isMobile()) {
         setInterval(() => {
           windowScrollY.value = window.scrollY;
         }, 4800);
