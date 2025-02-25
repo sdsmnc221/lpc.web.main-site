@@ -1,7 +1,7 @@
 <template>
   <div
     class="ui-dock__container"
-    :style="`top: ${isNaN(windowScrollY) ? 'unset' : windowScrollY + 'px'};`"
+    :style="`top: ${isNaN(windowScrollY) ? 0 : windowScrollY + 'px'};`"
   >
     <div
       ref="dockRef"
