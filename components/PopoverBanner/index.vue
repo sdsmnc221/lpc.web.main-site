@@ -34,12 +34,12 @@
           <SheetTitle class="popover-sheet__title text-3xl">{{
             ctalabel
           }}</SheetTitle>
-
-          <prismic-rich-text
-            class="popover-sheet__text albert-sans-regular w-fit leading-6"
-            :field="text"
-          />
         </SheetHeader>
+
+        <prismic-rich-text
+          class="popover-sheet__text albert-sans-regular w-fit leading-6"
+          :field="text"
+        />
       </SheetContent>
     </Sheet>
   </div>
@@ -72,6 +72,8 @@ type Prop = {
 
 const props = defineProps<Prop>();
 
+const node = ref(null);
+
 const onUpdateOpen = (openState) => {
   if (openState) {
     window.lenis?.stop();
@@ -79,6 +81,10 @@ const onUpdateOpen = (openState) => {
     console.log(window.lenis);
     window.lenis?.start();
   }
+};
+
+const onScroll = (e) => {
+  console.log(e);
 };
 </script>
 
