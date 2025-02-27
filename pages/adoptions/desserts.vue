@@ -234,7 +234,7 @@
                     :translate-z="50"
                     class="text-2xl uppercase font-bold text-rose-700"
                   >
-                    Praline<span class="text-lg font-bold">tte</span>
+                    Praline<span class="text-lg font-bold">nounette</span>
                   </CardItem>
                   <CardItem
                     as="p"
