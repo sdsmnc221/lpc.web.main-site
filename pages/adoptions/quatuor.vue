@@ -414,119 +414,133 @@
       </div>
     </div>
 
-    <div class="mt-8">
-      <h2 class="text-fuchsia-200 px-[10vw] font-bold text-base leading-none">
-        Adoption ou Accueil
-      </h2>
+    <div class="flex flex-col md:flex-row w-full md:mt-[24vh]">
+      <div class="mt-8">
+        <h2 class="text-fuchsia-200 px-[10vw] font-bold text-base leading-none">
+          Adoption ou Accueil
+        </h2>
 
-      <div class="mx-[10vw] flex flex-col items-start justify-start">
-        <div class="text-xs mt-2">
-          <a
-            href="https://lespetitsclochards.fillout.com/pre-adoption"
-            target="_blank"
-          >
-            <Badge>Formulaire d'adoption</Badge>
-          </a>
+        <div class="mx-[10vw] flex flex-col items-start justify-start md:mt-4">
+          <div class="text-xs mt-2">
+            <a
+              href="https://lespetitsclochards.fillout.com/pre-adoption"
+              target="_blank"
+            >
+              <Badge>Formulaire d'adoption</Badge>
+            </a>
+          </div>
+
+          <div class="text-xs mt-2">
+            <a
+              href="https://lespetitsclochards.fillout.com/chatmille-accueil"
+              target="_blank"
+            >
+              <Badge>Formulaire d'accueil</Badge>
+            </a>
+          </div>
+
+          <div class="text-xs mt-2">
+            <a href="tel:+33642804318" target="_blank">
+              <Badge>06 42 80 43 18 (Mme Bonniot)</Badge>
+            </a>
+          </div>
+
+          <div class="text-xs mt-2">
+            <a href="mailto:lespetitsclochards91@gmail.com" target="_blank">
+              <Badge>lespetitsclochards91@gmail.com</Badge>
+            </a>
+          </div>
         </div>
+      </div>
 
-        <div class="text-xs mt-2">
-          <a
-            href="https://lespetitsclochards.fillout.com/chatmille-accueil"
-            target="_blank"
-          >
-            <Badge>Formulaire d'accueil</Badge>
-          </a>
-        </div>
+      <div class="mt-8 md:basis-full">
+        <h2 class="text-fuchsia-200 px-[10vw] font-bold text-base leading-none">
+          Chat'Parrainage
+        </h2>
 
-        <div class="text-xs mt-2">
-          <a href="tel:+33642804318" target="_blank">
-            <Badge>06 42 80 43 18 (Mme Bonniot)</Badge>
-          </a>
-        </div>
+        <div
+          class="mx-[10vw] flex flex-col md:flex-row md:flex-wrap md:gap-10 items-start md:items-center justify-start"
+        >
+          <div class="text-xs mt-2 text-fuchsia-100">
+            <p class="font-bold text-fuchsia-200">Pourquoi parrainer ?</p>
+            <p>
+              Depuis plus de 5 ans, nous travaillons à leur socialisation avec
+              patience. Les adoptions sont rares et le coût du foyer est souvent
+              couvert par nos bénévoles.
+            </p>
+          </div>
 
-        <div class="text-xs mt-2">
-          <a href="mailto:lespetitsclochards91@gmail.com" target="_blank">
-            <Badge>lespetitsclochards91@gmail.com</Badge>
-          </a>
+          <div class="text-xs mt-2 text-fuchsia-100 md-w-[50%]">
+            <p class="font-bold text-fuchsia-200">Comment soutenir ?</p>
+            <p class="mt-2">
+              <a
+                href="https://www.helloasso.com/associations/les-petits-clochards/formulaires/2"
+                target="_blank"
+              >
+                <Badge>Chat'Parrainage sur HelloAsso</Badge>
+              </a>
+            </p>
+            <p class="mt-2">
+              <a
+                href="https://www.teaming.net/lespetitsclochards"
+                target="_blank"
+              >
+                <Badge>Rejoindre Teaming (1€/mois)</Badge>
+              </a>
+            </p>
+          </div>
+
+          <div class="text-xs mt-2 text-fuchsia-100">
+            <p class="font-bold text-fuchsia-200">Notre engagement...!</p>
+            <p>- Photos et nouvelles régulières</p>
+            <p>- Suivi de leur évolution</p>
+            <p>- Pâtée gourmande spéciale Journée des Femmes & Anniversaire</p>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="mt-8">
-      <h2 class="text-fuchsia-200 px-[10vw] font-bold text-base leading-none">
-        Chat'Parrainage
-      </h2>
-
-      <div class="mx-[10vw] flex flex-col items-start justify-start">
-        <div class="text-xs mt-2 text-fuchsia-100">
-          <p class="font-bold text-fuchsia-200">Pourquoi parrainer ?</p>
-          <p>
-            Depuis plus de 5 ans, nous travaillons à leur socialisation avec
-            patience. Les adoptions sont rares et le coût du foyer est souvent
-            couvert par nos bénévoles.
-          </p>
-        </div>
-
-        <div class="text-xs mt-2 text-fuchsia-100">
-          <p class="font-bold text-fuchsia-200">Comment soutenir ?</p>
-          <p class="mt-2">
-            <a
-              href="https://www.helloasso.com/associations/les-petits-clochards/formulaires/2"
-              target="_blank"
-            >
-              <Badge>Chat'Parrainage sur HelloAsso</Badge>
-            </a>
-          </p>
-          <p class="mt-2">
-            <a
-              href="https://www.teaming.net/lespetitsclochards"
-              target="_blank"
-            >
-              <Badge>Rejoindre Teaming (1€/mois)</Badge>
-            </a>
-          </p>
-        </div>
-
-        <div class="text-xs mt-2 text-fuchsia-100">
-          <p class="font-bold text-fuchsia-200">Notre engagement...!</p>
-          <p>- Photos et nouvelles régulières</p>
-          <p>- Suivi de leur évolution</p>
-          <p>- Pâtée gourmande spéciale Journée des Femmes & Anniversaire</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="mt-8">
-      <h2 class="text-fuchsia-200 px-[10vw] font-bold text-base leading-none">
+    <div class="mt-8 md:mt-[24vh]">
+      <h2
+        class="text-fuchsia-200 px-[10vw] relative md:z-[100] font-bold text-base md:text-center leading-none"
+      >
         Un Mot du Cœur...
       </h2>
 
-      <figure class="w-[50vh] h-[50vh] absolute z-50 left-[-56vw]">
+      <figure
+        class="w-[50vh] h-[50vh] absolute z-50 md:z-[2] left-[-56vw] md:left-0 md:scale-[2.4]"
+      >
         <img alt="" class="w-full h-full turning" src="/quatuor/cd.png" />
       </figure>
 
-      <div
-        class="shadow-xl flex min-h-[50vh] w-[104vw] relative left-[-2vw] flex flex-col justify-center items-center gap-2 mt-2 text-fuchsia-950 text-xs leading-none pl-[48%] pr-[24px] text-sm bg-fuchsia-100"
-      >
-        <p class="font-bold">
-          Dans l'orchestre de nos vies, ces quatre chattes jouent des mélodies
-          subtiles :
-        </p>
+      <div class="flex flex-col md:flex-row w-full">
+        <div
+          class="shadow-xl flex min-h-[50vh] w-[104vw] md:w-[100vw] relative left-[-2vw] md:left-0 flex flex-col justify-center items-center gap-2 mt-2 md:mt-0 text-fuchsia-950 text-xs leading-none pl-[48%] md:pl-[44%] pr-[24px] text-sm md:text-base bg-fuchsia-100"
+        >
+          <p class="font-bold">
+            Dans l'orchestre de nos vies, ces quatre chattes jouent des mélodies
+            subtiles :
+          </p>
 
-        <p>Praline, une sonate vive aux mouvements imprévisibles;</p>
-        <p>Melba, une berceuse aux nuances délicates;</p>
-        <p>Tagada, un requiem devenu hymne d'espoir;</p>
-        <p>et Cacaille, une ballade ancienne riche d'histoire.</p>
-        <p class="font-bold">
-          Devenir leur famille, parrain, marraine, c'est choisir de comprendre
-          que parfois, les plus belles mélodies sont celles qui demandent de
-          l'attention pour être appréciées.
-        </p>
+          <p>Praline, une sonate vive aux mouvements imprévisibles;</p>
+          <p>Melba, une berceuse aux nuances délicates;</p>
+          <p>Tagada, un requiem devenu hymne d'espoir;</p>
+          <p>et Cacaille, une ballade ancienne riche d'histoire.</p>
+          <p class="font-bold">
+            Devenir leur famille, parrain, marraine, c'est choisir de comprendre
+            que parfois, les plus belles mélodies sont celles qui demandent de
+            l'attention pour être appréciées.
+          </p>
+        </div>
+
+        <figure class="shadow-xl w-full aspect-square h-auto md:h-full mt-0">
+          <img
+            alt=""
+            src="/quatuor/quatuor-finale.jpg"
+            class="w-full h-full rounded-none"
+          />
+        </figure>
       </div>
-
-      <figure class="shadow-xl w-full aspect-square h-auto mt-0">
-        <img alt="" src="/quatuor/quatuor-finale.jpg" class="rounded-none" />
-      </figure>
     </div>
   </div>
 </template>
@@ -694,6 +708,11 @@ definePageMeta({
       #9a7b9f 30%
     );
   }
+}
+
+.--adoptions-quatuor + footer {
+  position: relative;
+  z-index: 999;
 }
 
 .discover .quatuor {
