@@ -26,9 +26,13 @@
         <figure
           class="music-player w-[100vw] flex justify-around items-center rotate-[24deg] mix-blend-hard-light"
         >
-          <img alt="" src="/quatuor/cta-left.png" class="scale-x-[-1] invert" />
-          <img alt="" src="/quatuor/cta-play.png" />
-          <img alt="" src="/quatuor/cta-right.png" />
+          <img
+            alt=""
+            src="/quatuor/cta-left.png"
+            class="w-[48px] h-[48px] scale-x-[-1] invert"
+          />
+          <img alt="" src="/quatuor/cta-play.png" class="w-[48px] h-[48px]" />
+          <img alt="" src="/quatuor/cta-right.png" class="w-[48px] h-[48px]" />
         </figure>
       </section>
 
@@ -46,7 +50,7 @@
       </section>
     </div>
 
-    <div class="h-[100dvh]">
+    <div class="min-h-[100dvh] pt-2">
       <h2 class="text-fuchsia-300 px-[10vw] font-bold text-base">
         Nos Quatre Mélodies de Féminité
       </h2>
@@ -54,57 +58,90 @@
       <section>
         <CardContainer>
           <CardBody
-            class="flex flex-col justify-start items-start bg-fuchsia-100 w-full p-4 gap-2 rounded-2xl"
+            class="flex flex-row flex-wrap justify-center items-center w-full max-h-[50vh] p-4 gap-2 rounded-2xl"
           >
-            <CardItem class="w-full h-[40%]">
+            <CardItem
+              :translate-z="0"
+              :translate-y="0"
+              :translate-x="0"
+              class="w-[48%] h-full flex flex-col gap-2"
+            >
+              <div
+                class="font-bold text-left bg-fuchsia-200 pl-4 rounded-tr-3xl"
+              >
+                <h3 class="text-xl">{{ musics[musicIndex].name }}</h3>
+                <p class="text-sm leading-[0.2rem] pb-3 font-serif">
+                  {{ musics[musicIndex].subtitle }}
+                </p>
+              </div>
+
+              <p
+                class="basis-full text-xs text-pink-100 bg-pink-900 p-2 flex flex-col gap-2 justify-end items-end rounded-bl-2xl rounded-tr-3xl"
+              >
+                <span class="font-bold font-serif">
+                  {{ musics[musicIndex].highlight }} :</span
+                >
+                <span class="text-[11px] inline-block pl-2 pb-2 leading-none">
+                  {{ musics[musicIndex].description }}
+                </span>
+              </p>
+            </CardItem>
+            <CardItem
+              :translate-z="0"
+              :translate-y="0"
+              :translate-x="0"
+              class="w-[40%] h-full flex flex-col gap-2"
+            >
               <img
                 alt=""
-                src="/quatuor/praline.jpg"
-                class="w-full h-full object-cover object-top rounded-xl"
+                :src="musics[musicIndex].img"
+                class="w-full h-full object-cover object-top rounded-none rounded-br-xl"
               />
-            </CardItem>
-            <CardItem>
-              <h3 class="font-bold text-xl">Praline - L'Allegro Curieux</h3>
-            </CardItem>
-            <CardItem>
-              <p class="text-sm">
-                <TextHighlight
-                  :delay="640"
-                  class="rounded-lg bg-gradient-to-r from-fuchsia-200 to-rose-500"
+              <p
+                class="h-fit flex justify-center uppercase bg-pink-700 text-pink-200 items-center text-center text-xs rounded-2xl"
+              >
+                <a :href="musics[musicIndex].link" target="_blank"
+                  >Voir sa fiche !</a
                 >
-                  Incarne la curiosité et l'audace :</TextHighlight
-                >
-                notre détective féline observe, enquête et participe à la vie du
-                foyer, mais toujours selon ses propres règles. Elle ne peut
-                résister à une enquête : un bruit mystérieux ? Elle sera la
-                première sur les lieux !
               </p>
             </CardItem>
           </CardBody>
         </CardContainer>
+
+        <figure
+          class="music-player--small my-2 py-2 relative border-b-[10px] border-fuchsia-200 w-[80vw] m-auto mt-[-20px] flex justify-around items-center"
+        >
+          <img
+            alt=""
+            src="/quatuor/cta-left.png"
+            class="w-[24px] h-[24px] scale-x-[-1]"
+            @click="incrementIndex"
+          />
+          <img
+            alt=""
+            src="/quatuor/cta-play.png"
+            class="w-[24px] h-[24px] invert"
+          />
+          <img
+            alt=""
+            src="/quatuor/cta-right.png"
+            class="w-[24px] h-[24px]"
+            @click="decrementIndex"
+          />
+        </figure>
       </section>
 
       <section class="quatuor__cards">
-        <figure class="flex w-[100vw] p-4 flex-wrap gap-[20px] justify-around">
+        <figure
+          class="flex w-[80vw] m-auto py-4 flex-wrap gap-[20px] justify-center items-center"
+        >
           <img
-            alt="Découvrez notre Pralinounette"
-            src="/quatuor/praline.jpg"
+            v-for="(music, index) in musics"
+            :key="`music-thumbnail-${music.name}`"
+            :alt="`Découvrez notre ${music.name}`"
+            :src="music.img"
             class="w-[20%] h-[20%] rounded-xl object-cover"
-          />
-          <img
-            alt="Découvrez notre Melbanette"
-            src="/quatuor/melba.jpg"
-            class="w-[20%] h-[20%] rounded-xl object-cover"
-          />
-          <img
-            alt="Découvrez notre Tagadanun"
-            src="/quatuor/tagada.jpg"
-            class="w-[20%] h-[20%] rounded-xl object-cover"
-          />
-          <img
-            alt="Découvrez notre Cacailloune"
-            src="/quatuor/cacaille.jpg"
-            class="w-[20%] h-[20%] rounded-xl object-cover"
+            @click="musicIndex = index"
           />
         </figure>
       </section>
@@ -119,6 +156,58 @@ import CardBody from "@/components/ThreeDeeCard/CardBody.vue";
 import CardItem from "@/components/ThreeDeeCard/CardItem.vue";
 
 const emits = defineEmits(["animation-init-done"]);
+
+const musicIndex = ref(0);
+
+const musics = [
+  {
+    name: "Praline",
+    subtitle: "L'Allegro Curieux",
+    highlight: "Incarne la curiosité et l'audace",
+    description:
+      "Notre détective féline observe, enquête et participe à la vie du foyer, mais toujours selon ses propres règles. Elle ne peut résister à une enquête : un bruit mystérieux ? Elle sera la première sur les lieux !",
+    img: "/quatuor/praline.jpg",
+    link: "https://www.lespetitsclochards.fr/adoptions?id=ZsYjZBEAACIAY3tU",
+  },
+  {
+    name: "Melba",
+    subtitle: "L'Adagio Délicat'",
+    highlight: "Représente la force tranquille",
+    description:
+      "Derrière sa douceur silencieuse se cache une profondeur insoupçonnée. Elle avance à son propre rythme, montrant que sensibilité et force peuvent coexister parfaitement. On la surprend souvent à observer le monde avec des yeux pleins d'envie, surtout en compagnie de ses amis.",
+    img: "/quatuor/melba.jpg",
+    link: "https://www.lespetitsclochards.fr/adoptions?id=ZsYjlBEAACUAY3uf",
+  },
+  {
+    name: "Tagada",
+    subtitle: "L'Andante Résilient",
+    highlight: "Témoigne d'une résilience exceptionnelle",
+    description:
+      "Ayant perdu son frère Snoop, elle poursuit son chemin avec courage. Peureuse mais très joueuse et gourmande, elle continue sa socialisation avec une détermination touchante. Elle est déjà copine avec les caisses de transport - une petite victoire qui en dit long sur son chemin parcouru.",
+    img: "/quatuor/tagada.jpg",
+    link: "https://www.lespetitsclochards.fr/adoptions/snoop-tagada",
+  },
+  {
+    name: "Cacaille",
+    subtitle: "Le Capriccioso Sage",
+    highlight: "Porte la richesse de l'expérience",
+    description:
+      "Rescapée d'un site d'empoisonnement, arrivée il y a 8 ans, elle est la mémoire vivante du foyer. Elle a transformé sa peur en prudence, sa méfiance en discernement. Tandis que son ancien compagnon Rufus a trouvé sa famille, elle attend encore la sienne, avec une patience profonde et une présence apaisante.",
+    img: "/quatuor/cacaille.jpg",
+    link: "https://www.lespetitsclochards.fr/adoptions?id=ZsYjfBEAACMAY3t5",
+  },
+];
+
+const incrementIndex = () => {
+  const tempIndex = musicIndex.value + 1;
+  musicIndex.value = tempIndex === 4 ? 0 : tempIndex;
+  console.log(musicIndex.value);
+};
+
+const decrementIndex = () => {
+  const tempIndex = musicIndex.value - 1;
+  musicIndex.value = tempIndex === -1 ? 3 : tempIndex;
+};
 
 onMounted(() => {
   nextTick(() => emits("animation-init-done"));
