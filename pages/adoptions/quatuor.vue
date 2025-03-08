@@ -144,7 +144,7 @@
 
       <section class="quatuor__cards">
         <figure
-          class="flex w-[80vw] m-auto py-4 flex-wrap gap-[20px] justify-center items-center"
+          class="flex w-[80vw] xs-w-90vw m-auto py-4 flex-wrap gap-[20px] justify-center items-center"
         >
           <img
             v-for="(music, index) in musics"
@@ -365,7 +365,7 @@
               href="https://www.helloasso.com/associations/les-petits-clochards/formulaires/2"
               target="_blank"
             >
-              <Badge>Campagne Chat'Parrainage sur HelloAsso</Badge>
+              <Badge>Chat'Parrainage sur HelloAsso</Badge>
             </a>
           </p>
           <p class="mt-2">
@@ -617,7 +617,11 @@ definePageMeta({
     }
   }
 
-  .music-track {
+  .xs-w-90vw {
+    @media screen and (max-width: 320px) {
+      width: 90vw !important;
+      gap: 8px;
+    }
   }
 }
 </style>
