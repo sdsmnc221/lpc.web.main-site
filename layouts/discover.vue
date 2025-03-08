@@ -144,7 +144,7 @@ watch(
 </script>
 
 <style lang="scss">
-.discover {
+.discover:not(:has(.quatuor)) {
   h1 {
     margin: auto !important;
   }
