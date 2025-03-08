@@ -7,15 +7,15 @@
   <div class="adoptions quatuor min-w-[100vw] min-h-[100vh] font">
     <div class="h-[100dvh]">
       <section class="quatuor__cover relative flex flex-col items-center">
-        <figure class="w-[50vh] h-[50vh]">
+        <figure class="w-[50vh] md:w-[50vw] h-[50vh] md:h-[50vw]">
           <img
             src="/quatuor/quatuor-cover.png"
             alt="Adoptez Notre Quatuor !"
-            class="w-full h-full aspect-square object-cover relative rotate-[-2.4deg] top-[-8vh] left-[6vw]"
+            class="w-full h-full aspect-square object-cover relative rotate-[-2.4deg] top-[-8vh] left-[6vw] md:left-[-16vw]"
           />
         </figure>
         <figure
-          class="w-[50vh] h-[50vh] absolute top-[38%] left-[8%] rotate-[24deg] scale-[0.8] mix-blend-hard-light"
+          class="w-[50vh] h-[50vh] absolute top-[38%] md:top-[24%] left-[8%] md:left-[56vw] rotate-[24deg] md:rotate-[-24deg] scale-[0.8] md:scale-[1.6] mix-blend-hard-light"
         >
           <img
             src="/quatuor/quatuor-h1.png"
@@ -24,7 +24,7 @@
           />
         </figure>
         <figure
-          class="music-player w-[100vw] flex justify-around items-center rotate-[24deg] relative top-[5vh] mix-blend-hard-light"
+          class="music-player w-[100vw] md:w-[100vw] flex justify-around md:justify-end items-center rotate-[24deg] md:rotate-[-24deg] relative top-[5vh] md:top-[-8vh] md:gap-[10%] mix-blend-hard-light"
         >
           <img
             alt=""
@@ -36,12 +36,16 @@
         </figure>
       </section>
 
-      <section class="quatuor__title">
-        <h1 class="w-[72vw] text-fuchsia-200 font-bold font-serif text-xl">
+      <section
+        class="quatuor__title md:rotate-[-24deg] relative md:top-[-30vh] md:translate-x-[44vw] md:w-[50vw]"
+      >
+        <h1
+          class="w-[72vw] md:w-full text-fuchsia-200 font-bold font-serif text-xl"
+        >
           Nouvelle mélodie unique chez Les Petits Clochards, ce 2025...!
         </h1>
         <p
-          class="px-[10vw] pt-1 pb-4 w-full text-fuchsia-400 font-normal text-xs"
+          class="px-[10vw] md:px-[4vw] md:pl-[10vw] pt-1 pb-4 w-full text-fuchsia-400 font-normal text-xs"
         >
           Quatre chattes, quatre histoires, quatre notes distinctes mais
           harmonieuses. Pour cette Journée internationale des femmes, découvrez
@@ -50,133 +54,137 @@
       </section>
     </div>
 
-    <div class="mt-0">
-      <h2 class="text-fuchsia-200 px-[10vw] font-bold text-base">
-        Nos Quatre Mélodies de Féminité
-      </h2>
+    <div class="flex flex-col md:flex-row md:w-full relative">
+      <div class="mt-0 md:w-[100%] md:mt-[32vh]">
+        <h2 class="text-fuchsia-200 px-[10vw] font-bold text-base">
+          Nos Quatre Mélodies de Féminité
+        </h2>
 
-      <section>
-        <CardContainer>
-          <CardBody
-            class="flex flex-row flex-wrap justify-center items-center w-full max-h-[50vh] p-4 gap-2 rounded-2xl"
-          >
-            <CardItem
-              :translate-z="0"
-              :translate-y="0"
-              :translate-x="0"
-              class="w-[48%] h-full"
-            >
-              <TransitionGroup
-                tag="div"
-                class="flex flex-col gap-2 h-full"
-                :css="false"
-                @enter="animateText"
+        <div class="flex flex-col md:flex-row md:w-full px-20">
+          <section class="basis-full md:basis-auto px-10">
+            <CardContainer>
+              <CardBody
+                class="flex flex-row flex-wrap justify-center items-center w-full md:w-[50vh] max-h-[50vh] p-4 gap-2 rounded-2xl"
               >
-                <div
-                  :key="`name-${musicIndex}`"
-                  class="shadow-xl font-bold text-left bg-fuchsia-200 pl-2 rounded-tr-3xl"
+                <CardItem
+                  :translate-z="0"
+                  :translate-y="0"
+                  :translate-x="0"
+                  class="w-[48%] h-full"
                 >
-                  <h3 class="text-xl">{{ musics[musicIndex].name }}</h3>
-                  <p
-                    class="text-sm leading-[0.2rem] tracking-[-0.2px] pb-3 font-serif"
+                  <TransitionGroup
+                    tag="div"
+                    class="flex flex-col gap-2 h-full"
+                    :css="false"
+                    @enter="animateText"
                   >
-                    {{ musics[musicIndex].subtitle }}
-                  </p>
-                </div>
+                    <div
+                      :key="`name-${musicIndex}`"
+                      class="shadow-xl font-bold text-left bg-fuchsia-200 pl-2 rounded-tr-3xl"
+                    >
+                      <h3 class="text-xl">{{ musics[musicIndex].name }}</h3>
+                      <p
+                        class="text-sm leading-[0.2rem] tracking-[-0.2px] pb-3 font-serif"
+                      >
+                        {{ musics[musicIndex].subtitle }}
+                      </p>
+                    </div>
 
-                <p
-                  :key="`description-${musicIndex}`"
-                  class="shadow-xl h-full text-xs text-pink-100 bg-pink-900 p-2 flex flex-col gap-2 justify-end items-end rounded-bl-2xl rounded-tr-3xl"
+                    <p
+                      :key="`description-${musicIndex}`"
+                      class="shadow-xl h-full text-xs text-pink-100 bg-pink-900 p-2 flex flex-col gap-2 justify-end items-end rounded-bl-2xl rounded-tr-3xl"
+                    >
+                      <span class="font-bold font-serif highlight-text">
+                        {{ musics[musicIndex].highlight }} :
+                      </span>
+                      <span
+                        class="text-[11px] inline-block pl-2 pb-2 leading-none description-text"
+                      >
+                        {{ musics[musicIndex].description }}
+                      </span>
+                    </p>
+                  </TransitionGroup>
+                </CardItem>
+                <CardItem
+                  :translate-z="0"
+                  :translate-y="0"
+                  :translate-x="0"
+                  class="w-[40%] h-full flex flex-col gap-2"
                 >
-                  <span class="font-bold font-serif highlight-text">
-                    {{ musics[musicIndex].highlight }} :
-                  </span>
-                  <span
-                    class="text-[11px] inline-block pl-2 pb-2 leading-none description-text"
+                  <img
+                    alt=""
+                    :src="musics[musicIndex].img"
+                    class="shadow-xl w-full h-[80%] object-cover object-top rounded-none rounded-br-xl"
+                  />
+                  <p
+                    class="shadow-xl h-[19%] flex justify-center uppercase bg-pink-700 text-pink-200 items-center text-center text-xs rounded-2xl"
                   >
-                    {{ musics[musicIndex].description }}
-                  </span>
-                </p>
-              </TransitionGroup>
-            </CardItem>
-            <CardItem
-              :translate-z="0"
-              :translate-y="0"
-              :translate-x="0"
-              class="w-[40%] h-full flex flex-col gap-2"
+                    <a :href="musics[musicIndex].link" target="_blank"
+                      >Voir sa fiche !</a
+                    >
+                  </p>
+                </CardItem>
+              </CardBody>
+            </CardContainer>
+
+            <figure
+              class="music-player--small my-2 py-2 relative border-b-[10px] md:border-b-0 border-fuchsia-200 w-[80vw] md:w-[64%] m-auto mt-[-20px] flex justify-around items-center"
             >
               <img
                 alt=""
-                :src="musics[musicIndex].img"
-                class="shadow-xl w-full h-[80%] object-cover object-top rounded-none rounded-br-xl"
+                src="/quatuor/cta-left.png"
+                class="w-[24px] md:w-[40px] h-[24px] md:h-[40px] scale-x-[-1]"
+                @click="incrementIndex"
               />
-              <p
-                class="shadow-xl h-[19%] flex justify-center uppercase bg-pink-700 text-pink-200 items-center text-center text-xs rounded-2xl"
-              >
-                <a :href="musics[musicIndex].link" target="_blank"
-                  >Voir sa fiche !</a
-                >
-              </p>
-            </CardItem>
-          </CardBody>
-        </CardContainer>
+              <img
+                alt=""
+                src="/quatuor/cta-play.png"
+                class="w-[24px] md:w-[40px] h-[24px] md:h-[40px] invert"
+              />
+              <img
+                alt=""
+                src="/quatuor/cta-right.png"
+                class="w-[24px] md:w-[40px] h-[24px] md:h-[40px]"
+                @click="decrementIndex"
+              />
+            </figure>
+          </section>
 
-        <figure
-          class="music-player--small my-2 py-2 relative border-b-[10px] border-fuchsia-200 w-[80vw] m-auto mt-[-20px] flex justify-around items-center"
+          <section class="quatuor__cards md:basis-full">
+            <figure
+              class="flex w-[80vw] md:w-[100%] xs-w-90vw m-auto md:ml-0 py-4 flex-wrap gap-[20px] md:gap-4 justify-center items-center"
+            >
+              <img
+                v-for="(music, index) in musics"
+                :key="`music-thumbnail-${music.name}`"
+                :alt="`Découvrez notre ${music.name}`"
+                :src="music.img"
+                class="w-[20%] md:w-[10vw] h-[20%] md:h-[32vh] rounded-xl object-cover"
+                @click="musicIndex = index"
+              />
+            </figure>
+          </section>
+        </div>
+      </div>
+
+      <div class="mt-8 md:absolute md:w-[64vw] md:bottom-[2vh] md:right-0">
+        <h2 class="text-fuchsia-200 px-[10vw] font-bold text-base leading-none">
+          Une Symphonie qui s'accorde lentement
+        </h2>
+
+        <div
+          class="shadow-xl flex justify-center items-center gap-2 mx-[8vw] mt-2 text-fuchsia-950 text-xs leading-none p-2 text-sm bg-fuchsia-100 rounded-xl"
         >
-          <img
-            alt=""
-            src="/quatuor/cta-left.png"
-            class="w-[24px] h-[24px] scale-x-[-1]"
-            @click="incrementIndex"
-          />
-          <img
-            alt=""
-            src="/quatuor/cta-play.png"
-            class="w-[24px] h-[24px] invert"
-          />
-          <img
-            alt=""
-            src="/quatuor/cta-right.png"
-            class="w-[24px] h-[24px]"
-            @click="decrementIndex"
-          />
-        </figure>
-      </section>
-
-      <section class="quatuor__cards">
-        <figure
-          class="flex w-[80vw] xs-w-90vw m-auto py-4 flex-wrap gap-[20px] justify-center items-center"
-        >
-          <img
-            v-for="(music, index) in musics"
-            :key="`music-thumbnail-${music.name}`"
-            :alt="`Découvrez notre ${music.name}`"
-            :src="music.img"
-            class="w-[20%] h-[20%] rounded-xl object-cover"
-            @click="musicIndex = index"
-          />
-        </figure>
-      </section>
-    </div>
-
-    <div class="mt-8">
-      <h2 class="text-fuchsia-200 px-[10vw] font-bold text-base leading-none">
-        Une Symphonie qui s'accorde lentement
-      </h2>
-
-      <div
-        class="shadow-xl flex justify-center items-center gap-2 mx-[8vw] mt-2 text-fuchsia-950 text-xs leading-none p-2 text-sm bg-fuchsia-100 rounded-xl"
-      >
-        <figure class="w-[48px] h-[48px] invert">
-          <img alt="" class="w-full h-full" src="/quatuor/cta-play.png" />
-        </figure>
-        <p class="basis-full">
-          Chacune joue sa propre partition, à son propre tempo. C'est dans cette
-          désynchronisation que réside la beauté de leur cohabitation - une
-          métaphore de ces voix féminines qui, à travers l'histoire, n'ont pas
-          toujours marché au même pas mais ont toujours avancé ensemble.
-        </p>
+          <figure class="w-[48px] h-[48px] invert">
+            <img alt="" class="w-full h-full" src="/quatuor/cta-play.png" />
+          </figure>
+          <p class="basis-full">
+            Chacune joue sa propre partition, à son propre tempo. C'est dans
+            cette désynchronisation que réside la beauté de leur cohabitation -
+            une métaphore de ces voix féminines qui, à travers l'histoire, n'ont
+            pas toujours marché au même pas mais ont toujours avancé ensemble.
+          </p>
+        </div>
       </div>
     </div>
 
