@@ -4,7 +4,7 @@
       class="aurora-background bg-fuchsia-950"
     ></AuroraBackground>
   </div>
-  <div class="adoptions quatuor min-w-[100vw] min-h-[100vh]">
+  <div class="adoptions quatuor min-w-[100vw] min-h-[100vh] font">
     <section class="quatuor__cover relative flex flex-col items-center">
       <figure class="w-[50vh] h-[50vh]">
         <img
@@ -29,6 +29,19 @@
         <img alt="" src="/quatuor/cta-play.png" />
         <img alt="" src="/quatuor/cta-right.png" />
       </figure>
+    </section>
+
+    <section class="quatuor__title">
+      <h1 class="w-[72vw] text-fuchsia-300 font-bold font-serif text-xl">
+        Nouvelle mélodie unique chez Les Petits Clochards, ce 2025...!
+      </h1>
+      <p
+        class="px-[10vw] pt-1 pb-4 w-full text-fuchsia-400 font-normal text-xs"
+      >
+        Quatre chattes, quatre histoires, quatre notes distinctes mais
+        harmonieuses. Pour cette Journée internationale des femmes, découvrez
+        notre quatuor féminin : Praline, Melba, Tagada et Cacaille.
+      </p>
     </section>
   </div>
 </template>
@@ -75,9 +88,23 @@ definePageMeta({
 }
 
 .discover .quatuor {
+  h1 {
+    margin: 10vh 10vw !important;
+    margin-bottom: 0 !important;
+  }
   .music-player {
     img {
       filter: invert(0.8) !important;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: -20vw;
+      width: 200vw;
+      height: 1px;
+      background-color: #3e0647;
     }
   }
 }
