@@ -50,7 +50,7 @@
       </section>
     </div>
 
-    <div class="pt-2">
+    <div class="mt-0">
       <h2 class="text-fuchsia-200 px-[10vw] font-bold text-base">
         Nos Quatre Mélodies de Féminité
       </h2>
@@ -158,7 +158,7 @@
       </section>
     </div>
 
-    <div class="pt-4">
+    <div class="mt-8">
       <h2 class="text-fuchsia-200 px-[10vw] font-bold text-base leading-none">
         Une Symphonie qui s'accorde lentement
       </h2>
@@ -178,7 +178,7 @@
       </div>
     </div>
 
-    <div class="pt-2">
+    <div class="mt-4">
       <figure>
         <img
           alt="L'histoire de Cacaille"
@@ -202,6 +202,107 @@
         mérite désormais d'écrire la suite de la sienne au-delà des murs du
         foyer.
       </p>
+    </div>
+
+    <div class="mt-8">
+      <h2 class="text-fuchsia-200 px-[10vw] font-bold text-base leading-none">
+        Pourquoi choisir une Mélodie Complexe?
+      </h2>
+
+      <figure>
+        <video
+          alt=""
+          src="/quatuor/rufus.mp4"
+          controls
+          loop
+          muted
+          autoplay
+          class="mt-2 shadow-xl"
+        />
+      </figure>
+
+      <div class="flex flex-col justify-center items-center gap-2 mx-[8vw]">
+        <p class="text-fuchsia-100 shadow-xl mt-4 text-xs leading-none">
+          Adopter l'une de nos musiciennes, c'est faire le choix d'une
+          composition qui se dévoile progressivement:
+        </p>
+
+        <p
+          class="w-full shadow-xl mt-3 p-4 text-xs leading-none flex flex-col gap-2 justify-start items-start bg-pink-900 text-fuchsia-200 rounded-2xl"
+        >
+          <span class="font-serif font-bold">Victoires partagées</span>
+          <span
+            class="shadow-xl w-[100%] h-[3px] rounded-3xl bg-pink-800 relative"
+          >
+            <span
+              class="shadow-xl w-[12%] h-[3px] absolute top-0 left-0 bg-pink-600 rounded-3xl"
+            ></span>
+            <span
+              class="shadow-xl w-[8px] h-[8px] absolute left-[12%] top-[50%] translate-y-[-50%] bg-pink-500 rounded-3xl"
+            ></span>
+          </span>
+          <span class="text-[12px]"
+            >Chaque progrès devient un moment de joie mutuelle.</span
+          >
+        </p>
+
+        <p
+          class="w-full shadow-xl mt-2 p-4 text-xs leading-none flex flex-col gap-2 justify-start items-start bg-pink-900 text-fuchsia-200 rounded-2xl"
+        >
+          <span class="font-serif font-bold">Confiance précieuse</span>
+          <span
+            class="shadow-xl w-[100%] h-[3px] rounded-3xl bg-pink-800 relative"
+          >
+            <span
+              class="shadow-xl w-[32%] h-[3px] absolute top-0 left-0 bg-pink-600 rounded-3xl"
+            ></span>
+            <span
+              class="shadow-xl w-[8px] h-[8px] absolute left-[32%] top-[50%] translate-y-[-50%] bg-pink-500 rounded-3xl"
+            ></span>
+          </span>
+          <span class="text-[12px]"
+            >Une fois gagnée, elle crée un lien unique.</span
+          >
+        </p>
+
+        <p
+          class="w-full shadow-xl mt-2 p-4 text-xs leading-none flex flex-col gap-2 justify-start items-start bg-pink-900 text-fuchsia-200 rounded-2xl"
+        >
+          <span class="font-serif font-bold">Personnalités établies</span>
+          <span
+            class="shadow-xl w-[100%] h-[3px] rounded-3xl bg-pink-800 relative"
+          >
+            <span
+              class="shadow-xl w-[48%] h-[3px] absolute top-0 left-0 bg-pink-600 rounded-3xl"
+            ></span>
+            <span
+              class="shadow-xl w-[8px] h-[8px] absolute left-[48%] top-[50%] translate-y-[-50%] bg-pink-500 rounded-3xl"
+            ></span>
+          </span>
+          <span class="text-[12px]"
+            >Des compagnes matures sans surprises de comportement.</span
+          >
+        </p>
+
+        <p
+          class="w-full shadow-xl mt-2 p-4 text-xs leading-none flex flex-col gap-2 justify-start items-start bg-pink-900 text-fuchsia-200 rounded-2xl"
+        >
+          <span class="font-serif font-bold">Amour profond</span>
+          <span
+            class="shadow-xl w-[100%] h-[3px] rounded-3xl bg-pink-800 relative"
+          >
+            <span
+              class="shadow-xl w-[64%] h-[3px] absolute top-0 left-0 bg-pink-600 rounded-3xl"
+            ></span>
+            <span
+              class="shadow-xl w-[8px] h-[8px] absolute left-[64%] top-[50%] translate-y-[-50%] bg-pink-500 rounded-3xl"
+            ></span>
+          </span>
+          <span class="text-[12px]"
+            >Différent mais d'une intensité incomparable.</span
+          >
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -380,6 +481,7 @@ definePageMeta({
     margin: 10vh 10vw !important;
     margin-bottom: 0 !important;
   }
+
   .music-player {
     img {
       filter: invert(0.8) !important;
@@ -394,6 +496,9 @@ definePageMeta({
       height: 1px;
       background-color: #3e0647;
     }
+  }
+
+  .music-track {
   }
 }
 </style>
