@@ -386,6 +386,43 @@
         </div>
       </div>
     </div>
+
+    <div class="mt-8">
+      <h2 class="text-fuchsia-200 px-[10vw] font-bold text-base leading-none">
+        Un Mot du Cœur...
+      </h2>
+
+      <div
+        class="shadow-xl flex justify-center items-center gap-2 mx-[8vw] mt-2 text-fuchsia-950 text-xs leading-none p-2 text-sm bg-fuchsia-100 rounded-xl"
+      >
+        <figure class="w-[48px] h-[48px] invert">
+          <img alt="" class="w-full h-full" src="/quatuor/cta-play.png" />
+        </figure>
+        <p class="basis-full">
+          Dans l'orchestre de nos vies, ces quatre chattes jouent des mélodies
+          subtiles : Praline, une sonate vive aux mouvements imprévisibles;
+          Melba, une berceuse aux nuances délicates; Tagada, un requiem devenu
+          hymne d'espoir; et Cacaille, une ballade ancienne riche d'histoire.
+        </p>
+      </div>
+
+      <div
+        class="shadow-xl flex justify-center items-center gap-2 mx-[8vw] mt-2 text-fuchsia-950 text-xs leading-none p-2 text-sm bg-fuchsia-100 rounded-xl"
+      >
+        <figure class="w-[48px] h-[48px] invert">
+          <img alt="" class="w-full h-full" src="/quatuor/cta-play.png" />
+        </figure>
+        <p class="basis-full">
+          Devenir leur famille, parrain, marraine, c'est choisir de comprendre
+          que parfois, les plus belles mélodies sont celles qui demandent de
+          l'attention pour être appréciées.
+        </p>
+      </div>
+
+      <figure class="shadow-xl w-full aspect-square h-auto mt-6">
+        <img alt="" src="/quatuor/quatuor-finale.jpg" class="rounded-none" />
+      </figure>
+    </div>
   </div>
 </template>
 
