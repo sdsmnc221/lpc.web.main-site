@@ -204,7 +204,7 @@
       </p>
     </div>
 
-    <div class="mt-8">
+    <div class="mt-10">
       <h2 class="text-fuchsia-200 px-[10vw] font-bold text-base leading-none">
         Pourquoi choisir une Mélodie Complexe?
       </h2>
@@ -222,7 +222,7 @@
       </figure>
 
       <div class="flex flex-col justify-center items-center gap-2 mx-[8vw]">
-        <p class="text-fuchsia-100 shadow-xl mt-4 text-xs leading-none">
+        <p class="text-fuchsia-100 mt-4 text-center text-sm leading-tight">
           Adopter l'une de nos musiciennes, c'est faire le choix d'une
           composition qui se dévoile progressivement:
         </p>
@@ -302,6 +302,88 @@
             >Différent mais d'une intensité incomparable.</span
           >
         </p>
+      </div>
+    </div>
+
+    <div class="mt-8">
+      <h2 class="text-fuchsia-200 px-[10vw] font-bold text-base leading-none">
+        Adoption ou Accueil
+      </h2>
+
+      <div class="mx-[10vw] flex flex-col items-start justify-start">
+        <div class="text-xs mt-2">
+          <a
+            href="https://lespetitsclochards.fillout.com/pre-adoption"
+            target="_blank"
+          >
+            <Badge>Formulaire d'adoption</Badge>
+          </a>
+        </div>
+
+        <div class="text-xs mt-2">
+          <a
+            href="https://lespetitsclochards.fillout.com/chatmille-accueil"
+            target="_blank"
+          >
+            <Badge>Formulaire d'accueil</Badge>
+          </a>
+        </div>
+
+        <div class="text-xs mt-2">
+          <a href="tel:+33642804318" target="_blank">
+            <Badge>06 42 80 43 18 (Mme Bonniot)</Badge>
+          </a>
+        </div>
+
+        <div class="text-xs mt-2">
+          <a href="mailto:lespetitsclochards91@gmail.com" target="_blank">
+            <Badge>lespetitsclochards91@gmail.com</Badge>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-8">
+      <h2 class="text-fuchsia-200 px-[10vw] font-bold text-base leading-none">
+        Chat'Parrainage
+      </h2>
+
+      <div class="mx-[10vw] flex flex-col items-start justify-start">
+        <div class="text-xs mt-2 text-fuchsia-100">
+          <p class="font-bold text-fuchsia-200">Pourquoi parrainer ?</p>
+          <p>
+            Depuis plus de 5 ans, nous travaillons à leur socialisation avec
+            patience. Les adoptions sont rares et le coût du foyer est souvent
+            couvert par nos bénévoles.
+          </p>
+        </div>
+
+        <div class="text-xs mt-2 text-fuchsia-100">
+          <p class="font-bold text-fuchsia-200">Comment soutenir ?</p>
+          <p class="mt-2">
+            <a
+              href="https://www.helloasso.com/associations/les-petits-clochards/formulaires/2"
+              target="_blank"
+            >
+              <Badge>Campagne Chat'Parrainage sur HelloAsso</Badge>
+            </a>
+          </p>
+          <p class="mt-2">
+            <a
+              href="https://www.teaming.net/lespetitsclochards"
+              target="_blank"
+            >
+              <Badge>Rejoindre Teaming (1€/mois)</Badge>
+            </a>
+          </p>
+        </div>
+
+        <div class="text-xs mt-2 text-fuchsia-100">
+          <p class="font-bold text-fuchsia-200">Notre engagement...!</p>
+          <p>- Photos et nouvelles régulières</p>
+          <p>- Suivi de leur évolution</p>
+          <p>- Pâtée gourmande spéciale Journée des Femmes & Anniversaire</p>
+        </div>
       </div>
     </div>
   </div>
