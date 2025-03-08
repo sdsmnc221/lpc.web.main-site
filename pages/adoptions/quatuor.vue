@@ -502,7 +502,7 @@
 
     <div class="mt-8 md:mt-[24vh]">
       <h2
-        class="text-fuchsia-200 px-[10vw] relative md:z-[100] font-bold text-base md:text-center leading-none"
+        class="text-fuchsia-200 px-[10vw] relative md:z-[100] font-bold text-base md:text-2xl md:text-center leading-none"
       >
         Un Mot du Cœur...
       </h2>
@@ -513,7 +513,9 @@
         <img alt="" class="w-full h-full turning" src="/quatuor/cd.png" />
       </figure>
 
-      <div class="flex flex-col md:flex-row w-full">
+      <div
+        class="flex flex-col md:flex-row w-full justify-stretch items-stretch"
+      >
         <div
           class="shadow-xl flex min-h-[50vh] w-[104vw] md:w-[100vw] relative left-[-2vw] md:left-0 flex flex-col justify-center items-center gap-2 mt-2 md:mt-0 text-fuchsia-950 text-xs leading-none pl-[48%] md:pl-[44%] pr-[24px] text-sm md:text-base bg-fuchsia-100"
         >
@@ -533,7 +535,7 @@
           </p>
         </div>
 
-        <figure class="shadow-xl w-full aspect-square h-auto md:h-full mt-0">
+        <figure class="shadow-xl w-full aspect-square h-auto mt-0">
           <img
             alt=""
             src="/quatuor/quatuor-finale.jpg"
