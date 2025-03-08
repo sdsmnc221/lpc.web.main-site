@@ -60,8 +60,8 @@
           Nos Quatre Mélodies de Féminité
         </h2>
 
-        <div class="flex flex-col md:flex-row md:w-full px-20">
-          <section class="basis-full md:basis-auto px-10 relative">
+        <div class="flex flex-col md:flex-row md:w-full md:px-20">
+          <section class="basis-full md:basis-auto md:px-10 relative">
             <CardContainer>
               <CardBody
                 class="flex flex-row flex-wrap justify-center items-center w-full md:w-[50vh] max-h-[50vh] p-4 gap-2 rounded-2xl"
