@@ -37,7 +37,7 @@
       </section>
 
       <section class="quatuor__title">
-        <h1 class="w-[72vw] text-fuchsia-300 font-bold font-serif text-xl">
+        <h1 class="w-[72vw] text-fuchsia-200 font-bold font-serif text-xl">
           Nouvelle mélodie unique chez Les Petits Clochards, ce 2025...!
         </h1>
         <p
@@ -50,8 +50,8 @@
       </section>
     </div>
 
-    <div class="min-h-[100dvh] pt-2">
-      <h2 class="text-fuchsia-300 px-[10vw] font-bold text-base">
+    <div class="pt-2">
+      <h2 class="text-fuchsia-200 px-[10vw] font-bold text-base">
         Nos Quatre Mélodies de Féminité
       </h2>
 
@@ -64,27 +64,38 @@
               :translate-z="0"
               :translate-y="0"
               :translate-x="0"
-              class="w-[48%] h-full flex flex-col gap-2"
+              class="w-[48%] h-full"
             >
-              <div
-                class="font-bold text-left bg-fuchsia-200 pl-4 rounded-tr-3xl"
+              <TransitionGroup
+                tag="div"
+                class="flex flex-col gap-2 h-full"
+                :css="false"
+                @enter="animateText"
               >
-                <h3 class="text-xl">{{ musics[musicIndex].name }}</h3>
-                <p class="text-sm leading-[0.2rem] pb-3 font-serif">
-                  {{ musics[musicIndex].subtitle }}
-                </p>
-              </div>
-
-              <p
-                class="basis-full text-xs text-pink-100 bg-pink-900 p-2 flex flex-col gap-2 justify-end items-end rounded-bl-2xl rounded-tr-3xl"
-              >
-                <span class="font-bold font-serif">
-                  {{ musics[musicIndex].highlight }} :</span
+                <div
+                  :key="`name-${musicIndex}`"
+                  class="shadow-xl font-bold text-left bg-fuchsia-200 pl-4 rounded-tr-3xl"
                 >
-                <span class="text-[11px] inline-block pl-2 pb-2 leading-none">
-                  {{ musics[musicIndex].description }}
-                </span>
-              </p>
+                  <h3 class="text-xl">{{ musics[musicIndex].name }}</h3>
+                  <p class="text-sm leading-[0.2rem] pb-3 font-serif">
+                    {{ musics[musicIndex].subtitle }}
+                  </p>
+                </div>
+
+                <p
+                  :key="`description-${musicIndex}`"
+                  class="shadow-xl h-full text-xs text-pink-100 bg-pink-900 p-2 flex flex-col gap-2 justify-end items-end rounded-bl-2xl rounded-tr-3xl"
+                >
+                  <span class="font-bold font-serif highlight-text">
+                    {{ musics[musicIndex].highlight }} :
+                  </span>
+                  <span
+                    class="text-[11px] inline-block pl-2 pb-2 leading-none description-text"
+                  >
+                    {{ musics[musicIndex].description }}
+                  </span>
+                </p>
+              </TransitionGroup>
             </CardItem>
             <CardItem
               :translate-z="0"
@@ -95,10 +106,10 @@
               <img
                 alt=""
                 :src="musics[musicIndex].img"
-                class="w-full h-full object-cover object-top rounded-none rounded-br-xl"
+                class="shadow-xl w-full h-[80%] object-cover object-top rounded-none rounded-br-xl"
               />
               <p
-                class="h-fit flex justify-center uppercase bg-pink-700 text-pink-200 items-center text-center text-xs rounded-2xl"
+                class="shadow-xl h-[19%] flex justify-center uppercase bg-pink-700 text-pink-200 items-center text-center text-xs rounded-2xl"
               >
                 <a :href="musics[musicIndex].link" target="_blank"
                   >Voir sa fiche !</a
@@ -146,10 +157,58 @@
         </figure>
       </section>
     </div>
+
+    <div class="pt-4">
+      <h2 class="text-fuchsia-200 px-[10vw] font-bold text-base leading-none">
+        Une Symphonie qui s'accorde lentement
+      </h2>
+
+      <div
+        class="shadow-xl flex justify-center items-center gap-2 mx-[8vw] mt-2 text-fuchsia-950 text-xs leading-none p-2 text-sm bg-fuchsia-100 rounded-xl"
+      >
+        <figure class="w-[48px] h-[48px] invert">
+          <img alt="" class="w-full h-full" src="/quatuor/cta-play.png" />
+        </figure>
+        <p class="basis-full">
+          Chacune joue sa propre partition, à son propre tempo. C'est dans cette
+          désynchronisation que réside la beauté de leur cohabitation - une
+          métaphore de ces voix féminines qui, à travers l'histoire, n'ont pas
+          toujours marché au même pas mais ont toujours avancé ensemble.
+        </p>
+      </div>
+    </div>
+
+    <div class="pt-2">
+      <figure>
+        <img
+          alt="L'histoire de Cacaille"
+          src="/quatuor/cacaille-story.png"
+          class="w-[102vw] h-auto relative left[-10px]"
+        />
+      </figure>
+      <h2
+        class="text-fuchsia-200 px-[10vw] font-bold text-center mt-[-4vh] text-base leading-none"
+      >
+        L'histoire de Cacaille
+      </h2>
+
+      <p
+        class="shadow-xl flex justify-center items-center gap-2 mx-[8vw] mt-2 text-fuchsia-100 text-xs text-center leading-none p-2 text-sm bg-fuchsia-900 rounded-xl"
+      >
+        Il y a 8 ans, Cacaille et Rufus arrivaient terrifiés à notre foyer. Lui
+        se figeait, elle feulait et montrait les crocs. Aujourd'hui, Rufus a
+        trouvé sa famille tandis que Cacaille, moins méfiante mais toujours
+        indépendante, attend encore la sienne. Témoin de tant d'histoires, elle
+        mérite désormais d'écrire la suite de la sienne au-delà des murs du
+        foyer.
+      </p>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { gsap } from "gsap";
+
 import AuroraBackground from "~/components/AuroraBackground.vue";
 import CardContainer from "@/components/ThreeDeeCard/CardContainer.vue";
 import CardBody from "@/components/ThreeDeeCard/CardBody.vue";
@@ -209,6 +268,61 @@ const decrementIndex = () => {
   musicIndex.value = tempIndex === -1 ? 3 : tempIndex;
 };
 
+const animateText = (el, done) => {
+  const tl = gsap.timeline({
+    onComplete: done,
+  });
+
+  // Split the elements you want to animate
+  const name = document.querySelector("h3");
+  const subtitle = document.querySelector("h3 + p");
+  const highlight = document.querySelector(".highlight-text");
+  const description = document.querySelector(".description-text");
+
+  // Reset initial state
+  gsap.set([name, subtitle, highlight, description], {
+    opacity: 0,
+    y: 20,
+  });
+
+  // Animate text elements
+  tl.to(name, {
+    opacity: 1,
+    y: 0,
+    duration: 0.5,
+    ease: "power2.out",
+  })
+    .to(
+      subtitle,
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: "power2.out",
+      },
+      "-=0.3"
+    )
+    .to(
+      highlight,
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: "power2.out",
+      },
+      "-=0.3"
+    )
+    .to(
+      description,
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: "power2.out",
+      },
+      "-=0.3"
+    );
+};
 onMounted(() => {
   nextTick(() => emits("animation-init-done"));
 });
@@ -217,6 +331,18 @@ definePageMeta({
   layout: "discover",
 });
 </script>
+
+<style scoped>
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+</style>
 
 <style lang="scss">
 * {
