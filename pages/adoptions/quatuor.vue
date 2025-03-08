@@ -11,11 +11,11 @@
           <img
             src="/quatuor/quatuor-cover.png"
             alt="Adoptez Notre Quatuor !"
-            class="w-full h-full aspect-square object-cover relative rotate-[-24deg] top-[-10vh] left-[-10vw]"
+            class="w-full h-full aspect-square object-cover relative rotate-[-2.4deg] top-[-8vh] left-[6vw]"
           />
         </figure>
         <figure
-          class="w-[50vh] h-[50vh] absolute top-[32%] left-[24%] rotate-[24deg] scale-[0.9] mix-blend-hard-light"
+          class="w-[50vh] h-[50vh] absolute top-[38%] left-[8%] rotate-[24deg] scale-[0.8] mix-blend-hard-light"
         >
           <img
             src="/quatuor/quatuor-h1.png"
@@ -24,7 +24,7 @@
           />
         </figure>
         <figure
-          class="music-player w-[100vw] flex justify-around items-center rotate-[24deg] mix-blend-hard-light"
+          class="music-player w-[100vw] flex justify-around items-center rotate-[24deg] relative top-[5vh] mix-blend-hard-light"
         >
           <img
             alt=""
@@ -74,10 +74,12 @@
               >
                 <div
                   :key="`name-${musicIndex}`"
-                  class="shadow-xl font-bold text-left bg-fuchsia-200 pl-4 rounded-tr-3xl"
+                  class="shadow-xl font-bold text-left bg-fuchsia-200 pl-2 rounded-tr-3xl"
                 >
                   <h3 class="text-xl">{{ musics[musicIndex].name }}</h3>
-                  <p class="text-sm leading-[0.2rem] pb-3 font-serif">
+                  <p
+                    class="text-sm leading-[0.2rem] tracking-[-0.2px] pb-3 font-serif"
+                  >
                     {{ musics[musicIndex].subtitle }}
                   </p>
                 </div>
