@@ -61,7 +61,7 @@
         </h2>
 
         <div class="flex flex-col md:flex-row md:w-full px-20">
-          <section class="basis-full md:basis-auto px-10">
+          <section class="basis-full md:basis-auto px-10 relative">
             <CardContainer>
               <CardBody
                 class="flex flex-row flex-wrap justify-center items-center w-full md:w-[50vh] max-h-[50vh] p-4 gap-2 rounded-2xl"
@@ -188,222 +188,228 @@
       </div>
     </div>
 
-    <div class="mt-4">
-      <figure>
-        <img
-          alt="L'histoire de Cacaille"
-          src="/quatuor/cacaille-story.png"
-          class="w-[102vw] h-auto relative left[-10px]"
-        />
-      </figure>
-      <h2
-        class="text-fuchsia-200 px-[10vw] font-bold text-center mt-[-4vh] text-base leading-none"
-      >
-        L'histoire de Cacaille
-      </h2>
+    <div class="flex flex-col md:flex-row w-full md:mt-[24vh]">
+      <div class="mt-4 md-w-[40%]">
+        <figure>
+          <img
+            alt="L'histoire de Cacaille"
+            src="/quatuor/cacaille-story.png"
+            class="w-[102vw] h-auto relative left[-10px]"
+          />
+        </figure>
+        <h2
+          class="text-fuchsia-200 px-[10vw] font-bold text-center mt-[-4vh] text-base leading-none"
+        >
+          L'histoire de Cacaille
+        </h2>
 
-      <p
-        class="shadow-xl flex justify-center items-center gap-2 mx-[8vw] mt-2 text-fuchsia-100 text-xs text-center leading-none p-2 text-sm bg-fuchsia-900 rounded-xl"
-      >
-        Il y a 8 ans, Cacaille et Rufus arrivaient terrifiés à notre foyer. Lui
-        se figeait, elle feulait et montrait les crocs. Aujourd'hui, Rufus a
-        trouvé sa famille tandis que Cacaille, moins méfiante mais toujours
-        indépendante, attend encore la sienne. Témoin de tant d'histoires, elle
-        mérite désormais d'écrire la suite de la sienne au-delà des murs du
-        foyer.
-      </p>
-    </div>
-
-    <div class="mt-10">
-      <h2 class="text-fuchsia-200 px-[10vw] font-bold text-base leading-none">
-        Pourquoi choisir une Mélodie Complexe?
-      </h2>
-
-      <figure>
-        <video
-          alt=""
-          src="/quatuor/rufus.mp4"
-          controls
-          loop
-          muted
-          autoplay
-          class="mt-2 shadow-xl"
-        />
-      </figure>
-
-      <div class="flex flex-col justify-center items-center gap-2 mx-[8vw]">
-        <p class="text-fuchsia-100 mt-4 text-center text-sm leading-tight">
-          Adopter l'une de nos musiciennes, c'est faire le choix d'une
-          composition qui se dévoile progressivement:
+        <p
+          class="shadow-xl flex justify-center items-center gap-2 mx-[8vw] mt-2 text-fuchsia-100 text-xs text-center leading-none p-2 text-sm bg-fuchsia-900 rounded-xl"
+        >
+          Il y a 8 ans, Cacaille et Rufus arrivaient terrifiés à notre foyer.
+          Lui se figeait, elle feulait et montrait les crocs. Aujourd'hui, Rufus
+          a trouvé sa famille tandis que Cacaille, moins méfiante mais toujours
+          indépendante, attend encore la sienne. Témoin de tant d'histoires,
+          elle mérite désormais d'écrire la suite de la sienne au-delà des murs
+          du foyer.
         </p>
+      </div>
+
+      <div class="mt-10 md:w-[60%] flex flex-col md:flex-row flex-wrap">
+        <h2
+          class="text-fuchsia-200 px-[10vw] md:px-0 md:basis-full font-bold text-base leading-none"
+        >
+          Pourquoi choisir une Mélodie Complexe?
+        </h2>
+
+        <figure class="md:w-[50%]">
+          <video
+            alt=""
+            src="/quatuor/rufus.mp4"
+            controls
+            loop
+            muted
+            autoplay
+            class="mt-2 shadow-xl"
+          />
+        </figure>
 
         <div
-          class="w-full shadow-xl mt-3 p-4 text-xs leading-none flex flex-col gap-2 justify-start items-start bg-pink-900 text-fuchsia-200 rounded-2xl"
+          class="flex flex-col md:w-[50%] justify-center items-center gap-2 mx-[8vw] md:mx-0 md:px-10 md:mt-[-2vh]"
         >
-          <span class="font-serif font-bold">Victoires partagées</span>
+          <p class="text-fuchsia-100 mt-4 text-center text-sm leading-tight">
+            Adopter l'une de nos musiciennes, c'est faire le choix d'une
+            composition qui se dévoile progressivement:
+          </p>
 
-          <div class="flex w-full">
-            <figure
-              class="music-player--small relative w-[10vw] flex justify-between items-center"
-            >
-              <img
-                alt=""
-                src="/quatuor/cta-left.png"
-                class="w-[16px] h-[16px] scale-x-[-1]"
-                @click="incrementIndex"
-              />
-              <img
-                alt=""
-                src="/quatuor/cta-play.png"
-                class="w-[16px] h-[16px] invert"
-              />
-              <img
-                alt=""
-                src="/quatuor/cta-right.png"
-                class="w-[16px] h-[16px]"
-                @click="decrementIndex"
-              />
-            </figure>
-            <span
-              class="shadow-xl ml-6 w-[56vw] h-[3px] rounded-3xl bg-pink-200 relative self-center"
-            >
-              <span
-                class="shadow-xl w-[12%] h-[3px] absolute top-0 left-0 bg-pink-600 rounded-3xl"
-              ></span>
-              <span
-                class="shadow-xl w-[8px] h-[8px] absolute left-[12%] top-[50%] translate-y-[-50%] bg-pink-500 rounded-3xl"
-              ></span>
-            </span>
-          </div>
-          <span class="text-[12px]"
-            >Chaque progrès devient un moment de joie mutuelle.</span
+          <div
+            class="w-full shadow-xl mt-3 p-4 text-xs leading-none flex flex-col gap-2 justify-start items-start bg-pink-900 text-fuchsia-200 rounded-2xl"
           >
-        </div>
+            <span class="font-serif font-bold">Victoires partagées</span>
 
-        <div
-          class="w-full shadow-xl mt-2 p-4 text-xs leading-none flex flex-col gap-2 justify-start items-start bg-pink-900 text-fuchsia-200 rounded-2xl"
-        >
-          <span class="font-serif font-bold">Confiance précieuse</span>
-          <div class="flex w-full">
-            <figure
-              class="music-player--small relative w-[10vw] flex justify-between items-center"
-            >
-              <img
-                alt=""
-                src="/quatuor/cta-left.png"
-                class="w-[16px] h-[16px] scale-x-[-1]"
-                @click="incrementIndex"
-              />
-              <img
-                alt=""
-                src="/quatuor/cta-play.png"
-                class="w-[16px] h-[16px] invert"
-              />
-              <img
-                alt=""
-                src="/quatuor/cta-right.png"
-                class="w-[16px] h-[16px]"
-                @click="decrementIndex"
-              />
-            </figure>
-            <span
-              class="shadow-xl ml-6 w-[56vw] h-[3px] rounded-3xl bg-pink-200 relative self-center"
-            >
+            <div class="flex w-full">
+              <figure
+                class="music-player--small relative w-[10vw] flex justify-between items-center"
+              >
+                <img
+                  alt=""
+                  src="/quatuor/cta-left.png"
+                  class="w-[16px] h-[16px] scale-x-[-1]"
+                  @click="incrementIndex"
+                />
+                <img
+                  alt=""
+                  src="/quatuor/cta-play.png"
+                  class="w-[16px] h-[16px] invert"
+                />
+                <img
+                  alt=""
+                  src="/quatuor/cta-right.png"
+                  class="w-[16px] h-[16px]"
+                  @click="decrementIndex"
+                />
+              </figure>
               <span
-                class="shadow-xl w-[24%] h-[3px] absolute top-0 left-0 bg-pink-600 rounded-3xl"
-              ></span>
-              <span
-                class="shadow-xl w-[8px] h-[8px] absolute left-[24%] top-[50%] translate-y-[-50%] bg-pink-500 rounded-3xl"
-              ></span>
-            </span>
+                class="shadow-xl ml-6 w-[56vw] h-[3px] rounded-3xl bg-pink-200 relative self-center"
+              >
+                <span
+                  class="shadow-xl w-[12%] h-[3px] absolute top-0 left-0 bg-pink-600 rounded-3xl"
+                ></span>
+                <span
+                  class="shadow-xl w-[8px] h-[8px] absolute left-[12%] top-[50%] translate-y-[-50%] bg-pink-500 rounded-3xl"
+                ></span>
+              </span>
+            </div>
+            <span class="text-[12px]"
+              >Chaque progrès devient un moment de joie mutuelle.</span
+            >
           </div>
-          <span class="text-[12px]"
-            >Une fois gagnée, elle crée un lien unique.</span
-          >
-        </div>
 
-        <div
-          class="w-full shadow-xl mt-2 p-4 text-xs leading-none flex flex-col gap-2 justify-start items-start bg-pink-900 text-fuchsia-200 rounded-2xl"
-        >
-          <span class="font-serif font-bold">Personnalités établies</span>
-          <div class="flex w-full">
-            <figure
-              class="music-player--small relative w-[10vw] flex justify-between items-center"
-            >
-              <img
-                alt=""
-                src="/quatuor/cta-left.png"
-                class="w-[16px] h-[16px] scale-x-[-1]"
-                @click="incrementIndex"
-              />
-              <img
-                alt=""
-                src="/quatuor/cta-play.png"
-                class="w-[16px] h-[16px] invert"
-              />
-              <img
-                alt=""
-                src="/quatuor/cta-right.png"
-                class="w-[16px] h-[16px]"
-                @click="decrementIndex"
-              />
-            </figure>
-            <span
-              class="shadow-xl ml-6 w-[56vw] h-[3px] rounded-3xl bg-pink-200 relative self-center"
-            >
-              <span
-                class="shadow-xl w-[36%] h-[3px] absolute top-0 left-0 bg-pink-600 rounded-3xl"
-              ></span>
-              <span
-                class="shadow-xl w-[8px] h-[8px] absolute left-[36%] top-[50%] translate-y-[-50%] bg-pink-500 rounded-3xl"
-              ></span>
-            </span>
-          </div>
-          <span class="text-[12px]"
-            >Des compagnes matures sans surprises de comportement.</span
+          <div
+            class="w-full shadow-xl mt-2 p-4 text-xs leading-none flex flex-col gap-2 justify-start items-start bg-pink-900 text-fuchsia-200 rounded-2xl"
           >
-        </div>
+            <span class="font-serif font-bold">Confiance précieuse</span>
+            <div class="flex w-full">
+              <figure
+                class="music-player--small relative w-[10vw] flex justify-between items-center"
+              >
+                <img
+                  alt=""
+                  src="/quatuor/cta-left.png"
+                  class="w-[16px] h-[16px] scale-x-[-1]"
+                  @click="incrementIndex"
+                />
+                <img
+                  alt=""
+                  src="/quatuor/cta-play.png"
+                  class="w-[16px] h-[16px] invert"
+                />
+                <img
+                  alt=""
+                  src="/quatuor/cta-right.png"
+                  class="w-[16px] h-[16px]"
+                  @click="decrementIndex"
+                />
+              </figure>
+              <span
+                class="shadow-xl ml-6 w-[56vw] h-[3px] rounded-3xl bg-pink-200 relative self-center"
+              >
+                <span
+                  class="shadow-xl w-[24%] h-[3px] absolute top-0 left-0 bg-pink-600 rounded-3xl"
+                ></span>
+                <span
+                  class="shadow-xl w-[8px] h-[8px] absolute left-[24%] top-[50%] translate-y-[-50%] bg-pink-500 rounded-3xl"
+                ></span>
+              </span>
+            </div>
+            <span class="text-[12px]"
+              >Une fois gagnée, elle crée un lien unique.</span
+            >
+          </div>
 
-        <div
-          class="w-full shadow-xl mt-2 p-4 text-xs leading-none flex flex-col gap-2 justify-start items-start bg-pink-900 text-fuchsia-200 rounded-2xl"
-        >
-          <span class="font-serif font-bold">Amour profond</span>
-          <div class="flex w-full">
-            <figure
-              class="music-player--small relative w-[10vw] flex justify-between items-center"
-            >
-              <img
-                alt=""
-                src="/quatuor/cta-left.png"
-                class="w-[16px] h-[16px] scale-x-[-1]"
-                @click="incrementIndex"
-              />
-              <img
-                alt=""
-                src="/quatuor/cta-play.png"
-                class="w-[16px] h-[16px] invert"
-              />
-              <img
-                alt=""
-                src="/quatuor/cta-right.png"
-                class="w-[16px] h-[16px]"
-                @click="decrementIndex"
-              />
-            </figure>
-            <span
-              class="shadow-xl ml-6 w-[56vw] h-[3px] rounded-3xl bg-pink-200 relative self-center"
-            >
-              <span
-                class="shadow-xl w-[48%] h-[3px] absolute top-0 left-0 bg-pink-600 rounded-3xl"
-              ></span>
-              <span
-                class="shadow-xl w-[8px] h-[8px] absolute left-[48%] top-[50%] translate-y-[-50%] bg-pink-500 rounded-3xl"
-              ></span>
-            </span>
-          </div>
-          <span class="text-[12px]"
-            >Différent mais d'une intensité incomparable.</span
+          <div
+            class="w-full shadow-xl mt-2 p-4 text-xs leading-none flex flex-col gap-2 justify-start items-start bg-pink-900 text-fuchsia-200 rounded-2xl"
           >
+            <span class="font-serif font-bold">Personnalités établies</span>
+            <div class="flex w-full">
+              <figure
+                class="music-player--small relative w-[10vw] flex justify-between items-center"
+              >
+                <img
+                  alt=""
+                  src="/quatuor/cta-left.png"
+                  class="w-[16px] h-[16px] scale-x-[-1]"
+                  @click="incrementIndex"
+                />
+                <img
+                  alt=""
+                  src="/quatuor/cta-play.png"
+                  class="w-[16px] h-[16px] invert"
+                />
+                <img
+                  alt=""
+                  src="/quatuor/cta-right.png"
+                  class="w-[16px] h-[16px]"
+                  @click="decrementIndex"
+                />
+              </figure>
+              <span
+                class="shadow-xl ml-6 w-[56vw] h-[3px] rounded-3xl bg-pink-200 relative self-center"
+              >
+                <span
+                  class="shadow-xl w-[36%] h-[3px] absolute top-0 left-0 bg-pink-600 rounded-3xl"
+                ></span>
+                <span
+                  class="shadow-xl w-[8px] h-[8px] absolute left-[36%] top-[50%] translate-y-[-50%] bg-pink-500 rounded-3xl"
+                ></span>
+              </span>
+            </div>
+            <span class="text-[12px]"
+              >Des compagnes matures sans surprises de comportement.</span
+            >
+          </div>
+
+          <div
+            class="w-full shadow-xl mt-2 p-4 text-xs leading-none flex flex-col gap-2 justify-start items-start bg-pink-900 text-fuchsia-200 rounded-2xl"
+          >
+            <span class="font-serif font-bold">Amour profond</span>
+            <div class="flex w-full">
+              <figure
+                class="music-player--small relative w-[10vw] flex justify-between items-center"
+              >
+                <img
+                  alt=""
+                  src="/quatuor/cta-left.png"
+                  class="w-[16px] h-[16px] scale-x-[-1]"
+                  @click="incrementIndex"
+                />
+                <img
+                  alt=""
+                  src="/quatuor/cta-play.png"
+                  class="w-[16px] h-[16px] invert"
+                />
+                <img
+                  alt=""
+                  src="/quatuor/cta-right.png"
+                  class="w-[16px] h-[16px]"
+                  @click="decrementIndex"
+                />
+              </figure>
+              <span
+                class="shadow-xl ml-6 w-[56vw] h-[3px] rounded-3xl bg-pink-200 relative self-center"
+              >
+                <span
+                  class="shadow-xl w-[48%] h-[3px] absolute top-0 left-0 bg-pink-600 rounded-3xl"
+                ></span>
+                <span
+                  class="shadow-xl w-[8px] h-[8px] absolute left-[48%] top-[50%] translate-y-[-50%] bg-pink-500 rounded-3xl"
+                ></span>
+              </span>
+            </div>
+            <span class="text-[12px]"
+              >Différent mais d'une intensité incomparable.</span
+            >
+          </div>
         </div>
       </div>
     </div>
