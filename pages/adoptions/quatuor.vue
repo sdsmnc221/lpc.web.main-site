@@ -54,13 +54,13 @@
       </section>
     </div>
 
-    <div class="flex flex-col md:flex-row md:w-full relative">
+    <div class="container flex flex-col md:flex-row md:w-full relative">
       <div class="mt-0 md:w-[100%] md:mt-[32vh]">
         <h2 class="text-fuchsia-200 px-[10vw] font-bold text-base">
           Nos Quatre Mélodies de Féminité
         </h2>
 
-        <div class="flex flex-col md:flex-row md:w-full md:px-20">
+        <div class="flex flex-col container md:flex-row md:w-full md:px-20">
           <section class="basis-full md:basis-auto md:px-10 relative">
             <CardContainer>
               <CardBody
@@ -128,7 +128,7 @@
             </CardContainer>
 
             <figure
-              class="music-player--small my-2 py-2 relative border-b-[10px] md:border-b-0 border-fuchsia-200 w-[80vw] md:w-[64%] m-auto mt-[-20px] flex justify-around items-center"
+              class="music-player--small my-2 py-2 relative border-b-[2px] md:border-b-0 border-fuchsia-200 w-[80vw] md:w-[64%] m-auto mt-[-20px] flex justify-around items-center"
             >
               <img
                 alt=""
@@ -167,7 +167,9 @@
         </div>
       </div>
 
-      <div class="mt-8 md:absolute md:w-[64vw] md:bottom-[2vh] md:right-0">
+      <div
+        class="quatuor__symphony mt-8 md:absolute md:w-[64vw] md:bottom-[2vh] md:right-0"
+      >
         <h2 class="text-fuchsia-200 px-[10vw] font-bold text-base leading-none">
           Une Symphonie qui s'accorde lentement
         </h2>
@@ -188,7 +190,7 @@
       </div>
     </div>
 
-    <div class="flex flex-col md:flex-row w-full md:mt-[24vh]">
+    <div class="container flex flex-col md:flex-row w-full md:mt-[24vh]">
       <div class="mt-4 md-w-[40%]">
         <figure>
           <img
@@ -215,7 +217,9 @@
         </p>
       </div>
 
-      <div class="mt-10 md:w-[60%] flex flex-col md:flex-row flex-wrap">
+      <div
+        class="quatuor__complexe mt-10 md:w-[60%] flex flex-col md:flex-row flex-wrap"
+      >
         <h2
           class="text-fuchsia-200 px-[10vw] md:px-0 md:basis-full font-bold text-base leading-none"
         >
@@ -414,7 +418,7 @@
       </div>
     </div>
 
-    <div class="flex flex-col md:flex-row w-full md:mt-[24vh]">
+    <div class="container flex flex-col md:flex-row w-full md:mt-[24vh]">
       <div class="mt-8">
         <h2 class="text-fuchsia-200 px-[10vw] font-bold text-base leading-none">
           Adoption ou Accueil
@@ -500,7 +504,7 @@
       </div>
     </div>
 
-    <div class="mt-8 md:mt-[24vh]">
+    <div class="mt-8 container__containing-heartnote md:mt-[24vh]">
       <h2
         class="text-fuchsia-200 px-[10vw] relative md:z-[100] font-bold text-base md:text-2xl md:text-center leading-none"
       >
@@ -514,7 +518,7 @@
       </figure>
 
       <div
-        class="flex flex-col md:flex-row w-full justify-stretch items-stretch"
+        class="container container__heartnote flex flex-col md:flex-row w-full justify-stretch items-stretch"
       >
         <div
           class="shadow-xl flex min-h-[50vh] w-[104vw] md:w-[100vw] relative left-[-2vw] md:left-0 flex flex-col justify-center items-center gap-2 mt-2 md:mt-0 text-fuchsia-950 text-xs leading-none pl-[48%] md:pl-[44%] pr-[24px] text-sm md:text-base bg-fuchsia-100"
@@ -761,6 +765,110 @@ definePageMeta({
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media screen and (max-width: 1000px) and (min-width: 480px) and (max-height: 1200px) {
+  .discover .quatuor {
+    figure.music-player {
+      top: 18vh;
+    }
+
+    .quatuor {
+      &__cover {
+        figure:first-child {
+          width: 50vh;
+          height: 50vh;
+
+          img {
+            left: 10vw;
+            top: 2vh;
+            transform: rotate(6deg);
+          }
+        }
+        figure:nth-child(2) {
+          left: 8vw;
+          top: 30vh;
+          transform: scale(1.2) rotate(-24deg) !important;
+        }
+      }
+
+      &__title {
+        left: -36vw;
+        top: 11vh;
+        width: 86vw;
+      }
+    }
+
+    .container {
+      flex-direction: column;
+      margin-top: 10vh;
+
+      .music-player--small {
+        border-bottom-width: 2px;
+        width: 100%;
+      }
+
+      .quatuor__cards {
+        figure {
+          img {
+            width: 12vw;
+            height: 12vw;
+          }
+        }
+      }
+
+      .quatuor__symphony {
+        width: 80%;
+        margin: 40px auto;
+        position: relative;
+      }
+
+      .quatuor__complexe {
+        width: 100%;
+
+        h2 {
+          transform: translate(2vw, 2vh);
+        }
+
+        & > div:last-child {
+          padding-right: 0;
+        }
+
+        & > figure {
+          margin-top: 5vh;
+        }
+      }
+
+      &__containing-heartnote {
+        margin-top: 10vh;
+
+        h2 {
+          transform: translateY(8vh);
+          text-align: right;
+        }
+      }
+
+      &__heartnote {
+        & > div:first-child {
+          padding-left: 50%;
+          padding-right: 10%;
+        }
+
+        figure {
+          width: 100vw;
+          transform: translateX(-4vw);
+        }
+      }
+    }
+
+    .turning {
+      left: -6vw;
+      width: 50vw;
+      height: 50vw;
+      top: 10vh;
+      position: relative;
+    }
   }
 }
 </style>
