@@ -772,7 +772,7 @@ definePageMeta({
   }
 }
 
-@media screen and (max-width: 1000px) and (min-width: 480px) and (max-height: 1100px) {
+@media screen and (max-width: 1200px) and (min-width: 480px) and (orientation: portrait) {
   .discover .quatuor {
     figure.music-player {
       top: 18vh;
@@ -876,7 +876,7 @@ definePageMeta({
   }
 }
 
-@media screen and (max-height: 1000px) and (min-height: 480px) and (max-width: 1100px) and (orientation: landscape) {
+@media screen and (max-width: 1200px) and (orientation: landscape) {
   .discover .quatuor {
     figure.music-player {
       top: 18vh;
