@@ -54,13 +54,15 @@
       </section>
     </div>
 
-    <div class="container flex flex-col md:flex-row md:w-full relative">
+    <div class="containered flex flex-col md:flex-row md:w-full relative">
       <div class="mt-0 md:w-[100%] md:mt-[32vh]">
         <h2 class="text-fuchsia-200 px-[10vw] font-bold text-base">
           Nos Quatre Mélodies de Féminité
         </h2>
 
-        <div class="flex flex-col container md:flex-row md:w-full md:px-20">
+        <div
+          class="flex flex-col containered containered__cards md:flex-row md:w-full md:px-20"
+        >
           <section class="basis-full md:basis-auto md:px-10 relative">
             <CardContainer>
               <CardBody
@@ -190,7 +192,9 @@
       </div>
     </div>
 
-    <div class="container flex flex-col md:flex-row w-full md:mt-[24vh]">
+    <div
+      class="containered containered__has-cacaille flex flex-col md:flex-row w-full md:mt-[24vh]"
+    >
       <div class="mt-4 md-w-[40%]">
         <figure>
           <img
@@ -418,7 +422,7 @@
       </div>
     </div>
 
-    <div class="container flex flex-col md:flex-row w-full md:mt-[24vh]">
+    <div class="containered flex flex-col md:flex-row w-full md:mt-[24vh]">
       <div class="mt-8">
         <h2 class="text-fuchsia-200 px-[10vw] font-bold text-base leading-none">
           Adoption ou Accueil
@@ -504,7 +508,7 @@
       </div>
     </div>
 
-    <div class="mt-8 container__containing-heartnote md:mt-[24vh]">
+    <div class="mt-8 containered__containing-heartnote md:mt-[24vh]">
       <h2
         class="text-fuchsia-200 px-[10vw] relative md:z-[100] font-bold text-base md:text-2xl md:text-center leading-none"
       >
@@ -518,7 +522,7 @@
       </figure>
 
       <div
-        class="container container__heartnote flex flex-col md:flex-row w-full justify-stretch items-stretch"
+        class="containered containered__heartnote flex flex-col md:flex-row w-full justify-stretch items-stretch"
       >
         <div
           class="shadow-xl flex min-h-[50vh] w-[104vw] md:w-[100vw] relative left-[-2vw] md:left-0 flex flex-col justify-center items-center gap-2 mt-2 md:mt-0 text-fuchsia-950 text-xs leading-none pl-[48%] md:pl-[44%] pr-[24px] text-sm md:text-base bg-fuchsia-100"
@@ -768,7 +772,7 @@ definePageMeta({
   }
 }
 
-@media screen and (max-width: 1000px) and (min-width: 480px) and (max-height: 1200px) {
+@media screen and (max-width: 1000px) and (min-width: 480px) and (max-height: 1100px) {
   .discover .quatuor {
     figure.music-player {
       top: 18vh;
@@ -800,7 +804,7 @@ definePageMeta({
       }
     }
 
-    .container {
+    .containered {
       flex-direction: column;
       margin-top: 10vh;
 
@@ -867,6 +871,125 @@ definePageMeta({
       width: 50vw;
       height: 50vw;
       top: 10vh;
+      position: relative;
+    }
+  }
+}
+
+@media screen and (max-height: 1000px) and (min-height: 480px) and (max-width: 1100px) {
+  .discover .quatuor {
+    figure.music-player {
+      top: 18vh;
+    }
+
+    .quatuor {
+      &__cover {
+        figure:first-child {
+          width: 50vw;
+          height: 50vh;
+
+          img {
+            left: 17vw;
+            top: 0vh;
+            transform: rotate(6deg);
+          }
+        }
+        figure:nth-child(2) {
+          left: 18vw;
+          top: 38vh;
+          transform: scale(1.6) rotate(-24deg) !important;
+        }
+      }
+
+      &__title {
+        left: -14vw;
+        top: -2vh;
+        width: 86vw;
+      }
+    }
+
+    .containered {
+      flex-direction: column;
+      margin-top: 10vh;
+
+      &__cards {
+        flex-direction: row;
+        margin-top: 4vh;
+      }
+
+      &__has-cacaille {
+        flex-direction: row;
+
+        & > div:first-child {
+          transform: scale(1.12) translateX(-1vw) translateY(9vh);
+        }
+      }
+
+      .music-player--small {
+        border-bottom-width: 2px;
+        width: 80%;
+      }
+
+      .quatuor__cards {
+        margin-left: 6vw;
+
+        figure {
+          img {
+            width: 12vw;
+            height: 12vw;
+          }
+        }
+      }
+
+      .quatuor__symphony {
+        position: absolute;
+        width: 50%;
+        bottom: -5vh;
+      }
+
+      .quatuor__complexe {
+        width: 100%;
+
+        h2 {
+          transform: translate(2vw, 2vh);
+        }
+
+        & > div:last-child {
+          padding-right: 0;
+        }
+
+        & > figure {
+          margin-top: 5vh;
+        }
+      }
+
+      &__containing-heartnote {
+        margin-top: 10vh;
+
+        h2 {
+          transform: translateY(8vh);
+          text-align: center;
+        }
+      }
+
+      &__heartnote {
+        & > div:first-child {
+          padding-left: 44%;
+          padding-right: 5%;
+        }
+
+        figure {
+          width: 102vw;
+          transform: translateX(-4vw) !important;
+        }
+      }
+    }
+
+    .turning {
+      left: -6vw;
+      width: 50vh;
+      height: 50vh;
+      top: 6vh;
       position: relative;
     }
   }
