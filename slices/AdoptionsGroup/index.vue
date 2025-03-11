@@ -376,8 +376,6 @@ const playScroll = (TL, containerWidth, windowWidth) => {
     }, 2400);
   }
 
-  console.log("playScroll");
-
   TL.to(
     scrollContainer.value,
     {
@@ -416,8 +414,6 @@ const initHorizontalScroll = () => {
   // configScrollTriggerSafari();
 
   const container = scrollContainer.value;
-
-  console.log({ container });
 
   if (container) {
     catItems.value = [...container.querySelectorAll(".cat-item")];
@@ -491,11 +487,9 @@ const configScrollTriggerSafari = () => {
 watch(
   () => useRoute().path,
   (newRoute) => {
-    console.log({ newRoute });
     if (newRoute === "/adoptions") {
       setTimeout(() => {
         if (!isMobile() && !isSafari()) {
-          console.log("tombe here");
           initHorizontalScroll();
         } else {
           isDoScrollDisabled.value = true;
@@ -515,7 +509,6 @@ watch(
 );
 
 onUnmounted(() => {
-  console.log("aan");
   cleanupScrollTrigger();
   isMounted.value = false;
 });

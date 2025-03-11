@@ -82,7 +82,7 @@ const onUpdateOpen = (openState) => {
     window.lenis?.destroy();
     window.lenis = null;
   } else {
-    console.log(window.lenis);
+    // console.log(window.lenis);
   }
 };
 

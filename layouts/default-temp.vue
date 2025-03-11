@@ -117,7 +117,7 @@ const seo = ref({
 useSmoothScroll();
 
 const playFade = () => {
-  console.log(["links", "adoptions"].includes(route.path));
+  // console.log(["links", "adoptions"].includes(route.path));
   if (updateCount.value === 0) {
     const children = [
       ...document.body.querySelectorAll(

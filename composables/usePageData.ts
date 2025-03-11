@@ -48,7 +48,6 @@ export default function usePageData(templateString: string) {
   watch(
     () => currentPage.value,
     () => {
-      console.log(currentPage.value);
       // Check if the data properties exist
       if (
         currentPage.value?.data?.meta_title &&
