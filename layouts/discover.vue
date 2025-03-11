@@ -23,6 +23,8 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import useSmoothScroll from "~/composables/useSmoothScroll";
 
+import usePageData from "~/composables/usePageData";
+
 import FooterMenu from "@/components/FooterMenu/index.vue";
 import PopoverBanner from "@/components/PopoverBanner/index.vue";
 
@@ -68,37 +70,11 @@ const { data: footer } = await useAsyncData("footer", () =>
   client.getSingle("footermenu")
 );
 
-const currentPage = ref({ data: {} });
+// Usage in your page or layout component:
 
-const getPage = async () => {
-  // Store the result of useAsyncData
-  const { data: pageData } = await useAsyncData("currentPage", async () => {
-    const { path: currentPagePath } = route;
-
-    const data = await client.getByUID(
-      "navigationpage",
-      (currentPagePath as string).replaceAll("/", "").replace("adoptions", "")
-    );
-
-    return data; // Return the data instead of setting currentPage.value
-  });
-
-  // Now currentPage is properly populated with resolved data
-  // console.log(pageData.value);
-
-  // Check if the data properties exist
-  if (
-    pageData.value?.data?.meta_title &&
-    pageData.value?.data?.meta_description
-  ) {
-    useSeoMeta({
-      title: `Chez Les Petits Clochards ${pageData.value.data.meta_title ? "- " + pageData.value.data.meta_title : ""}`,
-      ogTitle: `Chez Les Petits Clochards ${pageData.value.data.meta_title ? "- " + pageData.value.data.meta_title : ""}`,
-      description: pageData.value.data.meta_description,
-      ogDescription: pageData.value.data.meta_description,
-    });
-  }
-};
+const { currentPage, loading, error, fetchPageData } = usePageData(
+  "Chez Les Petits Clochards"
+);
 
 useSmoothScroll();
 
@@ -124,15 +100,15 @@ const playFade = () => {
   });
 };
 
+fetchPageData();
+
 onMounted(() => {
-  getPage();
   nextTick(() => {
     playFade();
   });
 });
 
 onUpdated(() => {
-  getPage();
   nextTick(() => {
     playFade();
   });
