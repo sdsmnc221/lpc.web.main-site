@@ -132,6 +132,8 @@ const playFade = () => {
     });
 
     updateCount.value += 1;
+
+    setTimeout(() => emits("animation-init-done"), 600);
   }
 };
 
@@ -172,8 +174,6 @@ watch(
     if (newRoute !== oldRoute) {
       playFade();
     }
-
-    setTimeout(() => emits("animation-init-done"), 1200);
   }
 );
 </script>

@@ -486,7 +486,7 @@ const configScrollTriggerSafari = () => {
 
 onMounted(() => {
   if (useRoute().path === "/adoptions") {
-    console.log("aa");
+    console.log("aaaaaa");
     nextTick(() => {
       if (!isMobile() && !isSafari()) {
         initHorizontalScroll();
@@ -506,6 +506,7 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
+  console.log("aan");
   cleanupScrollTrigger();
   isMounted.value = false;
 });

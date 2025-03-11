@@ -16,9 +16,7 @@ const route = useRoute();
 
 const gsapLoaded = ref(false);
 
-const loaded = computed(() => {
-  return gsapLoaded.value;
-});
+const loaded = ref(false);
 
 const onGsapInitDone = () => {
   gsapLoaded.value = true;
@@ -31,20 +29,27 @@ const onGsapInitDone = () => {
 };
 
 watch(
-  [() => route.path, () => gsapLoaded.value],
-  ([newRoute, newGsapLoaded]) => {
+  () => route.path,
+  (newRoute) => {
+    gsapLoaded.value = false;
+
     if (ALLOWED_PAGES.some((slug) => newRoute.includes(slug))) {
-      gsapLoaded.value = newGsapLoaded;
+      {
+        setTimeout(() => {
+          gsapLoaded.value = true;
+        }, 200);
+      }
     }
   },
   { immediate: true, flush: "sync" }
 );
 
 watch(
-  () => route.path,
-  () => {
-    gsapLoaded.value = false;
-  }
+  () => gsapLoaded.value,
+  (newGsapLoaded) => {
+    loaded.value = newGsapLoaded;
+  },
+  { immediate: true }
 );
 </script>
 
