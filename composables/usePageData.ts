@@ -65,13 +65,12 @@ export default function usePageData(templateString: string) {
     { immediate: true, deep: true }
   );
 
-  setDefaultPageData();
-
   // Return the reactive references and the fetch function
   return {
     currentPage,
     loading,
     error,
     fetchPageData,
+    setDefaultPageData,
   };
 }

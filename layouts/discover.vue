@@ -72,9 +72,8 @@ const { data: footer } = await useAsyncData("footer", () =>
 
 // Usage in your page or layout component:
 
-const { currentPage, loading, error, fetchPageData } = usePageData(
-  "Chez Les Petits Clochards"
-);
+const { currentPage, loading, error, fetchPageData, setDefaultPageData } =
+  usePageData("Chez Les Petits Clochards");
 
 useSmoothScroll();
 
@@ -99,6 +98,10 @@ const playFade = () => {
     });
   });
 };
+
+onBeforeMount(() => {
+  setDefaultPageData();
+});
 
 onMounted(() => {
   fetchPageData();
