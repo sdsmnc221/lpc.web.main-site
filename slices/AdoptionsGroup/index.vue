@@ -90,6 +90,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { isPC, isIOS, randomHSLA, isSafari, isMobile } from "@/lib/helpers";
 
 const router = useRouter();
+const route = useRoute();
 
 const isMounted = ref(false);
 
@@ -484,10 +485,9 @@ const configScrollTriggerSafari = () => {
   // }
 };
 
-watch(
-  () => useRoute().path,
-  (newRoute) => {
-    if (newRoute === "/adoptions") {
+onMounted(() => {
+  if (route.name === "adoptions") {
+    nextTick(() => {
       setTimeout(() => {
         if (!isMobile() && !isSafari()) {
           initHorizontalScroll();
@@ -503,10 +503,9 @@ watch(
           isMounted.value = true;
         }
       }, 480);
-    }
-  },
-  { immediate: true }
-);
+    });
+  }
+});
 
 onUnmounted(() => {
   cleanupScrollTrigger();
