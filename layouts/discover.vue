@@ -100,15 +100,17 @@ const playFade = () => {
   });
 };
 
-fetchPageData();
-
 onMounted(() => {
+  fetchPageData();
+
   nextTick(() => {
     playFade();
   });
 });
 
 onUpdated(() => {
+  fetchPageData();
+
   nextTick(() => {
     playFade();
   });
