@@ -99,9 +99,7 @@ const playFade = () => {
   });
 };
 
-onBeforeMount(() => {
-  setDefaultPageData();
-});
+setDefaultPageData();
 
 onMounted(() => {
   fetchPageData();
