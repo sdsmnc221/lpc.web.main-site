@@ -99,7 +99,16 @@ const playFade = () => {
   });
 };
 
-setDefaultPageData();
+onNuxtReady(() => {
+  useSeoMeta({
+    title: defaultLayout.value?.data.meta_title,
+    ogTitle: defaultLayout.value?.data.meta_title,
+    description: defaultLayout.value?.data.meta_description,
+    ogDescription: defaultLayout.value?.data.meta_description,
+    ogImage: defaultLayout.value?.data?.meta_image?.url,
+    twitterImage: defaultLayout.value?.data?.meta_image?.url,
+  });
+});
 
 onMounted(() => {
   fetchPageData();
