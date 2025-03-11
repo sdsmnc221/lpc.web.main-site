@@ -72,9 +72,8 @@ const { data: footer } = await useAsyncData("footer", () =>
 
 // Usage in your page or layout component:
 
-const { currentPage, loading, error, fetchPageData } = usePageData(
-  "Chez Les Petits Clochards"
-);
+const { currentPage, loading, error, fetchPageData, setDefaultPageData } =
+  usePageData("Chez Les Petits Clochards");
 
 useSmoothScroll();
 
@@ -99,6 +98,17 @@ const playFade = () => {
     });
   });
 };
+
+onNuxtReady(() => {
+  useSeoMeta({
+    title: defaultLayout.value?.data.meta_title,
+    ogTitle: defaultLayout.value?.data.meta_title,
+    description: defaultLayout.value?.data.meta_description,
+    ogDescription: defaultLayout.value?.data.meta_description,
+    ogImage: defaultLayout.value?.data?.meta_image?.url,
+    twitterImage: defaultLayout.value?.data?.meta_image?.url,
+  });
+});
 
 onMounted(() => {
   fetchPageData();
