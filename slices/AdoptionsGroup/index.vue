@@ -295,7 +295,7 @@ const split = (el, mode = "lines") => {
 };
 
 const playScroll = (TL, containerWidth, windowWidth) => {
-  if (groupTitle.value?.$el) {
+  if (groupTitle && groupTitle.value?.$el) {
     split(groupTitle.value.$el, "words");
 
     setTimeout(() => {
@@ -337,7 +337,7 @@ const playScroll = (TL, containerWidth, windowWidth) => {
     }, 2400);
   }
 
-  if (groupDescription.value) {
+  if (groupDescription && groupDescription.value) {
     split(groupDescription.value);
     setTimeout(() => {
       const spans = [...groupDescription.value.querySelectorAll(".word")];
@@ -485,21 +485,24 @@ const configScrollTriggerSafari = () => {
 };
 
 onMounted(() => {
-  nextTick(() => {
-    if (!isMobile() && !isSafari()) {
-      initHorizontalScroll();
-    } else {
-      isDoScrollDisabled.value = true;
+  if (useRoute().path === "/adoptions") {
+    console.log("aa");
+    nextTick(() => {
+      if (!isMobile() && !isSafari()) {
+        initHorizontalScroll();
+      } else {
+        isDoScrollDisabled.value = true;
 
-      if (section.value) {
-        section.value.style.overflowX = "scroll";
+        if (section.value) {
+          section.value.style.overflowX = "scroll";
+        }
+
+        emits("animation-init-done");
       }
 
-      emits("animation-init-done");
-    }
-
-    isMounted.value = true;
-  });
+      isMounted.value = true;
+    });
+  }
 });
 
 onUnmounted(() => {

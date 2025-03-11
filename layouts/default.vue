@@ -41,6 +41,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 const route = useRoute();
 
+const emits = defineEmits(["animation-init-done"]);
+
 const { client } = usePrismic();
 
 const { data: defaultLayout } = await useAsyncData("defaultLayout", () =>
@@ -170,6 +172,8 @@ watch(
     if (newRoute !== oldRoute) {
       playFade();
     }
+
+    setTimeout(() => emits("animation-init-done"), 1200);
   }
 );
 </script>
