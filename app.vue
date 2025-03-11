@@ -1,5 +1,5 @@
 <template>
-  <page-loader :show="!loaded"></page-loader>
+  <page-loader :show="!loaded && !gsapLoaded"></page-loader>
 
   <NuxtLayout>
     <NuxtPage @animation-init-done="onGsapInitDone" />
@@ -19,37 +19,26 @@ const gsapLoaded = ref(false);
 const loaded = ref(false);
 
 const onGsapInitDone = () => {
-  gsapLoaded.value = true;
-  // setTimeout(
-  //   () => {
-  //     gsapLoaded.value = true;
-  //   },
-  //   isMobile() && isSafari() ? 2200 : 1400
-  // );
+  setTimeout(() => {
+    gsapLoaded.value = true;
+  }, 600);
 };
 
 watch(
   () => route.path,
   (newRoute) => {
+    loaded.value = false;
     gsapLoaded.value = false;
 
     if (ALLOWED_PAGES.some((slug) => newRoute.includes(slug))) {
       {
         setTimeout(() => {
-          gsapLoaded.value = true;
+          loaded.value = true;
         }, 200);
       }
     }
   },
   { immediate: true, flush: "sync" }
-);
-
-watch(
-  () => gsapLoaded.value,
-  (newGsapLoaded) => {
-    loaded.value = newGsapLoaded;
-  },
-  { immediate: true }
 );
 </script>
 

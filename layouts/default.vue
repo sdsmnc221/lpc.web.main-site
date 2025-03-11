@@ -133,7 +133,9 @@ const playFade = () => {
 
     updateCount.value += 1;
 
-    setTimeout(() => emits("animation-init-done"), 600);
+    if (route.path !== "/adoptions") {
+      emits("animation-init-done");
+    }
   }
 };
 

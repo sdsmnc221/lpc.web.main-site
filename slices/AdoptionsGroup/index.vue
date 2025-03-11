@@ -295,7 +295,7 @@ const split = (el, mode = "lines") => {
 };
 
 const playScroll = (TL, containerWidth, windowWidth) => {
-  if (groupTitle && groupTitle.value?.$el) {
+  if (groupTitle.value?.$el) {
     split(groupTitle.value.$el, "words");
 
     setTimeout(() => {
@@ -337,7 +337,7 @@ const playScroll = (TL, containerWidth, windowWidth) => {
     }, 2400);
   }
 
-  if (groupDescription && groupDescription.value) {
+  if (groupDescription.value) {
     split(groupDescription.value);
     setTimeout(() => {
       const spans = [...groupDescription.value.querySelectorAll(".word")];
@@ -375,6 +375,8 @@ const playScroll = (TL, containerWidth, windowWidth) => {
       TL.add(spansTL, 0);
     }, 2400);
   }
+
+  console.log("playScroll");
 
   TL.to(
     scrollContainer.value,
@@ -414,6 +416,8 @@ const initHorizontalScroll = () => {
   // configScrollTriggerSafari();
 
   const container = scrollContainer.value;
+
+  console.log({ container });
 
   if (container) {
     catItems.value = [...container.querySelectorAll(".cat-item")];
@@ -484,26 +488,31 @@ const configScrollTriggerSafari = () => {
   // }
 };
 
-onMounted(() => {
-  if (useRoute().path === "/adoptions") {
-    console.log("aaaaaa");
-    nextTick(() => {
-      if (!isMobile() && !isSafari()) {
-        initHorizontalScroll();
-      } else {
-        isDoScrollDisabled.value = true;
+watch(
+  () => useRoute().path,
+  (newRoute) => {
+    console.log({ newRoute });
+    if (newRoute === "/adoptions") {
+      setTimeout(() => {
+        if (!isMobile() && !isSafari()) {
+          console.log("tombe here");
+          initHorizontalScroll();
+        } else {
+          isDoScrollDisabled.value = true;
 
-        if (section.value) {
-          section.value.style.overflowX = "scroll";
+          if (section.value) {
+            section.value.style.overflowX = "scroll";
+          }
+
+          emits("animation-init-done");
+
+          isMounted.value = true;
         }
-
-        emits("animation-init-done");
-      }
-
-      isMounted.value = true;
-    });
-  }
-});
+      }, 480);
+    }
+  },
+  { immediate: true }
+);
 
 onUnmounted(() => {
   console.log("aan");
