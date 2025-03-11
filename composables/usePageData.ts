@@ -5,6 +5,23 @@ export default function usePageData(templateString: string) {
   const loading = ref(true);
   const error = ref(null);
 
+  const setDefaultPageData = async () => {
+    const { data: defaultLayout } = await useAsyncData("defaultLayout", () => {
+      const { client } = usePrismic();
+
+      return client.getByUID("pagelayout", "default-layout");
+    });
+
+    if (defaultLayout.value) {
+      useSeoMeta({
+        title: `${defaultLayout.value.data?.meta_title || ""}`,
+        ogTitle: `${defaultLayout.value.data?.meta_title || ""}`,
+        description: defaultLayout.value.data?.meta_description,
+        ogDescription: defaultLayout.value.data?.meta_description,
+      });
+    }
+  };
+
   const fetchPageData = () => {
     const route = useRoute();
     const { client } = usePrismic();
@@ -47,6 +64,8 @@ export default function usePageData(templateString: string) {
     },
     { immediate: true, deep: true }
   );
+
+  setDefaultPageData();
 
   // Return the reactive references and the fetch function
   return {
