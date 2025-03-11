@@ -71,7 +71,8 @@ const { data: footer } = await useAsyncData("footer", () =>
 const currentPage = ref({ data: {} });
 
 const getPage = async () => {
-  await useAsyncData("currentPage", async () => {
+  // Store the result of useAsyncData
+  const { data: pageData } = await useAsyncData("currentPage", async () => {
     const { path: currentPagePath } = route;
 
     const data = await client.getByUID(
@@ -79,17 +80,25 @@ const getPage = async () => {
       (currentPagePath as string).replaceAll("/", "").replace("adoptions", "")
     );
 
-    currentPage.value = data;
+    return data; // Return the data instead of setting currentPage.value
   });
-};
 
-const seo = computed(() => ({
-  title:
-    currentPage.value?.data?.meta_title ?? defaultLayout.value?.data.meta_title,
-  description:
-    currentPage.value?.data?.meta_description ??
-    defaultLayout.value?.data.meta_description,
-}));
+  // Now currentPage is properly populated with resolved data
+  // console.log(pageData.value);
+
+  // Check if the data properties exist
+  if (
+    pageData.value?.data?.meta_title &&
+    pageData.value?.data?.meta_description
+  ) {
+    useSeoMeta({
+      title: `Chez Les Petits Clochards ${pageData.value.data.meta_title ? "- " + pageData.value.data.meta_title : ""}`,
+      ogTitle: `Chez Les Petits Clochards ${pageData.value.data.meta_title ? "- " + pageData.value.data.meta_title : ""}`,
+      description: pageData.value.data.meta_description,
+      ogDescription: pageData.value.data.meta_description,
+    });
+  }
+};
 
 useSmoothScroll();
 
@@ -128,19 +137,6 @@ onUpdated(() => {
     playFade();
   });
 });
-
-watch(
-  [() => seo.value, () => currentPage.value],
-  ([newSeo, newPageContent]) => {
-    useSeoMeta({
-      title: newSeo.title,
-      ogTitle: newSeo.title,
-      description: newSeo.description,
-      ogDescription: newSeo.description,
-    });
-  },
-  { immediate: true }
-);
 </script>
 
 <style lang="scss">
