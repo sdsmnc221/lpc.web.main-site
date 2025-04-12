@@ -205,6 +205,19 @@ watch(
 @container nuxt (max-width: 699px) {
   .superapp:has(.navigation-menu.--at-top) {
     padding-top: 10vh;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--black);
+      width: 100%;
+      height: 10vh;
+      z-index: -1;
+    }
   }
 
   .app {
