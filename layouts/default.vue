@@ -203,6 +203,10 @@ watch(
 }
 
 @container nuxt (max-width: 699px) {
+  .superapp:has(.navigation-menu.--at-top) {
+    padding-top: 10vh;
+  }
+
   .app {
     padding: var(--spacing-m);
 

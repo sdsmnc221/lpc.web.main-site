@@ -48,6 +48,7 @@
           "config": {
             "label": "infoLink",
             "placeholder": "",
+            "allowTargetBlank": true,
             "select": null
           }
         }

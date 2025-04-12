@@ -61,7 +61,7 @@ interface CatficheDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#select
    */
-  catsexe: prismic.SelectField<"♂️" | "♀️">;
+  catsexe: prismic.SelectField<"♂️" | "♀️" | "♂️♀️">;
 
   /**
    * catAgeNumber field in *CatFiche*
