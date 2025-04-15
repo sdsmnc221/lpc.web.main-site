@@ -13,6 +13,7 @@
   "dependencies": {
     "@nuxtjs/leaflet": "^1.2.2",
     "@prismicio/vue": "^4.2.2",
+    "@vercel/analytics": "^1.5.0",
     "@vueuse/core": "^11.1.0",
     "@vueuse/nuxt": "^12.2.0",
     "class-variance-authority": "^0.7.0",

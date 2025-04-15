@@ -4,11 +4,15 @@
   <NuxtLayout>
     <NuxtPage @animation-init-done="onGsapInitDone" />
   </NuxtLayout>
+
+  <Analytics />
 </template>
 
 <script setup lang="ts">
 import PageLoader from "@/components/PageLoader/index.vue";
 import { isMobile, isSafari } from "./lib/helpers";
+
+import { Analytics } from "@vercel/analytics/nuxt";
 
 import { ALLOWED_PAGES } from "./middleware/wip.global";
 
