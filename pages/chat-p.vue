@@ -60,6 +60,10 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
+.superapp:has(.navigation-menu.--at-top):has(.app.--chat-p) {
+  padding-top: 0;
+}
+
 .app.--chat-p {
   .hero-banner-with-text {
     &__buttons-group {
