@@ -154,7 +154,7 @@ const commonOpen = (opened: boolean, catItem = null) => {
 
       router.push({
         name: router.currentRoute.value.name,
-        query: { id: catItem.id },
+        query: { uid: catItem.uid },
       });
     }
   } else {
@@ -172,6 +172,7 @@ const formatCatItem = ({ cat, index }) => {
         ...cat.data,
         index,
         id: cat.id,
+        uid: cat.uid,
         contactInfo: contactInfo.value,
         adoptionRequirements: adoptionRequirements.value,
         avatarPlaceholder: avatarPlaceholder.value,
@@ -218,13 +219,14 @@ watch(
   (newRoute, oldRoute) => {
     randomTint.value = randomHSLA();
 
-    if (!newRoute.query.id) {
+    if (!newRoute.query.id && !newRoute.query.uid) {
       defaultOpen.value = false;
     } else {
       setTimeout(() => {
         if (itemsData.value) {
           const theCatIndex = itemsData.value?.findIndex(
-            (cat) => cat.id === newRoute.query.id
+            (cat) =>
+              cat.id === newRoute.query.id || cat.uid === newRoute.query.uid
           );
 
           if (theCatIndex !== -1) {

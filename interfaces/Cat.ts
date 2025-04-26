@@ -3,6 +3,7 @@ import type { Image } from "./Common";
 export type CatInfo = {
   index: number;
   id: string;
+  uid: string;
   createddate: string;
   catphoto: Image;
   catphoto2: Image;
