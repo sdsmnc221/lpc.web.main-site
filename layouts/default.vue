@@ -34,6 +34,8 @@ import PopoverBanner from "@/components/PopoverBanner/index.vue";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+import { isSafari, isMobile } from "@/lib/helpers";
+
 import "splitting/dist/splitting.css";
 import "splitting/dist/splitting-cells.css";
 
@@ -114,7 +116,9 @@ useSmoothScroll();
 const playFade = () => {
   if (updateCount.value === 0) {
     const children = [
-      ...document.body.querySelectorAll(".app > *:not(.emoji-banner) > *"),
+      ...document.body.querySelectorAll(
+        ".app > *:not(.emoji-banner) > *:not(.adoptions-group__container)"
+      ),
     ];
 
     children.forEach((section) => {
@@ -130,6 +134,18 @@ const playFade = () => {
         },
       });
     });
+
+    const adoptionsGroups = [
+      ...document.body.querySelectorAll(".adoptions-group__container"),
+    ];
+
+    if (!isMobile() && !isSafari()) {
+      adoptionsGroups.forEach((group) => {
+        gsap.set(group, {
+          opacity: 0,
+        });
+      });
+    }
 
     updateCount.value += 1;
 

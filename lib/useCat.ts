@@ -16,7 +16,7 @@ export default function useCat() {
 
         router.push({
           name: router.currentRoute.value.name,
-          query: { id: catItem.id },
+          query: { id: catItem.id, uid: catItem.uid },
         });
       }
     } else {
@@ -33,11 +33,13 @@ export default function useCat() {
   watch(
     () => router.currentRoute.value,
     (newRoute, oldRoute) => {
-      if (!newRoute.query.id) {
+      if (!newRoute.query.id && !newRoute.query.uid) {
         defaultOpen.value = false;
       } else {
         setTimeout(() => {
-          defaultOpen.value = currentCatItem.value?.id === newRoute.query.id;
+          defaultOpen.value =
+            currentCatItem.value?.id === newRoute.query.id ||
+            currentCatItem.value?.uid === newRoute.query.uid;
         }, 320);
       }
     },

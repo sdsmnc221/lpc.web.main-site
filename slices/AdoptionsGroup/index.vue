@@ -154,7 +154,7 @@ const commonOpen = (opened: boolean, catItem = null) => {
 
       router.push({
         name: router.currentRoute.value.name,
-        query: { id: catItem.id },
+        query: { uid: catItem.uid },
       });
     }
   } else {
@@ -172,6 +172,7 @@ const formatCatItem = ({ cat, index }) => {
         ...cat.data,
         index,
         id: cat.id,
+        uid: cat.uid,
         contactInfo: contactInfo.value,
         adoptionRequirements: adoptionRequirements.value,
         avatarPlaceholder: avatarPlaceholder.value,
@@ -218,13 +219,14 @@ watch(
   (newRoute, oldRoute) => {
     randomTint.value = randomHSLA();
 
-    if (!newRoute.query.id) {
+    if (!newRoute.query.id && !newRoute.query.uid) {
       defaultOpen.value = false;
     } else {
       setTimeout(() => {
         if (itemsData.value) {
           const theCatIndex = itemsData.value?.findIndex(
-            (cat) => cat.id === newRoute.query.id
+            (cat) =>
+              cat.id === newRoute.query.id || cat.uid === newRoute.query.uid
           );
 
           if (theCatIndex !== -1) {
@@ -305,33 +307,43 @@ const playScroll = (TL, containerWidth, windowWidth) => {
       const words = [...groupTitle.value.$el.querySelectorAll(".word")];
 
       words.forEach((word, index) => {
-        titleTL.fromTo(
-          word,
-          {
-            y: index * -24,
-            x: index * (windowWidth / 4) * (index % 2 === 0) ? 1 : -1,
-            filter: "blur(4px)",
-            opacity: 0,
-            color: "var(--gray)",
-            willChange: "transform, filter, opacity, color",
-          },
-          {
-            y: 0,
-            x: 0,
-            filter: "blur(0)",
-            opacity: 1,
-            color: "var(--black)",
-            ease: "power4.inOut",
-            delay: 0.1 + index * 0.2,
-            scrollTrigger: {
-              // containerAnimation: TL,
-              trigger: groupTitle.value.$el,
-              start: "top top",
-              end: `top+=${(index + 3) * 64}px top`,
-              scrub: 0.5,
+        titleTL
+          .fromTo(
+            word,
+            {
+              y: index * -24,
+              x: index * (windowWidth / 4) * (index % 2 === 0) ? 1 : -1,
+              filter: "blur(4px)",
+              opacity: 0,
+              color: "var(--gray)",
+              willChange: "transform, filter, opacity, color",
             },
-          }
-        );
+            {
+              y: 0,
+              x: 0,
+              filter: "blur(0)",
+              opacity: 1,
+              color: "var(--black)",
+              ease: "power4.inOut",
+              delay: 0.1 + index * 0.2,
+              scrollTrigger: {
+                // containerAnimation: TL,
+                trigger: groupTitle.value.$el,
+                start: "top top",
+                end: `top+=${(index + 3) * 64}px top`,
+                scrub: 0.5,
+              },
+            }
+          )
+          .to(
+            scrollContainer.value,
+            {
+              opacity: 1,
+
+              ease: "sine.inOut",
+            },
+            "+=0.1"
+          );
       });
 
       TL.add(titleTL, 0);
