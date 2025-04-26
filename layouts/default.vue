@@ -34,6 +34,8 @@ import PopoverBanner from "@/components/PopoverBanner/index.vue";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+import { isSafari, isMobile } from "@/lib/helpers";
+
 import "splitting/dist/splitting.css";
 import "splitting/dist/splitting-cells.css";
 
@@ -137,11 +139,13 @@ const playFade = () => {
       ...document.body.querySelectorAll(".adoptions-group__container"),
     ];
 
-    adoptionsGroups.forEach((group) => {
-      gsap.set(group, {
-        opacity: 0,
+    if (!isMobile() && !isSafari()) {
+      adoptionsGroups.forEach((group) => {
+        gsap.set(group, {
+          opacity: 0,
+        });
       });
-    });
+    }
 
     updateCount.value += 1;
 
