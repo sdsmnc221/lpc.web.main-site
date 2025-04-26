@@ -98,7 +98,6 @@ const quickAccess = (section: string) => {
 
   nextTick(() => {
     if (window && document) {
-      console.log(section);
       switch (section) {
         case "top":
           y = 0;

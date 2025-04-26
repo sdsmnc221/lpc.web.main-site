@@ -114,7 +114,9 @@ useSmoothScroll();
 const playFade = () => {
   if (updateCount.value === 0) {
     const children = [
-      ...document.body.querySelectorAll(".app > *:not(.emoji-banner) > *"),
+      ...document.body.querySelectorAll(
+        ".app > *:not(.emoji-banner) > *:not(.adoptions-group__container)"
+      ),
     ];
 
     children.forEach((section) => {
@@ -128,6 +130,16 @@ const playFade = () => {
           trigger: section as any,
           start: "top bottom",
         },
+      });
+    });
+
+    const adoptionsGroups = [
+      ...document.body.querySelectorAll(".adoptions-group__container"),
+    ];
+
+    adoptionsGroups.forEach((group) => {
+      gsap.set(group, {
+        opacity: 0,
       });
     });
 
