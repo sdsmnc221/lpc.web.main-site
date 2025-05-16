@@ -2,7 +2,7 @@
   <nav
     class="navigation-menu transition-all"
     ref="node"
-    :class="{ '--thin': thin, 'bg-black': black }"
+    :class="cn(thin ? '--thin' : '', black ? 'bg-black' : '', className)"
     v-if="links"
   >
     <NuxtLink
@@ -26,9 +26,11 @@
 import { type Link } from "~/interfaces/Navigation";
 import { ref } from "vue";
 import { useWindowScroll } from "@vueuse/core";
+import { cn } from "~/lib/utils";
 
 type Props = {
   links: Link[] | undefined;
+  className?: string;
 };
 
 const props = defineProps<Props>();

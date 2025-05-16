@@ -1,7 +1,11 @@
 <template>
   <div>
-    <main class="app" :class="`--${route.name as string}`">
+    <main class="app relative" :class="`--${route.name as string}`">
       <slot />
+      <navigation-menu
+        :links="links"
+        class-name="bg-gray-300 border-r border-t md:border-t-0 md:border-r-0 md:border-b border-gray-400"
+      ></navigation-menu>
     </main>
 
     <footer-menu v-if="footer && footer.data" v-bind="footer.data">
@@ -24,6 +28,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import FooterMenu from "@/components/FooterMenu/index.vue";
 import PopoverBanner from "@/components/PopoverBanner/index.vue";
+import NavigationMenu from "@/components/NavigationMenu/index.vue";
 
 import "splitting/dist/splitting.css";
 import "splitting/dist/splitting-cells.css";
@@ -35,6 +40,11 @@ gsap.registerPlugin(ScrollTrigger);
 const route = useRoute();
 
 const { client } = usePrismic();
+
+const { data: navigation } = await useAsyncData("navigation", () =>
+  client.getSingle("navigationmenu")
+);
+const links = computed(() => navigation.value?.data.navigationlink);
 
 const { data: defaultLayout } = await useAsyncData("defaultLayout", () =>
   client.getByUID("pagelayout", "default-layout")
@@ -141,6 +151,38 @@ watch(
 
 <style lang="scss">
 @import "../styles/index.scss";
+
+#__nuxt:has(.links) {
+  .navigation-menu {
+    position: absolute !important;
+    padding: 10px;
+    padding-bottom: 0;
+    width: 60% !important;
+    right: 0 !important;
+    top: 0 !important;
+    left: auto !important;
+
+    * {
+      color: var(--gray);
+    }
+  }
+
+  @media screen and (max-width: 699px) {
+    .navigation-menu {
+      left: 0 !important;
+      right: auto !important;
+      width: 40% !important;
+      bottom: 0 !important;
+      top: auto !important;
+      flex-direction: column;
+
+      a {
+        text-align: left;
+        width: 100%;
+      }
+    }
+  }
+}
 
 @container nuxt (min-width: 701px) {
   .app:has(.links) {
