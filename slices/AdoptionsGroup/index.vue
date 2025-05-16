@@ -339,7 +339,6 @@ const playScroll = (TL, containerWidth, windowWidth) => {
             scrollContainer.value,
             {
               opacity: 1,
-
               ease: "sine.inOut",
             },
             "+=0.1"
