@@ -1,6 +1,8 @@
 import { apiEndpoint, repositoryName } from "./slicemachine.config.json";
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  ssr: true,
+
   app: {
     // pageTransition: { name: "page", mode: "out-in" },
     // layoutTransition: { name: "page", mode: "out-in" },
