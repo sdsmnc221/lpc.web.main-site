@@ -68,11 +68,10 @@ body {
   img {
     display: block;
     border-radius: 32px;
-    filter: grayscale(1);
     transition: filter var(--base-transition-duration) ease-in-out;
 
     &:hover {
-      filter: grayscale(0);
+      filter: contrast(1.32);
     }
   }
 

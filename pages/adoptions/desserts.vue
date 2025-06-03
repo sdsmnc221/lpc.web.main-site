@@ -769,6 +769,10 @@ definePageMeta({
 #__nuxt:has(.desserts) {
   footer {
     filter: invert(1);
+
+    img {
+      filter: invert(1);
+    }
   }
 }
 
