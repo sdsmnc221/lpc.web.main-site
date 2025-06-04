@@ -156,6 +156,7 @@ watch(
   .navigation-menu {
     position: absolute !important;
     padding-bottom: 0;
+    padding-top: 0 !important;
     width: 40% !important;
     right: 0 !important;
     top: 0 !important;
