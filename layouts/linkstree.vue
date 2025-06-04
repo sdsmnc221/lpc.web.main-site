@@ -155,7 +155,6 @@ watch(
 #__nuxt:has(.links) {
   .navigation-menu {
     position: absolute !important;
-    padding: 10px;
     padding-bottom: 0;
     width: 40% !important;
     right: 0 !important;
