@@ -157,13 +157,34 @@ watch(
     position: absolute !important;
     padding: 10px;
     padding-bottom: 0;
-    width: 60% !important;
+    width: 40% !important;
     right: 0 !important;
     top: 0 !important;
-    left: auto !important;
+    left: 0 !important;
+    flex-direction: column;
+    height: 100svh;
+    gap: 32px;
+    background-color: rgba(0, 0, 0, 0.48);
+    border: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
 
     * {
       color: var(--gray);
+      margin: 0;
+      padding: 0;
+    }
+
+    a {
+      text-transform: uppercase;
+      text-align: center !important;
+      color: white;
+      transition: all ease-in-out 0.64s;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.48);
+      }
     }
   }
 

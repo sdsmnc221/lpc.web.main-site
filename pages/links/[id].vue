@@ -1,5 +1,5 @@
 <template>
-  <div class="links w-dvw h-dvh bg-white">
+  <div class="links w-dvw h-svh bg-white">
     <div class="flex flex-row">
       <!-- Left side image grid -->
       <photo-grid-five :photo-grids="photoGrids"></photo-grid-five>
