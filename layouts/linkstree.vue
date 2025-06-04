@@ -194,7 +194,7 @@ watch(
       right: auto !important;
       width: 40% !important;
       bottom: 0 !important;
-      top: auto !important;
+      top: 0 !important;
       flex-direction: column;
 
       a {
