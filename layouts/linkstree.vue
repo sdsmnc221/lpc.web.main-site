@@ -154,7 +154,7 @@ watch(
 
 #__nuxt:has(.links) {
   .navigation-menu {
-    position: fixed !important;
+    position: absolute !important;
     padding: 10px;
     padding-bottom: 0;
     width: 40% !important;
@@ -162,7 +162,7 @@ watch(
     top: 0 !important;
     left: 0 !important;
     flex-direction: column;
-    height: 100svh;
+    height: 100dvh;
     gap: 32px;
     background-color: rgba(0, 0, 0, 0.48);
     border: none;
