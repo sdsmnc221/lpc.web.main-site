@@ -231,8 +231,8 @@ watch(
       bottom: 0;
       background-color: var(--black);
       width: 100%;
-      height: 10vh;
-      z-index: -1;
+      height: 50vh;
+      z-index: 0;
     }
   }
 
