@@ -141,7 +141,9 @@ onMounted(() => {
     padding: 0 !important;
     margin: 0 !important;
   }
+
   .hero-banner-with-text {
+    z-index: 1;
     p {
       text-align: center;
     }
@@ -183,13 +185,6 @@ onMounted(() => {
       color: var(--black);
       text-decoration: underline;
     }
-  }
-}
-
-.app.--about {
-  .hero-banner-with-text {
-    padding-top: var(--spacing-m);
-    background-color: var(--black);
   }
 }
 
