@@ -188,7 +188,7 @@ onMounted(() => {
 
 .app.--about {
   .hero-banner-with-text {
-    padding-top: var(--spacing-m);
+    padding-top: var(--spacing-s);
     background-color: var(--black);
   }
 }
