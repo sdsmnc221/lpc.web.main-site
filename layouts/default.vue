@@ -219,7 +219,7 @@ watch(
 }
 
 @container nuxt (max-width: 699px) {
-  .superapp:has(.navigation-menu.--at-top) {
+  .superapp:has(.navigation-menu.--at-top):not(:has(.--chat-p)) {
     padding-top: 10vh;
 
     &::after {
@@ -231,7 +231,7 @@ watch(
       bottom: 0;
       background-color: var(--black);
       width: 100%;
-      height: 50vh;
+      height: 24vh;
       z-index: 0;
     }
   }

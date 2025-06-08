@@ -144,6 +144,7 @@ onMounted(() => {
 
   .hero-banner-with-text {
     z-index: 1;
+
     p {
       text-align: center;
     }
