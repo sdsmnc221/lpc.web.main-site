@@ -136,16 +136,15 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-.superapp:has(.navigation-menu.--at-top):has(.app.--about) {
-  padding-top: 0;
-}
-
 .app.--about {
   & *:has(.empty) {
     padding: 0 !important;
     margin: 0 !important;
   }
   .hero-banner-with-text {
+    p {
+      text-align: center;
+    }
     &__buttons-group {
       .ui-button {
         align-self: start;
@@ -184,6 +183,13 @@ onMounted(() => {
       color: var(--black);
       text-decoration: underline;
     }
+  }
+}
+
+.app.--about {
+  .hero-banner-with-text {
+    padding-top: var(--spacing-m);
+    background-color: var(--black);
   }
 }
 
