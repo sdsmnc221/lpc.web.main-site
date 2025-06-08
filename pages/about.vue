@@ -166,6 +166,24 @@ onMounted(() => {
     & > div:not(:first-of-type) {
       margin-top: var(--spacing-m);
     }
+
+    li {
+      margin-top: var(--spacing-s);
+    }
+
+    a:not([href^="tel:"]) {
+      display: inline-block;
+      padding: 0;
+      margin: 0;
+      letter-spacing: -0.2px;
+
+      @include ft-s(16);
+      @extend .gloock-regular;
+
+      background-color: transparent;
+      color: var(--black);
+      text-decoration: underline;
+    }
   }
 }
 
