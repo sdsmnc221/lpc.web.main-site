@@ -42,6 +42,7 @@ const description = computed(() => primary.value?.description);
   justify-content: flex-start;
   align-items: flex-start;
   gap: 0;
+  margin: var(--spacing-m) 0;
 
   &__heading * {
     @include ft-s(large);
