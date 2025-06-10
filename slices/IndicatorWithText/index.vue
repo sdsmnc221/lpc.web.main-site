@@ -49,7 +49,7 @@ const description = computed(() => primary.value?.description);
   }
 
   &__description p {
-    @include ft-s(24);
+    @include ft-s(16);
     margin-top: calc(var(--spacing-s) * -1);
   }
 
@@ -125,8 +125,17 @@ const description = computed(() => primary.value?.description);
     }
 
     &__description {
+      p:first-child * {
+        @include ft-s(24);
+      }
+
       * {
-        @include ft-s(medium);
+        @include ft-s(16);
+
+        &:is(em) {
+          text-decoration: underline;
+          font-style: italic;
+        }
       }
 
       & > p:first-child {

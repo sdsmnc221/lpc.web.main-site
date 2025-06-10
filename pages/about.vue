@@ -11,7 +11,7 @@
     ></component>
     <div
       v-else-if="index === indicatorWithTextFirstIndex"
-      class="flex flex-col md:flex-row gap-4"
+      class="flex flex-col md:grid md:grid-cols-3 gap-4"
     >
       <indicator-with-text
         v-for="(sliceIndicator, index) in indicatorWithTextGroups"
