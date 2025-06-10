@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-3/5 h-screen flex flex-col items-center justify-start bg-gray-300 relative"
+    class="w-3/5 h-screen flex flex-col items-center justify-start md:justify-center bg-gray-300 relative"
   >
     <h1 class="md:text-lg" v-html="processedPageTitle"></h1>
 
