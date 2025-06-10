@@ -1,6 +1,6 @@
 <template>
   <!-- Left side image grid -->
-  <div class="w-2/5 h-svh grid grid-cols-3 grid-rows-3 gap-0">
+  <div class="w-2/5 h-dvh grid grid-cols-3 grid-rows-3 gap-0">
     <div class="row-span-2">
       <img
         class="object-cover object-left inline-block w-full h-full"
