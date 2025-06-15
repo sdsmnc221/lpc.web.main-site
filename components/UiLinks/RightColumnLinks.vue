@@ -15,14 +15,10 @@
       <!-- Navigation Links -->
       <nav class="w-full md:w-3/4 md:m-auto space-y-4 pb-1 md:pb-4">
         <NuxtLink
-          v-for="link in links"
-          :key="link.linklabel"
-          :href="
-            link.linksrc.link_type !== 'Web'
-              ? `/${link.linksrc.uid.toString().replace('links-', 'links/')}`
-              : link.linksrc.url
-          "
-          :target="link.linksrc.target ?? '_self'"
+          v-for="link in computedLinks"
+          :key="`right-col-link-${link.linklabel}`"
+          :to="linkAdapter(link)"
+          :target="link.linkitem.target ?? '_self'"
           class="block w-full p-2 md:p-4 text-xs bg-gray-200 hover:bg-gray-300 transition-colors duration-300 text-center font-serif italic text-gray-800"
         >
           {{ link.linklabel }}
@@ -39,6 +35,8 @@
 </template>
 
 <script setup lang="ts">
+import linkAdapter from "~/prismic/linkAdapter";
+
 type Props = {
   pageTitle: string;
   pageDescription: any;
@@ -51,8 +49,18 @@ type Props = {
 
 const props = defineProps<Props>();
 
+const computedLinks = computed(() =>
+  props.links
+    ? props.links.map((link) => ({
+        linklabel: link.linklabel,
+        linkitem: link.linksrc,
+        linkhref: link.linksrc.url,
+      }))
+    : []
+);
+
 const processedPageTitle = computed(() => {
-  const splitOnBr = props.pageTitle.split("<br />");
+  const splitOnBr = props.pageTitle?.split("<br />") || [];
   let htmlString = "";
 
   splitOnBr.forEach((text, index) => {

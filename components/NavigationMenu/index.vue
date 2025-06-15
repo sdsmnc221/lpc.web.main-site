@@ -8,7 +8,7 @@
     <NuxtLink
       v-for="(link, index) in links"
       :key="`navigation-menu-link-${link.linkitem?.id}-${index}`"
-      :to="`${link.linkitem.type === 'homepage' ? '/' : link.linkitem.type === 'linkstreepage' ? '/links/' + link.linkitem.uid : '/' + link.linkitem.uid}`"
+      :to="linkAdapter(link)"
       class="albert-sans-light size-16"
       :class="{
         '--current':
@@ -27,6 +27,7 @@ import { type Link } from "~/interfaces/Navigation";
 import { ref } from "vue";
 import { useWindowScroll } from "@vueuse/core";
 import { cn } from "~/lib/utils";
+import linkAdapter from "~/prismic/linkAdapter";
 
 type Props = {
   links: Link[] | undefined;

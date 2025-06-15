@@ -17,8 +17,6 @@ export default async function useLinkstreeLayout(uid?: string) {
   });
   const pageTitle = computed(() => linkstree.value?.data.pagetitle);
 
-  console.log(linkstree.value, uid);
-
   const pageDescription = computed(() => linkstree.value?.data.pagedescription);
 
   const links = computed(() => linkstree.value?.data.linkstree);

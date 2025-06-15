@@ -3,7 +3,7 @@
     <main class="app relative" :class="`--${route.name as string}`">
       <slot />
       <navigation-menu
-        :links="links"
+        :links="linksNav"
         class-name="bg-gray-300 border-r border-t md:border-t-0 md:border-r-0 md:border-b border-gray-400"
       ></navigation-menu>
     </main>
@@ -44,7 +44,7 @@ const { client } = usePrismic();
 const { data: navigation } = await useAsyncData("navigation", () =>
   client.getSingle("navigationmenu")
 );
-const links = computed(() => navigation.value?.data.navigationlink);
+const linksNav = computed(() => navigation.value?.data.navigationlink);
 
 const { data: defaultLayout } = await useAsyncData("defaultLayout", () =>
   client.getByUID("pagelayout", "default-layout")

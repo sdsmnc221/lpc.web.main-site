@@ -8,8 +8,8 @@
         <AccordionContent class="accordion-navigation__pages">
           <NuxtLink
             v-for="(link, index) in links"
-            :key="`navigation-menu-link-${index}`"
-            :to="`${link.linkitem.type === 'homepage' ? '/' : '/' + link.linkitem.uid}`"
+            :key="`navigation-menu-link-accordion-${index}`"
+            :to="linkAdapter(link)"
             class="link albert-sans-light size-16"
             >{{ link.linklabel }}</NuxtLink
           >
@@ -29,6 +29,7 @@ import {
 import { computed, ref } from "vue";
 import { type Link } from "~/interfaces/Navigation";
 import { useWindowScroll } from "@vueuse/core";
+import linkAdapter from "~/prismic/linkAdapter";
 
 type Props = {
   links: Link[] | undefined;
