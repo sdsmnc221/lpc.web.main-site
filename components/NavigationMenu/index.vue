@@ -8,7 +8,7 @@
     <NuxtLink
       v-for="(link, index) in links"
       :key="`navigation-menu-link-${link.linkitem?.id}-${index}`"
-      :to="`${link.linkitem.type === 'homepage' ? '/' : '/' + link.linkitem.uid}`"
+      :to="`${link.linkitem.type === 'homepage' ? '/' : link.linkitem.type === 'linkstreepage' ? '/links/' + link.linkitem.uid : '/' + link.linkitem.uid}`"
       class="albert-sans-light size-16"
       :class="{
         '--current':

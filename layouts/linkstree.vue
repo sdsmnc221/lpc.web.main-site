@@ -170,6 +170,8 @@ watch(
     align-items: center;
     z-index: 1;
 
+    transition: none !important;
+
     * {
       color: var(--gray);
       margin: 0;
@@ -185,6 +187,11 @@ watch(
       &:hover {
         background-color: rgba(0, 0, 0, 0.48);
       }
+    }
+
+    .router-link-active {
+      background-color: rgba(0, 0, 0, 0.48);
+      font-weight: 500;
     }
   }
 
