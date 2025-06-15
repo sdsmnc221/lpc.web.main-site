@@ -8,7 +8,7 @@
     <NuxtLink
       v-for="(link, index) in links"
       :key="`navigation-menu-link-${link.linkitem?.id}-${index}`"
-      :to="linkAdapter(link, link.linkitem?.type)"
+      :to="linkAdapter(link)"
       class="albert-sans-light size-16"
       :class="{
         '--current':

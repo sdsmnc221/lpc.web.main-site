@@ -1,28 +1,22 @@
 import type { Link } from "~/interfaces/Navigation";
 
-export default function linkAdapter(link: Link, linkType?: string) {
-  console.log(linkType);
-  let to = "";
+export default function linkAdapter(link: Link) {
   if (link.linkhref && link.linkitem?.link_type === "Web") {
-    to = link.linkhref;
-  } else if (linkType) {
-    switch (linkType) {
+    return link.linkhref;
+  } else if (link.linkitem?.type && link.linkitem?.uid) {
+    switch (link.linkitem.type) {
       case "homepage":
-        to = "/";
-        break;
+        return { name: "index" };
       case "navigationpage":
-        to = link.linkitem.uid;
-        break;
+        return { name: link.linkitem.uid };
       case "linkstreepage":
-        to = `/links/${link.linkitem?.uid}`;
-        break;
+        return {
+          name: "links-id",
+          params: { id: link.linkitem.uid },
+        };
       default:
-        to = link.linkitem.uid;
-        break;
+        return `/${link.linkitem.uid}`;
     }
-  } else {
-    to = "/";
   }
-
-  return to;
+  return "/";
 }
