@@ -28,7 +28,7 @@ const route = useRoute();
 const { logo, photoGrids, pageTitle, pageDescription, links } =
   await useLinkstreeLayout(route.params.id);
 
-console.log(logo, photoGrids, pageTitle, pageDescription, links);
+// console.log(logo, photoGrids, pageTitle, pageDescription, links);
 
 definePageMeta({
   layout: "linkstree",

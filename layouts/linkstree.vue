@@ -46,6 +46,8 @@ const { data: navigation } = await useAsyncData("navigation", () =>
 );
 const links = computed(() => navigation.value?.data.navigationlink);
 
+console.log({ links });
+
 const { data: defaultLayout } = await useAsyncData("defaultLayout", () =>
   client.getByUID("pagelayout", "default-layout")
 );
