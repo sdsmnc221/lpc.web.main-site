@@ -3,7 +3,7 @@
     <div>
       <accordion-navigation :links="links"></accordion-navigation>
 
-      <navigation-menu :links="links"></navigation-menu>
+      <navigation-menu :links="links" ref="navigationMenu"></navigation-menu>
 
       <main class="app" :class="`--${route.name as string}`">
         <slot />
@@ -44,6 +44,9 @@ gsap.registerPlugin(ScrollTrigger);
 const route = useRoute();
 
 const emits = defineEmits(["animation-init-done"]);
+
+const navigationMenu = ref<InstanceType<typeof NavigationMenu> | null>(null);
+const navigationMenuHeight = ref(0);
 
 const { client } = usePrismic();
 
@@ -158,11 +161,21 @@ const playFade = () => {
 onMounted(() => {
   playFade();
 
-  // nextTick(() => {
-  //   [...document.querySelectorAll(".adoptions-group")].forEach((group) =>
-  //     group.addEventListener("scroll", ScrollTrigger.update)
-  //   );
-  // });
+  nextTick(() => {
+    // [...document.querySelectorAll(".adoptions-group")].forEach((group) =>
+    //   group.addEventListener("scroll", ScrollTrigger.update)
+    // );
+
+    if (navigationMenu.value) {
+      navigationMenuHeight.value = navigationMenu.value.$el.offsetHeight;
+      const superapp = document.querySelector(
+        ".superapp:has(.navigation-menu.--at-top):not(:has(.--chat-p))"
+      ) as HTMLElement;
+      if (superapp) {
+        superapp.style.paddingTop = `${navigationMenuHeight.value}px`;
+      }
+    }
+  });
 });
 
 onUpdated(() => {
