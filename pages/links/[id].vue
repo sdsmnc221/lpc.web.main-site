@@ -2,7 +2,10 @@
   <div class="links w-dvw h-svh bg-white">
     <div class="flex flex-row">
       <!-- Left side image grid -->
-      <photo-grid-five :photo-grids="photoGrids"></photo-grid-five>
+      <photo-grid-five
+        :photo-grids="photoGrids"
+        :photo-grids-uni="photoGridsUni"
+      ></photo-grid-five>
 
       <!-- Right side content -->
       <right-column-links
@@ -25,7 +28,7 @@ const emits = defineEmits(["animation-init-done"]);
 
 const route = useRoute();
 
-const { logo, photoGrids, pageTitle, pageDescription, links } =
+const { logo, photoGrids, photoGridsUni, pageTitle, pageDescription, links } =
   await useLinkstreeLayout(route.params.id);
 
 // console.log(logo, photoGrids, pageTitle, pageDescription, links);

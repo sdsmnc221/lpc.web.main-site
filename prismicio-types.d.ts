@@ -1179,6 +1179,28 @@ interface PagelayoutDocumentData {
   photosgrid5: prismic.GroupField<
     Simplify<PagelayoutDocumentDataPhotosgrid5Item>
   >;
+
+  /**
+   * photoGridUni field in *PageLayout*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: pagelayout.photogriduni
+   * - **Tab**: Linkstree
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  photogriduni: prismic.ImageField<never>;
+
+  /**
+   * photoGridUniBg field in *PageLayout*
+   *
+   * - **Field Type**: Color
+   * - **Placeholder**: *None*
+   * - **API ID Path**: pagelayout.photogridunibg
+   * - **Tab**: Linkstree
+   * - **Documentation**: https://prismic.io/docs/field#color
+   */
+  photogridunibg: prismic.ColorField;
 }
 
 /**

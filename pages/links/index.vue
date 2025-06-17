@@ -2,7 +2,10 @@
   <div class="links w-dvw h-vh bg-white">
     <div class="flex flex-row">
       <!-- Left side image grid -->
-      <photo-grid-five :photo-grids="photoGrids"></photo-grid-five>
+      <photo-grid-five
+        :photo-grids="photoGrids"
+        :photo-grids-uni="photoGridsUni"
+      ></photo-grid-five>
 
       <!-- Right side content -->
       <right-column-links
@@ -23,8 +26,15 @@ import useLinkstreeLayout from "../../composables/linkstreeLayout";
 
 const emits = defineEmits(["animation-init-done"]);
 
-const { logo, photoGrids, pageTitle, pageDescription, links, meta } =
-  await useLinkstreeLayout();
+const {
+  logo,
+  photoGrids,
+  photoGridsUni,
+  pageTitle,
+  pageDescription,
+  links,
+  meta,
+} = await useLinkstreeLayout();
 
 definePageMeta({
   layout: "linkstree",

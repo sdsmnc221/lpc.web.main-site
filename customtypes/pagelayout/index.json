@@ -105,6 +105,21 @@
             }
           }
         }
+      },
+      "photogriduni": {
+        "type": "Image",
+        "config": {
+          "label": "photoGridUni",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "photogridunibg": {
+        "type": "Color",
+        "config": {
+          "label": "photoGridUniBg",
+          "placeholder": ""
+        }
       }
     }
   }

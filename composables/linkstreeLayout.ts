@@ -25,6 +25,12 @@ export default async function useLinkstreeLayout(uid?: string) {
     assets.value?.photosgrid5.map((photo) => photo.img.url)
   );
 
+  const photoGridsUni = computed(() => ({
+    enable: !!assets.value?.photogriduni,
+    img: assets.value?.photogriduni?.url,
+    hex: assets.value?.photogridunibg,
+  }));
+
   const showlogo = computed(() => linkstree.value?.data.showlogo);
 
   const logo = computed(() =>
@@ -51,6 +57,7 @@ export default async function useLinkstreeLayout(uid?: string) {
   return {
     logo,
     photoGrids,
+    photoGridsUni,
     links,
     pageTitle,
     pageDescription,

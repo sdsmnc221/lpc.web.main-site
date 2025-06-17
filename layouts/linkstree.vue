@@ -153,6 +153,12 @@ watch(
 @import "../styles/index.scss";
 
 #__nuxt:has(.links) {
+  &:has(.photo-grids-uni) {
+    .navigation-menu {
+      background-color: rgba(0, 0, 0, 0.24);
+      padding-bottom: 20vh;
+    }
+  }
   .navigation-menu {
     position: absolute !important;
     padding-bottom: 0;
