@@ -37,7 +37,7 @@
       />
     </div>
   </div>
-  <div v-else :class="`photo-grids-uni w-2/5 h-screen flex justify-center items-end gap-0 bg-[${photoGridsUni.hex}]`" :style="{ backgroundColor: photoGridsUni.hex }">
+  <div v-else :class="`photo-grids-uni w-2/5 h-svh md:h-screen flex justify-center items-end gap-0 bg-[${photoGridsUni.hex}]`" :style="{ backgroundColor: photoGridsUni.hex }">
     <img
       class="object-contain object-center inline-block md:h-1/2 md:w-auto h-auto w-full"
       alt=""
