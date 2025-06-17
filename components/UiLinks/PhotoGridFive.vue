@@ -1,6 +1,6 @@
 <template>
   <!-- Left side image grid -->
-  <div v-if="!photoGridsUni?.enable" class="w-2/5 h-screen grid grid-cols-3 grid-rows-3 gap-0">
+  <div v-if="!photoGridsUni?.img" class="w-2/5 h-screen grid grid-cols-3 grid-rows-3 gap-0">
     <div class="row-span-2">
       <img
         class="object-cover object-left inline-block w-full h-full"
