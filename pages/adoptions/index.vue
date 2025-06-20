@@ -57,6 +57,7 @@ const { data: adoptions } = await useAsyncData("adoptions", () =>
 );
 
 const { data: adoptionHowTo } = await useAsyncData("adoptionsHowTo", () =>
+  client.getByUID("popoverbanner", "modalites-adoption")
 );
 
 const heroBanners = computed(
@@ -128,7 +129,6 @@ const quickAccess = (section: string) => {
 
 onMounted(() => {
   // playFade();
-
 });
 </script>
 
