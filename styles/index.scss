@@ -71,7 +71,7 @@ body {
     transition: filter var(--base-transition-duration) ease-in-out;
 
     &:hover {
-      filter: contrast(1.32);
+      filter: brightness(1.1);
     }
   }
 
