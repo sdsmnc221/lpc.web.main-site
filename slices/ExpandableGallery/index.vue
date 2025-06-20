@@ -21,12 +21,12 @@
       <div
         v-for="(chonk, indexChonk) in chunks"
         :key="`expandable-gallery-${title}-chonk-${index}`"
-        :class="cn('flex flex-col md:flex-row  md:h-96 h-dvh w-full gap-2 ')"
+        :class="cn('flex flex-col md:flex-row md:h-96 h-[200vh] w-full gap-2 ')"
       >
         <div
           v-for="(image, index) in chonk"
           :key="`expandable-gallery-${title}-${indexChonk}-${index}`"
-          class="relative flex h-full flex-1 cursor-pointer overflow-hidden aspect-square rounded-xl transition-[flex] duration-500 ease-in-out hover:rounded-none md:hover:flex-[4] hover:flex-none hover:justify-center md:hover:h-full hover:h-auto hover:w-[100%]"
+          :class="`relative flex h-${indexChonk === 0 ? `[${100 / chonk.length}%]` : 'full'} md:h-full overflow-hidden flex-1 cursor-pointer  hover:aspect-${indexChonk === 0 ? '[4/5]' : 'square'} rounded-xl transition-[flex] duration-500 ease-in-out hover:rounded-none md:hover:flex-[4] hover:flex-none hover:justify-center md:hover:h-full hover:h-auto hover:w-[100%]`"
         >
           <img
             class="relative h-full w-full md:w-auto object-cover rounded-none pointer-events-none"
