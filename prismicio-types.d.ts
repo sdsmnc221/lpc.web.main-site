@@ -197,7 +197,8 @@ interface CatficheDocumentData {
     | "Adoptable - Chaton"
     | "Adopté.e"
     | "Adoptable - Chat ado"
-    | "Réservé.e",
+    | "Réservé.e"
+    | "À réserver",
     "filled"
   >;
 

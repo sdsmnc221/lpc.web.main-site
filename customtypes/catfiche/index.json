@@ -145,7 +145,8 @@
             "Adoptable - Chaton",
             "Adopté.e",
             "Adoptable - Chat ado",
-            "Réservé.e"
+            "Réservé.e",
+            "À réserver"
           ],
           "default_value": "Adoptable - Chat adulte"
         }

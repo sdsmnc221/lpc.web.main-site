@@ -25,7 +25,10 @@
   <pop-out-text :slice="popOutText"></pop-out-text>
 
   <ui-dock>
-    <Badge @click="quickAccess('faq')">Modalités d'adoption</Badge>
+    <popover-banner
+      v-if="adoptionHowTo"
+      v-bind="adoptionHowTo.data"
+    ></popover-banner>
     <Badge @click="quickAccess('top')">Haut de page</Badge>
   </ui-dock>
 </template>
@@ -42,6 +45,7 @@ import MultiTextBlock from "@/slices/MultiTextBlock/index.vue";
 import PopOutText from "@/slices/PopOutText/index.vue";
 import UiDock from "~/components/UiDock/UiDock.vue";
 import Badge from "~/components/ui/badge/Badge.vue";
+import PopoverBanner from "@/components/PopoverBanner/index.vue";
 
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(ScrollToPlugin);
@@ -50,6 +54,9 @@ const { client } = usePrismic();
 
 const { data: adoptions } = await useAsyncData("adoptions", () =>
   client.getByUID("navigationpage", "adoptions")
+);
+
+const { data: adoptionHowTo } = await useAsyncData("adoptionsHowTo", () =>
 );
 
 const heroBanners = computed(
@@ -121,6 +128,7 @@ const quickAccess = (section: string) => {
 
 onMounted(() => {
   // playFade();
+
 });
 </script>
 
