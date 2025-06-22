@@ -21,21 +21,26 @@
       <div
         v-for="(chonk, indexChonk) in chunks"
         :key="`expandable-gallery-${title}-chonk-${index}`"
-        :class="cn('flex flex-col md:flex-row md:h-96 h-[200vh] w-full gap-2 ')"
+        :class="
+          cn(
+            `flex flex-col md:flex-row md:h-96 w-full gap-2 `,
+            chonk.length < 7 ? 'h-[100vh]' : 'h-[200vh]'
+          )
+        "
       >
         <div
           v-for="(image, index) in chonk"
           :key="`expandable-gallery-${title}-${indexChonk}-${index}`"
-          :class="`relative flex h-${indexChonk === 0 ? `[${100 / chonk.length}%]` : 'full'} md:h-full overflow-hidden flex-1 cursor-pointer  hover:aspect-${indexChonk === 0 ? '[4/5]' : 'square'} rounded-xl transition-[flex] duration-500 ease-in-out hover:rounded-none md:hover:flex-[4] hover:flex-none hover:justify-center md:hover:h-full hover:h-auto hover:w-[100%]`"
+          :class="`image-in-gallery relative flex h-${indexChonk === 0 ? `[${100 / chonk.length}%]` : 'full'} md:h-full w-full overflow-hidden flex-1 cursor-pointer  md:hover:aspect-${chonk.length < 7 ? '[2/3]' : indexChonk === 0 ? '[4/5]' : 'square'} hover:aspect-${indexChonk === 0 ? '[4/5]' : 'square'} rounded-xl transition-[flex] duration-500 ease-in-out hover:rounded-none md:hover:flex-[4] hover:flex-none hover:justify-center md:hover:h-full hover:h-auto hover:w-[100%]`"
         >
           <img
-            class="relative h-full w-full md:w-auto object-cover rounded-none pointer-events-none"
+            class="relative h-full w-full md:w-full object-cover rounded-none pointer-events-none"
             :src="image.src"
             :alt="image.alt"
           />
 
           <img
-            class="absolute h-full w-full md:w-auto object-cover rounded-none transition-all"
+            class="absolute h-full w-full md:w-auto md:hover:w-auto object-cover rounded-none transition-all"
             :src="image.srcAlternative"
             :alt="image.alt"
           />
@@ -87,6 +92,17 @@ const chunks = computed(() => chunkArray(images.value, 7));
     .expandable-gallery__title {
       margin: 0;
       padding: 0;
+    }
+  }
+
+  .image-in-gallery {
+    &:hover {
+      img:first-child {
+        opacity: 0;
+      }
+    }
+    img {
+      transition: opacity ease-in-out 0.3s;
     }
   }
 
