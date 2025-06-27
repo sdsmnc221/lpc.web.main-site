@@ -77,11 +77,6 @@
         <div
           class="preview__item-contact preview__item-box-desc w-full md:w-4/5 flex flex-col justify-end"
         >
-          <div class="text-xs mt-2 md:mr-2">
-            <a href="tel:+33642804318" target="_blank">
-              <Badge class="badge">06 42 80 43 18 (Mme Bonniot)</Badge>
-            </a>
-          </div>
 
           <div class="text-xs mt-2">
             <a

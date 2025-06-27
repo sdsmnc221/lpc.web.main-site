@@ -97,11 +97,7 @@
           <div
             class="cat-sheet__footnote__content flex flex-col md:flex-row justify-end"
           >
-            <div class="text-xs mt-2 md:mr-2">
-              <a href="tel:+33642804318" target="_blank">
-                <Badge class="badge">06 42 80 43 18 (Mme Bonniot)</Badge>
-              </a>
-            </div>
+            
 
             <div class="text-xs mt-2">
               <a
