@@ -456,6 +456,7 @@ onUnmounted(() => {
     // Optimisation pour les animations
     will-change: transform;
     transform: translateZ(0);
+    position: relative;
   }
 
   &__items {
