@@ -137,11 +137,15 @@
             <Badge class="max-w-[120px] md:max-w-fit text-center">{{
               catItem.catidentification
             }}</Badge>
+
+            <Badge class="md:max-w-fit">
+              Stérilisation <br />
+              Castration :
+              {{ catItem.catsterilization ? "✅" : "❌" }}
+            </Badge>
+
             <Badge class="md:max-w-fit">
               Vaccination : {{ catItem.catvaccination ? "✅" : "❌" }}
-            </Badge>
-            <Badge class="md:max-w-fit">
-              Stérilisation : {{ catItem.catsterilization ? "✅" : "❌" }}
             </Badge>
           </div>
         </div>
