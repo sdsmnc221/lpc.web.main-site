@@ -77,7 +77,6 @@
         <div
           class="preview__item-contact preview__item-box-desc w-full md:w-4/5 flex flex-col justify-end"
         >
-
           <div class="text-xs mt-2">
             <a
               href="https://lespetitsclochards.fillout.com/pre-adoption"
@@ -103,6 +102,17 @@
             <p class="text-xs md:text-sm mt-1 leading-tight pl-2">
               Ce chat cherche aussi un accueil temporaire.
             </p>
+          </div>
+
+          <div class="text-xs mt-4">
+            <p class="text-sm font-bold mt-1 leading-tight pl-2 mb-1 underline">
+              Conditions d'adoption :
+            </p>
+            <ul class="list-none">
+              <li>✅ Pro-vaccination & stérilisation</li>
+              <li>✅ Suivi vétérinaire régulier</li>
+              <li>✅ Adoption définitive & engagement à vie</li>
+            </ul>
           </div>
         </div>
       </div>
