@@ -282,122 +282,44 @@ const groupTitle = ref(null);
 const groupDescription = ref(null);
 const catItems = ref([]);
 
-const split = (el, mode = "lines") => {
-  nextTick(async () => {
-    const Splitting = await import("splitting");
+// Variable pour gérer l'état des ScrollTriggers
+let scrollTriggers = [];
 
-    Splitting.default({
-      /* target: String selector, Element, Array of Elements, or NodeList */
-      target: [...el.querySelectorAll(":scope > *")],
-      /* by: String of the plugin name */
-      by: mode,
-      /* key: Optional String to prefix the CSS variables */
-      key: null,
-    });
-  });
-};
+// Fonction split supprimée car plus utilisée
 
 const playScroll = (TL, containerWidth, windowWidth) => {
-  if (groupTitle.value?.$el) {
-    split(groupTitle.value.$el, "words");
+  // Animations du titre et de la description supprimées
 
-    setTimeout(() => {
-      const titleTL = gsap.timeline({});
+  // S'assurer que le container est visible dès le début
+  gsap.set(scrollContainer.value, { opacity: 1 });
 
-      const words = [...groupTitle.value.$el.querySelectorAll(".word")];
+  // Animation horizontale principale
+  const mainST = ScrollTrigger.create({
+    trigger: section.value,
+    start: "top top",
+    end: `+=${containerWidth + windowWidth + windowWidth / 4}`,
+    scrub: 1, // Augmenté pour plus de fluidité
+    pin: true,
+    pinnedContainer: section.value,
+    anticipatePin: 1,
+    invalidateOnRefresh: true,
+    ...(isPC() || isSafari() ? { pinType: "transform" } : {}),
+    onUpdate: (self) => {
+      const progress = self.progress;
+      const maxTranslate = -(containerWidth - windowWidth);
 
-      words.forEach((word, index) => {
-        titleTL
-          .fromTo(
-            word,
-            {
-              y: index * -24,
-              x: index * (windowWidth / 4) * (index % 2 === 0) ? 1 : -1,
-              filter: "blur(4px)",
-              opacity: 0,
-              color: "var(--gray)",
-              willChange: "transform, filter, opacity, color",
-            },
-            {
-              y: 0,
-              x: 0,
-              filter: "blur(0)",
-              opacity: 1,
-              color: "var(--black)",
-              ease: "power4.inOut",
-              delay: 0.1 + index * 0.2,
-              scrollTrigger: {
-                // containerAnimation: TL,
-                trigger: groupTitle.value.$el,
-                start: "top top",
-                end: `top+=${(index + 3) * 64}px top`,
-                scrub: 0.5,
-              },
-            }
-          )
-          .to(
-            scrollContainer.value,
-            {
-              opacity: 1,
-
-              ease: "sine.inOut",
-            },
-            "+=0.1"
-          );
+      // Animation plus fluide avec interpolation
+      gsap.to(scrollContainer.value, {
+        x: gsap.utils.interpolate(-24, maxTranslate, progress),
+        duration: 0.1,
+        overwrite: true,
       });
-
-      TL.add(titleTL, 0);
-    }, 2400);
-  }
-
-  if (groupDescription.value) {
-    split(groupDescription.value);
-    setTimeout(() => {
-      const spans = [...groupDescription.value.querySelectorAll(".word")];
-
-      // Create a separate timeline for spans animation
-      const spansTL = gsap.timeline({});
-      // Add span animations to the spans timeline
-      spans.forEach((span, index) => {
-        spansTL.fromTo(
-          span,
-          {
-            y: index * 8,
-            // x: index * (windowWidth / 4) * (index % 2 === 0) ? 1 : -1,
-            opacity: 0,
-            willChange: "transform, filter, opacity",
-          },
-          {
-            y: 0,
-            x: 0,
-            opacity: 1,
-            stagger: 0.16 * index,
-            duration: 2,
-            scrollTrigger: {
-              // containerAnimation: TL,
-              trigger: groupDescription.value.parentNode,
-              start: "top top",
-              scrub: 0.5,
-            },
-            ease: "power4",
-          }
-        );
-      });
-
-      // Link the spans timeline to the main timeline's pause point
-      TL.add(spansTL, 0);
-    }, 2400);
-  }
-
-  TL.to(
-    scrollContainer.value,
-    {
-      x: -(containerWidth - windowWidth),
-      ease: "sine.inOut",
     },
-    "pausePoint+=72%"
-  );
+  });
 
+  scrollTriggers.push(mainST);
+
+  // Animations des éléments des chats
   catItems.value.forEach((item, itemIndex) => {
     const childrenNodes = [
       ...(item as HTMLElement).querySelectorAll(
@@ -405,27 +327,38 @@ const playScroll = (TL, containerWidth, windowWidth) => {
       ),
     ];
 
-    const childTL = gsap.timeline({});
-
     childrenNodes.forEach((child, index) => {
-      childTL.to(child, {
-        y: 240 * (0.2 * (itemIndex + 1)),
-        x: -32 * (0.2 * (itemIndex + 1)),
-        ease: "sine.out",
-        scrollTrigger: {
-          trigger: child,
-          start: `top top`,
-          end: `top+=${containerWidth * (itemIndex + 1) * 0.72}px top`,
-          scrub: 0.5,
+      const st = ScrollTrigger.create({
+        trigger: child,
+        start: `top top`,
+        end: `top+=${containerWidth * (itemIndex + 1) * 0.72}px top`,
+        scrub: 1,
+        onUpdate: (self) => {
+          const progress = self.progress;
+
+          gsap.to(child, {
+            y: gsap.utils.interpolate(
+              0,
+              240 * (0.2 * (itemIndex + 1)),
+              progress
+            ),
+            x: gsap.utils.interpolate(
+              0,
+              -32 * (0.2 * (itemIndex + 1)),
+              progress
+            ),
+            duration: 0.1,
+            overwrite: true,
+          });
         },
       });
+
+      scrollTriggers.push(st);
     });
   });
 };
 
 const initHorizontalScroll = () => {
-  // configScrollTriggerSafari();
-
   const container = scrollContainer.value;
 
   if (container) {
@@ -434,67 +367,31 @@ const initHorizontalScroll = () => {
     const containerWidth = (container as HTMLElement).scrollWidth;
     const windowWidth = window.innerWidth;
 
-    // const usingSmoothScroll = // !matchMedia("(hover: none)").matches
-
-    // Main horizontal scroll animation
-
-    const TL = gsap.timeline({
-      onUpdate: ScrollTrigger.update,
-      scrollTrigger: {
-        trigger: section.value,
-        start: "top top",
-        end: `+=${containerWidth + windowWidth + windowWidth / 4}`,
-        scrub: 0.5,
-        pin: true,
-        pinnedContainer: section.value,
-
-        anticipatePin: 1,
-        invalidateOnRefresh: true,
-        ...(isPC() || isSafari() ? { pinType: "transform" } : {}),
-
-        // markers: true, // debug
-      },
+    // Configuration ScrollTrigger pour une meilleure performance
+    ScrollTrigger.config({
+      autoRefreshEvents: "visibilitychange,DOMContentLoaded,load",
+      ignoreMobileResize: true,
     });
 
-    TL.to(
-      scrollContainer.value,
-      {
-        x: -24,
-        ease: "sine.inOut",
-      },
-      0
-    );
-
-    TL.add("pausePoint");
-
-    playScroll(TL, containerWidth, windowWidth);
+    playScroll(null, containerWidth, windowWidth);
 
     emits("animation-init-done");
   }
 };
 
 const cleanupScrollTrigger = () => {
+  // Nettoie spécifiquement nos ScrollTriggers
+  scrollTriggers.forEach((st) => st.kill());
+  scrollTriggers = [];
+
+  // Nettoie tous les autres si nécessaire
   ScrollTrigger.getAll().forEach((st) => st.kill());
+  ScrollTrigger.clearMatchMedia();
 };
 
-const configScrollTriggerSafari = () => {
-  // if (isIOS()) {
-  ScrollTrigger.normalizeScroll(true);
-
-  ScrollTrigger.config({ ignoreMobileResize: true });
-
-  ScrollTrigger.observe({
-    target: section.value, // can be any element (selector text is fine)
-    type: "pointer,touch", // comma-delimited list of what to listen for ("wheel,touch,scroll,pointer")
-    // onUp: () => previous(),
-    // onDown: () => next(),
-
-    onDrag: (self) => {
-      console.warn(self.deltaX);
-      gsap.to(window, { scrollTo: { y: `+=${self.deltaX * 10}` } });
-    },
-  });
-  // }
+// Fonction pour rafraîchir les ScrollTriggers lors du resize
+const handleResize = () => {
+  ScrollTrigger.refresh();
 };
 
 onMounted(() => {
@@ -503,6 +400,9 @@ onMounted(() => {
       setTimeout(() => {
         if (!isMobile() && !isSafari()) {
           initHorizontalScroll();
+
+          // Ajoute un listener pour le resize
+          window.addEventListener("resize", handleResize);
         } else {
           isDoScrollDisabled.value = true;
 
@@ -511,15 +411,19 @@ onMounted(() => {
           }
 
           emits("animation-init-done");
-
-          isMounted.value = true;
         }
-      }, 480);
+
+        isMounted.value = true;
+      }, 100); // Réduit de 480 à 100
     });
   }
 });
 
 onUnmounted(() => {
+  // Nettoie les event listeners
+  window.removeEventListener("resize", handleResize);
+
+  // Nettoie les ScrollTriggers
   cleanupScrollTrigger();
   isMounted.value = false;
 });
@@ -533,6 +437,10 @@ onUnmounted(() => {
   display: flex;
   padding: var(--spacing-m);
 
+  // Amélioration du smooth scrolling
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+
   &__title {
     margin-bottom: var(--spacing-m);
 
@@ -544,6 +452,10 @@ onUnmounted(() => {
   &__container {
     height: 100%;
     display: flex;
+    opacity: 1; // S'assurer que le container est visible
+    // Optimisation pour les animations
+    will-change: transform;
+    transform: translateZ(0);
   }
 
   &__items {
@@ -554,6 +466,9 @@ onUnmounted(() => {
     & > * {
       margin-right: 6vw;
       margin-left: 6vw;
+      // Optimisation pour les animations
+      will-change: transform;
+      transform: translateZ(0);
     }
   }
 
@@ -606,9 +521,11 @@ onUnmounted(() => {
       position: absolute;
       bottom: 8vh;
       left: 4vw;
-      transform: scale(0.98);
+      transform: scale(0.98) translateZ(0); // Ajout de translateZ(0)
       border-radius: 0;
       z-index: -1;
+      // Optimisation pour les images
+      will-change: transform;
     }
 
     p {
@@ -658,6 +575,19 @@ onUnmounted(() => {
     * {
       text-decoration: underline;
     }
+  }
+}
+
+// Styles pour améliorer les performances sur desktop
+@media (pointer: fine) {
+  .adoptions-group {
+    // Améliore la gestion de la souris
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
 }
 
@@ -712,7 +642,7 @@ onUnmounted(() => {
         height: auto !important;
         left: 0 !important;
         bottom: 4.8vh;
-        transform: scale(0.64) !important;
+        transform: scale(0.64) translateZ(0) !important;
       }
 
       strong {
@@ -848,7 +778,7 @@ onUnmounted(() => {
       }
 
       img {
-        transform: scale(1) translateX(-8%);
+        transform: scale(1) translateX(-8%) translateZ(0);
       }
 
       &__text-content {
@@ -916,7 +846,7 @@ onUnmounted(() => {
         height: auto;
         left: 0;
         top: 0;
-        transform: scale(1);
+        transform: scale(1) translateZ(0);
       }
 
       strong {
