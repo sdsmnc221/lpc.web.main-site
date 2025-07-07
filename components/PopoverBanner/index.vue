@@ -77,12 +77,48 @@ type Prop = {
 
 const props = defineProps<Prop>();
 
+// Stocker la référence à Lenis avant de la détruire
+let previousLenis = null;
+
 const onUpdateOpen = (openState) => {
   if (openState) {
-    window.lenis?.destroy();
-    window.lenis = null;
+    // Stocker la référence avant de détruire
+    previousLenis = window.lenis;
+
+    // Désactiver le scroll pendant que le popover est ouvert
+    if (window.lenis) {
+      window.lenis.stop();
+    }
   } else {
-    // console.log(window.lenis);
+    // Réactiver le scroll quand le popover se ferme
+    if (window.lenis) {
+      window.lenis.start();
+    } else if (previousLenis) {
+      // Si Lenis a été détruit, le recréer
+      window.lenis = previousLenis;
+      window.lenis.start();
+    } else {
+      // Si aucune instance Lenis n'existe, en créer une nouvelle
+      const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        direction: "vertical",
+        gestureDirection: "vertical",
+        smooth: true,
+        mouseMultiplier: 1,
+        smoothTouch: false,
+        touchMultiplier: 2,
+        infinite: false,
+      });
+
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+
+      requestAnimationFrame(raf);
+      window.lenis = lenis;
+    }
   }
 };
 
