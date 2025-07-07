@@ -133,6 +133,10 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
+body:has(.app.--adoptions) {
+  scrollbar-gutter: stable; // Keeps space for scrollbar
+}
+
 .app.--adoptions {
   padding-right: 0;
   padding-left: 0;
@@ -145,43 +149,6 @@ onMounted(() => {
   .multi-text-block {
     & > div:not(:first-of-type) {
       margin-top: var(--spacing-m);
-    }
-  }
-
-  // Remettre les scrollbars visibles sur PC
-  .adoptions-group {
-    @media (pointer: fine) {
-      &::-webkit-scrollbar {
-        height: 8px;
-        width: 8px;
-      }
-      
-      &::-webkit-scrollbar-track {
-        background: rgba(0, 0, 0, 0.1);
-        border-radius: 4px;
-      }
-      
-      &::-webkit-scrollbar-thumb {
-        background: rgba(0, 0, 0, 0.3);
-        border-radius: 4px;
-        
-        &:hover {
-          background: rgba(0, 0, 0, 0.5);
-        }
-      }
-      
-      scrollbar-width: thin;
-      scrollbar-color: rgba(0, 0, 0, 0.3) rgba(0, 0, 0, 0.1);
-    }
-
-    // Sur mobile, garder les scrollbars cachées
-    @media (pointer: coarse) {
-      &::-webkit-scrollbar {
-        display: none;
-      }
-      
-      scrollbar-width: none;
-      -ms-overflow-style: none;
     }
   }
 }
