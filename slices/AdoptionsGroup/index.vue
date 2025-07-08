@@ -695,7 +695,7 @@ onUnmounted(() => {
       }
 
       &__text-content {
-        width: 100vw;
+        width: 148vw;
         max-height: 100vh;
         padding: 0 6vh;
         margin: 0;
@@ -751,7 +751,7 @@ onUnmounted(() => {
       }
 
       &__text-content {
-        width: 100vw;
+        width: 148vw;
         max-height: 100vh;
         padding: 0 7.2vh;
         margin: 0;
