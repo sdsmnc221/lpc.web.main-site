@@ -9,13 +9,14 @@
       :field="photo"
     />
 
-    <h3 class="photo-with-text-block__title albert-sans-bold">
+    <h3 class="photo-with-text-block__title aherlbert-sans-bold">
       {{ title }}
     </h3>
 
     <prismic-rich-text
       class="photo-with-text-block__description albert-sans-regular text-base leading-tight"
       :field="description"
+      :link-resolver="prismicLinkAdapter"
     />
   </section>
 </template>
@@ -23,6 +24,7 @@
 <script setup lang="ts">
 import { type Content } from "@prismicio/client";
 import { computed } from "vue";
+import linkAdapter from "~/prismic/linkAdapter";
 
 // The array passed to `getSliceComponentProps` is purely optional.
 // Consider it as a visual hint for you when templating your slice.
@@ -40,6 +42,28 @@ const primary = computed(() => props.slice.primary);
 const photo = computed(() => primary.value?.photo);
 const title = computed(() => primary.value?.title);
 const description = computed(() => primary.value?.description);
+
+const prismicLinkAdapter = (doc) => {
+  console.log(doc);
+  const linkData = {
+    linkitem: {
+      type: doc.type,
+      uid: doc.uid,
+      link_type: doc.link_type || "Document",
+    },
+    linkhref: doc.url || null,
+  };
+
+  const result = linkAdapter(linkData);
+
+  // Gérer les objets de route
+  if (typeof result === "object" && result.name) {
+    const router = useRouter();
+    return router.resolve(result).href;
+  }
+
+  return result;
+};
 </script>
 
 <style lang="scss">

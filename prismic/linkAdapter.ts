@@ -14,6 +14,8 @@ export default function linkAdapter(link: Link) {
           name: "links-id",
           params: { id: link.linkitem.uid },
         };
+      case "catfiche":
+        return `/adoptions?uid=${link.linkitem.uid}`;
       default:
         return `/${link.linkitem.uid}`;
     }
