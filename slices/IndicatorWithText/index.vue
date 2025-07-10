@@ -166,8 +166,12 @@ const description = computed(() => primary.value?.description);
     width: 100%;
     justify-content: center;
     align-items: center;
-    text-align: left;
+
     padding: 0 24px;
+
+    p {
+      text-align: center;
+    }
 
     .indicator-with-text__description {
       margin-top: var(--spacing-s);
