@@ -137,6 +137,9 @@ onMounted(() => {
 
 <style lang="scss">
 .app.--about {
+  & > *:first-child {
+    padding: 0 !important;
+  }
   & *:has(.empty) {
     padding: 0 !important;
     margin: 0 !important;
