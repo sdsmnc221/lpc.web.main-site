@@ -337,7 +337,7 @@ watch(
       &__info {
         & > p {
           &:nth-of-type(n) {
-            transform: translateY(calc(var(--spacing-l) * 1.6))
+            transform: translateY(calc(var(--spacing-l) * 2.2))
               translateX(calc(var(--spacing-l) * 0.2)) !important;
           }
           &:nth-of-type(2n) {
