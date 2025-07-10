@@ -11,13 +11,7 @@
   </Suspense>
 
   <Suspense>
-    <adoptions-group
-      v-for="(group, index) in adoptionsGroup"
-      :key="`${group.id}-${index}`"
-      :slice="group"
-      :index="index"
-      @animation-init-done="onGsapInitDone"
-    ></adoptions-group>
+    <adoptions-grid :slice="adoptionsGrid"></adoptions-grid>
   </Suspense>
 
   <multi-text-block ref="faqRef" :slice="faq" class="faq"></multi-text-block>
@@ -40,7 +34,8 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 import HeroBannerWithText from "@/slices/HeroBannerWithText/index.vue";
 import HeroPhotoBackground from "@/slices/HeroPhotoBackground/index.vue";
-import AdoptionsGroup from "@/slices/AdoptionsGroup/index.vue";
+
+import AdoptionsGrid from "@/slices/AdoptionsGrid/index.vue";
 import MultiTextBlock from "@/slices/MultiTextBlock/index.vue";
 import PopOutText from "@/slices/PopOutText/index.vue";
 import UiDock from "~/components/UiDock/UiDock.vue";
@@ -83,6 +78,10 @@ const adoptionsGroup = computed(() =>
   adoptions.value?.data?.slices.filter(
     (s) => s?.slice_type == "adoptions_group"
   )
+);
+
+const adoptionsGrid = computed(() =>
+  adoptionsGroup.value?.find((s) => s.variation === "adoptionsGrid")
 );
 
 const popOutText = computed(() =>

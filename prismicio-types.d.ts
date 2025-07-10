@@ -198,7 +198,8 @@ interface CatficheDocumentData {
     | "Adopté.e"
     | "Adoptable - Chat ado"
     | "Réservé.e"
-    | "À réserver",
+    | "À réserver"
+    | "Sans suite",
     "filled"
   >;
 
@@ -1331,6 +1332,21 @@ export interface AdoptionsGroupSliceDefaultPrimaryCatsgroupItem {
 }
 
 /**
+ * Item in *AdoptionsGroup → AdoptionsGrid → Primary → descriptionText*
+ */
+export interface AdoptionsGroupSliceAdoptionsGridPrimaryDescriptionItem {
+  /**
+   * paragraph field in *AdoptionsGroup → AdoptionsGrid → Primary → descriptionText*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: adoptions_group.adoptionsGrid.primary.description[].paragraph
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  paragraph: prismic.RichTextField;
+}
+
+/**
  * Primary content in *AdoptionsGroup → Default → Primary*
  */
 export interface AdoptionsGroupSliceDefaultPrimary {
@@ -1423,9 +1439,91 @@ export type AdoptionsGroupSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *AdoptionsGroup → AdoptionsGrid → Primary*
+ */
+export interface AdoptionsGroupSliceAdoptionsGridPrimary {
+  /**
+   * title field in *AdoptionsGroup → AdoptionsGrid → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: adoptions_group.adoptionsGrid.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * descriptionText field in *AdoptionsGroup → AdoptionsGrid → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: adoptions_group.adoptionsGrid.primary.description[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  description: prismic.GroupField<
+    Simplify<AdoptionsGroupSliceAdoptionsGridPrimaryDescriptionItem>
+  >;
+
+  /**
+   * image field in *AdoptionsGroup → AdoptionsGrid → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: adoptions_group.adoptionsGrid.primary.image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * CatAvatarPlaceholder field in *AdoptionsGroup → AdoptionsGrid → Primary*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: adoptions_group.adoptionsGrid.primary.catavatarplaceholder
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  catavatarplaceholder: prismic.ContentRelationshipField<"imageplaceholder">;
+
+  /**
+   * ContactInfo field in *AdoptionsGroup → AdoptionsGrid → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: adoptions_group.adoptionsGrid.primary.contactinfo
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  contactinfo: prismic.RichTextField;
+
+  /**
+   * AdoptionRequirements field in *AdoptionsGroup → AdoptionsGrid → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: adoptions_group.adoptionsGrid.primary.adoptionrequirements
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  adoptionrequirements: prismic.RichTextField;
+}
+
+/**
+ * AdoptionsGrid variation for AdoptionsGroup Slice
+ *
+ * - **API ID**: `adoptionsGrid`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type AdoptionsGroupSliceAdoptionsGrid = prismic.SharedSliceVariation<
+  "adoptionsGrid",
+  Simplify<AdoptionsGroupSliceAdoptionsGridPrimary>,
+  never
+>;
+
+/**
  * Slice variation for *AdoptionsGroup*
  */
-type AdoptionsGroupSliceVariation = AdoptionsGroupSliceDefault;
+type AdoptionsGroupSliceVariation =
+  | AdoptionsGroupSliceDefault
+  | AdoptionsGroupSliceAdoptionsGrid;
 
 /**
  * AdoptionsGroup Shared Slice
@@ -2449,8 +2547,11 @@ declare module "@prismicio/client" {
       AdoptionsGroupSliceDefaultPrimaryDescriptionItem,
       AdoptionsGroupSliceDefaultPrimaryCatsgroupItem,
       AdoptionsGroupSliceDefaultPrimary,
+      AdoptionsGroupSliceAdoptionsGridPrimaryDescriptionItem,
+      AdoptionsGroupSliceAdoptionsGridPrimary,
       AdoptionsGroupSliceVariation,
       AdoptionsGroupSliceDefault,
+      AdoptionsGroupSliceAdoptionsGrid,
       ExpandableGallerySlice,
       ExpandableGallerySliceDefaultPrimaryImagesItem,
       ExpandableGallerySliceDefaultPrimary,

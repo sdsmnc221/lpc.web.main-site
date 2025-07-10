@@ -96,6 +96,80 @@
         }
       },
       "items": {}
+    },
+    {
+      "id": "adoptionsGrid",
+      "name": "AdoptionsGrid",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "title",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,heading1,heading2,heading3,heading4,heading5,heading6,strong,em"
+          }
+        },
+        "description": {
+          "type": "Group",
+          "config": {
+            "label": "descriptionText",
+            "repeat": true,
+            "fields": {
+              "paragraph": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "paragraph",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,preformatted,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                }
+              }
+            }
+          }
+        },
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "catavatarplaceholder": {
+          "type": "Link",
+          "config": {
+            "label": "CatAvatarPlaceholder",
+            "select": "document",
+            "customtypes": [
+              "imageplaceholder"
+            ]
+          }
+        },
+        "contactinfo": {
+          "type": "StructuredText",
+          "config": {
+            "label": "ContactInfo",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,strong,em,hyperlink,list-item,o-list-item,rtl"
+          }
+        },
+        "adoptionrequirements": {
+          "type": "StructuredText",
+          "config": {
+            "label": "AdoptionRequirements",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,strong,em,hyperlink,list-item,o-list-item,rtl,image"
+          }
+        }
+      },
+      "items": {}
     }
   ]
 }

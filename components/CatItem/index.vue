@@ -1,5 +1,5 @@
 <template>
-  <div class="cat-item" ref="catItem">
+  <div class="cat-item md:w-[20%] w-full m-10 h-[50vh]" ref="catItem">
     <Sheet>
       <SheetTrigger
         @click="onOpen(true)"
@@ -13,7 +13,7 @@
         </div>
 
         <h4
-          class="cat-item__name cat-item-title oh leading-[0.64]"
+          class="cat-item__name cat-item-title oh"
           :class="`${catname.length >= 10 ? 'text-8xl' : ''}`"
         >
           <span
@@ -96,7 +96,6 @@ watch(
 
 <style lang="scss">
 .cat-item {
-  width: 40%;
   // margin: 0 var(--spacing-s);
   // margin-bottom: var(--spacing-m);
   display: flex;
@@ -104,16 +103,14 @@ watch(
   align-items: center;
   position: relative;
 
-  &:nth-of-type(n) {
-    transform: translateY(calc(var(--spacing-l) * -3));
-  }
-  &:nth-of-type(2n) {
-    transform: translateY(calc(var(--spacing-l) * -1));
-  }
-
   &-title {
     transition: all ease 1.2s;
     z-index: 10;
+
+    span {
+      position: relative;
+      top: -24px;
+    }
 
     &.--previewing {
       color: var(--random-tint);
@@ -162,8 +159,8 @@ watch(
     aspect-ratio: 1;
     object-fit: cover;
     background-color: var(--gray);
-    border-radius: 32px;
-    width: 100%;
+    border-radius: 16px;
+    width: 72%;
   }
 
   &__name {
@@ -307,7 +304,6 @@ watch(
 <style lang="scss">
 @container app (min-width: 700px) {
   .cat-item {
-    width: 32%;
     // max-width: 220px;
 
     &__name {
@@ -360,10 +356,16 @@ watch(
     .cat-item {
       width: 72vw;
 
+      &__photo {
+        width: 100%;
+        height: 100%;
+        aspect-ratio: 1;
+      }
+
       &__name {
         span {
           font-size: calc((var(--base-ft-size) * 4));
-          line-height: calc((var(--base-ft-size) * 3));
+          line-height: calc((var(--base-ft-size)));
         }
       }
 
@@ -391,8 +393,6 @@ watch(
 @container app (min-width: 1000px) {
   .adoptions-group {
     .cat-item {
-      width: 25vw !important;
-
       &__explore {
         width: 50%;
       }
@@ -468,12 +468,12 @@ watch(
       &__info {
         & > p {
           &:nth-of-type(n) {
-            transform: translateY(calc(var(--spacing-l) * 0.4))
-              translateX(calc(var(--spacing-l) * 2.4));
+            transform: translateY(calc(var(--spacing-l) * 1.2))
+              translateX(calc(var(--spacing-s) * 2.4));
           }
           &:nth-of-type(2n) {
-            transform: translateY(calc(var(--spacing-l) * 1.6))
-              translateX(calc(var(--spacing-l) * 0.2));
+            transform: translateY(calc(var(--spacing-l) * 2.4))
+              translateX(calc(var(--spacing-s) * -4.8));
           }
         }
       }
@@ -481,7 +481,8 @@ watch(
       &__name {
         span {
           font-size: calc((var(--base-ft-size) * 5));
-          line-height: calc((var(--base-ft-size) * 4));
+          transform: translateY(-50);
+          position: relative;
         }
       }
     }
