@@ -222,7 +222,7 @@ watch(
     }
 
     & * {
-      @include ft-s(medium);
+      @include ft-s(20);
     }
   }
 

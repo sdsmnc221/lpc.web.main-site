@@ -6,7 +6,7 @@
     class="adoptions-group bg-white"
   >
     <div
-      class="adoptions-group__items flex-wrap justify-center items-start w-screen"
+      class="adoptions-group__items flex-wrap justify-center items-start w-screen mb-[10vh]"
       v-if="itemsData?.length"
     >
       <cat-item
