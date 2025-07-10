@@ -470,8 +470,6 @@ onUnmounted(() => {
 // Filter styles
 .filters-container {
   padding: 1rem 2rem;
-  background: #f8f9fa;
-  border-radius: 12px;
   margin: 0 8vw;
 
   @media (max-width: 768px) {
@@ -487,9 +485,9 @@ onUnmounted(() => {
 
 .filter-select {
   appearance: none;
-  background: white;
-  border: 2px solid #e2e8f0;
-  border-radius: 8px;
+  background: transparent;
+  border: thin solid var(--black);
+
   padding: 12px 40px 12px 16px;
   font-size: 14px;
   font-weight: 500;
@@ -504,28 +502,28 @@ onUnmounted(() => {
   background-size: 16px;
 
   &:hover {
-    border-color: #3b82f6;
+    border-color: var(--black);
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
   }
 
   &:focus {
     outline: none;
-    border-color: #3b82f6;
+    border-color: var(--black);
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
   }
 
   option {
     padding: 8px;
-    background: white;
+    background: var(--white);
     color: #374151;
   }
 }
 
 .clear-filters-btn {
-  background: #ef4444;
-  color: white;
+  background: var(--black);
+  color: var(--white);
   border: none;
-  border-radius: 8px;
+
   padding: 12px 20px;
   font-size: 14px;
   font-weight: 500;
@@ -533,9 +531,8 @@ onUnmounted(() => {
   transition: all 0.2s ease;
 
   &:hover {
-    background: #dc2626;
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+    box-shadow: 0 4px 12px rgba(77, 77, 77, 0.3);
   }
 
   &:active {
@@ -545,9 +542,11 @@ onUnmounted(() => {
 
 .results-count {
   color: #6b7280;
-  font-size: 14px;
-  font-weight: 500;
+
   margin: 0 8vw;
+  padding-top: 2vh;
+
+  @include ft-s(20);
 }
 
 .no-results {
