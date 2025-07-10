@@ -139,7 +139,7 @@ const description = computed(() => primary.value?.description);
       }
 
       & > p:first-child {
-        text-align: center;
+        text-align: left;
       }
     }
 
