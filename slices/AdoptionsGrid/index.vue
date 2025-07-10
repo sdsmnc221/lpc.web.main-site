@@ -471,10 +471,12 @@ onUnmounted(() => {
 .filters-container {
   padding: 1rem 2rem;
   margin: 0 8vw;
+  gap: 2vw;
 
   @media (max-width: 768px) {
     margin: 0 4vw;
     flex-direction: column;
+    align-items: stretch;
     gap: 1rem;
   }
 }
