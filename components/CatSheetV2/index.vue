@@ -127,7 +127,9 @@
             <p v-else-if="catItem.catbirthyear">
               📅 {{ catItem.catbirthyear }}
             </p>
-            <p v-if="catItem.zipcode">📍 {{ catItem.zipcode }}</p>
+            <p v-if="catItem.zipcode || catItem.commune">
+              📍 {{ catItem.zipcode }} {{ catItem.commune }}
+            </p>
           </div>
 
           <div

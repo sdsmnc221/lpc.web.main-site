@@ -18,6 +18,7 @@ export type CatInfo = {
   catvaccination?: boolean;
   catsterilization?: boolean;
   zipcode?: null | number;
+  commune?: null | string;
   relatedcat?: any | null;
   adoptionstatus?: string;
   contactInfo?: any;

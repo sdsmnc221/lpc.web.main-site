@@ -126,6 +126,13 @@
           "placeholder": "91210"
         }
       },
+      "commune": {
+        "type": "Text",
+        "config": {
+          "label": "Commune",
+          "placeholder": ""
+        }
+      },
       "relatedcat": {
         "type": "Link",
         "config": {

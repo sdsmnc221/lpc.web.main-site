@@ -42,6 +42,9 @@
             </span>
             <span class="albert-sans-light" v-if="catsexe">{{ catsexe }}</span>
           </p>
+          <p v-if="commune">
+            {{ `📍 ${commune}` }}
+          </p>
         </div>
       </SheetTrigger>
     </Sheet>
@@ -197,9 +200,11 @@ watch(
     margin-top: calc(var(--spacing-s) * -1);
     padding: calc(var(--spacing-s) * 0.5);
     position: absolute;
-    bottom: 20%;
-    right: 0;
+    bottom: -10%;
+    right: 20%;
     display: flex;
+    flex-direction: column;
+    gap: 14px;
 
     & > * {
       display: block;
@@ -221,7 +226,7 @@ watch(
       }
     }
 
-    & * {
+    & *:not(:last-child) {
       @include ft-s(20);
     }
   }
@@ -315,18 +320,6 @@ watch(
 @media screen and (min-width: 768px) and (max-width: 1200px) {
   .adoptions-group {
     .cat-item {
-      &__info {
-        & > p {
-          &:nth-of-type(n) {
-            transform: translateY(calc(var(--spacing-l) * 1.6))
-              translateX(calc(var(--spacing-l) * 0.2)) !important;
-          }
-          &:nth-of-type(2n) {
-            transform: translateY(calc(var(--spacing-l) * 0.8))
-              translateX(calc(var(--spacing-l) * -0.8));
-          }
-        }
-      }
     }
   }
 }
@@ -334,18 +327,7 @@ watch(
 @media screen and (max-width: 699px) {
   .adoptions-group {
     .cat-item {
-      &__info {
-        & > p {
-          &:nth-of-type(n) {
-            transform: translateY(calc(var(--spacing-l) * 2.2))
-              translateX(calc(var(--spacing-l) * 0.2)) !important;
-          }
-          &:nth-of-type(2n) {
-            transform: translateY(calc(var(--spacing-l) * 0.8))
-              translateX(calc(var(--spacing-l) * -0.8));
-          }
-        }
-      }
+      //
     }
   }
 }
@@ -465,19 +447,6 @@ watch(
 @media screen and (min-width: 1000px) {
   .adoptions-group {
     .cat-item {
-      &__info {
-        & > p {
-          &:nth-of-type(n) {
-            transform: translateY(calc(var(--spacing-l) * 1.2))
-              translateX(calc(var(--spacing-s) * 2.4));
-          }
-          &:nth-of-type(2n) {
-            transform: translateY(calc(var(--spacing-l) * 2.4))
-              translateX(calc(var(--spacing-s) * -4.8));
-          }
-        }
-      }
-
       &__name {
         span {
           font-size: calc((var(--base-ft-size) * 5));

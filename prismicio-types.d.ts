@@ -171,6 +171,17 @@ interface CatficheDocumentData {
   zipcode: prismic.NumberField;
 
   /**
+   * Commune field in *CatFiche*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: catfiche.commune
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  commune: prismic.KeyTextField;
+
+  /**
    * relatedCat field in *CatFiche*
    *
    * - **Field Type**: Content Relationship
