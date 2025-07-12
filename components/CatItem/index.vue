@@ -376,7 +376,7 @@ watch(
   .adoptions-group {
     .cat-item {
       &__explore {
-        width: 50%;
+        width: 44%;
       }
     }
   }
