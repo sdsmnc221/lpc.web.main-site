@@ -1214,6 +1214,18 @@ interface PagelayoutDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#color
    */
   photogridunibg: prismic.ColorField;
+
+  /**
+   * photoGridUniCover field in *PageLayout*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: pagelayout.photogridunicover
+   * - **Tab**: Linkstree
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  photogridunicover: prismic.BooleanField;
 }
 
 /**

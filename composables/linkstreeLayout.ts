@@ -29,6 +29,7 @@ export default async function useLinkstreeLayout(uid?: string) {
     enable: !!assets.value?.photogriduni,
     img: assets.value?.photogriduni?.url,
     hex: assets.value?.photogridunibg,
+    cover: assets.value?.photogridunicover,
   }));
 
   const showlogo = computed(() => linkstree.value?.data.showlogo);

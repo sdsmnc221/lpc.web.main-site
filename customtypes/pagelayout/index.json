@@ -120,6 +120,15 @@
           "label": "photoGridUniBg",
           "placeholder": ""
         }
+      },
+      "photogridunicover": {
+        "type": "Boolean",
+        "config": {
+          "label": "photoGridUniCover",
+          "placeholder_false": "false",
+          "placeholder_true": "true",
+          "default_value": false
+        }
       }
     }
   }

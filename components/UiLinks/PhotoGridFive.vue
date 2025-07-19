@@ -39,7 +39,7 @@
   </div>
   <div v-else :class="`photo-grids-uni w-2/5 h-screen flex justify-center items-end gap-0 bg-[${photoGridsUni.hex}]`" :style="{ backgroundColor: photoGridsUni.hex }">
     <img
-      class="object-contain object-center inline-block md:h-1/2 md:w-auto h-auto mb-[10vh] md:mb-0"
+      :class="photoGridsUni.cover ? 'object-contain object-center w-full h-full' : 'object-contain object-center inline-block md:h-1/2 md:w-auto h-auto mb-[10vh] md:mb-0'"
       alt=""
       :src="photoGridsUni.img"
       
@@ -53,6 +53,7 @@ type Props = {
     enable: boolean;
     img: string;
     hex: string;
+    cover: boolean
   };
 };
 
