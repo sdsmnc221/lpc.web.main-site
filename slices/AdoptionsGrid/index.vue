@@ -157,6 +157,10 @@ const image = computed(() => primary.value?.image);
 const { data: itemsData } = await useAsyncData("catsList", async () => {
   const allCats = await client.getAllByType("catfiche", {
     limit: 100,
+    orderings: {
+      field: "document.last_publication_date",
+      direction: "desc",
+    },
   });
 
   console.log(allCats);
